@@ -6,23 +6,25 @@ typedef вводит \IT{синоним} для типа. Часто это ис
 \begin{lstlisting}
 typedef struct _node
 {
-	void *data;
+	node *prev;
 	node *next;
+	void *data;
 } node;
 \end{lstlisting}
 
-Такого очень много в Windows API.
+Такого очень много в ``заголовочных'' файлах в Windows SDK (Windows API).
 
-Тем не менее, \IT{typedef} также можно использовать и не для структур, а для обычных, 
+Тем не менее, \IT{typedef} также можно использовать не только для структур, но и для обычных, 
 интегральных\footnote{приводимых к числу}, типов, например:
 
 \begin{lstlisting}
 typedef int age;
-typedef int coord;
-typedef uint32_t address;
-
-void draw (coord X, coord Y, coord Z);
 int compute_mean (age man, age woman);
+
+typedef int coord;
+void draw (coord X, coord Y, coord Z);
+
+typedef uint32_t address;
 void write_memory (address a, size_t size, byte *buf);
 \end{lstlisting}
 
