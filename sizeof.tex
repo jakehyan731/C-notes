@@ -1,0 +1,37 @@
+﻿\section{sizeof}
+
+% array of struct phonebook
+
+Обычно, sizeof() применяют к интегральным\footnote{типы отражающие числа} типам либо к структурам, тем не менее,
+его можно применять и к массивам:
+
+% snprintf, wchar_t...
+
+И к массивам структур:
+
+\begin{lstlisting}
+struct phonebook_entry
+{
+	char *name;
+	char *surname;
+	char *tel;
+};
+
+struct phonebook_entry phonebook[]=
+{
+	{ "Kirk", "Hammett", "555-1234" },
+	{ "Lars", "Ulrich", "555-5678" },
+	{ "James", "Hetfield", "555-1122" },
+	{ "Robert", "Trujillo", "555-7788" }
+};
+
+void dump (struct phonebook_entry* input)
+{
+	for (int i=0; i<sizeof(phonebook)/sizeof(struct phonebook_entry); i++)
+		printf ("%s %s - %s\n", input[i].name, input[i].surname, input[i].tel);
+};
+\end{lstlisting}
+
+sizeof(phonebook) -- это размер всего массива структур в байтах. sizeof(struct phonebook\_entry) -- это размер
+одной структуры в байтах. Делением мы узнаем количество структур в массиве.
+

@@ -34,6 +34,7 @@
 \usepackage{amsmath}
 \usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 \usepackage[]{hyperref} % should be last
+%\usepackage{tikz}
 
 \definecolor{lstbgcolor}{rgb}{0.94,0.94,0.94}
 \makeindex
@@ -117,9 +118,10 @@ To view a copy of this license, visit} \url{http://creativecommons.org/licenses/
 
 \chapter{\IFRU{Введение}{Preface}}
 
-Сейчас, в 2013-м году, если некто желает написать как можно более быстро работающую программу, либо как
+Сейчас, в 2013-м году, если некто желает написать 1) как можно более быстро работающую программу; 2) либо как
 можно более компактную для встраиваемых систем либо маломощных микроконтроллеров, то выбор небольшой:
-Си, Си++ либо ассемблер. И замены этим языкам, в обозримом будущем, похоже не видно.
+Си, Си++ либо ассемблер. И альтернативы этим старым но популярным языкам, в обозримом будущем, 
+пока что не видно.
 
 \chapter{\IFRU{Целевая аудитория}{Target audience}}
 
@@ -128,9 +130,9 @@ To view a copy of this license, visit} \url{http://creativecommons.org/licenses/
 
 \chapter{\IFRU{Об авторе}{About author}}
 
-\IFRU{Денис Юричев ~--- опытный программист, свободный для найма как reverse engineer, консультант, тренер. 
+\IFRU{Денис Юричев ~--- опытный программист, свободный для найма как программист, reverse engineer, консультант, тренер. 
 С его резюме можно ознакомиться \href{http://yurichev.com/Dennis_Yurichev.pdf}{здесь}.}
-{Dennis Yurichev is experienced programmer, available for hire as reverse engineer, consultant, trainer. 
+{Dennis Yurichev is experienced programmer, available for hire as programmer, reverse engineer, consultant, trainer. 
 His CV is available \href{http://yurichev.com/Dennis_Yurichev.pdf}{here}.}
 
 \chapter{\IFRU{Благодарности}{Thanks}}
@@ -143,6 +145,10 @@ His CV is available \href{http://yurichev.com/Dennis_Yurichev.pdf}{here}.}
 \chapter{\IFRU{Элементы языка Си/Си++}{C/C++ language elements}}
 \input{typedef}
 \input{goto}
+\input{sizeof}
+\input{pointers}
+
+\input{operators}
 
 \input{Cstdlib}
 
