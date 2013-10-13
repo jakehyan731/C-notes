@@ -7,3 +7,8 @@
 *.toc
 *.stackdump
 *.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.fdb_latexmk
