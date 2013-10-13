@@ -1,0 +1,71 @@
+﻿\section{goto}
+
+Использование оператора \IT{goto}\footnote{statement} считается плохим тоном и вредным вообще\cite{Dijkstra:1968:LEG:362929.362947}\cite{Dijkstra:1979:GSC:1241515.1241518}, 
+тем не менее, использование его в разумных дозах\cite{Knuth:1974:SPG:356635.356640} может облегчить жизнь.
+
+Частый пример, это выход из функции.
+
+\begin{lstlisting}
+void f(...)
+{
+	byte* buf1=malloc(...);
+	byte* buf2=malloc(...);
+
+	...
+
+	if (something_goes_wrong_1)
+		goto cleanup_and_exit;
+
+	...
+	
+	if (something_goes_wrong_2)
+		goto cleanup_and_exit;
+
+	...
+
+cleanup_and_exit:
+	free(buf1);
+	free(buf2);
+	return;
+};
+\end{lstlisting}
+
+Более сложный пример:
+
+\begin{lstlisting}
+void f(...)
+{
+	byte* buf1=malloc(...);
+	byte* buf2=malloc(...);
+
+	FILE* f=fopen(...);
+	if (f==NULL)
+		goto cleanup_and_exit;
+
+	...
+
+	if (something_goes_wrong_1)
+		goto close_file_cleanup_and_exit;
+
+	...
+	
+	if (something_goes_wrong_2)
+		goto close_file_cleanup_and_exit;
+
+	...
+
+close_file_cleanup_and_exit:
+	fclose(f);
+
+cleanup_and_exit:
+	free(buf1);
+	free(buf2);
+	return;
+};
+\end{lstlisting}
+
+Если в данных примерах отказаться от \IT{goto}, то придется вызывать free() и fclose() перед каждым
+выходом из функции (return), что здорово замусорит весь код.
+
+Использование \IT{goto} в таких случаях одобряется, например, в \cite{LinuxKernelCodingStyle}.
+

@@ -1,0 +1,37 @@
+﻿\section{typedef}
+
+typedef вводит \IT{синоним} для типа. Часто это используется для структур, чтобы каждый раз не писать \IT{struct}
+перед её именем, например:
+
+\begin{lstlisting}
+typedef struct _node
+{
+	void *data;
+	node *next;
+} node;
+\end{lstlisting}
+
+Такого очень много в Windows API.
+
+Тем не менее, \IT{typedef} также можно использовать и не для структур, а для обычных, 
+интегральных\footnote{приводимых к числу}, типов, например:
+
+\begin{lstlisting}
+typedef int age;
+typedef int coord;
+typedef uint32_t address;
+
+void draw (coord X, coord Y, coord Z);
+int compute_mean (age man, age woman);
+void write_memory (address a, size_t size, byte *buf);
+\end{lstlisting}
+
+Как видно, \IT{typedef} здесь может помочь в документировании исходного кода, так он легче читается.
+
+Здесь можно было бы использовать директиву препроцессора \TT{\#define}, но это хуже с точки зрения обработки ошибок во время компиляции.
+
+\subsection{Критика typedef}
+
+Тем не менее, такие известные и опытные программисты как Линус Торвальдс, против использования typedef:
+\cite{Torvalds:2002}.
+
