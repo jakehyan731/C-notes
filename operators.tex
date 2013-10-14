@@ -30,7 +30,7 @@
 остальные даже не будут вызываться.
 
 Эта особенность есть не только в Си/Си++
-\footnote{Здесь список ЯП где присутствует short-circuit evaluation\url{https://en.wikipedia.org/wiki/Short-circuit_evaluation}}.
+\footnote{Здесь список ЯП где присутствует short-circuit evaluation\url{https://en.wikipedia.org/wiki/Short-circuit_evaluation}. Кстати, хотя это и не про Си, но все же интересно: в bash если писать \IT{cmd1 \&\& cmd2 \&\& cmd3}, то каждая следующая команда будет исполняться только если предыдущая закончилась с успехом. Это также short-circuit.}.
 
 Когда-то давно\cite{dmr:1995}, в языках B и BCPL (предтечи Си) не было операторов \IT{\&\&} и \IT{||}, 
 но чтобы реализовать в них
