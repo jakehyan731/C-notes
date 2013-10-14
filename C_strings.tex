@@ -1,4 +1,4 @@
-\section{Строки в Си}
+\chapter{Строки в Си}
 
 В Си нет встроенных возможностей для удобной работы со строками, такими, какие имеются в ЯП более
 высокого уровня.
@@ -80,7 +80,7 @@ Buffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.ht
 ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} и 
 CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} в Java.
 
-\subsection{Хранение длины строки}
+\section{Хранение длины строки}
 
 Всегда хранить длину строки --- это было принято в реализациях ЯП Pascal. 
 Не смотря на исходы святых войн\footnote{holy wars} между приверженцами Си и Pascal, все же, почти все библиотеки
@@ -163,7 +163,7 @@ unknown_color:
 Тем не менее, мы здорово сократили количество необходимых сравнений строк! Вероятно, для тех ситуаций, когда 
 нужно как можно быстрее обрабатывать текстовые строки, такой подход может улучшить ситуацию.
 
-\subsection{Возврат строки}
+\section{Возврат строки}
 
 Если некая ф-ция должна вернуть строку, имеются такие возможности:
 
@@ -262,4 +262,26 @@ char *sha1_to_hex(const unsigned char *sha1)
 
 Кстати, обратите также внимание на то что переменная \IT{bufno} не инициализируется, потому что используются только 
 2 младших её бита, к тому же, не важно, какое значение переменная будет содержать в самом начале!
+
+\section{Определение строк}
+
+Малоизвестная возможность Си, длинные строки можно определять так:
+
+\begin{lstlisting}
+const char* long_line="line 1"
+	"line 2"
+	"line 3"
+	"line 4"
+	"line 5";
+
+...
+
+printf ("Some Utility v0.1\n"
+	"Usage: %s parameters\n"
+	"\n"
+	"Authors:...\n", argv[0]);
+\end{lstlisting}
+
+Это отдаленно напоминает ``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} в 
+UNIX-шеллах и Perl.
 

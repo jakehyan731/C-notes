@@ -1,0 +1,69 @@
+﻿\chapter{\IFRU{Препроцессор}{Preprocessor}}
+
+Препроцессор обрабатывает директивы начинающиеся с \# --- \#define, \#include, \#if, итд.
+
+\section{``Пустой'' макрос}
+
+Всем известны макросы не объявляющие никаких значений, например \IT{\_DEBUG}.
+Обычно, только проверяется наличие его или отсутствие.
+Вот еще пример полезного ``пустого'' макроса:
+
+В заголовочных файлах Windows API мы можем увидеть такое:
+
+\begin{lstlisting}
+typedef NTSTATUS
+(NTAPI *TDI_REGISTER_CALLBACK)(
+  IN PUNICODE_STRING DeviceName,
+  OUT HANDLE *TdiHandle);
+
+...
+
+typedef NDIS_STATUS
+(NTAPI *CM_CLOSE_CALL_HANDLER)(
+  IN NDIS_HANDLE  CallMgrVcContext,
+  IN NDIS_HANDLE  CallMgrPartyContext  OPTIONAL,
+  IN PVOID  CloseData  OPTIONAL,
+  IN UINT  Size  OPTIONAL);
+\end{lstlisting}
+
+IN, OUT и OPTIONAL --- это ``пустые'' макросы объявленные так:
+
+\begin{lstlisting}
+#ifndef IN
+#define IN
+#endif
+#ifndef OUT
+#define OUT
+#endif
+#ifndef OPTIONAL
+#define OPTIONAL
+#endif
+\end{lstlisting}
+
+Для компилятора они никакой информации не несут, они предназначены только для документирования, показать,
+какие параметры ф-ций зачем нужны.
+
+\section{Частая ошибка}
+
+К примеру, вы хотите создать макрос для возведения числа в квадрат:
+
+\begin{lstlisting}
+#define square(x)      x*x
+\end{lstlisting}
+
+Это ошибка, потому что выражение \IT{square(a+b)} в итоге ``развернется'' в $a+b*a+b$, что, разумеется, совсем
+не то что хотелось. Поэтому в определнии макроса все переменные, и сам макрос, нужно ``изолировать'' скобками:
+
+\begin{lstlisting}
+#define square(x)      ((x)*(x))
+\end{lstlisting}
+
+Пример из файла minmax.h из MinGW:
+
+\begin{lstlisting}
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+...
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+\end{lstlisting}
+
+
