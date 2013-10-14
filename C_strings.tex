@@ -42,7 +42,8 @@ cout << "Date: " + Date_ToString(date) + " a=" + a_ToString(a) + "\n";
 Но все же строки иногда конструировать надо.
 
 Есть какие-то библиотеки для этого.
-К примеру, в Glib есть gstring.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.h}}/
+К примеру, в Glib\footnote{\url{https://developer.gnome.org/glib/}} есть 
+gstring.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.h}}/
 gstring.c\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.c}}. 
 
 А в исходниках git можно найти strbuf.h\footnote{\url{https://github.com/git/git/blob/master/strbuf.h}}/
@@ -51,7 +52,7 @@ strbuf.c\footnote{\url{https://github.com/git/git/blob/master/strbuf.c}}. Соб
 и текущий размер строки в буфере. При помощи отдельных функций, можно добавлять новые строки или символы
 в буфер, который, в свою очередь, будет автоматически увеличиваться или даже уменьшаться.
 
-В strbuf.c из git есть даже ф-ция \IT{strbuf\_addf()}, работающая как sprintf(), 
+В \IT{strbuf.c} из git есть даже ф-ция \IT{strbuf\_addf()}, работающая как \IT{sprintf()}, 
 но добавляющая строку-результат в буфер.
 
 Так пользователь освобождается от головной боли связанной с выделением памяти.
@@ -208,6 +209,22 @@ const char* get_month_name (int month)
 	case 12: return "December";
 	default: return "Unknown month!";
 	};
+};
+\end{lstlisting}
+
+Можно даже еще проще:
+
+\begin{lstlisting}
+const char* month_names[]={
+	"January", "February", "March", "April", "May", "June", "July", "August",
+	"September", "October", "November", "December" };
+
+const char* get_month_name (int month)
+{
+	if (month>=1 && month<=12)
+		return month_names[month-1];
+
+	return "Unknown month!";
 };
 \end{lstlisting}
 
