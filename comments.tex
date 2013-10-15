@@ -1,0 +1,26 @@
+﻿\section{Комментарии}
+
+Их иногда удобно вставлять прямо в вызов ф-ции, чтобы где-то на виду держать пометку,
+что означает каждый аргумент:
+
+\begin{lstlisting}
+f (val1, /* a very special flag! */ false, /* another special flag here */ true);
+\end{lstlisting}
+
+Целый блок кода можно откомментировать при помощи \#if:
+
+\begin{lstlisting}
+	ta	= aemif_calc_rate(t->ta, clkrate, TA_MAX);
+	rhold	= aemif_calc_rate(t->rhold, clkrate, RHOLD_MAX);
+#if 0	
+	rstrobe	= aemif_calc_rate(t->rstrobe, clkrate, RSTROBE_MAX);
+	rsetup	= aemif_calc_rate(t->rsetup, clkrate, RSETUP_MAX);
+	whold	= aemif_calc_rate(t->whold, clkrate, WHOLD_MAX);
+#endif	
+	wstrobe	= aemif_calc_rate(t->wstrobe, clkrate, WSTROBE_MAX);
+	wsetup	= aemif_calc_rate(t->wsetup, clkrate, WSETUP_MAX);
+\end{lstlisting}
+
+Это может быть удобнее чем традиционный способ потому что текстовый редактор или IDE в этом случае
+не ``сломает'' отступы при выравнивании.
+
