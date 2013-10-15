@@ -65,5 +65,22 @@ process 2> debug.txt
 в 2038-м году, именно тогда 32-битное число переполнится, то есть, пройдет $2^{32}$ секунд с 1970-го года.
 Так что, для этого следует использовать 64-битное значение, т.е., time64.
 
-% NtQuerySystemTime http://msdn.microsoft.com/en-us/library/windows/desktop/ms724512(v=vs.85).aspx
+% ? NtQuerySystemTime http://msdn.microsoft.com/en-us/library/windows/desktop/ms724512(v=vs.85).aspx
+
+\section{scanf(), fscanf(), sscanf()}
+
+\subsection{Засада \#1}
+
+Если использовать \%d в строке формата, scanf() подразумевает что это 32-битный int. 
+
+Ошибкой является подобное:
+
+\begin{lstlisting}
+char a[10];
+
+scanf ("%d %d %d %d", &a[0], &a[1], &a[2], &[3]);
+\end{lstlisting}
+
+Символы (или байты) лежат ``в притык'' друг к другу. Когда scanf() будет обрабатывать первое значение, он будет считать
+его за 32-битный int, и ``затрет'' остальные три, рядом лежащие. И так далее.
 
