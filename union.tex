@@ -1,0 +1,111 @@
+﻿\section{union}
+
+union часто используется, когда в каком-то месте структуры можно хранить разные типы на выбор.
+К примеру:
+
+\begin{lstlisting}
+union
+{
+	int i; // 4 bytes
+	float f; // 4 bytes
+	double d; // 8 bytes
+} u;
+\end{lstlisting}
+
+Такой union позволяет хранить одну из этих трех переменных на выбор. Занимать он будет места столько же,
+сколько максимальный элемент (double) --- 8 байт.
+
+union часто используют для обращения к какому-то типу данных как к другому.
+
+Например, как известно, каждый XMM-регистр в SSE может представлять собой 16 байт, 8 16-битных слов,
+4 32-битных слова, 2 64-битных слова, 4 float-значения и 2 double-значения. Так можно описать его:
+
+\begin{lstlisting}
+union
+{
+	double d[2];
+	float f[4];
+	uint8_t b[16];
+	uint16_t w[8];
+	uint32_t i[4];
+	uint64_t q[2];
+} XMM_register;
+
+union XMM_register reg1;
+
+reg.u.d[0]=123.4567;
+reg.u.d[1]=89.12345;
+
+// here we can use reg.u.b[...]
+
+\end{lstlisting}
+
+Это также очень удобно использовать вместе со структурой, где поля имеют битовую гранулярность.
+Это флаги x86-процессора:
+
+\begin{lstlisting}
+typedef struct _s_EFLAGS
+{
+    unsigned CF : 1;
+    unsigned reserved1 : 1;
+    unsigned PF : 1;
+    unsigned reserved2 : 1;
+    unsigned AF : 1;
+    unsigned reserved3 : 1;
+    unsigned ZF : 1;
+    unsigned SF : 1;
+    unsigned TF : 1;
+    unsigned IF : 1;
+    unsigned DF : 1;
+    unsigned OF : 1;
+    unsigned IOPL : 2;
+    unsigned NT : 1;
+    unsigned reserved4 : 1;
+    unsigned RF : 1;
+    unsigned VM : 1;
+    unsigned AC : 1;
+    unsigned VIF : 1;
+    unsigned VIP : 1;
+    unsigned ID : 1;
+} s_EFLAGS;
+
+typedef union _u_EFLAGS
+{
+    uint32_t flags;
+    s_EFLAGS s;
+} u_EFLAGS;
+\end{lstlisting}
+
+Можно таким образом загрузить флаги как 32-битное значение в поле flags, а затем из поля s обращаться
+к отдельным битам. Либо наоборот, модифицировать биты, затем прочитать поле flags.
+
+\subsection{tagged union}
+
+Это union плюс флаг (tag), определяющий тип union. К примеру, если нам нужна какая-то переменная,
+которая может быть как числом, так и числом с плавающей точкой, так и текстовой строкой (как переменные
+в динамически-типизированных ЯП), то мы можем объявить такую структуру:
+
+\begin{lstlisting}
+
+enum var_type
+{
+	INT,
+	DOUBLE,
+	STRING
+};
+
+struct
+{
+	enum var_type tag; // 4 bytes
+	union
+	{
+		int i; // 4 bytes
+		double d; // 8 bytes
+		char *string; // 4 bytes (on 32-bit architecture)
+	} u;
+} variable;
+\end{lstlisting}
+
+Суммарная длина такой структуры будет $8+4=12$ байт. В любом случае, это компактнее, чем выделять
+поля для переменной каждого возможного типа.
+

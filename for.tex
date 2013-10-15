@@ -1,5 +1,13 @@
 ﻿\section{for}
 
+В for(), как известно, три выражения, и второе из них вычисляется перед каждой итерацией.
+Поэтому, если написать такое:
+
+\lstinputlisting{src/for_strlen.cpp}
+
+... то это наверное будет ошибкой: strlen(s) будет вызываться перед каждой итерацией --- такой код генерирует
+MSVC 2010. Впрочем, GCC 4.8.1 вызывает strlen(s) только один раз, в начале цикла.
+
 \subsection{Запятая}
 
 Запятая --- не самая понятная штука в Си, однако, их удобно использовать в объявлении for().
@@ -22,5 +30,48 @@
 
 \begin{lstlisting}
 	for (int i=0, std::list<int>::iterator it=l.begin(); it!=l.end(); i++, it++)
+\end{lstlisting}
+
+\subsection{continue}
+
+continue это безусловный переход на конец тела цикла.
+
+Это может быть очень полезно, например, в подобном коде:
+
+\begin{lstlisting}
+for (...)
+{
+	if (is_element_satisfied_criteria_1(...)==true)
+	{
+		// do something need in is_element_satisfied_criteria_2()
+
+		if (is_element_satisfied_criteria_2(...)==true)
+		{
+			do_something_1();
+			do_something_2();
+			do_something_3();
+		};
+
+	};
+};
+\end{lstlisting}
+
+Всё это можно легко заменить на более опрятное:
+
+\begin{lstlisting}
+for (...)
+{
+	if (is_element_satisfied_criteria_1(...)==false)
+		continue;
+
+	// do something need in is_element_satisfied_criteria_2()
+
+	if (is_element_satisfied_criteria_2(...)==false)
+		continue;
+
+	do_something_1();
+	do_something_2();
+	do_something_3();
+};
 \end{lstlisting}
 
