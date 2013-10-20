@@ -142,55 +142,15 @@ His CV is available \href{http://yurichev.com/Dennis_Yurichev.pdf}{here}.}
 
 \mainmatter
 
-\chapter{\IFRU{Описания (definitions) в Си/Си++}{C/C++ definitions}}
-\input{definitions_common_mistakes}
-\input{const}
-\input{datatypes}
-\input{typedef}
+% only chapters here!
 
-\chapter{\IFRU{Объявления в Си/Си++}{C/C++ declarations}}
-\section{C99: Объявления переменных внутри ф-ции}
-
-Раньше, в Си можно было объявлять переменные только в начале ф-ции. А в Си++ --- где угодно.
-
-К тому же, нельзя было объявлять итератор в for() (а в Си++ также можно было):
-
-\begin{lstlisting}
-for(int i=0; i<10; i++)
-	...
-\end{lstlisting}
-
-Новый стандарт\cite{C99TC3} позволяет делать это.
-
-Впрочем, нужно отметить, что MSVC не поддерживает его. А чтобы включить его поддержку в GCC, нужно добавить ключ
-компиляции \IT{-stc=c99}.
-
-\subsection{static}
-
-Обычно глобальные переменные (или ф-ции) объявляются как static, так их область видимости ограничивается 
-данным файлом. Но локальные переменные внутри ф-ции также можно объявлять как static, тогда эта переменная
-будет не локальной, а глобальной, но её область видимости будет ограничена только этой ф-цией.
-
-К примеру, это помогло бы для реализации strtok(), ведь этой ф-ции что-то нужно хранить у себя между вызовами.
-
-\input{forward_declarations} % section
-
-\chapter{\IFRU{Элементы языка Си/Си++}{C/C++ language elements}}
-\input{comments}
-\input{goto}
-\input{for}
-\input{sizeof}
-\input{pointers}
-\input{operators}
-\input{union}
-
-\input{C99} % chapter
-
-\input{preprocessor} % chapter
-
-\input{C_strings} % chapter
-
-\input{Cpp_templates} % chapter
+\input{definitions}
+\input{declarations}
+\input{elements}
+\input{C99}
+\input{preprocessor}
+\input{C_strings}
+\input{Cpp_templates}
 
 % \chapter{\IFRU{Ваши собственные структуры данных}{Your own data structures}}
 % list, map
