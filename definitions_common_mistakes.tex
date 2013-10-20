@@ -1,0 +1,21 @@
+﻿\section{Частые ошибки}
+
+Чтобы объявить два указателя на char, можно, по инерции, написать:
+
+\begin{lstlisting}
+char* p1, p2;
+\end{lstlisting}
+
+Это не верно, потому что компилятор распознает это описание так:
+
+\begin{lstlisting}
+char *p1, p2;
+\end{lstlisting}
+
+... и объявляет указатель на char и просто char.
+
+Правильно так:
+
+\begin{lstlisting}
+char *p1, *p2;
+\end{lstlisting}
