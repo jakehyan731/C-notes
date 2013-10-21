@@ -110,3 +110,20 @@ struct
 Суммарная длина такой структуры будет $8+4=12$ байт. В любом случае, это компактнее, чем выделять
 поля для переменной каждого возможного типа.
 
+Начиная с C11\cite{C11}, \TT{u} можно не указывать, это называется ``анонимный union'':
+
+\begin{lstlisting}
+struct
+{
+	enum var_type tag; // 4 bytes
+	union
+	{
+		int i; // 4 bytes
+		double d; // 8 bytes
+		char *string; // 4 bytes (on 32-bit architecture)
+	};
+} variable;
+\end{lstlisting}
+
+... и обращаться к полям union просто как к \TT{variable.i}, \TT{variable.d}, итд.
+

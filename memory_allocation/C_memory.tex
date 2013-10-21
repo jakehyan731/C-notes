@@ -1,0 +1,20 @@
+\chapter{Работа с памятью Си}
+
+Есть наверное только два основных типа в памяти, предоставляемых программисту на Си.
+
+\begin{itemize}
+\item
+Память выделяемая в локальном стеке. Это локальные переменные, память выделенная при помощи alloca().
+Обычно это очень быстро выделяемая память.
+
+\item
+Куча\footnote{heap}. То что выделается при помощи malloc().
+\end{itemize}
+
+\input{memory_allocation/local_stack}
+
+\input{memory_allocation/alloca}
+
+\input{memory_allocation/heap}
+
+\input{memory_allocation/local_stack_or_heap}

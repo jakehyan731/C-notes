@@ -1,0 +1,205 @@
+﻿\subsection{Выделение памяти в куче}
+
+Куча (heap) это какая-то часть памяти выделенная ОС процессу, где процесс может уже сам делить эту часть как хочет.
+После заврешения процесса, в т.ч., некорректного, куча автоматически аннулируется и ОС не нужно разбирать 
+по одному все выделенные процессом блоки.
+
+Для работы с кучей есть ф-ции malloc(), calloc(), realloc(), free(), а в Си++ --- new и delete.
+
+Очевидно, чтобы поддерживать информацию о выделенных блоках в куче, нужна масса связных друг с другом структур.
+Отсюда имеется вполне осязаемые накладные расходы (overhead). Вы можете выделить блок размером 8 байт, но, возможно, 
+еще 16 байт (FIXME)
+будет задействованы для хранения информации о выделенном блоке\footnote{это еще называют ``метаданными''}, 
+а то и больше.
+
+Использование кучи требует некоторой программистской дисциплины, без которой легко наделать ошибок.
+Возможно поэтому, считается что ЯП с RAII как Си++
+либо ЯП со сборщиками мусора (Python, Ruby) легче.
+
+\subsubsection{Одна из основных ошибок: утечки памяти}
+
+Память была выделена, но её забыли освободить через free(). Эта проблема довольно легко решается своей собственной
+надстройкой над ф-циями malloc()/free(). Пусть эта надстройка ведет учет выделенных блоков, а также, где и когда
+(и для чего) был выделен тот или иной блок.
+
+Я сделал это в своей библиотеке octothorpe\footnote{\url{https://github.com/dennis714/octothorpe/blob/master/dmalloc.c}}. 
+Например, макрос DMALLOC вызывает ф-цию dmalloc(), передавая
+ей имя файла, имя ф-ции, номер строки, а также комментарий (имя блока). В конце работы программы, вызываем
+\TT{dump\_unfreed\_blocks()} и он покажет список блоков, которые забыли освободить.
+
+\begin{lstlisting}
+seq_n:2, size: 124, filename: dmalloc_test.c:31, func: main, struct: block124
+seq_n:3, size: 12, filename: dmalloc_test.c:33, func: main, struct: block12
+seq_n:4, size: 555, filename: dmalloc_test.c:35, func: main, struct: block555
+\end{lstlisting}
+
+У каждого блока есть также номер.
+Это для того чтобы можно было установить брякпоинт по номеру выделяемого блока --- 
+тогда отладчик сработает когда этот блок будет выделяться и вы увидите, где и при каких условиях это происходит.
+
+Писать в коде комментарии для каждого выделяемого блока памяти нудно, но очень полезно. Потом легко увидеть,
+под что была выделена память. Я впервые увидел эту идею в Oracle RDBMS. Помимо всего прочего, там еще и ведется
+статистика, под что было выделено больше памяти, её можно легко увидеть:
+
+\begin{lstlisting}
+SQL> select * from v$sgastat;
+
+POOL         NAME                            BYTES     CON_ID
+------------ -------------------------- ---------- ----------
+shared pool  AQ Slave list                    1224          1
+shared pool  KQR L PO                       653312          2
+shared pool  KQR X SO                       635808          2
+shared pool  RULEC                           20688          1
+shared pool  KQR M SO                         7168          2
+shared pool  work area table entry           12240          2
+shared pool  kglsim object batch              3864          2
+large pool   PX msg pool                    860160          1
+large pool   free memory                  30523392          0
+large pool   SWRF Metric CHBs              1802240          2
+large pool   SWRF Metric Eidbuf             368640          2
+\end{lstlisting}
+
+Подобная штука также присутствует и в ядре Windows, там это называется tagging. При выделении памяти
+в ядре или драйвере, нужно указывать также 32-битный тег (обычно, четырехбуквенное сокращение, означающее
+подсистему Windows). 
+Затем в отладчике можно увидеть статистику, под что выделено больше всего памяти:
+
+\begin{lstlisting}
+kd> !poolused 4
+   Sorting by  Paged Pool Consumed
+
+  Pool Used:
+            NonPaged            Paged
+ Tag    Allocs     Used    Allocs     Used
+ CM25        0        0       935  4124672	Internal Configuration manager allocations , Binary: nt!cm
+ Gh05        0        0       268  3291016	GDITAG_HMGR_SPRITE_TYPE , Binary: win32k.sys
+ MmSt        0        0      2119  2936752	Mm section object prototype ptes , Binary: nt!mm
+ CM35        0        0        91  2150400	Internal Configuration manager allocations , Binary: nt!cm
+ vmfb        0        0        13  2148752	UNKNOWN pooltag 'vmfb', please update pooltag.txt
+ Ntff        5     1040      1287  1070784	FCB_DATA , Binary: ntfs.sys
+ ArbA        0        0       108   442368	ARBITER_ALLOCATION_STATE_TAG , Binary: nt!arb
+ NtfF        0        0       457   431408	FCB_INDEX , Binary: ntfs.sys
+ CM16        0        0        62   331776	Internal Configuration manager allocations , Binary: nt!cm
+ IoNm        0        0      2022   267288	Io parsing names , Binary: nt!io
+ Ttfd        0        0       159   253976	TrueType Font driver 
+ Ifs         0        0         4   249968	Default file system allocations (user's of ntifs.h) 
+ CM29        0        0        26   212992	Internal Configuration manager allocations , Binary: nt!cm
+\end{lstlisting}
+
+Конечно, можно возразить, что для этого нужно хранить еще больше информации о выделенных блоках, а еще
+и теги, названия блоков. 
+И это еще сильнее замедляет работу программы. Конечно. 
+Поэтому пусть это будет работать только в отладочных (debug) сборках, 
+а в release-сборках, DMALLOC() становится обычной функцией-переходником\footnote{thunk function} для malloc().
+Ну а в ядре Windows это вообще по умолчанию отключено, и нужно включать при помощи утилиты GFlags
+\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/hardware/ff549557(v=vs.85).aspx}}
+Помимо всего прочего, подобное есть и в MSVC
+\footnote{читайте больше о ф-циях 
+\href{http://msdn.microsoft.com/en-us/library/5at7yxcs.aspx}{\_CrtSetDbgFlag}
+и
+\href{http://msdn.microsoft.com/en-us/library/d41t22sb.aspx}{\_CrtDumpMemoryLeaks}}.
+
+\subsubsection{Одна из основных ошибок: разрушение кучи}
+
+Нетрудно выделить память под 4 байта, но по ошибке дописать туда пятый. Скорее всего, никак это не проявится,
+но фактически это очень опасная мина замедленного действия, опасная, потому что ведет к трудновыявляемым
+ошибкам. Байт следующий за выделенным вам блоком может не использоваться вовсе, но также там уже
+может начинаться какая-то структура менеджера памяти, отвечающая за учет блоков. Если какую-то из
+таких структур сознателно разрушить, перезаписать, то тогда следующие вызовы malloc() или free() не смогут
+корректно работать. Иногда это проявляется в выводе ошибок вроде (в Windows):
+
+\begin{lstlisting}
+HEAP[Application.exe]: HEAP: Free Heap block 211a10 modified at 211af8 after it was freed
+\end{lstlisting}
+
+Подобные ошибки эксплуатируются авторами эксплоитов: если знать что вы можете изменить структуры данных
+менеджера памяти нужным вам образом, вы можете добиться какого-то нужного вам поведения программы 
+(это называется heap overflow\footnote{\url{https://en.wikipedia.org/wiki/Heap_overflow}}).
+
+Довольно распространенный метод борьбы с подобными ошибками: это просто дописывать ``guard''-ы с обоих сторон
+блока, например, 4-байтного размера. Например, я сделал это в своем DMALLOC. При каждом вызове free(),
+проверяется целостность guard-ов (это могут быть просто какие-то фиксированные значения вроде 0x12345678),
+и если кто-то или что-то затерло один из них, можно тут же сообщить об этом.
+
+%\subsubsection{Приемущества своего собственного менеджера памяти или надстройки над стандартным}
+%... может выдать размер выделенного блока, хотя нафик оно надо...
+
+\subsubsection{Одна из основных ошибок: непроверка результата malloc()}
+
+При успешном выполнении, malloc() возвращает указатель на блок, который можно использовать, либо NULL,
+если памяти не хватает. Конечно, в наше время дешевой памяти эта проблема становится редкой, тем не менее,
+если вы используете много памяти, думать об этом все же надо. Проверять указатель после каждого вызова
+malloc() неудобно, так что довольно популярный метод это писать свои функции-переходники с названием 
+xmalloc(), xrealloc(), вызывающие malloc()/realloc(), но проверяющие их результат и падающие в случае
+ошибки.
+
+Интересно упомянуть, как ведет себя xmalloc() в git:
+
+\begin{lstlisting}
+void *xmalloc(size_t size)
+{
+	void *ret;
+
+	memory_limit_check(size);
+	ret = malloc(size);
+	if (!ret && !size)
+		ret = malloc(1);
+	if (!ret) {
+		try_to_free_routine(size);
+		ret = malloc(size);
+		if (!ret && !size)
+			ret = malloc(1);
+		if (!ret)
+			die("Out of memory, malloc failed (tried to allocate %lu bytes)",
+			    (unsigned long)size);
+	}
+#ifdef XMALLOC_POISON
+	memset(ret, 0xA5, size);
+#endif
+	return ret;
+}
+\end{lstlisting}
+\footnote{\url{https://github.com/git/git/blob/master/wrapper.c}}
+
+Если malloc() не успешен, он пытается освободить какие-то уже выделенные (и не очень нужные) 
+блоки при помощи try\_to\_free\_routine(), а затем вызвать malloc() снова.
+
+Помимо всего прочего, если определен XMALLOC\_POISON, все байты в выделенном блоке заполняются 0xA5.
+Это может помочь визуально, на глаз, увидеть когда вы, например, выделили память под структуру,
+а затем используете какое-то поле из нее до того как инициализировали. Значение \TT{0xA5A5A5A5} будет
+бросаться в глаза в отладчике, ну или просто если вы захотите где-то в дампе вывести его в шестнадцатеричной
+форме. В MSVC для этой же цели служит константа \TT{0xbaadf00d}.
+
+И даже более того: после вызова free(), освобожденный блок может маркироваться уже какой-то другой константой,
+чтобы если кто-то захочет использовать что-то оттуда после освобождения блока, это также было видно, хотя
+бы визуально.
+
+Примеры констант от Microsoft:
+
+\begin{lstlisting}
+* 0xABABABAB : Used by Microsoft's HeapAlloc() to mark "no man's land" guard bytes after allocated heap memory
+* 0xABADCAFE : A startup to this value to initialize all free memory to catch errant pointers
+* 0xBAADF00D : Used by Microsoft's LocalAlloc(LMEM_FIXED) to mark uninitialised allocated heap memory
+* 0xBADCAB1E : Error Code returned to the Microsoft eVC debugger when connection is severed to the debugger
+* 0xBEEFCACE : Used by Microsoft .NET as a magic number in resource files
+* 0xCCCCCCCC : Used by Microsoft's C++ debugging runtime library to mark uninitialised stack memory
+* 0xCDCDCDCD : Used by Microsoft's C++ debugging runtime library to mark uninitialised heap memory
+* 0xDEADDEAD : A Microsoft Windows STOP Error code used when the user manually initiates the crash.
+* 0xFDFDFDFD : Used by Microsoft's C++ debugging heap to mark "no man's land" guard bytes before and after allocated heap memory
+* 0xFEEEFEEE : Used by Microsoft's HeapFree() to mark freed heap memory
+\end{lstlisting}
+\footnote{\url{https://en.wikipedia.org/wiki/Magic_number_(programming)}}
+
+\subsubsection{Еще частые ошибки}
+
+Если не включить заголовочный файл stdlib.h, 
+GCC считает возвращаемое значение неизвестной ф-ции malloc() за int и постоянно ругается на приведение типов.
+
+Еще одна ошибка, которая может попортить нервов, это выделить один и тот же блок памяти в одном месте 
+больше одного раза (предыдущие вызовы ``теряются'' из вида).
+
+\subsubsection{Методы борьбы}
+
+Однако, может оказаться так, что ошибки в программе у вас есть, а перекомпилировать её по каким-то причинам
+вы не можете. Тогда может помочь, например, valgrind\footnote{\url{http://valgrind.org/}}.
+

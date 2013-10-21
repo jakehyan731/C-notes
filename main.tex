@@ -19,7 +19,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{ulem}
-\usepackage{url}
+\usepackage{url} % \url
 \usepackage{graphicx}
 \usepackage{listingsutf8}
 \usepackage{makeidx}
@@ -32,8 +32,9 @@
 \usepackage{ccicons}
 \usepackage[nottoc]{tocbibind}
 \usepackage{amsmath}
+\usepackage[footnote,printonlyused,withpage]{acronym}
 \usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
-\usepackage[]{hyperref} % should be last
+\usepackage[]{hyperref} % \href. should be last
 %\usepackage{tikz}
 
 \definecolor{lstbgcolor}{rgb}{0.94,0.94,0.94}
@@ -98,8 +99,7 @@ To view a copy of this license, visit} \url{http://creativecommons.org/licenses/
 
 \IFRU{Возможно, более новая версии текста, а так же англоязычная версия, также доступна по ссылке}
 {Probably, newer version of this text, and also Russian language version is also accessible at} 
-%FIXME URL?
-\url{http://yurichev.com/C-notes.html}
+\url{http://yurichev.com/C-book.html}
 
 \IFRU{Вы также можете подписаться на мой twitter для получения информации о новых версиях этого текста, итд:
 \href{https://twitter.com/yurichev_ru}{@yurichev\_ru}}
@@ -150,7 +150,10 @@ His CV is available \href{http://yurichev.com/Dennis_Yurichev.pdf}{here}.}
 \input{C99}
 \input{preprocessor}
 \input{C_strings}
+\input{memory_allocation/C_memory}
+\input{C_OOP}
 \input{Cpp_templates}
+\input{Cpp_STL}
 
 % \chapter{\IFRU{Ваши собственные структуры данных}{Your own data structures}}
 % list, map
@@ -158,6 +161,7 @@ His CV is available \href{http://yurichev.com/Dennis_Yurichev.pdf}{here}.}
 \input{Cstdlib}
 
 \include{afterword}
+\include{acronyms}
 
 \bibliographystyle{alpha}
 \bibliography{books,articles,usenet,misc}

@@ -24,3 +24,18 @@ for(int i=0; i<10; i++)
 К примеру, это помогло бы для реализации strtok(), ведь этой ф-ции что-то нужно хранить у себя между вызовами.
 
 \input{forward_declarations} % section
+
+\section{C++11: auto}
+
+Пользуясь \ac{STL}, иногда надоедает каждый раз объявлять тип итератора вроде:
+
+\begin{lstlisting}
+for (std::list<int>::iterator it=list.begin(); it!=list.end(); it++)
+\end{lstlisting}
+
+Тип it вполне можно получить из list.begin(), поэтому, в начиная со стандарта C++11, можно использовать auto:
+
+\begin{lstlisting}
+for (auto it=list.begin(); it!=list.end(); it++)
+\end{lstlisting}
+
