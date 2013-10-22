@@ -101,3 +101,113 @@ bzero() это ф-ция просто обнуляющая блок памяти
 
 С другой стороны, её нет в стандарте POSIX.
 
+\label{printf}
+\section{printf()}
+
+\subsection{Свои собственные модификаторы в printf()}
+
+Часто можно испытать раздражение, когда было бы логично передать в printf(), скажем, структуру описывающее комплексное
+число, или цвет закодированный в структуре из трех чисел типа int.
+
+В printk() (printf-подобная ф-ция в ядре Linux) имеются дополнительные модификаторы
+\footnote{\url{http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/printk-formats.txt}}, 
+такие как \TT{\%pM} (Mac-адрес), \TT{\%pI4} (IPv4-адрес), \TT{\%pUb} (UUID/GUID).
+
+В ОС Plan9, и в исходниках компилятора Go, можно найти ф-цию fmtinstall(), объявляющую новый модификатор printf-строки,
+например:
+
+\begin{lstlisting}[caption=go\textbackslash{}src\textbackslash{}cmd\textbackslash{}5c\textbackslash{}list.c]
+void
+listinit(void)
+{
+
+	fmtinstall('A', Aconv);
+	fmtinstall('P', Pconv);
+	fmtinstall('S', Sconv);
+	fmtinstall('N', Nconv);
+	fmtinstall('B', Bconv);
+	fmtinstall('D', Dconv);
+	fmtinstall('R', Rconv);
+}
+
+...
+
+int
+Pconv(Fmt *fp)
+{
+	char str[STRINGSZ], sc[20];
+	Prog *p;
+	int a, s;
+
+	p = va_arg(fp->args, Prog*);
+	a = p->as;
+	s = p->scond;
+	strcpy(sc, extra[s & C_SCOND]);
+	if(s & C_SBIT)
+		strcat(sc, ".S");
+	if(s & C_PBIT)
+		strcat(sc, ".P");
+	if(s & C_WBIT)
+		strcat(sc, ".W");
+	if(s & C_UBIT)		/* ambiguous with FBIT */
+		strcat(sc, ".U");
+	if(a == AMOVM) {
+		if(p->from.type == D_CONST)
+			sprint(str, "	%A%s	%R,%D", a, sc, &p->from, &p->to);
+		else
+		if(p->to.type == D_CONST)
+			sprint(str, "	%A%s	%D,%R", a, sc, &p->from, &p->to);
+		else
+			sprint(str, "	%A%s	%D,%D", a, sc, &p->from, &p->to);
+	} else
+	if(a == ADATA)
+		sprint(str, "	%A	%D/%d,%D", a, &p->from, p->reg, &p->to);
+	else
+	if(p->as == ATEXT)
+		sprint(str, "	%A	%D,%d,%D", a, &p->from, p->reg, &p->to);
+	else
+	if(p->reg == NREG)
+		sprint(str, "	%A%s	%D,%D", a, sc, &p->from, &p->to);
+	else
+	if(p->from.type != D_FREG)
+		sprint(str, "	%A%s	%D,R%d,%D", a, sc, &p->from, p->reg, &p->to);
+	else
+		sprint(str, "	%A%s	%D,F%d,%D", a, sc, &p->from, p->reg, &p->to);
+	return fmtstrcpy(fp, str);
+}
+\end{lstlisting}
+(\url{http://plan9.bell-labs.com/sources/plan9/sys/src/cmd/5c/list.c})
+
+Ф-ция Pconv() будет вызвана если в строке формата будет встречен \%P. Затем она копирует созданную строку
+при помощи fmtstrcpy(). Кстати, эта ф-ция и сама использует другие объявленные модификаторы, такие как \%A, \%D, итд.
+
+В Glibc есть нестандартное расширение
+\footnote{\url{http://www.gnu.org/software/libc/manual/html_node/Customizing-Printf.html}}, 
+позволяющее объявлять свои модификаторы, но это \IT{deprecated}.
+
+Попробуем определить свои собственные модификаторы для Mac-адреса и для вывода байта в бинарном виде:
+
+\lstinputlisting{register_printf_function.c}
+\footnote{Основа для примера взята отсюда: \url{http://codingrelic.geekhold.com/2008/12/printf-acular.html}}
+
+Это компилируется с предупреждениями:
+
+\begin{lstlisting}
+1.c: In function 'main':
+1.c:48:2: warning: 'register_printf_function' is deprecated (declared at /usr/include/printf.h:106) [-Wdeprecated-declarations]
+1.c:49:2: warning: 'register_printf_function' is deprecated (declared at /usr/include/printf.h:106) [-Wdeprecated-declarations]
+1.c:51:2: warning: unknown conversion type character 'M' in format [-Wformat]
+1.c:52:2: warning: unknown conversion type character 'B' in format [-Wformat]
+\end{lstlisting}
+
+GCC умеет следить за соответствиями модификаторов в printf-строке и аргументами в вызове printf(), но здесь
+ему встречаются незнакомые модификаторы, о чем он предупреждает.
+
+Тем не менее, наша программа работает:
+
+\begin{lstlisting}
+$ ./a.out
+00:11:22:33:44:55
+10101011
+\end{lstlisting}
+
