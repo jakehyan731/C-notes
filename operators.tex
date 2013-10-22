@@ -42,3 +42,41 @@ short-circuit evaluation, приоритет операций \IT{\&} и \IT{|} 
 Так что, нередкая ошибка это забывать о высоком приоритете этих операций и писать, например,
 \IT{if (a\&1==0)}, в то время как это нужно брать в скобки: \IT{if ((a\&1)==0)}.
 
+\subsection{! и ~}
+
+~ (тильда) это побитовое инвертирование всех бит в значении.
+
+! --- если значение не равно 0, тогда будет 0. Если значение было равно 0, тогда будет 1. Эта операция часто
+используется для инвертирования результатов действия ф-ций. Например, strcmp() в случае равенства строк возвращает 0.
+Поэтому можно писать:
+
+\begin{lstlisting}
+if (!strcmp(str1, str2))
+{
+	// do something in case of strings equivalence
+};
+\end{lstlisting}
+
+... вместо \TT{if (strcmp (...)==0)}. \\
+\\
+Также, два подряд восклицательных знака применяется для трасформирования любого значения в тип bool
+по правилу: 0 --- false (0); не ноль --- true (1).
+Например:
+
+\begin{lstlisting}
+bool some_object_present=!!struct->object;
+\end{lstlisting}
+
+Или:
+
+\begin{lstlisting}
+#define FLAG 0x00001000
+bool FLAG_present=!!(value & FLAG);
+\end{lstlisting}
+
+А также:
+
+\begin{lstlisting}
+bool bit_7_set=!!(value & (1<<7));
+\end{lstlisting}
+
