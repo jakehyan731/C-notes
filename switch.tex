@@ -1,0 +1,39 @@
+﻿\section{switch}
+
+Иногда можно устать писать одно и то же:
+
+\begin{lstlisting}
+switch(...)
+{
+	case 0:
+	case 1:
+	case 2:
+	case 3:
+		fn1();
+		break;
+	case 4:
+	case 5:
+	case 6:
+	case 7:
+		fn2();
+		break;
+};
+\end{lstlisting}
+
+Это нестандартное расширение GCC
+\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Case-Ranges.html}} может немного всё упростить:
+
+\begin{lstlisting}
+switch(...)
+{
+	case 0 ... 3:
+		fn1();
+		break;
+	case 4 ... 7:
+		fn2();
+		break;
+};
+\end{lstlisting}
+
+Так что если в планах имеется использовать только компилятор GCC, то можно делать так.
+

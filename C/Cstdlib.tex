@@ -88,3 +88,69 @@ bzero() это ф-ция просто обнуляющая блок памяти
 
 \input{C/printf}
 
+\section{strstr() и memmem()}
+
+strstr() применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще.
+
+memmem() можно применять с этими же целями, но для поиска по буферу, в котором могут быть нули,
+либо по части строки.
+
+\label{memchr}
+\section{strchr() и memchr()}
+
+strchr() применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще.
+
+memchr() можно применять с этими же целями, но для поиска по части строки.
+
+\section{atexit()}
+
+При помощи atexit() можно добавить ф-цию, автоматически вызываемую перед выходом из вашей программы.
+Кстати, программы на Си++ именно при помощи atexit() добавляют деструкторы глобальных объектов.
+
+Можно попробовать:
+
+\begin{lstlisting}
+#include <string>
+
+std::string s="test";
+
+int main()
+{
+};
+\end{lstlisting}
+
+В листинге на ассемблере найдем конструктор этого глобального объекта:
+
+\begin{lstlisting}[caption=MSVC 2010]
+??__Es@@YAXXZ PROC					; `dynamic initializer for 's'', COMDAT
+; Line 3
+	push	ebp
+	mov	ebp, esp
+	push	OFFSET $SG22192
+	mov	ecx, OFFSET ?s@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A ; s
+	call	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@PBD@Z ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string<char,std::char_traits<char>,std::allocator<char> >
+	push	OFFSET ??__Fs@@YAXXZ			; `dynamic atexit destructor for 's''
+	call	_atexit
+	add	esp, 4
+	pop	ebp
+	ret	0
+??__Es@@YAXXZ ENDP					; `dynamic initializer for 's''
+
+??__Fs@@YAXXZ PROC					; `dynamic atexit destructor for 's'', COMDAT
+	push	ebp
+	mov	ebp, esp
+	mov	ecx, OFFSET ?s@@3V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A ; s
+	call	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@XZ ; std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string<char,std::char_traits<char>,std::allocator<char> >
+	pop	ebp
+	ret	0
+??__Fs@@YAXXZ ENDP					; `dynamic atexit destructor for 's''
+\end{lstlisting}
+
+Конструктор, конструируя, также регистрирует деструктор объекта в atexit().
+
+\section{atoi(), atof(), strtod(), strtof()}
+
+Ф-ции atoi/atof не могут сигнализировать об ошибке, а strtod/strtof, делая то же самое --- могут.
+
+\input{C/bsearch.tex}
+
