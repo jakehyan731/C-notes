@@ -20,3 +20,7 @@ unsigned int find_max_value (unsigned int *array, size_t array_size);
 unsigned int max_value=find_max_value ((unsigned[]){ 0x123, 0x456, 0x789, 0xF00 }, 4);
 \end{lstlisting}
 
+Поиск в массиве можно реализовать при помощи ф-ций bsearch() или lfind()\ref{bsearch_lfind}, 
+поиск и вставку при помощи lsearch()\footnote{работает также как и lfind(), но при отсутствии искомого элемента,
+добавляет его в массив}.
+

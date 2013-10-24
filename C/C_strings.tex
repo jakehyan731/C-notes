@@ -189,6 +189,8 @@ unknown_color:
 
 \end{itemize}
 
+\subsection{Через строку-константу}
+
 Первый вариант очень прост. Например:
 
 \begin{lstlisting}
@@ -229,7 +231,30 @@ const char* get_month_name (int month)
 };
 \end{lstlisting}
 
-Насчет второго варианта, в git в hex.c\footnote{\url{https://github.com/git/git/blob/master/hex.c}} можно найти такое:
+\subsection{Через глобальный массив символов}
+
+Так делает стандартная ф-ция asctime(). Следует помнить, что нужно использовать возвращенную строку
+перед каждым следующим вызовом asctime. 
+
+Например, это правильно:
+
+\begin{lstlisting}
+printf("date1: %s\n", asctime(&date1));
+printf("date2: %s\n", asctime(&date2));
+\end{lstlisting}
+
+А это нет:
+
+\begin{lstlisting}
+char *date1=asctime(&date1);
+char *date2=asctime(&date2);
+printf("date1: %s\n", date1);
+printf("date2: %s\n", date2);
+\end{lstlisting}
+
+... ведь указатели date1 и date2 будут указывать на одно и то же место, и вывод printf() будет одинаковым. \\
+\\
+В git в hex.c\footnote{\url{https://github.com/git/git/blob/master/hex.c}} можно найти такое:
 
 \begin{lstlisting}
 char *sha1_to_hex(const unsigned char *sha1)

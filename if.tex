@@ -1,0 +1,16 @@
+﻿\section{if}
+
+Вместо коротких if желательно использовать \TT{?:}, например:
+
+\begin{lstlisting}
+char* get_name (struct data *s)
+{
+	return s->name==NULL ? "<name_unknown>" : s->name;
+};
+
+...
+
+printf ("val=%s\n", val ? "true" : "false");
+\end{lstlisting}
+
+
