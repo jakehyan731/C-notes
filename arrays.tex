@@ -1,0 +1,22 @@
+﻿\section{Массивы}
+
+В C99\ref{C99} можно передавать массив в аргументах ф-ции.
+
+Собственно, массив байт можно было передавать и раньше, кодируя байты в строке, включая ноль, примерно так
+(узнать, встречается ли байт \IT{c} в массиве байт):
+
+\begin{lstlisting}
+if (memchr ("\x12\x34\x56\x78\x00\xAB", c, 6))
+	...
+\end{lstlisting}
+
+Байты после ноля нормально кодируются.
+
+Но в C99 теперь можно передавать массив значений других типов, например unsigned int:
+
+\begin{lstlisting}
+unsigned int find_max_value (unsigned int *array, size_t array_size);
+
+unsigned int max_value=find_max_value ((unsigned[]){ 0x123, 0x456, 0x789, 0xF00 }, 4);
+\end{lstlisting}
+
