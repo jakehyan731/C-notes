@@ -67,8 +67,6 @@ process 2> debug.txt
 
 % ? NtQuerySystemTime http://msdn.microsoft.com/en-us/library/windows/desktop/ms724512(v=vs.85).aspx
 
-\input{C/scanf}
-
 \label{memcpy}
 \section{memcpy()}
 
@@ -87,20 +85,6 @@ bzero() это ф-ция просто обнуляющая блок памяти
 С другой стороны, её нет в стандарте POSIX.
 
 \input{C/printf}
-
-\section{strstr() и memmem()}
-
-strstr() применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще.
-
-memmem() можно применять с этими же целями, но для поиска по буферу, в котором могут быть нули,
-либо по части строки.
-
-\label{memchr}
-\section{strchr() и memchr()}
-
-strchr() применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще.
-
-memchr() можно применять с этими же целями, но для поиска по части строки.
 
 \section{atexit()}
 
@@ -147,10 +131,6 @@ int main()
 \end{lstlisting}
 
 Конструктор, конструируя, также регистрирует деструктор объекта в atexit().
-
-\section{atoi(), atof(), strtod(), strtof()}
-
-Ф-ции atoi/atof не могут сигнализировать об ошибке, а strtod/strtof, делая то же самое --- могут.
 
 \input{C/bsearch.tex}
 
