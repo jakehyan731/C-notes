@@ -13,4 +13,18 @@ char* get_name (struct data *s)
 printf ("val=%s\n", val ? "true" : "false");
 \end{lstlisting}
 
+\subsection{C++: объявление переменных в if()}
+
+Это доступно как минимум в C++03:
+
+\begin{lstlisting}
+if (int a=fn(...))
+{
+     ...
+     cout << a;
+     ...
+};
+\end{lstlisting}
+
+Точно также их можно объявлять и в switch().
 

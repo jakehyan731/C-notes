@@ -1,0 +1,46 @@
+﻿\subsection{references}
+
+Это то же что и указатели, но обезопасенные (safe), потому что работая с ними, труднее сделать ошибку
+\cite[8.3.2]{CPP11}.
+
+\IFRU{Например, reference всегда должен указывать объект того же типа и не может быть NULL}
+{For example, reference should be always be pointing to the object of corresponding type and can't be NULL}
+\cite[8.6]{ParashiftCPPFAQ}.
+\IFRU{Более того, reference нельзя менять, нельзя его заставить указывать на другой объект (reseat)}
+{Even more, reference cannot be changed, it's not possible to point to to another object (reseat)}
+\cite[8.5]{ParashiftCPPFAQ}.
+
+В \cite[1.7.1]{REBook} можно увидеть, что на уровне x86-кода, это одно и то же.
+
+Как и указатели, reference-ы также можно возвращать из ф-ций, например:
+
+\begin{lstlisting}
+#include <iostream>
+ 
+int& use_count()
+{
+	static int uc=1000; // starting value
+	return uc;
+};
+ 
+void main()
+{
+	std::cout << ++use_count() << std::endl;
+	std::cout << ++use_count() << std::endl;
+	std::cout << ++use_count() << std::endl;
+	std::cout << ++use_count() << std::endl;
+};
+\end{lstlisting}
+
+Это выведет предсказуемое:
+
+\begin{lstlisting}
+1001
+1002
+1003
+1004
+\end{lstlisting}
+
+Если посмотреть что там сгенерировалось на ассемблере, то можно увидеть что \TT{use\_count()} просто возвращает
+указатель на \TT{uc}, а в \TT{main()} происходит инкремент значения по этому указателю.
+

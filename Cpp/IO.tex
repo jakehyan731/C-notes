@@ -1,0 +1,26 @@
+\section{C++: ввод/вывод}
+
+Часто есть необходимость выводить в ostream целые структуры, а каждый раз выводить их по одному полю это
+неудобно. Иногда это решается добавлением метода ToString() в класс. 
+Другое решение это сделать ``свободную'' ф-цию (free function)
+\footnote{Ф-ции не являющиеся методом какого-либо класса} для вывода вроде:
+
+\begin{lstlisting}
+ostream& operator<< (ostream &out, const Object &in)
+{
+    out << "Object. size=" << in.size << " value=" << in.value << " ";
+
+    return out;
+};
+\end{lstlisting}
+
+После этого можно отправлять экземпляры класса прямо в ostream:
+
+\begin{lstlisting}
+Object o1, o2;
+...
+cout << "o1=" << o1 << " o2=" << o2 << endl;
+\end{lstlisting}
+
+А для того чтобы ф-ция вывода могла обращаться к любым полям класса, её можно сделать friend.
+
