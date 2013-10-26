@@ -1,0 +1,57 @@
+﻿\section{Стандартные ф-ции для работы со строками}
+
+\subsection{strstr() и memmem()}
+
+strstr() применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще.
+
+memmem() можно применять с этими же целями, но для поиска по буферу, в котором могут быть нули,
+либо по части строки.
+
+\label{memchr}
+\subsection{strchr() и memchr()}
+
+strchr() применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще.
+
+memchr() можно применять с этими же целями, но для поиска по части строки.
+
+\subsection{atoi(), atof(), strtod(), strtof()}
+
+Ф-ции atoi/atof не могут сигнализировать об ошибке, а strtod/strtof, делая то же самое --- могут.
+
+\input{C_strings/scanf}
+
+\subsection{strspn(), strcspn()}
+
+strspn() часто применяется для того чтобы удостовериться, что некая строка полностью состоит из
+нужных символов:
+    
+\begin{lstlisting}
+if (strspn(s, "1234567890") == strlen(s)) ... OK
+...
+if (strspn(IPv4, "1234567890.") == strlen(IPv4)) ... OK
+...
+if (strspn(IPv6, "0123456789AaBbCcDdEeFf:.") == strlen(IPv6)) ... OK
+\end{lstlisting}
+
+Либо для того чтобы пропустить начало строки:
+
+\begin{lstlisting}
+const char *whitespaces = " \n\r\t";
+*buf += strspn(*buf, whitespaces); // skip whitespaces at start
+\end{lstlisting}
+
+strcspn() это обратная ф-ция, её можно использовать для пропуска всех символов в начале строки, не попадающих
+под множество символов:
+
+\begin{lstlisting}
+s += strcspn(s, whitespaces); // first, skip anything till whitespaces
+s += strspn(s, whitespaces); // then skip shitespaces
+\end{lstlisting}
+
+\subsection{strtok() и strpbrk()}
+
+Обе ф-ции служат для разбиения строки на подстроки, отделенные друг от друга разделительными символами
+\footnote{delimiter}.
+Только strtok() модифицирует исходную строку (и таким образом, подстроку сразу можно использовать
+как отдельную Си-строку), а strpbrk() нет, он только возвращает указатель на следующую подстроку.
+

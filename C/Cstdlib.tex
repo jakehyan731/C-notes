@@ -1,30 +1,6 @@
 ﻿\chapter{\IFRU{Стандартные библиотеки Си/Си++}{C/C++ standard library}}
 
-\section{assert}
-
-Как известно, этот макрос часто используется для валидации
-\footnote{используется также такой термин как ``инвариант'' и ``sanitization'' в англ.яз.} заданных значений. 
-Например, если ваша ф-ция
-работает с датой, вы, вероятно, захотите написать в её начале что-то вроде \IT{assert (month>=1 \&\& month<=12)}.
-
-Вот то о чем нужно помнить: стандартный макрос assert() доступен только в отладочных (debug) сборках. В release
-все выражения как бы исчезают. Поэтому писать, например, \IT{assert(f=malloc(...))} неверно. Впрочем,
-вы возможно захотите использовать что-то вроде \IT{assert(object->get\_something()==123)}.
-
-В макросах assert можно также указывать небольшие сообщения об ошибках: 
-вы увидите их если assert() ``не сойдется''. 
-Например, в исходниках LLVM\footnote{\url{http://llvm.org/}} можно встретить такое:
-
-\begin{lstlisting}
-assert(Index < Length && "Invalid index!");
-...
-assert(i + Count <= M && "Invalid source range");
-...
-assert(j + Count <= N && "Invalid dest range");
-\end{lstlisting}
-
-Текстовая строка имеет тип \IT{const char*}, и она никогда не NULL. 
-Таким образом, можно дописать к любому выражению \IT{... \&\& true} не меняя его смысл.
+\input{C/assert}
 
 \section{Разница между stdout и stderr}
 
@@ -83,6 +59,9 @@ bzero() это ф-ция просто обнуляющая блок памяти
 К тому же, имя ф-ции bzero легче читается.
 
 С другой стороны, её нет в стандарте POSIX.
+
+А в Windows API для этих же целей применяется ZeroMemory()
+\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366920(v=vs.85).aspx}}.
 
 \input{C/printf}
 
