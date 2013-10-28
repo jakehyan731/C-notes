@@ -1,4 +1,4 @@
-﻿\section{\IFRU{Указатели}{Pointers}}
+﻿\subsection{\IFRU{Указатели}{Pointers}}
 
 Как однажды сказал Дональд Кнут в интервью\cite{KnuthInterview1993}, то как в Си устроены указатели, это является
 очень удачной инновацией в языках программирования по тем временам.
@@ -13,7 +13,7 @@
 как разделитель. К примеру, мы можем подать на вход строку \TT{The quick brown fox jumps over the lazy dog} 
 и задать пробел в качестве разделителя.
 
-\lstinputlisting{src/strtok_ex1.c}
+\lstinputlisting{common/strtok_ex1.c}
 
 Мы в итоге получим на выходе:
 
@@ -63,7 +63,7 @@ dog
 в другие функции,
 там точно так же используются указатели, но просто эта механика скрыта от программиста.
 
-\subsection{Синтаксический сахар для a[i]}
+\subsubsection{Синтаксический сахар для a[i]}
 
 Ради упрощения, можно сказать что в Си нет массивов вообще, а есть только синтаксический сахар для выражений
 вроде \IT{a[i]}.
@@ -105,11 +105,11 @@ The International Obfuscated C Code Contest\footnote{\url{http://www.ioccc.org/}
 массива), будет отсчитано 5 элементов, затем оттуда прочитается элемент для записи в \IT{x}.
 
 \label{PtrArith}
-\subsection{\IFRU{Арифметика указателей}{Pointer arithmetic}}
+\subsubsection{\IFRU{Арифметика указателей}{Pointer arithmetic}}
 
 Простой пример:
 
-\lstinputlisting{src/phonebook1.c}
+\lstinputlisting{common/phonebook1.c}
 
 Мы объяляем глобальный массив из структур. Если скомпилировать это в GCC с ключом \IT{-S} либо в MSVC с ключом
 \IT{/Fa}, мы увидим листинг на ассемблере и то, как компилятор расположил эти строки. 
@@ -146,7 +146,7 @@ The International Obfuscated C Code Contest\footnote{\url{http://www.ioccc.org/}
 (а не 1 байт, как можно поначалу ошибочно подумать),
 таким образом, на каждой итерации, \IT{i} указывает на следующий элемент массива.
 
-\subsection{Указатели на функции}
+\subsubsection{Указатели на функции}
 
 Часто используются для callback-в.
 
