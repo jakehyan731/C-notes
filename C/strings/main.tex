@@ -1,4 +1,4 @@
-\chapter{Строки в Си}
+\section{Строки в Си}
 
 В Си нет встроенных возможностей для удобной работы со строками, такими, какие имеются в ЯП более
 высокого уровня.
@@ -81,7 +81,7 @@ Buffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.ht
 ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} и 
 CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} в Java.
 
-\section{Хранение длины строки}
+\subsection{Хранение длины строки}
 
 Всегда хранить длину строки --- это было принято в реализациях ЯП Pascal. 
 Не смотря на исходы святых войн\footnote{holy wars} между приверженцами Си и Pascal, все же, почти все библиотеки
@@ -98,19 +98,19 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 Это не очень эстетично, это выглядит избыточно, зато очень удобно.
 Например, у нас есть некоторая ф-ция, которой нужно в начале узнать, какую строку ей передали:
 
-\lstinputlisting{C_strings/strcmp1.c}
+\lstinputlisting{C/strings/strcmp1.c}
 
 А вот если бы эта ф-ция имела длину входной строки, её можно было бы переписать так:
 
-\lstinputlisting{C_strings/strcmp2.c}
+\lstinputlisting{C/strings/strcmp2.c}
 
 Конечно, с эстетической точки зрения, код выглядит ужасно.
 Тем не менее, мы здорово сократили количество необходимых сравнений строк! Вероятно, для тех ситуаций, когда 
 нужно как можно быстрее обрабатывать текстовые строки, такой подход может улучшить ситуацию.
 
-\input{C_strings/return}
+\input{C/strings/return}
 
-\section{Определение строк}
+\subsection{Определение строк}
 
 \label{heredoc}
 Малоизвестная возможность Си, длинные строки можно определять так:
@@ -133,9 +133,9 @@ printf ("Some Utility v0.1\n"
 Это отдаленно напоминает ``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} в 
 UNIX-шеллах и Perl.
 
-\input{C_strings/std_func}
+\input{C/strings/std_func}
 
-\section{Unicode}
+\subsection{Unicode}
 
 Unicode это важно! Наиболее популярные способы его применения это:
 
@@ -148,7 +148,7 @@ Unicode это важно! Наиболее популярные способы 
 Используется в Windows API.
 \end{itemize}
 
-\subsection{UTF-16}
+\subsubsection{UTF-16}
 
 Под каждый символ отводят 16-битный тип \IT{wchar\_t}.
 
@@ -161,7 +161,7 @@ L"hello world"
 Для работы с wchar\_t вместо char, имеется целый класс функций-двойников с символом w в названии,
 например: fwprintf(), wcscmp(), wcslen(), iswalpha().
 
-\subsubsection{Windows}
+\paragraph{Windows}
 
 В Windows, если некто хочет писать программу сразу в двух версиях, с использованием Unicode и без,
 для этого есть тип tchar, в зависимости от объявленной переменной препроцессора UNICODE, 
@@ -177,7 +177,7 @@ _T("hello world")
 
 В заголовочном файле tchar.h есть масса ф-ций, меняющих свою функцию в зависимости от этой переменной.
 
-\section{Списки строк}
+\subsection{Списки строк}
 
 Самый простой список строк, это просто набор строк оканчивающийся нулем.
 Например, в Windows API, в библиотеке Common Dialogs, 

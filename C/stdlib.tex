@@ -1,8 +1,8 @@
-﻿\chapter{\IFRU{Стандартные библиотеки Си/Си++}{C/C++ standard library}}
+﻿\section{\IFRU{Стандартные библиотеки Си/Си++}{C/C++ standard library}}
 
 \input{C/assert}
 
-\section{Разница между stdout и stderr}
+\subsection{Разница между stdout и stderr}
 
 \IT{stdout} это то что выводится на консоль при помощи вызова \IT{printf()}.
 \IT{stdout} это буферизированный вывод,
@@ -25,7 +25,7 @@ process 2> debug.txt
 
 ... это направит вывод \IT{stderr} в заданный файл (потому что номер этого потока -- 2).
 
-\section{UNIX time}
+\subsection{UNIX time}
 
 В UNIX-среде очень популярно представление даты и времени в формате UNIX time.
 Это просто 32-битное число, показывающее
@@ -44,13 +44,13 @@ process 2> debug.txt
 % ? NtQuerySystemTime http://msdn.microsoft.com/en-us/library/windows/desktop/ms724512(v=vs.85).aspx
 
 \label{memcpy}
-\section{memcpy()}
+\subsection{memcpy()}
 
 Поначалу трудно запомнить порядок аргументов в ф-циях memcpy(), strcpy(). Чтобы было легче, можно представлять
 знак ``='' (``равно'') между аргументами.
 
 \label{bzero}
-\section{bzero() и memset()}
+\subsection{bzero() и memset()}
 
 bzero() это ф-ция просто обнуляющая блок памяти.
 Для этого обычно используют memset(). Но у memset() есть неприятная особенность, легко перепутать второй
@@ -65,7 +65,7 @@ bzero() это ф-ция просто обнуляющая блок памяти
 
 \input{C/printf}
 
-\section{atexit()}
+\subsection{atexit()}
 
 При помощи atexit() можно добавить ф-цию, автоматически вызываемую перед выходом из вашей программы.
 Кстати, программы на Си++ именно при помощи atexit() добавляют деструкторы глобальных объектов.
@@ -113,7 +113,7 @@ int main()
 
 \input{C/bsearch.tex}
 
-\section{setjmp(), longjmp()}
+\subsection{setjmp(), longjmp()}
 
 В каком-то смысле, это реализация исключений в Си.
 

@@ -1,4 +1,4 @@
-﻿\section{Возврат строки}
+﻿\subsection{Возврат строки}
 
 Если некая ф-ция должна вернуть строку, имеются такие возможности:
 
@@ -90,7 +90,7 @@ printf("date2: %s\n", date2);
 \\
 В git в hex.c\footnote{\url{https://github.com/git/git/blob/master/hex.c}} можно найти такое:
 
-\lstinputlisting{C_strings/git_hex.c}
+\lstinputlisting{C/strings/git_hex.c}
 
 Строка возвращается фактически через глобальную переменную, объявление её как static внутри ф-ции просто напросто
 обеспечивает доступ к ней только из этой ф-ции. Но вот недостаток: после вызова \IT{sha1\_to\_hex()} вы не можете
