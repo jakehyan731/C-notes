@@ -35,17 +35,66 @@ void fn(...)
 
 \input{common/forward_declarations} % subsection
 
-\subsection{C++11: auto}
+\subsection{Определение строк}
 
-Пользуясь \ac{STL}, иногда надоедает каждый раз объявлять тип итератора вроде:
+\subsubsection{Символы используемые в строках}
+
+\begin{center}
+\begin{tabular}{ | l | l | l | }
+\hline
+\textbackslash{}0 & 0x00 & нулевой байт \\
+\hline
+\textbackslash{}t & 0x09 & табуляция \\
+\hline
+\textbackslash{}n & 0x0A & line feed (LF) \\
+\hline
+\textbackslash{}r & 0x0D & carriage return (CR) \\
+\hline
+\end{tabular}
+\end{center}
+
+Разница между LF и CR в том, что в старых матричных принтерах,
+LF означал протягивание бумаги на одну строку вниз,
+а CR перевод каретки влево до конца.
+Так что в принтер нужно было передавать оба символа.
+
+Вывод CR без LF дает возможность перезаписывать текующую строку в консоли:
 
 \begin{lstlisting}
-for (std::list<int>::iterator it=list.begin(); it!=list.end(); it++)
+for (;;)
+{
+	// do something
+	// how much we processed?
+	percents=ammount_of_work/total_work*100;
+	printf ("%d%% complete\r", percents);
+};
 \end{lstlisting}
 
-Тип it вполне можно получить из list.begin(), поэтому, в начиная со стандарта C++11, можно использовать auto:
+Это часто используется например в архиваторах для отображения информации, или, например, wget.
+
+В Си и UNIX принят LF.
+
+В DOS и затем в Windows ~--- CR+LF.
+
+\subsubsection{Строка определенная в нескольких строках}
+\label{heredoc}
+Малоизвестная возможность Си, длинные строки можно определять так:
 
 \begin{lstlisting}
-for (auto it=list.begin(); it!=list.end(); it++)
+const char* long_line="line 1"
+	"line 2"
+	"line 3"
+	"line 4"
+	"line 5";
+
+...
+
+printf ("Some Utility v0.1\n"
+	"Usage: %s parameters\n"
+	"\n"
+	"Authors:...\n", argv[0]);
 \end{lstlisting}
+
+Это отдаленно напоминает ``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} в 
+UNIX-шеллах и Perl.
 

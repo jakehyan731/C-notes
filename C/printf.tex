@@ -13,6 +13,10 @@
 \footnote{\url{http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/printk-formats.txt}}, 
 такие как \TT{\%pM} (Mac-адрес), \TT{\%pI4} (IPv4-адрес), \TT{\%pUb} (UUID/GUID).
 
+В GNU Multiple Precision Arithmetic Library есть ф-ция gmp\_printf()
+\footnote{\url{http://gmplib.org/manual/Formatted-Output-Strings.html}} имеющая нестандартные 
+модификаторы нужные для вывода чисел с произвольной точностью.
+
 В ОС Plan9, и в исходниках компилятора Go, можно найти ф-цию fmtinstall(), объявляющую новый модификатор printf-строки,
 например:
 

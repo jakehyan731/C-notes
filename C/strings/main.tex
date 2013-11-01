@@ -109,30 +109,6 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 нужно как можно быстрее обрабатывать текстовые строки, такой подход может улучшить ситуацию.
 
 \input{C/strings/return}
-
-\subsection{Определение строк}
-
-\label{heredoc}
-Малоизвестная возможность Си, длинные строки можно определять так:
-
-\begin{lstlisting}
-const char* long_line="line 1"
-	"line 2"
-	"line 3"
-	"line 4"
-	"line 5";
-
-...
-
-printf ("Some Utility v0.1\n"
-	"Usage: %s parameters\n"
-	"\n"
-	"Authors:...\n", argv[0]);
-\end{lstlisting}
-
-Это отдаленно напоминает ``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} в 
-UNIX-шеллах и Perl.
-
 \input{C/strings/std_func}
 
 \subsection{Unicode}
