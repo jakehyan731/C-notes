@@ -1,5 +1,16 @@
 ﻿\chapter{\IFRU{Общее для Си и Си++}{Common for C and C++}}
+% secions here
 \input{common/definitions}
 \input{common/declarations}
 \input{common/elements}
 \input{common/preprocessor}
+\section{Прочее}
+\subsection{-Wall}
+
+Стоит ли постоянно держать включенным ключ \TT{-Wall} в GCC или \TT{/Wall} в MSVC, то есть, чтобы выводить
+все возможные предупреждения (warnings)?
+Да, однозначно стоит, так можно зараннее найти мелкие ошибки.
+Можно даже в GCC включить \TT{-Werror} или \TT{/WX} в MSVC ~--- 
+тогда предупреждения будут трактоваться как ошибки.
+
+% TODO: good example
