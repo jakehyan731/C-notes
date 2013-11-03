@@ -1,0 +1,71 @@
+﻿\section{Возврат кодов ошибок}
+
+Самый простой способ сообщить вызываемой ф-ции о своем успехе, это вернуть булеву переменную, 
+\IT{false} ~--- в случае ошибки, и \IT{true} в случае успеха. Такого очень много в Windows API.
+А если нужно передать больше информации, то оставить код ошибки в \ac{TIB}, откуда затем получить 
+это значение вызвав GetLastError(). Либо, в UNIX-средах, оставлять код ошибки в глобальной переменной \IT{errno}.
+
+\subsection{Отрицательные коды ошибок}
+
+Еще один интересный способ передать больше информации в возвращаемом значении. Например, в документации IBM DB2 9.1,
+мы можем увидеть такое:
+
+\begin{framed}
+\begin{quotation}
+Regardless of whether the application program provides an SQLCA or a stand-alone variable, SQLCODE is set by DB2 after each SQL statement is executed. DB2 conforms to the ISO/ANSI SQL standard as follows:\\
+\\
+If SQLCODE = 0, execution was successful.\\
+If SQLCODE > 0, execution was successful with a warning.\\
+If SQLCODE < 0, execution was not successful.\\
+SQLCODE = 100, "no data" was found. For example, a FETCH statement returned no data because the cursor was positioned after the last row of the result table.
+\end{quotation}
+\end{framed}
+\footnote{\href{http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=\%2Fcom.ibm.db2z9.doc.codes\%2Fsrc\%2Ftpc\%2Fdb2z\_sqlcodes.htm}{SQL codes}}
+\footnote{\href{http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=\%2Fcom.ibm.db2z9.doc.codes\%2Fsrc\%2Ftpc\%2Fdb2z\_n.htm}{SQL error codes}}
+
+В исходниках Linux можно увидеть и такое
+\footnote{\url{http://lxr.free-electrons.com/source/arch/powerpc/kernel/crash_dump.c}}:
+
+\begin{lstlisting}[caption=arch/arm/kernel/crash\_dump.c]
+/**
+ * copy_oldmem_page() - copy one page from old kernel memory
+ * @pfn: page frame number to be copied
+ * @buf: buffer where the copied page is placed
+ * @csize: number of bytes to copy
+ * @offset: offset in bytes into the page
+ * @userbuf: if set, @buf is int he user address space
+ *
+ * This function copies one page from old kernel memory into buffer pointed by
+ * @buf. If @buf is in userspace, set @userbuf to %1. Returns number of bytes
+ * copied or negative error in case of failure.
+ */
+ssize_t copy_oldmem_page(unsigned long pfn, char *buf,
+			 size_t csize, unsigned long offset,
+			 int userbuf)
+{
+	void *vaddr;
+
+	if (!csize)
+		return 0;
+
+	vaddr = ioremap(pfn << PAGE_SHIFT, PAGE_SIZE);
+	if (!vaddr)
+		return -ENOMEM;
+
+	if (userbuf) {
+		if (copy_to_user(buf, vaddr + offset, csize)) {
+			iounmap(vaddr);
+			return -EFAULT;
+		}
+	} else {
+		memcpy(buf, vaddr + offset, csize);
+	}
+
+	iounmap(vaddr);
+	return csize;
+}
+\end{lstlisting}
+
+Обратите внимание ~--- ф-ция может вернуть как количество байт, так и ошибку. Тип ssize\_t это ``знаковый'' size\_t,
+то есть, способный принимать отрицательные значения. ENOMEM и EFAULT это стандартные коды ошибок из errno.h.
+

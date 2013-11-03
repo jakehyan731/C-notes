@@ -1,19 +1,4 @@
-﻿\chapter{Прочее}
-
-Что хранится в объектных и бинарных (.exe, .dll) файлах?
-
-Обычно только данные (глобальные переменные) и тела ф-ций (включая методы классов).
-
-Информации о типах (классы, структуры, typedef\ref{typedef}-ы) там нет. 
-Это может помочь в понимании того как всё устроено.
-
-В этом заключается одна из больших проблем декомпиляции --- отсутствие информации о типах.
-
-% FIXME: add about name mangling
-
-О том как всё компилируется в машинный код, подробнее можно почитать здесь:\cite{REBook}.
-
-\section{Глобальные переменные}
+﻿\section{Глобальные переменные}
 
 Мода на ООП и всякие такие штуки утвердила что глобальные переменные это плохо, тем не менее, в каких-то разумных
 случаях, это можно использовать, например, для возврата большего количества информации из ф-ций. 
@@ -151,28 +136,3 @@ extern  void    Generate( bool routine_done )
 #endif
 }
 \end{lstlisting}
-
-\input{bitfields}
-
-\section{Интересные проекты для изучения}
-
-\subsection{Си}
-
-\begin{itemize}
-\item
-Go Compiler \url{http://golang.org/doc/install/source}
-
-\item
-Git \url{https://github.com/git/git}
-\end{itemize}
-
-\subsection{Си++}
-
-\begin{itemize}
-\item
-LLVM \url{http://llvm.org/releases/download.html}
-
-\item
-Google Chrome \url{http://www.chromium.org/developers/how-tos/get-the-code}
-\end{itemize}
-
