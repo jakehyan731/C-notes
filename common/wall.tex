@@ -1,0 +1,64 @@
+﻿\section{-Wall}
+
+Стоит ли постоянно держать включенным ключ \TT{-Wall} в GCC или \TT{/Wall} в MSVC, то есть, чтобы выводить
+все возможные предупреждения (warnings)?
+Да, однозначно стоит, так можно зараннее найти мелкие ошибки.
+Можно даже в GCC включить \TT{-Werror} или \TT{/WX} в MSVC ~--- 
+тогда предупреждения будут трактоваться как ошибки.
+
+Вот простой пример:
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int f1(int a, int b, int c)
+{
+	printf ("(in %s) %d\n", __FUNCTION__, a*b+c);
+	// return a*b+c; // OOPS, accidentally I forgot to add this
+};
+
+int main()
+{
+	printf ("(in %s) %d\n", __FUNCTION__, f1(123,456,789));
+};
+\end{lstlisting}
+
+Автор ``забыл'' дописать return в ф-ции f1(.)
+Тем не менее, GCC 4.8.1 компилирует этот пример молча.
+При запуске мы увидим:
+
+\begin{lstlisting}
+(in f1) 56877
+(in main) 14
+\end{lstlisting}
+
+Откуда взялось число $14$? Это то что вернула ф-ция printf() вызванная из f1(). Возвращаемые результаты
+ф-ций интегральных типов\footnote{То есть, содержащих челочисленное число: int, short, char}
+остаются в регистре EAX/RAX. В ф-ции main() берется значение из регистра EAX/RAX
+и передается дальше во второй printf()
+\footnote{Больше о том, как возвращаются результаты ф-ций через регистры, можно почитать в \cite{REBook}}.
+
+Если компилировать с опцией -Wall, GCC скажет:
+
+\begin{lstlisting}
+1.c: In function 'f1':
+1.c:7:1: warning: control reaches end of non-void function [-Wreturn-type]
+ };
+ ^
+1.c: In function 'main':
+1.c:12:1: warning: control reaches end of non-void function [-Wreturn-type]
+ };
+ ^
+\end{lstlisting}
+
+... хотя всё равно скомпилирует.
+
+MSVC 2010 тоже генерирует код, работающий точно также, хотя и выводит предупреждение:
+
+\begin{lstlisting}
+...\1.c(7) : warning C4716: 'f1' : must return a value
+\end{lstlisting}
+
+Как видно, ошибка почти критическая, вызванная, можно сказать, опечаткой, но предупреждения компилятора
+либо не видно вовсе, либо можно и не заметить.
+
