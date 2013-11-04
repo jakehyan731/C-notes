@@ -2,6 +2,10 @@
 
 Препроцессор обрабатывает директивы начинающиеся с \# --- \#define, \#include, \#if, итд.
 
+\begin{lstlisting}[caption=``или'']
+#if defined(LINUX) || defined(ANDROID)
+\end{lstlisting}
+
 \section{Стандартные для компиляторов и ОС значения}
 
 \begin{itemize}
@@ -13,6 +17,10 @@
 \item \TT{\_\_cplusplus} --- присутствует в Си++ проектах.
 \item \TT{\_MSC\_VER} --- компилятор MSVC.
 \item \TT{\_\_GNUC\_\_} --- компилятор GCC.
+\item \TT{\_\_APPLE\_\_} --- компиляция под устройства Apple.
+\item \TT{\_\_ppc\_\_} --- компиляция под PowerPC 32-bit.
+\item \TT{\_\_ppc64\_\_} --- компиляция под PowerPC 64-bit.
+\item \TT{\_\_LP64\_\_} либо \TT{\_LP64} --- GCC: компиляция под 64-битный режим.
 \end{itemize}
 
 Так можно писать разные участки кода для разных компиляторов и ОС.
