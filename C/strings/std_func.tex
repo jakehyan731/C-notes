@@ -1,5 +1,21 @@
 ﻿\subsection{Стандартные ф-ции для работы со строками}
 
+Некоторые ф-ции, например, getcwd() не только заполняют буфер, но и возвращают указатель на него.
+Это для того чтобы можно было писать что-то вроде:
+
+\begin{lstlisting}
+char buf[256];
+do_something (getcwd (buf, sizeof(buf)));
+\end{lstlisting}
+
+... вместо:
+
+\begin{lstlisting}
+char buf[256];
+getcwd (buf, sizeof(buf))
+do_something (buf);
+\end{lstlisting}
+
 \subsubsection{strstr() и memmem()}
 
 strstr() применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще.
