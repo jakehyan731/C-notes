@@ -1,10 +1,16 @@
 ﻿\label{alloca}
 \subsection{alloca()}
 
-Ф-ция alloca() выделяет память в локальном стеке точно также, отодвигая указатель стека\cite[1.2.4]{REBook}.
-Память будет освобождена в конце ф-ции автоматически.
+\IFRU{Ф-ция alloca() выделяет блок памяти в локальном стеке точно также,
+отодвигая указатель стека}
+{alloca() function allocates a memory block in the local stack alike,
+shifting stack pointer}\cite[1.2.4]{REBook}.
+\IFRU{Блок памяти будет освобождена в конце ф-ции автоматически}
+{The memory block will be freed at the function finish automatically}.
 
-В стандарте C99\ref{C99}, использовать alloca() уже не обязательно, там можно просто писать:
+\IFRU{В стандарте}{In the} C99\ref{C99}\IFRU{, использовать alloca() 
+уже не обязательно, там можно просто писать}{ standard,
+it is necessary to use alloca(), one can write just}:
 
 \begin{lstlisting}
 void f(size_t s, ...)
@@ -13,6 +19,8 @@ void f(size_t s, ...)
 };
 \end{lstlisting}
 
-Впрочем, внутри, это работает так же как и alloca().
+\IFRU{Впрочем, внутри, это работает так же как и}
+{Internally it works just as} alloca()\IFRU{}{ however}.
 
-Критика: Линус Торвальдс против использования alloca()\cite{Torvalds:2003}.
+\IFRU{Критика: Линус Торвальдс против использования}
+{Criticism: Linus Torvalds against usage of} alloca()\cite{Torvalds:2003}.
