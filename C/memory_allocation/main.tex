@@ -1,14 +1,18 @@
-\section{Работа с памятью Си}
+\section{\IFRU{Работа с памятью Си}{Memory in C}}
 
-Есть наверное только два основных типа в памяти, предоставляемых программисту на Си.
+\IFRU{Есть наверное только два основных типа в памяти, предоставляемых программисту на Си}
+{Probably, there are two most common memory types available for a programmer in C}.
 
 \begin{itemize}
 \item
-Память выделяемая в локальном стеке. Это локальные переменные, память выделенная при помощи alloca().
-Обычно это очень быстро выделяемая память.
+\IFRU{Память выделяемая в локальном стеке}{Memory space in the local stack}. 
+\IFRU{Это локальные переменные, память выделенная при помощи}{It is local variables, a memory allocated
+with the help of} alloca().
+\IFRU{Обычно это очень быстро выделяемая память}{It is usually a memory very fast to allocate}.
 
 \item
-Куча\footnote{heap}. То что выделается при помощи malloc().
+\IFRU{Куча\footnote{heap}}{Heap}.
+\IFRU{То что выделается при помощи}{It is what allocated with the help of} malloc().
 \end{itemize}
 
 % subsections here

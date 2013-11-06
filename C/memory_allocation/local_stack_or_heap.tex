@@ -1,17 +1,30 @@
-﻿\subsection{Локальный стек или куча?}
+﻿\subsection{\IFRU{Локальный стек или куча}{Local stack or heap}?}
 
-Конечно, в локальном стеке выделение памяти происходит быстрее.
+\IFRU{Конечно, в локальном стеке выделение памяти происходит быстрее}{Of course, allocation in the
+local stack is much faster}.
 
-Например: в tracer\footnote{\url{http://yurichev.com/tracer-ru.html}} у меня есть дизассемблер\footnote{\url{https://github.com/dennis714/x86_disasm}} 
-и эмулятор x86-процессора\footnote{\url{https://github.com/dennis714/bolt/blob/master/X86_emu.c}}.
-Когда я писал дизассемблер на Си (я делал это после того как длительное время писал на ЯП 
-более высокого уровня --- Python), 
+\IFRU{Например: в}{For example: in} tracer
+\footnote{\url{\IFRU{http://yurichev.com/tracer-ru.html}{http://yurichev.com/tracer-en.html}}}
+\IFRU{у меня есть дизассемблер}{i have disassembler}\footnote{\url{https://github.com/dennis714/x86_disasm}} 
+\IFRU{и эмулятор x86-процессора}{and also x86 CPU emulator}
+\footnote{\url{https://github.com/dennis714/bolt/blob/master/X86_emu.c}}.
+\IFRU{Когда я писал дизассемблер на Си (я делал это после того как длительное время писал на ЯП 
+более высокого уровня ~--- Python), 
 я думал, что было бы неплохо, чтобы он сам выделял память под структуру, заполнял её
-и возвращал указатель на нее, а в случае ошибки дизассемблирования, возвращал бы NULL. Эстетически, это 
-неплохо смотрится, в стиле высокоуровневых ЯП, к тому же, такой код наверное легче читается. 
-Однако, дизассемблер и эмулятор x86-процессора
-работают в цикле, огромное количество раз в секунду и эффективность здесь более чем важна.
-Так что, основной цикл у меня выглядит примерно так:
+и возвращал указатель на нее, а в случае ошибки дизассемблирования, возвращал бы NULL}
+{When I was writing disassembled in C (I did it after a long period of programming in higher level PL ~---
+Python), I thought, it is a good idea for disassembler to allocate the memory for the structure it returns,
+fill it and return a pointer to it, or NULL in case of disassembling error}.
+
+\IFRU{Эстетически, это 
+неплохо смотрится, в стиле высокоуровневых ЯП, к тому же, такой код наверное легче читается}
+{Aesthetically it looks good, in style of high-level PL, aside from that, such code is easier to read}.
+\IFRU{Однако, дизассемблер и эмулятор x86-процессора
+работают в цикле, огромное количество раз в секунду и эффективность здесь более чем важна}
+{However, disassembler and x86 CPU emulator works in loop, a huge number of iterations per second and efficiency
+is crucial}.
+\IFRU{Так что, основной цикл у меня выглядит примерно так}
+{So main loop I wrote in that way}:
 
 \begin{lstlisting}
 while(true)
@@ -29,12 +42,18 @@ while(true)
 };
 \end{lstlisting}
 
-Затрат на выделение памяти под структуры, описывающие дизассемблированную инструкцию, нет вовсе.
-А иначе, нужно было бы на каждой итерации цикла вызывать malloc()/free(), каждая из которых, каждый раз,
-работала бы со структурами кучи, итд.
+\IFRU{Затрат на выделение памяти под структуры, описывающие дизассемблированную инструкцию, нет вовсе}
+{There are no costs for allocating disassembler structures at all}.
+\IFRU{А иначе, нужно было бы на каждой итерации цикла вызывать malloc()/free(), каждая из которых, каждый раз,
+работала бы со структурами кучи, итд}
+{Otherwise, we need to call malloc()/free() at teach loop iteration, each of which will also work with heap
+data structures, etc}.
 
-Как известно, у x86-инструкций может быть вплоть до трех операндов, так что, в моей структуре, помимо
-кода инструкции, есть также и информация о трех операндах. Конечно, можно было бы оформить её примерно так:
+\IFRU{Как известно, у x86-инструкций может быть вплоть до трех операндов, так что, в моей структуре, помимо
+кода инструкции, есть также и информация о трех операндах}
+{As we know, x86-instructions may have up to 3 operands, so, in my structure, aside from instruction code,
+there are also information about 3 operands}.
+\IFRU{Конечно, можно было бы оформить её примерно так}{Of course, I could do it like}:
 
 \begin{lstlisting}
 struct disassembled_instruction
@@ -46,9 +65,11 @@ struct disassembled_instruction
 };
 \end{lstlisting}
 
-... а в случае отсутствия какого либо операнда, пусть там будет NULL. Тем не менее, это снова выделение памяти в куче.
+... \IFRU{а в случае отсутствия какого либо операнда, пусть там будет NULL}
+{and let it be NULL there in case of absence of some operand}.
+\IFRU{Тем не менее, это снова выделение памяти в куче}{Nevertheless, it is still heap memory allocations}.
 
-Так что у меня сделано примерно так:
+\IFRU{Так что у меня сделано примерно так}{So I did it like}:
 
 \begin{lstlisting}
 struct disassembled_instruction
@@ -59,20 +80,38 @@ struct disassembled_instruction
 };
 \end{lstlisting}
 
-Такая структура занимает больше места в памяти. Ведь, как известно, трехоперандные инструкции очень редки в x86-коде,
-а здесь у меня пустой третий операнд хранится всегда. Однако, лишних манипуляций с памятью не происходит.
+\IFRU{Такая структура занимает больше места в памяти}
+{Such structure requires more memory}.
+\IFRU{К тому же, трехоперандные инструкции очень редки в x86-коде,
+а здесь у меня пустой третий операнд хранится всегда}
+{Aside from that, 3-operand instructions are rare in x86-code, but third operand is stored here always}.
+\IFRU{Однако, лишних манипуляций с памятью не происходит}
+{However, there are no extra manipulations with memory}.
 
-Ну а если уж так сильно хочется сэкономить на третьем операнде, то можно не хранить третий операнд вовсе: нетрудно
-вычислить размер структуры без одного операнда: \TT{sizeof(disassembled\_instruction) - sizeof(struct operand)} 
-и скопировать его куда-то, где он должен храниться.
-Ведь никто не запрещает нам использовать (и хранить) не всю структуру а только её часть.
-А ф-ции работы с этой структурой могут не трогать в памяти третий операнд вовсе и, таким образом, ошибок не будет.
+\IFRU{Ну а если уж так сильно хочется сэкономить на третьем операнде,
+то можно не хранить третий операнд вовсе}{But if one like to save a space by not storing third operator,
+it may be not stored at all}: \IFRU{нетрудно
+вычислить размер структуры без одного операнда}{it is easy to calculate structure size
+without one operatnd}: \TT{sizeof(disassembled\_instruction) - sizeof(struct operand)} 
+\IFRU{и скопировать её куда-то, где она должен храниться}{and copy it to the some place where it should be
+stored}.
+\IFRU{Ведь никто не запрещает нам использовать (и хранить) не всю структуру а только её часть}
+{Because no one prohibits to use (and store) not the whole structure, but only its part}.
+\IFRU{А ф-ции работы с этой структурой могут не трогать в памяти третий операнд вовсе и,
+таким образом, ошибок не будет}{Besides, the functions which works with the structure, may not touch
+third operand at all, and that will work correctly}.
 
-И даже более того: я специально сделал дизассемблер именно так, чтобы он мог принимать на вход не инициализированную
-структуру, и мог работать даже если там осталась информация от предыдущих вызовов.
+\IFRU{И даже более того: я специально сделал свой дизассемблер именно так,
+чтобы он мог принимать на вход не инициализированную
+структуру, и мог работать даже если там осталась информация от предыдущих вызовов}
+{Even more than that: I made my disassembler intentionally in that way that it can take
+not initialized structure and may work even if there are still some information leaved from
+the previous calls}.
 
-Возможно, это уже слишком, но вы поняли идею.
+\IFRU{Возможно, это уже слишком, но вы поняли идею}{Maybe it is overkill, but you got the idea}.
 
-Таким образом, если вы выделяете память под небольшие структуры зараннее известного размера, или если скорость
-очень важна, то лучше подумать насчет выделения в локальном стеке.
+\IFRU{Таким образом, если вы выделяете память под небольшие структуры зараннее известного размера, или если скорость
+очень важна, то лучше подумать насчет выделения в локальном стеке}
+{Thus, if you allocate small structures of known size and if speed is crucial, you may consider allocating
+them in the local stack}.
 
