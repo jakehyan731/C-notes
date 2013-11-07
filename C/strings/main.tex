@@ -1,18 +1,32 @@
-\section{Строки в Си}
+\section{\IFRU{Строки в Си}{String in C}}
 
-В Си нет встроенных возможностей для удобной работы со строками, такими, какие имеются в ЯП более
-высокого уровня.
+\IFRU{В Си нет встроенных возможностей для удобной работы со строками, такими, какие имеются в ЯП более
+высокого уровня}{There are no features in C to handle strings like those present in higher level PLs}.
 
-Часто жалуются на неудобную
-конкатенацию строк (то есть, склеивание) в Си при помощи функции strcat(). Также, многих раздражает sprintf(),
-под которых нельзя толком зараннее предсказать, сколько нужно выделять памяти. Копирование строк при помощи
-strcpy() также неудобно --- нужно думать, сколько же выделить байт под буфер. Помимо всего прочего, неудобная
-работа со строками в Си, это источник огромного количества уязвимостей в ПО, связанных с переполнениями буфера\cite[1.14.2]{REBook}.
+\IFRU{Часто жалуются на неудобную
+конкатенацию строк (то есть, склеивание) в Си при помощи функции strcat().
+Также, многих раздражает sprintf(), под который нельзя толком зараннее предсказать, 
+сколько нужно выделять памяти}{People often complain about awkward string concatenation (i.e., glueling together).
+Also irritating sprintf(), for which is hard to predict how much space will need}.
 
-Прежде всего, нужно задать себе вопрос, какие операции со строками нам нужны.
-Конкатенация (склеивание) нужна чтобы 1) выдавать в лог сообщения; 2) конструировать строки и записывать их куда-то.
+\IFRU{Копирование строк при помощи
+strcpy() также неудобно ~--- нужно думать, сколько же выделить байт под буфер}
+{Strings copying with strcpy() is not easy as well ~--- one need to think how many bytes should be allocated
+for buffer}.
+\IFRU{Помимо всего прочего, неудобная
+работа со строками в Си, это источник огромного количества уязвимостей в ПО, связанных с переполнениями буфера}
+{Aside from that, awkward C strings is the source of huge number of vulnerabilities related
+to buffer overflow}\cite[1.14.2]{REBook}.
 
-Для 1) можно использовать потоки (streams) --- не конструируя строку, выдавать её по порциям, например:
+\IFRU{Прежде всего, нужно задать себе вопрос, какие операции со строками нам нужны}
+{In the first place, we should ask ourselves, which string operations we need}.
+\IFRU{Конкатенация (склеивание) нужна чтобы}{Concatenation (glueling) is needed for} 
+1) \IFRU{выдавать в лог сообщения}{output messages to log};
+2) \IFRU{конструировать строки и затем передавать (или записывать) их куда-то}
+{construction of strings and then to pass (or write) them to some place}.
+
+\IFRU{Для 1) можно использовать потоки (streams) ~--- не конструируя строку, выдавать её по порциям, например}
+{For 1) it is possible to use streams ~--- without string construction just to output it by portions, for example}:
 
 \begin{lstlisting}
 printf ("Date: ");
@@ -22,113 +36,164 @@ dump_a(stdout, a);
 printf ("\n");
 \end{lstlisting}
 
-Подобное заменяется в Си++ выводом в ostream:
+\IFRU{Подобное заменяется в Си++ выводом в \IT{ostream}}{This is what \IT{ostream} in C++ is intended for}:
 
 \begin{lstlisting}
 cout << "Date: " << Date_ToString(date) << " a=" << a_ToString(a) << "\n";
 \end{lstlisting}
 
-Так быстрее и меньше требуется памяти для конструирования строк.
+\IFRU{Так быстрее и меньше требуется памяти для конструирования строк}
+{It is faster, and requries less memory for string construction}.
 
-Кстати, ошибкой является писать так:
+\IFRU{Кстати, ошибкой является писать так}{By the way, it is a mistake to write like}:
 
 \begin{lstlisting}
 cout << "Date: " + Date_ToString(date) + " a=" + a_ToString(a) + "\n";
 \end{lstlisting}
 
-Для неспешного вывода в лог небольшого кол-ва сообщений это нормально, но если таких строк очень много, то будут
-накладные расходы на их конкатенацию. \\
+\IFRU{Для неспешного вывода в лог небольшого кол-ва сообщений это нормально,
+но если таких сообщений очень много, то будут накладные расходы на их конкатенацию}
+{At an easy pace, it is good enough to write messages to log, however, if there are a lot
+of such messages, there may be string concatenation overhead}. \\
 \\
-Но все же строки иногда конструировать надо.
+\IFRU{Но все же строки иногда конструировать надо}{Anyway, sometimes strings should be constructed}.
 
-Есть какие-то библиотеки для этого.
-К примеру, в Glib\footnote{\url{https://developer.gnome.org/glib/}} есть 
+\IFRU{Есть какие-то библиотеки для этого}{There are some libraries for this}.
+\IFRU{К примеру, в}{For example, in} Glib\footnote{\url{https://developer.gnome.org/glib/}} 
+\IFRU{есть}{there are}
 gstring.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.h}}/
 gstring.c\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.c}}. 
 
 \label{strbuf}
-А в исходниках git можно найти strbuf.h\footnote{\url{https://github.com/git/git/blob/master/strbuf.h}}/
-strbuf.c\footnote{\url{https://github.com/git/git/blob/master/strbuf.c}}. Собственно,
-подобные Си-библиотеки очень похожи: они обеспечивают структуру данных, в которой есть некоторый буфер для строки, текущий размер буфера
-и текущий размер строки в буфере. При помощи отдельных функций, можно добавлять новые строки или символы
-в буфер, который, в свою очередь, будет автоматически увеличиваться или даже уменьшаться.
+\IFRU{А в исходниках git можно найти}
+{In the git source code we may find} strbuf.h\footnote{\url{https://github.com/git/git/blob/master/strbuf.h}}/
+strbuf.c\footnote{\url{https://github.com/git/git/blob/master/strbuf.c}}. 
+\IFRU{Собственно,
+подобные Си-библиотеки очень похожи: они обеспечивают структуру данных, 
+в которой есть некоторый буфер для строки, текущий размер буфера
+и текущий размер строки в буфере}
+{Strictly speaking, such C-libraries are very similar: they provide a data structure with a string buffer
+in it, current buffer length and current string in buffer length}.
+\IFRU{При помощи отдельных функций, можно добавлять новые строки или символы
+в буфер, который, в свою очередь, будет автоматически увеличиваться или даже уменьшаться}
+{With the help of various functions, it is possible to add to buffer other string or characters,
+which, in turn, will grow or shrink}.
 
-В \IT{strbuf.c} из git есть даже ф-ция \IT{strbuf\_addf()}, работающая как \IT{sprintf()}, 
-но добавляющая строку-результат в буфер.
+\IFRU{В}{In} \IT{strbuf.c} \IFRU{из}{from} git 
+\IFRU{есть в том числе и ф-ция}{there are also function} \IT{strbuf\_addf()}, 
+\IFRU{работающая как}{working just like} \IT{sprintf()}, 
+\IFRU{но добавляющая строку-результат в буфер}{but adding resulting string into the buffer}.
 
-Так пользователь освобождается от головной боли связанной с выделением памяти.
-При работе с этими библиотеками, практически невозможна ситуация переполнения буфера, если только не начать
-работать со структурой самостоятельно.
+\IFRU{Так программист освобождается от головной боли связанной с выделением памяти}
+{Thus a programmer may get rid of headache related to memory allocation}.
+\IFRU{При работе с этими библиотеками, практически невозможна ситуация переполнения буфера, если только не
+работать со структурой данных самостоятельно}{While using such libraries,
+buffer overflows are virtually impossibly if not to work with the structures by himself}.
 
-Типичная последовательность работы с такими библиотеками, выглядит так:
+\IFRU{Типичная последовательность работы с такими библиотеками, выглядит так}
+{The typical sequence of using such libraries is looks like}:
 
 \begin{itemize}
 \item
-Инициализация структуры strbuf или GString.
+\IFRU{Инициализация структуры}{Structure} strbuf \IFRU{или}{or} GString\IFRU{}{ initialization}.
 
 \item
-Добавление строк и/или символов.
+\IFRU{Добавление строк и/или символов}{Adding strings and/or characters}.
 
 \item
-Имеем сконструированную строку. Используем как обычную Си-строку, записываем куда-то в файл, передаем по сети, итд.
+\IFRU{Имеем сконструированную строку}{Now we have constructed string}.
 
 \item
-Освобождаем структуру.
+\IFRU{Модифицируем её если нужно}{Modifying it if need}.
+
+\item
+\IFRU{Используем её как обычную Си-строку, записываем куда-то в файл, передаем по сети, итд}
+{Using it as usual C-string, writing it to to some file, send it by network, etc}.
+
+\item
+\IFRU{Освобождаем структуру}{Structure deinitialization}.
 \end{itemize}
 
-Кстати, конструирование строк чем-то напоминает 
+\IFRU{Кстати, конструирование строк чем-то напоминает}{By the way, string construction is resembling somehow}
 Buffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html}}, 
-ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} и 
-CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} в Java.
+ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} \IFRU{и}{and}
+CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} \IFRU{в}{in} Java.
 
 \subsection{Хранение длины строки}
 
-Всегда хранить длину строки --- это было принято в реализациях ЯП Pascal. 
-Не смотря на исходы святых войн\footnote{holy wars} между приверженцами Си и Pascal, все же, почти все библиотеки
-для хранения строк и работы с ними, хранят также и текущую длину --- потому что удобства от этого перевешивают
-необходимость пересчитывать это значение.
+\IFRU{Всегда хранить длину строки ~--- это было принято в реализациях ЯП Pascal}
+{Storing always string length ~--- it was done in Pascal PL implementations}.
+\IFRU{Не смотря на исходы святых войн\footnote{holy wars} между приверженцами Си и Pascal}
+{Aside from holy wars outcomes between both PL devotees}, 
+\IFRU{все же, почти все библиотеки
+для хранения строк и работы с ними, хранят также и текущую длину}
+{nevertheless, almost all string libraries keep current string length} ~--- 
+\IFRU{просто потому что удобства от этого перевешивают необходимость пересчитывать это значение после
+каждой модификации}
+{just because conveniences outweigh the need of length value recalculation after each modification}.
 
-Например, \IT{strlen()} (подсчет длины строки) больше не нужен вообще, длина все время известна.
-Конкатенация строк работает намного быстрее, потому что не нужно вычислять длину первой строки.
-Ф-ция сравнения строк в самом начале может сравнить длины строк и если они не равны, тут же вернуть false,
-не начиная сравнивание самих строк.
+\IFRU{Например}{For example}, \IT{strlen()}
+\footnote{\IFRU{подсчет длины строки}{string length calculation}} 
+\IFRU{больше не нужен вообще, длина строки известна всегда}{is not needed at all, string length is always known}.
+\IFRU{Конкатенация строк работает намного быстрее, потому что не нужно вычислять длину первой строки}
+{String concatenation is also much faster, because we do not need to calculate length of the first string}.
+\IFRU{Ф-ция сравнения строк в самом начале может сравнить длины строк и если они не равны, тут же вернуть 
+\IT{false},
+не начиная сравнивание символов в строках}
+{The function of strings comparing may just compare string lengths 
+at the beginning and if they are not equals to each other, return \IT{false} without starting to compare
+characters in the strings}.
 
-В Oracle RDBMS, в сетевых библиотеках, в функции работы со строками, зачастую передается строка и, 
-отдельным аргументом, её длина\footnote{\url{http://blog.yurichev.com/node/64}}.
-Это не очень эстетично, это выглядит избыточно, зато очень удобно.
-Например, у нас есть некоторая ф-ция, которой нужно в начале узнать, какую строку ей передали:
+\IFRU{В всетевых библиотеках}{In the network libraries of} Oracle RDBMS, 
+\IFRU{в функции работы со строками, зачастую передается строка и, 
+отдельным аргументом, её длина}
+{to the various string functions often passed string with its length, as separate argument}
+\footnote{\url{http://blog.yurichev.com/node/64}}.
+\IFRU{Это не очень эстетично, это выглядит избыточно, зато очень удобно}
+{Not very aesthetical, looks redundant, but very useful}.
+\IFRU{Например, у нас есть некоторая ф-ция, которой нужно в начале узнать, какую строку ей передали}
+{For example, we have a function, which needs to know, which string was passed to it}:
 
 \lstinputlisting{C/strings/strcmp1.c}
 
-А вот если бы эта ф-ция имела длину входной строки, её можно было бы переписать так:
+\IFRU{А вот если бы эта ф-ция имела длину входной строки, её можно было бы переписать так}
+{However, if this function have length of the input string, it may be rewritten like}:
 
 \lstinputlisting{C/strings/strcmp2.c}
 
-Конечно, с эстетической точки зрения, код выглядит ужасно.
-Тем не менее, мы здорово сократили количество необходимых сравнений строк! Вероятно, для тех ситуаций, когда 
-нужно как можно быстрее обрабатывать текстовые строки, такой подход может улучшить ситуацию.
+\IFRU{Конечно, с эстетической точки зрения, код выглядит ужасно}
+{Aesthetically, the code looks just horrible}.
+\IFRU{Тем не менее, мы здорово сократили количество необходимых сравнений строк}
+{Nevertheless, we got rid of a lot of strings comparison calls}! 
+\IFRU{Вероятно, для тех ситуаций, когда 
+нужно как можно быстрее обрабатывать текстовые строки, такой подход может улучшить ситуацию}
+{Apparently, for those cases when strings must be processed fast, such approach may help}.
 
 \input{C/strings/return}
 \input{C/strings/std_func}
 
 \subsection{Unicode}
 
-Unicode это важно! Наиболее популярные способы его применения это:
+Unicode \IFRU{это важно}{is important}! \IFRU{Наиболее популярные способы его применения это}
+{Most popular approaches are}:
 
 \begin{itemize}
 \item UTF-8
-Популярно в UNIX-системах. Сильное приемущество: можно продолжать пользоваться стандартными ф-циями для
-обработки строк.
+\IFRU{Популярно в UNIX-системах}{Popular is UNIX-OS}.
+\IFRU{Сильное приемущество: можно продолжать пользоваться стандартными ф-циями для обработки строк}
+{Significant advantage: it is still possible to use standard functions for strings processing}.
 
 \item UTF-16
-Используется в Windows API.
+\IFRU{Используется в}{Used in} Windows API.
 \end{itemize}
 
 \subsubsection{UTF-16}
 
-Под каждый символ отводят 16-битный тип \IT{wchar\_t}.
+\IFRU{Под каждый символ отводят 16-битный тип}{For each character a 16-bit type is assigned:}
+\IT{wchar\_t}.
 
-Для объявления строк с таким типом, используется макрос L:
+\IFRU{Для объявления строк с таким типом, используется макрос \IT{L}}
+{For such typed string definition, \IT{L} macro is used:}:
 
 \begin{lstlisting}
 L"hello world"
