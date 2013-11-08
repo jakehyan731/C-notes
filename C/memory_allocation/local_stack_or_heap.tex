@@ -8,17 +8,18 @@ local stack is much faster}.
 \IFRU{у меня есть дизассемблер}{i have disassembler}\footnote{\url{https://github.com/dennis714/x86_disasm}} 
 \IFRU{и эмулятор x86-процессора}{and also x86 CPU emulator}
 \footnote{\url{https://github.com/dennis714/bolt/blob/master/X86_emu.c}}.
-\IFRU{Когда я писал дизассемблер на Си (я делал это после того как длительное время писал на ЯП 
+\IFRU{Когда я писал дизассемблер на Си (я делал это после того как длительное время писал на \ac{PL} 
 более высокого уровня ~--- Python), 
 я думал, что было бы неплохо, чтобы он сам выделял память под структуру, заполнял её
 и возвращал указатель на нее, а в случае ошибки дизассемблирования, возвращал бы NULL}
-{When I was writing disassembled in C (I did it after a long period of programming in higher level PL ~---
+{When I was writing disassembled in C (I did it after a long period of programming in higher level 
+\ac{PL} ~---
 Python), I thought, it is a good idea for disassembler to allocate the memory for the structure it returns,
 fill it and return a pointer to it, or NULL in case of disassembling error}.
 
 \IFRU{Эстетически, это 
-неплохо смотрится, в стиле высокоуровневых ЯП, к тому же, такой код наверное легче читается}
-{Aesthetically it looks good, in style of high-level PL, aside from that, such code is easier to read}.
+неплохо смотрится, в стиле высокоуровневых \ac{PL}, к тому же, такой код наверное легче читается}
+{Aesthetically it looks good, in style of high-level \ac{PL}, aside from that, such code is easier to read}.
 \IFRU{Однако, дизассемблер и эмулятор x86-процессора
 работают в цикле, огромное количество раз в секунду и эффективность здесь более чем важна}
 {However, disassembler and x86 CPU emulator works in loop, a huge number of iterations per second and efficiency
