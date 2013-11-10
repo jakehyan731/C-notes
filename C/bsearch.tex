@@ -1,29 +1,46 @@
 ﻿\subsection{bsearch(), lfind()}
 \label{bsearch_lfind}
 
-Удобные ф-ции для поиска чего-либо где-либо. 
+\IFRU{Удобные ф-ции для поиска чего-либо где-либо}{Handy functions for searching for something somewhere}.
 
-Разница между ними только в том что lfind() просто ищет заданное, а bsearch() требует отсортированный массив
-данных, но зато может искать быстрее\footnote{методом половинного деления, итд}
-\footnote{разница еще также в том что bsearch() есть в стандарте\cite{C99TC3}, 
-а lfind() нет, он есть только в POSIX и в MSVC, но эти ф-ции достаточно просты чтобы их реализовать самому}.
+\IFRU{Разница между ними только в том что}{The difference between them is that} lfind() 
+\IFRU{просто ищет заданное}{just search for data}, \IFRU{а}{buf} bsearch() \IFRU{требует отсортированный массив
+данных, но зато может искать быстрее}{requires sorted data array, but may search faster}
+\footnote{\IFRU{методом половинного деления, итд}{by bisection method, etc}}
+\footnote{\IFRU{разница еще также в том что bsearch() есть в стандарте}{the difference also is that
+bsearch() is present in}\cite{C99TC3}, 
+\IFRU{а lfind() нет, он есть только в \ac{POSIX} и в \ac{MSVC}}
+{but lfind() is not, it is present only in \ac{POSIX} and \ac{MSVC}},
+\IFRU{но эти ф-ции достаточно просты чтобы их реализовать самому}{but these functions are simple enough
+to implement them on your own}}.
 
-К примеру, поиск строки в массиве указателей на строки:
+\IFRU{К примеру, поиск строки в массиве указателей на строки}{For example, search for a string
+in the array of pointers to a strings}:
 
 \lstinputlisting{C/lfind.c}
 
-Свой собственный stricmp() нужен потому что lfind() будет передавать в него указатель на искомую строку,
-а также на место в массиве где записан указатель на строку, но не сама строка. Если бы это был
-массив строк фиксированной длины, тогда можно было бы воспользоваться стандартным stricmp().
+\IFRU{Свой собственный}{We need our own} stricmp() \IFRU{нужен потому что}{because} lfind() 
+\IFRU{будет передавать в него указатель на искомую строку}{will pass a pointer to the string we looking for},
+\IFRU{а также на место в массиве где записан указатель на строку, но не сама строка}
+{but also to the place where pointer to the string is stored, not the string itself}.
+\IFRU{Если бы это был
+массив строк фиксированной длины, тогда можно было бы воспользоваться стандартным stricmp()}
+{If it would be an array of fixed-size strings, then usual stricmp() could be used here instead}.
 
-Кстати, точно также ф-ция сравнивания задается и для qsort().
+\IFRU{Кстати, точно также ф-ция сравнения задается и для}{By the way, the same comparison function
+is used for} qsort().
 
-lfind() возвращает место в массиве где ф-ция \TT{my\_stricmp()} сработала выдав 0. Далее вычисляем разницу
-между адресом этого места и адресом начала самого массива. Учитывая арифметику указателей\ref{PtrArith}, 
-в итоге получается кол-во элементов между этими адресами.
+lfind() \IFRU{возвращает указатель на место в массиве где ф-ция}{returns a pointer to a place in an array
+where the} \TT{my\_stricmp()} \IFRU{сработала выдав}{function was triggered returning} $0$.
+\IFRU{Далее вычисляем разницу между адресом этого места и адресом начала самого массива}
+{Then we compute a difference between the address of that place and the address of the beginning of an array}.
+\IFRU{Учитывая арифметику указателей}{Considering pointer arithmetics}\ref{PtrArith}, 
+\IFRU{в итоге получается кол-во элементов между этими адресами}
+{we get a number of elements between these addresses}.
 
-Переделав ф-цию сравнивания, можно искать строку в каком угодно массиве.
-Пример из OpenWatcom:
+\IFRU{Реализуя ф-цию сравнивания, можно искать строку в каком угодно массиве}
+{By implementing comparison function, we can search a string in any array}.
+\IFRU{Пример из}{Example from} OpenWatcom:
 
 \begin{lstlisting}[caption=\textbackslash{}bld\textbackslash{}pbide\textbackslash{}defgen\textbackslash{}scan.c]
 int MyComp( const void *p1, const void *p2 ) {
@@ -48,7 +65,9 @@ static int CheckReservedWords( char *tokbuf ) {
 }
 \end{lstlisting}
 
-Здесь имеется отсортированный по первому полю массив структур ReservedWords, выглядящий так:
+\IFRU{Здесь имеется отсортированный по первому полю массив структур}
+{Here we have array of structures sorted by the first field} \IT{ReservedWords},
+\IFRU{выглядящий так}{like}:
 
 \begin{lstlisting}[caption=\textbackslash{}bld\textbackslash{}pbide\textbackslash{}defgen\textbackslash{}scan.c]
 typedef struct {
@@ -66,10 +85,17 @@ static KeyWord  ReservedWords[] = {
 };
 \end{lstlisting}
 
-bsearch() ищет строку сравнивая её со строкой в первом поле структуры. Здесь можно применить именно bsearch(),
-потому что массив уже отсортированный. Иначе пришлось бы использовать lfind().\\
+bsearch() \IFRU{ищет строку сравнивая её со строкой в первом поле структуры}{searching for the string comparing
+it with the string in the first field of structure}.
+\IFRU{Здесь можно применить именно bsearch(), потому что массив уже отсортированный}
+{bsearch() can be used here because array is already sorted}.
+\IFRU{Иначе пришлось бы использовать lfind()}{Otherwise, lfind() should be used}.
+\IFRU{Вероятно, несортированный массив можно вначале отсортировать при помощи qsort(), а затем уже
+использовать bsearch(), если вам нравится такая идея}
+{Probably, unsorted array can be sorted by qsort() before bsearch() usage, if you like the idea}. \\
 \\
-Точно так же можно искать что угодно, где угодно. Пример из BIND 9.9.1
+\IFRU{Точно так же можно искать что угодно, где угодно}{In the same way, it is possible to search anything
+anywhere}. \IFRU{Пример из}{The example from} BIND 9.9.1
 \footnote{\url{https://www.isc.org/downloads/bind/}}:
 
 \begin{lstlisting}[caption=backtrace.c]
@@ -111,5 +137,6 @@ symtbl_compare(const void *addr, const void *entryarg) {
 		result = ISC_R_NOTFOUND;
 \end{lstlisting}
 
-Таким образом, можно обойтись без того чтобы писать каждый раз цикл for() для перебирания элементов, итд.
+\IFRU{Таким образом, можно обойтись без того чтобы писать каждый раз цикл for() для перебирания элементов, итд}
+{Thus, it is possible to get rid of for() loop for enumerating elements each time, etc}.
 

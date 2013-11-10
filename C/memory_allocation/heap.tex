@@ -165,7 +165,7 @@ including their names or tags}.
 {Then we may use it only in debug builds, and in the release-builds DMALLOC() will be
 simple \IT{empty} thunk-function for} malloc().
 \IFRU{Ну а в ядре Windows это вообще по умолчанию отключено, и нужно включать при помощи утилиты GFlags}
-{It is also turned off by default in Windows and it should be turned on with the help of GFlags utility}
+{It is also turned off by default in Windows and it must be turned on with the help of GFlags utility}
 \footnote{\url{http://msdn.microsoft.com/en-us/library/windows/hardware/ff549557(v=vs.85).aspx}}
 \IFRU{Помимо всего прочего, подобное есть и в MSVC}{Aside from that, something similar present in MSVC}
 \footnote{\IFRU{читайте больше о ф-циях}{read more about the} 
@@ -232,7 +232,7 @@ or NULL in case of memory shortage}.
 \IFRU{Конечно, в наше время дешевой памяти эта проблема становится редкой, тем не менее,
 если вы используете много памяти, думать об этом все же надо}
 {Of course, in our time of cheap memory, this is rare problem, nevertheless, if one use it a lot,
-one should this about it}.
+one should consider it}.
 \IFRU{Проверять возвращаемый указатель после каждого вызова
 malloc() неудобно, так что довольно популярный метод это писать свои функции-переходники с названием 
 xmalloc(), xrealloc(), вызывающие malloc()/realloc(), но проверяющие их результат и падающие в случае

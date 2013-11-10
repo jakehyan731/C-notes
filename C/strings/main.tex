@@ -12,7 +12,7 @@ Also irritating sprintf(), for which is hard to predict how much space will need
 
 \IFRU{Копирование строк при помощи
 strcpy() также неудобно ~--- нужно думать, сколько же выделить байт под буфер}
-{Strings copying with strcpy() is not easy as well ~--- one need to think how many bytes should be allocated
+{Strings copying with strcpy() is not easy as well ~--- one need to think how many bytes must be allocated
 for buffer}.
 \IFRU{Помимо всего прочего, неудобная
 работа со строками в Си, это источник огромного количества уязвимостей в ПО, связанных с переполнениями буфера}
@@ -57,7 +57,7 @@ cout << "Date: " + Date_ToString(date) + " a=" + a_ToString(a) + "\n";
 {At an easy pace, it is good enough to write messages to log, however, if there are a lot
 of such messages, there may be string concatenation overhead}. \\
 \\
-\IFRU{Но все же строки иногда конструировать надо}{Anyway, sometimes strings should be constructed}.
+\IFRU{Но все же строки иногда конструировать надо}{Anyway, sometimes strings must be constructed}.
 
 \IFRU{Есть какие-то библиотеки для этого}{There are some libraries for this}.
 \IFRU{К примеру, в}{For example, in} Glib\footnote{\url{https://developer.gnome.org/glib/}} 
@@ -117,10 +117,10 @@ buffer overflows are virtually impossibly if not to work with the structures by 
 
 \IFRU{Кстати, конструирование строк чем-то напоминает}{By the way, string construction is resembling somehow}
 Buffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html}}, 
-ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} \IFRU{и}{and}
-CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} \IFRU{в}{in} Java.
+ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} \AndENRU
+CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} \InENRU Java.
 
-\subsection{Хранение длины строки}
+\subsection{\IFRU{Хранение длины строки}{String length storage}}
 
 \IFRU{Всегда хранить длину строки ~--- это было принято в реализациях \ac{PL} Pascal}
 {Storing always string length ~--- it was done in Pascal \ac{PL} implementations}.
@@ -175,12 +175,12 @@ characters in the strings}.
 
 \subsection{Unicode}
 
-Unicode \IFRU{это важно}{is important}! \IFRU{Наиболее популярные способы его применения это}
-{Most popular approaches are}:
+Unicode \IFRU{в наше время это важно}{is important these days}. 
+\IFRU{Наиболее популярные способы его применения это}{Most popular approaches are}:
 
 \begin{itemize}
 \item UTF-8
-\IFRU{Популярно в UNIX-системах}{Popular is UNIX-OS}.
+\IFRU{Популярно в UNIX-системах}{Popular in Unices}.
 \IFRU{Сильное приемущество: можно продолжать пользоваться стандартными ф-циями для обработки строк}
 {Significant advantage: it is still possible to use standard functions for strings processing}.
 
@@ -200,31 +200,46 @@ Unicode \IFRU{это важно}{is important}! \IFRU{Наиболее попу�
 L"hello world"
 \end{lstlisting}
 
-Для работы с wchar\_t вместо char, имеется целый класс функций-двойников с символом w в названии,
-например: fwprintf(), wcscmp(), wcslen(), iswalpha().
+\IFRU{Для работы с wchar\_t вместо char, имеется целый класс функций-двойников с символом w в названии,
+например}
+{There are a special class of ``twin'' functions with the ``w'' in name, intended for work with 
+wchar\_t instead of char}:
+fwprintf(), wcscmp(), wcslen(), iswalpha().
 
 \paragraph{Windows}
 
-В Windows, если некто хочет писать программу сразу в двух версиях, с использованием Unicode и без,
-для этого есть тип tchar, в зависимости от объявленной переменной препроцессора UNICODE, 
-он будет либо char либо wchar\_t\footnote{Сборка с Unicode и без была популярна во времена популярности
-как Windows NT/2000/XP так и Windows 95/98/ME. Вторая линейка плохо поддерживала Unicode}.
-Для этого же имеется макрос \TT{\_T(...)}:
+\IFRU{В Windows, если некто хочет писать программу сразу в двух версиях, с использованием Unicode и без,
+для этого есть тип \TT{tchar}, в зависимости от объявленной переменной препроцессора \TT{UNICODE},
+он будет либо \TT{char} либо \TT{wchar\_t}}
+{There are \TT{tchar} type in the Windows API which helps us to write a program in two builds: with Unicode
+and without, depending on \TT{UNICODE} preprocessor variable definition, it will be \TT{char} or \TT{wchar\_t}}
+\footnote{\IFRU{Одновременные сборки с Unicode и без были популярна во времена популярности
+как}{Simultenous builds with Unicode and without were popular in the time of popularity of both} 
+Windows NT/2000/XP \IFRU{так и}{and} Windows 95/98/ME\IFRU{}{ lines}.
+\IFRU{Вторая линейка плохо поддерживала Unicode}
+{Unicode support in the second was not very good}}.
+\IFRU{Для этого же имеется макрос}{ }\TT{\_T(...)}\IFRU{}{ macro is also intended for this}:
 
 \begin{lstlisting}
 _T("hello world")
 \end{lstlisting}
 
-В зависимости от выставленной переменной препроцессора UNICODE, она будет объявлена как char либо wchar\_t.
+\IFRU{В зависимости от выставленной переменной препроцессора \TT{UNICODE}, она будет объявлена как}
+{Depending on \TT{UNICODE} preprocessor macro definition, it will be} \TT{char} \OrENRU \TT{wchar\_t}.
 
-В заголовочном файле tchar.h есть масса ф-ций, меняющих свою функцию в зависимости от этой переменной.
+\IFRU{В заголовочном файле \TT{tchar.h} есть масса ф-ций, меняющих свое поведение в зависимости от этой переменной}
+{In the \TT{tchar.h} header file, there are a lot of functions, 
+changing its behaviour depending on this variable}.
 
-\subsection{Списки строк}
+\subsection{\IFRU{Списки строк}{Lists of strings}}
 
-Самый простой список строк, это просто набор строк оканчивающийся нулем.
-Например, в Windows API, в библиотеке Common Dialogs, 
-так\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/ms646829(v=vs.85).aspx}} 
-передаются список допустимых расширений файлов для диалогового окна:
+\IFRU{Самый простой список строк, это просто набор строк оканчивающийся нулем}{The most simple list of strings
+is just a strings set ending with the zero}.
+\IFRU{Например}{For example}, \InENRU Windows API, \IFRU{в библиотеке}{in the} Common Dialogs
+\IFRU{так}{library, thus}
+\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/ms646829(v=vs.85).aspx}} 
+\IFRU{передаются список допустимых расширений файлов для диалогового окна}
+{a list of available file extensions for dialog box are passed}:
 
 \begin{lstlisting}
 // Initialize OPENFILENAME

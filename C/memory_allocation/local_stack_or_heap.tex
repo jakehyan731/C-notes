@@ -94,7 +94,7 @@ struct disassembled_instruction
 it may be not stored at all}: \IFRU{нетрудно
 вычислить размер структуры без одного операнда}{it is easy to calculate structure size
 without one operatnd}: \TT{sizeof(disassembled\_instruction) - sizeof(struct operand)} 
-\IFRU{и скопировать её куда-то, где она должен храниться}{and copy it to the some place where it should be
+\IFRU{и скопировать её куда-то, где она должен храниться}{and copy it to the some place where it must be
 stored}.
 \IFRU{Ведь никто не запрещает нам использовать (и хранить) не всю структуру а только её часть}
 {Because no one prohibits to use (and store) not the whole structure, but only its part}.

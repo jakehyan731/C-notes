@@ -1,18 +1,28 @@
 ﻿\subsection{assert}
 
-Как известно, этот макрос часто используется для валидации
-\footnote{используется также такой термин как ``инвариант'' и ``sanitization'' в англ.яз.} заданных значений. 
-Например, если ваша ф-ция
-работает с датой, вы, вероятно, захотите написать в её начале что-то вроде \IT{assert (month>=1 \&\& month<=12)}.
+\IFRU{Как известно, этот макрос часто используется для валидации}
+{This macro is commonly used for validating}
+\footnote{\IFRU{используется также такой термин как ``инвариант'' и ``sanitization'' в англ.яз.}{
+``invariant'' and ``sanitization'' terms are also used}}
+\IFRU{заданных значений}{of input values}.
+\IFRU{Например, если ваша ф-ция работает с датой, вы, вероятно, захотите написать в её начале что-то вроде}
+{For eample, if you have a function working with data, you probably may want to add that code to the begin}:
+\IT{assert (month>=1 \&\& month<=12)}.
 
-Вот то о чем нужно помнить: стандартный макрос assert() доступен только в отладочных (debug) сборках. 
-В release, где объявлена переменная NDEBUG,
-все выражения как бы исчезают. Поэтому писать, например, \IT{assert(f=malloc(...))} неверно. Впрочем,
-вы возможно захотите использовать что-то вроде \IT{assert(object->get\_something()==123)}.
+\IFRU{Вот то о чем нужно помнить: стандартный макрос assert() доступен только в отладочных (debug) сборках}
+{Here is what one should remember: standard assert() macro is available only in debug builds}.
+\IFRU{В release, где объявлена переменная NDEBUG, все выражения как бы исчезают}{In release, where NDEBUG
+is defined, all statements are ``disappearing''}.
+\IFRU{Поэтому писать, например,}{That is why it is not correct to write}
+\IT{assert(f=malloc(...))}\IFRU{ неверно}{}.
+\IFRU{Впрочем, вы возможно захотите использовать что-то вроде}{However, you may want to write something like}
+\IT{assert(object->get\_something()==123)}.
 
-В макросах assert можно также указывать небольшие сообщения об ошибках: 
-вы увидите их если assert() ``не сойдется''. 
-Например, в исходниках LLVM\footnote{\url{http://llvm.org/}} можно встретить такое:
+\IFRU{В макросах \IT{assert} можно также указывать небольшие сообщения об ошибках}
+{Error messages also can be embedded in an \IT{assert} statements}:
+\IFRU{вы увидите их если выражение ``не сойдется''}{you will see it if expression will not be true}.
+\IFRU{Например, в исходниках}{For example, in the} LLVM\footnote{\url{http://llvm.org/}}
+\IFRU{можно встретить такое}{source code we may find this}:
 
 \begin{lstlisting}
 assert(Index < Length && "Invalid index!");
@@ -22,12 +32,15 @@ assert(i + Count <= M && "Invalid source range");
 assert(j + Count <= N && "Invalid dest range");
 \end{lstlisting}
 
-Текстовая строка имеет тип \IT{const char*}, и она никогда не NULL. 
-Таким образом, можно дописать к любому выражению \IT{... \&\& true} не меняя его смысл.
+\IFRU{Текстовая строка имеет тип}{Text string has}
+\IT{const char*}\IFRU{, и она никогда не}{ type and it is never} NULL.
+\IFRU{Таким образом, можно дописать к любому выражению}{Thus it is possible to add} \IT{... \&\& true} 
+\IFRU{не меняя его смысл}{to any expression without changing its sense}.
 
-Макрос assert() можно также вводить и для документации кода.
+\IFRU{Макрос }{}assert() \IFRU{можно также вводить и для документации кода}{macro can also be used
+for documenting purposes}.
 
-Например:
+\IFRU{Например}{For example}:
 
 \begin{lstlisting}[caption=GNU Chess]
 int my_random_int(int n) {
@@ -43,7 +56,8 @@ int my_random_int(int n) {
 }
 \end{lstlisting}
 
-Глядя на этот код, можно очень быстро увидеть ``легальные'' значения переменных n и r.
+\IFRU{Глядя на этот код, можно очень быстро увидеть ``легальные'' значения переменных}
+{By reading the code we can quickly see ``legal'' values of the} $n$ \AndENRU $r$\IFRU{}{ variables}.
 
-assert-ы также называют ``active comments''\cite{Lakos}.
+assert\IFRU{-ы также называют}{-s are also called} ``active comments''\cite{Lakos}.
 

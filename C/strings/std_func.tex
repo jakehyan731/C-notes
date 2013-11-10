@@ -1,14 +1,16 @@
-﻿\subsection{Стандартные ф-ции для работы со строками}
+﻿\subsection{\IFRU{Стандартные ф-ции в Си для работы со строками}{Standard string C functions}}
 
-Некоторые ф-ции, например, getcwd() не только заполняют буфер, но и возвращают указатель на него.
-Это для того чтобы можно было писать что-то вроде:
+\IFRU{Некоторые ф-ции, например, getcwd() не только заполняют буфер, но и возвращают указатель на него}
+{Some functions like getcwd() not only filling the buffer, but also returns a pointer to it}.
+\IFRU{Это для того чтобы можно было писать что-то вроде}
+{It is made for the situations, where it is more compact to write something like}:
 
 \begin{lstlisting}
 char buf[256];
 do_something (getcwd (buf, sizeof(buf)));
 \end{lstlisting}
 
-... вместо:
+... \IFRU{вместо}{instead of}:
 
 \begin{lstlisting}
 char buf[256];
@@ -16,30 +18,37 @@ getcwd (buf, sizeof(buf))
 do_something (buf);
 \end{lstlisting}
 
-\subsubsection{strstr() и memmem()}
+\subsubsection{strstr() \AndENRU memmem()}
 
-strstr() применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще.
+strstr() \IFRU{применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще}
+{is intended for searching for a substring in another string, or to get to know,
+are there substring present in it anyway}.
 
-memmem() можно применять с этими же целями, но для поиска по буферу, в котором могут быть нули,
-либо по части строки.
+memmem() \IFRU{можно применять с этими же целями, но для поиска по буферу, в котором могут быть нули,
+либо по части строки}{can be used with the same intentions, but for searching in the buffer which may
+contain zeroes, ot in the part of a string}.
 
 \label{memchr}
-\subsubsection{strchr() и memchr()}
+\subsubsection{strchr() \AndENRU memchr()}
 
-strchr() применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще.
+strchr() \IFRU{применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще}
+{is used for searching for character in a string or to get to know if there such character present}.
 
-memchr() можно применять с этими же целями, но для поиска по части строки.
+memchr() \IFRU{можно применять с этими же целями, но для поиска по части строки}{can be used with the same
+intentions, but for searching in the part of a string}.
 
 \subsubsection{atoi(), atof(), strtod(), strtof()}
 
-Ф-ции atoi/atof не могут сигнализировать об ошибке, а strtod/strtof, делая то же самое --- могут.
+\IFRU{Ф-ции }{}atoi()/atof() \IFRU{не могут сигнализировать об ошибке}{cannot signal an error},
+\IFRU{а}{but} strtod()/strtof()
+\IFRU{, делая то же самое}{ while doing the same thing} ~--- \IFRU{могут}{can signal}.
 
 \input{C/strings/scanf}
 
 \subsubsection{strspn(), strcspn()}
 
-strspn() часто применяется для того чтобы удостовериться, что некая строка полностью состоит из
-нужных символов:
+\TT{strspn()} \IFRU{часто применяется для того чтобы удостовериться, что некая строка полностью состоит из
+нужных символов}{is often used to get to be sure that a string has only characters from the list we defined}:
     
 \begin{lstlisting}
 if (strspn(s, "1234567890") == strlen(s)) ... OK
@@ -49,25 +58,32 @@ if (strspn(IPv4, "1234567890.") == strlen(IPv4)) ... OK
 if (strspn(IPv6, "0123456789AaBbCcDdEeFf:.") == strlen(IPv6)) ... OK
 \end{lstlisting}
 
-Либо для того чтобы пропустить начало строки:
+\IFRU{Либо для того чтобы пропустить начало строки}{Or to skip a begin of a string}:
 
 \begin{lstlisting}
 const char *whitespaces = " \n\r\t";
 *buf += strspn(*buf, whitespaces); // skip whitespaces at start
 \end{lstlisting}
 
-strcspn() это обратная ф-ция, её можно использовать для пропуска всех символов в начале строки, не попадающих
-под множество символов:
+\TT{strcspn()} \IFRU{это обратная ф-ция}{is inverse function},
+\IFRU{её можно использовать для пропуска всех символов в начале строки, не попадающих
+под множество символов}{it can be used for skipping all symbols at the string beginning,
+which are not defined in a set}:
 
 \begin{lstlisting}
 s += strcspn(s, whitespaces); // first, skip anything till whitespaces
-s += strspn(s, whitespaces); // then skip shitespaces
+s += strspn(s, whitespaces); // then skip whitespaces
+// here 's' is pointing to the part of string after whitespaces
 \end{lstlisting}
 
-\subsubsection{strtok() и strpbrk()}
+\subsubsection{strtok() \AndENRU strpbrk()}
 
-Обе ф-ции служат для разбиения строки на подстроки, отделенные друг от друга разделительными символами
+\IFRU{Обе ф-ции служат для разбиения строки на подстроки, отделенные друг от друга разделительными символами}
+{Both functions are used for delimiting string into substrings, divided by special characters}
 \footnote{delimiter}.
-Только strtok() модифицирует исходную строку (и таким образом, подстроку сразу можно использовать
-как отдельную Си-строку), а strpbrk() нет, он только возвращает указатель на следующую подстроку.
+\IFRU{Только}{However} strtok() \IFRU{модифицирует исходную строку}{modifies source stirng}
+(\IFRU{и таким образом, получаемые подстроки сразу можно использовать как отдельные Си-строки}
+{and thus resulting substrings can be used as separated C-strings}), 
+\IFRU{а}{but} strpbrk() \IFRU{нет, он только возвращает указатель на следующую подстроку}
+{is not, it is only returning a pointer to the next substring}.
 
