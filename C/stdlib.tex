@@ -2,75 +2,114 @@
 
 \input{C/assert}
 
-\subsection{Разница между stdout и stderr}
+\subsection{\IFRU{Разница между}{The difference between} stdout \AndENRU stderr}
 
-\IT{stdout} это то что выводится на консоль при помощи вызова \IT{printf()}.
-\IT{stdout} это буферизированный вывод,
-так что, пользователь, обычно того не зная, видит вывод порциями. Бывает так что программа выдает
-что-то используя \IT{printf()} либо \IT{cout} и тут же падает.
-Если это попадает в буфер, но буфер не успевает
-``сброситься'' (flush) в консоль, то пользователь ничего не увидит. Это бывает неудобно.
-Таким образом, для вывода более важной информации, в том числе отладочной, удобнее использовать \IT{stderr}.
+\IT{stdout} \IFRU{это то что выводится на консоль при помощи вызова}{is what is dumped
+to the console with the help of function} \IT{printf()} \OrENRU \IT{cout} \InENRU \CPP.
+\IT{stdout} \IFRU{это буферизированный вывод, так что, пользователь,
+обычно того не зная, видит вывод порциями}{is buffered output, so a user, usually not aware of this,
+sees output by portions}.
+\IFRU{Бывает так что программа выдает что-то используя}
+{Sometimes, the program output something using} \IT{printf()} \OrENRU \IT{cout} \IFRU{и тут же падает}
+{and then crashes}.
+\IFRU{Если это попадает в буфер, но буфер не успевает ``сброситься'' (flush) в консоль,
+то пользователь ничего не увидит}{If something goes to the buffer, but buffer did not have time to ``flush''
+into the console, a user will not see anything}.
+\IFRU{Это бывает неудобно}{This is unconvenient sometimes}.
+\IFRU{Таким образом, для вывода более важной информации, в том числе отладочной, удобнее использовать}
+{Thus, for dumping more important information, including debugging, it is more convenient to use} \IT{stderr}
+\OrENRU \IT{cerr}.
 
-\IT{stderr} это не буферизированный вывод, и всё что попадает в этот поток при помощи 
-\TT{fprintf(stderr,...)} либо \IT{cerr}, появляется в консоли тут же.
+\IT{stderr} \IFRU{это не буферизированный вывод, и всё что попадает в этот поток при помощи}
+{is not bufferized output, so, anything comes in this stream with the help of} 
+\TT{fprintf(stderr,...)} \OrENRU \IT{cerr},
+\IFRU{появляется в консоли тут же}{appearing in the console instantly}.
 
-Не следует также забывать, что из-за отсутствия буфера, вывод в \IT{stderr} медленнее.
+\IFRU{Не следует также забывать, что из-за отсутствия буфера, вывод в}{It is also worth noting
+that because of buffer absence, output to the} \IT{stderr} \IFRU{медленнее}{is slower}.
 
-Чтобы направлять \IT{stderr} в другой файл при запуске процесса, можно указывать:
+\IFRU{Чтобы направлять}{In order to redirect} \IT{stderr}
+\IFRU{в другой файл при запуске процесса, в командной строке (Windows/UNIX) можно указывать}
+{to the other file while process running, this can be specified in the command line (Windows/UNIX)}:
 
 \begin{lstlisting}
 process 2> debug.txt
 \end{lstlisting}
 
-... это направит вывод \IT{stderr} в заданный файл (потому что номер этого потока -- 2).
+... \IFRU{это направит вывод}{this will redirect} \IT{stderr} 
+\IFRU{в заданный файл (потому что номер потока для вывода ошибок~--- 2)}
+{into the file specified (because number of the error output stream is 2)}.
 
 \subsection{UNIX time}
 
-В UNIX-среде очень популярно представление даты и времени в формате UNIX time.
-Это просто 32-битное число, показывающее
-количество прошедших секунд с 1-го января 1970-го года.
+\IFRU{В UNIX-среде очень популярно представление даты и времени в формате UNIX time}
+{In UNIX-environment UNIX time representation is very popular}.
+\IFRU{Это просто 32-битное число, отсчитывающее
+количество прошедших секунд с 1-го января 1970-го года}{It is just a 32-bit number, counting number
+of seconds passing from the 1st January 1970}.
 
-В качестве положительных сторон: 1) очень легко хранить это 32-битное число; 2) очень легко вычислять разницу дат;
-3) невозможно закодировать неверные даты и время, такие как 32-е января, 29-е февраля невысокосных годов, 
-25 часов 62 минуты.
+\IFRU{В качестве положительных сторон}{On a positive side}:
+1) \IFRU{очень легко хранить это 32-битное число}{32-bit number is easy to store};
+2) \IFRU{очень легко вычислять разницу дат}{date difference is calculated easily};
+3) \IFRU{невозможно закодировать неверные даты и время}{it is not possible to encode incorrect date and time},
+\IFRU{такие как 32-е января}{like 32th January}, \IFRU{29-е февраля невысокосных годов}{29th February of non-leap
+year}, 25 \IFRU{часов}{hours} 62 \IFRU{минуты}{minutes}.
 
-В качестве отрицательных сторон: 1) нельзя закодировать дату до 1970-го года.
+\IFRU{В качестве отрицательных сторон}{On a negative side}:
+1) \IFRU{нельзя закодировать дату до 1970-го года}{it is not possible to encode a date before year 1970}.
 
-В наше время, если использовать UNIX time, тем не менее, следует помнить что ``срок его действия'' истечет
-в 2038-м году, именно тогда 32-битное число переполнится, то есть, пройдет $2^{32}$ секунд с 1970-го года.
-Так что, для этого следует использовать 64-битное значение, т.е., time64.
+\IFRU{В наше время, если использовать формат UNIX time, тем не менее,
+следует помнить что ``срок его действия'' истечет
+в 2038-м году, именно тогда 32-битное число переполнится, то есть, пройдет $2^{32}$ секунд с 1970-го года}
+{If to use UNIX time format in modern time, it is worth to remember that it has ``expiration date'' in year 2038,
+that will be a year when a 32-bit number will overflow, i.e., $2^{32}$ seconds will pass since year 1970}.
+\IFRU{Так что, для этого следует использовать 64-битное значение, т.е.}
+{So, 64-bit value should be used instead, i.e.}, \TT{time64}.
 
 % ? NtQuerySystemTime http://msdn.microsoft.com/en-us/library/windows/desktop/ms724512(v=vs.85).aspx
 
 \label{memcpy}
 \subsection{memcpy()}
 
-Поначалу трудно запомнить порядок аргументов в ф-циях memcpy(), strcpy(). Чтобы было легче, можно представлять
-знак ``='' (``равно'') между аргументами.
+\IFRU{Поначалу трудно запомнить порядок аргументов в ф-циях}{It is hard to memorize arguments order
+in the functions} memcpy(), strcpy()\IFRU{}{ at first}.
+\IFRU{Чтобы было легче, можно представлять знак ``='' (``равно'') между аргументами}
+{It can be easier to memorize if to visualize ``='' (``equal'') sign between arguments}.
 
 \label{bzero}
-\subsection{bzero() и memset()}
+\subsection{bzero() \AndENRU memset()}
 
-bzero() это ф-ция просто обнуляющая блок памяти.
-Для этого обычно используют memset(). Но у memset() есть неприятная особенность, легко перепутать второй
-и третий аргументы местами, и компилятор промолчит, потому что байт для заполнения всего блока задается как int.
+\TT{bzero()} \IFRU{это ф-ция просто обнуляющая блок памяти}{is a function which just fills memory block to
+zeroes}.
+\IFRU{Для этого обычно используют}{The} \TT{memset()}\IFRU{}{ is often used in the place}.
+\IFRU{Но у}{But the} \TT{memset()} 
+\IFRU{есть неприятная особенность, легко перепутать второй
+и третий аргументы местами, и компилятор промолчит, потому что байт для заполнения всего блока задается как 
+\IT{int}}
+{has unpleasant feature, it is easy to reverse the second and the third arguments and the compiler
+will be silent because the filling byte is specified by \IT{int} type}.
 
-К тому же, имя ф-ции bzero легче читается.
+\IFRU{К тому же, имя ф-ции}{Aside from that} \TT{bzero()} \IFRU{легче читается}{function name is easier to read}.
 
-С другой стороны, её нет в стандарте POSIX.
+\IFRU{С другой стороны, её нет в стандарте Си, но она есть в}{On the other hand,
+it is absent in C standard, however, it is present in} \ac{POSIX}.
 
-А в Windows API для этих же целей применяется ZeroMemory()
-\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366920(v=vs.85).aspx}}.
+\IFRU{А в}{In the} Windows API \IFRU{для этих же целей применяется}{there are present} ZeroMemory()
+\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366920(v=vs.85).aspx}}
+\IFRU{}{ for the same purpose}.
 
 \input{C/printf}
 
 \subsection{atexit()}
 
-При помощи atexit() можно добавить ф-цию, автоматически вызываемую перед выходом из вашей программы.
-Кстати, программы на Си++ именно при помощи atexit() добавляют деструкторы глобальных объектов.
+\IFRU{При помощи}{With the help of} \TT{atexit()} 
+\IFRU{можно добавить ф-цию, автоматически вызываемую перед выходом из вашей программы}
+{it is possible to add a function automatically called before each exit from your program}.
+\IFRU{Кстати, программы на \CPP именно при помощи}
+{By the way, \CPP programs use} \TT{atexit()} \IFRU{добавляют деструкторы глобальных объектов}
+{for adding global objects destructors}.
 
-Можно попробовать:
+\IFRU{Можно попробовать}{Let's try to see}:
 
 \begin{lstlisting}
 #include <string>
@@ -82,7 +121,8 @@ int main()
 };
 \end{lstlisting}
 
-В листинге на ассемблере найдем конструктор этого глобального объекта:
+\IFRU{В листинге на ассемблере найдем конструктор этого глобального объекта}
+{In the assembly listing we will find constructor of the global object}:
 
 \begin{lstlisting}[caption=MSVC 2010]
 ??__Es@@YAXXZ PROC					; `dynamic initializer for 's'', COMDAT
@@ -109,7 +149,8 @@ int main()
 ??__Fs@@YAXXZ ENDP					; `dynamic atexit destructor for 's''
 \end{lstlisting}
 
-Конструктор, конструируя, также регистрирует деструктор объекта в atexit().
+\IFRU{Конструктор, конструируя, также регистрирует деструктор объекта в}
+{Constructor, while constructing, also registers the object destructor in the} \TT{atexit()}.
 
 \input{C/bsearch.tex}
 

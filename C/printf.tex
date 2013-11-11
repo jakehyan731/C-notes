@@ -1,24 +1,36 @@
 ﻿\label{printf}
 \subsection{printf()}
 
-\subsubsection{Свои собственные модификаторы в printf()}
+\subsubsection{\IFRU{Свои собственные модификаторы в printf()}{Your own printf() format-string modifiers}}
 
-Часто можно испытать раздражение, когда было бы логично передать в printf(), скажем, структуру описывающее комплексное
-число, или цвет закодированный в структуре из трех чисел типа int.
+\IFRU{Часто можно испытать раздражение, когда было бы логично передать в printf(),
+скажем, структуру описывающее комплексное
+число, или цвет закодированный в структуре из трех чисел типа int}
+{It is often irritating when it is logical to pass to printf(), let's say, 
+a structure describing complex number, or a color encoded as 3 int numbers as a single entity}.
 
-Эту проблему в Си++ решают определением ф-ции \TT{operator<<} в \TT{ostream} для своего типа, либо введением
-метода с названием \TT{ToString()}.
-
-В printk() (printf-подобная ф-ция в ядре Linux) имеются дополнительные модификаторы
+\IFRU{Эту проблему в Си++ решают определением ф-ции}
+{In C++ this problem is usually solved by definition} \TT{operator<<} \InENRU \TT{ostream} 
+\IFRU{для своего типа}{for the own type}, \IFRU{либо введением метода с названием}
+{or by a method definition named} \TT{ToString()}. \\
+\\
+\IFRU{В}{In} printk() (printf-\IFRU{подобная ф-ция в ядре Linux}{like function in Linux kernel})
+\IFRU{имеются дополнительные модификаторы}{there are additional modifiers exist}
 \footnote{\url{http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/printk-formats.txt}}, 
-такие как \TT{\%pM} (Mac-адрес), \TT{\%pI4} (IPv4-адрес), \TT{\%pUb} (UUID/GUID).
+\IFRU{такие как}{like}
+\TT{\%pM} (Mac-\IFRU{адрес}{address}),
+\TT{\%pI4} (IPv4-\IFRU{адрес}{address}),
+\TT{\%pUb} (UUID/GUID).
 
-В GNU Multiple Precision Arithmetic Library есть ф-ция gmp\_printf()
-\footnote{\url{http://gmplib.org/manual/Formatted-Output-Strings.html}} имеющая нестандартные 
-модификаторы нужные для вывода чисел с произвольной точностью.
-
-В ОС Plan9, и в исходниках компилятора Go, можно найти ф-цию fmtinstall(), объявляющую новый модификатор printf-строки,
-например:
+\IFRU{В}{In} GNU Multiple Precision Arithmetic Library \IFRU{есть ф-ция}{there are} gmp\_printf()
+\footnote{\url{http://gmplib.org/manual/Formatted-Output-Strings.html}} \IFRU{имеющая нестандартные 
+модификаторы нужные для вывода чисел с произвольной точностью}{function having non-standard modifiers for
+arbitrary precision numbers outputting}. \\
+\\
+\\IFRU{В \ac{OS}}{In} Plan9\IFRU{, и в исходниках компилятора Go, можно найти ф-цию}
+{ \ac{OS}, and in Go compiler source code, we may find}
+fmtinstall()\IFRU{, для объявления нового модификатора printf-строки, например}
+{ function for a new printf-string modifier definition, for example}:
 
 \begin{lstlisting}[caption=go\textbackslash{}src\textbackslash{}cmd\textbackslash{}5c\textbackslash{}list.c]
 void
@@ -82,19 +94,29 @@ Pconv(Fmt *fp)
 \end{lstlisting}
 (\url{http://plan9.bell-labs.com/sources/plan9/sys/src/cmd/5c/list.c})
 
-Ф-ция Pconv() будет вызвана если в строке формата будет встречен \%P. Затем она копирует созданную строку
-при помощи fmtstrcpy(). Кстати, эта ф-ция и сама использует другие объявленные модификаторы, такие как \%A, \%D, итд.
-
-В Glibc\footnote{Стандартной библиотеке в Linux} есть нестандартное расширение
+\IFRU{Ф-ция}{The} Pconv() 
+\IFRU{будет вызвана если в строке формата будет встречен \%P}{will be called if \%P modifier
+in the format string will be met}.
+\IFRU{Затем она копирует созданную строку при помощи}
+{Then it copies the string created using} fmtstrcpy().
+\IFRU{Кстати, эта ф-ция и сама использует другие объявленные модификаторы, такие как}
+{By the way, that function also uses other defined modifiers like} \%A, \%D, \IFRU{итд}{etc}. \\
+\\
+\IFRU{В}{The} Glibc\footnote{\IFRU{Стандартной библиотеке в Linux}{The Linux standard library}} 
+\IFRU{есть нестандартное расширение}{has non-standard extension}
 \footnote{\url{http://www.gnu.org/software/libc/manual/html_node/Customizing-Printf.html}}, 
-позволяющее объявлять свои модификаторы, но это \IT{deprecated}.
+\IFRU{позволяющее объявлять свои модификаторы, но это}{allowing to define our own
+modifiers, but it is} \IT{deprecated}.
 
-Попробуем определить свои собственные модификаторы для Mac-адреса и для вывода байта в бинарном виде:
+\IFRU{Попробуем определить свои собственные модификаторы для 
+Mac-адреса и для вывода байта в бинарном виде}{Let's try to define our own modifiers for Mac-address
+outputting and also for byte outputting in a binary form}:
 
 \lstinputlisting{C/register_printf_function.c}
-\footnote{Основа для примера взята отсюда: \url{http://codingrelic.geekhold.com/2008/12/printf-acular.html}}
+\footnote{\IFRU{Основа для примера взята отсюда}{The base of example was taken from}:
+\url{http://codingrelic.geekhold.com/2008/12/printf-acular.html}}
 
-Это компилируется с предупреждениями:
+\IFRU{Это компилируется с предупреждениями}{This compiled with warnings}:
 
 \begin{lstlisting}
 1.c: In function 'main':
@@ -104,10 +126,12 @@ Pconv(Fmt *fp)
 1.c:52:2: warning: unknown conversion type character 'B' in format [-Wformat]
 \end{lstlisting}
 
-GCC умеет следить за соответствиями модификаторов в printf-строке и аргументами в вызове printf(), но здесь
-ему встречаются незнакомые модификаторы, о чем он предупреждает.
+\ac{GCC} \IFRU{умеет следить за соответствиями модификаторов в}{is able to track accordance between
+modifiers in the} printf-\IFRU{строке и аргументами в вызове}{string and arguments in} printf(),
+\IFRU{но здесь ему встречаются незнакомые модификаторы, о чем он предупреждает}
+{however, unfamiliar to it modifiers are present here, so it warns us about them}.
 
-Тем не менее, наша программа работает:
+\IFRU{Тем не менее, наша программа работает}{Nevertheless, our program works}:
 
 \begin{lstlisting}
 $ ./a.out

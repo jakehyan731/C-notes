@@ -1,19 +1,26 @@
 \subsection{\IFRU{Списки в Си}{Lists in C}}
 
 \IFRU{Списки это связный набор элементов}{Lists are linked set of elements}.
-\IFRU{Односвязный список}{Single-linked list} ~--- \IFRU{это когда у каждого элемента есть ссылка на следующий}
+\IFRU{Односвязный список}{Singly-linked list} ~--- \IFRU{это когда у каждого элемента есть ссылка на следующий}
 {it is when each element has pointer to the next one}.
-\IFRU{Двусвязный список}{Double-linked list} ~--- \IFRU{когда у элемента есть ссылки на следующий и на предыдущий}
+\IFRU{Двусвязный список}{Doubly-linked list} ~--- \IFRU{когда у элемента есть ссылки на следующий и на предыдущий}
 {is when each element has pointers to the both previous element and the next one}.
 
-У списков есть серьезное преимущество перед массивами: в список легко добавлять элемент в произвольное место,
-так и удалять. В качестве недостатков: тратится много памяти для поддержания самих структур списка, а также
-нет возможности индексировать его, как массив.
+\IFRU{У списков есть серьезное преимущество перед массивами: в список легко добавлять элемент в произвольное место,
+так и удалять}
+{In comparison with arrays, one significant advantage is ease of new element adding at the random place}.
+\IFRU{В качестве недостатков: тратится много памяти для поддержания самих структур списка, а также
+нет возможности индексировать список как массив}
+{As disadvantages: list supporting data structures consumes some memory overhead, and also it is not
+possible to index a list as an array}.
 
-\subsubsection{Односвязный список}
+\subsubsection{\IFRU{Односвязный список}{Singly-linked list}}
 
-Его сделать очень легко. В структуре предназначенной для связывания в список, достаточно добавить где-то
-ссылку на следующий элемент, обычно это поле называется next:
+\IFRU{Самый легкий для реализации}{Most simple to implement}.
+\IFRU{В структуре предназначенной для связывания в список, достаточно добавить где-то
+ссылку на следующий элемент, обычно это поле называется}
+{In the structure intended for linking into a list, it is enough just to add somewhere
+a link to the next element, usually this field called} \TT{next}:
 
 \begin{lstlisting}
 struct some_object
@@ -24,23 +31,27 @@ struct some_object
 };
 \end{lstlisting}
 
-NULL в next означает что этот элемент является последним.
+\TT{NULL} \IFRU{в}{in the} \TT{next} \IFRU{означает что этот элемент является последним в списке}
+{meaning that the element is last in the list}.
 
-Операция прохода по такому списку становится очень простой:
+\IFRU{Операция прохода по такому списку становится очень простой}
+{Elements enumerating in this list is very simple}:
 
 \begin{lstlisting}
 for (struct some_object *i=list; i!=NULL; i=i->next)
 	...
 \end{lstlisting}
 
-Для вставки нового элемента, нужно вначале найти последний элемент:
+\IFRU{Для вставки нового элемента, нужно вначале найти последний элемент}
+{One need first to find the last element}:
 
 \begin{lstlisting}
 for (struct some_object *i=list; i!=NULL; i=i->next);
 struct some_object *last_element=i;
 \end{lstlisting}
 
-... а затем, создав новую структуру, добавить указатель на нее в next:
+... \IFRU{а затем, создав новую структуру, записать указатель на нее в}
+{and then, after creating new structure, store the pointer to it in} \TT{next}:
 
 \begin{lstlisting}
 struct some_object *new_object=calloc(1, sizeof(struct some_object));
@@ -48,32 +59,59 @@ struct some_object *new_object=calloc(1, sizeof(struct some_object));
 last_element->next=new_object;
 \end{lstlisting}
 
-calloc() отличается от malloc() тем что обнуляет всё выделенное место, а значит в поле next нового
-элемента сразу будет NULL\footnote{Об ``инициализации'' структур, читайте также здесь\ref{COOPInit}.}.
+calloc() \IFRU{отличается от}{is different from the} malloc() 
+\IFRU{тем что обнуляет всё выделенное место, а значит в поле \TT{next} нового
+элемента сразу будет NULL}
+{in that sense that all allocated space will be cleared and consequently, there will be NULL
+in the \TT{next} field}
+\footnote{\IFRU{Об ``инициализации'' структур, читайте также здесь}
+{More about structures ``initialization'', read here}: \ref{COOPInit}.}.
 
-Поиск нужного элемента это просто проход по всему списку до тех пор, пока не найдется то что нужно.
+\IFRU{Поиск нужного элемента это просто проход по всему списку и сравнение каждого элемента с искомым,
+до тех пор, пока не найдется то что нужно}
+{Searching for the needed element is just enumerating all elements in the list with comparing them
+with the sought-for element until it is found}.
 
-Удаление элемента: найти предыдущий элемент и следующий, 
-у предыдущего в next установить указатель на следующий элемент, 
-затем освободить блок памяти выделенный для текущего элемента.
+\IFRU{Удаление элемента}{Element deletion}: \IFRU{найти предыдущий элемент и следующий, 
+у предыдущего в \TT{next} установить указатель на следующий элемент, 
+затем освободить блок памяти выделенный для текущего элемента}
+{find previous the element and the next, set the \TT{next} pointer in the previous element to the next one,
+then free memory block allocated for the current element}.
 
-Самый первый элемент списка называется ``list head''. Структуру самого первого элемента можно объявлять как локальную
-или глобальную переменную. Но тогда удалять первый элемент списка будет неудобно. А с другой стороны,
-можно объявлять указатель на первый элемент списка, тогда будет проще этому указателю присвоить другой элемент,
-который будет первым.
+\IFRU{Самый первый элемент списка называется}{The very first list element is also called} ``list head''.
+\IFRU{Структуру самого первого элемента можно объявлять как локальную
+или глобальную переменную}{The very first element structure can be declared as a local or global
+variable}.
+\IFRU{Но тогда удалять первый элемент списка будет неудобно}
+{But it will be harder to delete first element}. 
+\IFRU{А с другой стороны,
+можно объявлять указатель на первый элемент списка, 
+тогда будет проще этому указателю присвоить другой элемент,
+который будет первым}{On the other hand, it is possible to declare the pointer to the first
+list element, then it will be easier to assign other element to this pointer (which will be first)}.
 
-\subsubsection{Двусвязный список}
+\subsubsection{\IFRU{Двусвязный список}{Doubly-linked list}}
 
-Это почти то же самое, только, помимо указателя на следующий элемент, хранится еще и указатель на предыдущий.
-Если элемент первый, то указатель может быть NULL, либо он может указывать сам на себя (кому как удобнее).
+\IFRU{Это почти то же самое, только, помимо указателя на следующий элемент,
+хранится еще и указатель на предыдущий}{Almost the same, but, aside from the pointer to a next
+element, also pointer to a previous element is stored}.
+\IFRU{Если элемент первый, то указатель на предыдущий элемент может быть NULL, 
+либо он может указывать сам на себя (кому как удобнее)}
+{If the element is first, the pointer to the previous element may be NULL, or it may
+point to itself (whatever you like)}.
 
-Работая с двусвязным списком, легче находить предыдущие элементы, например, когда нужно удалить какой-то элемент.
-А также можно перебирать элементы с конца списка до начала.
-Но памяти на это тратится немного больше.
+\IFRU{Работая с двусвязным списком, легче находить предыдущие элементы,
+например, когда нужно удалить какой-то элемент}
+{When working with doubly-linked list, it is easier to find previous elements, for example,
+in case of element deletion}.
+\IFRU{А также можно перебирать элементы с конца списка до начала}{It is easier to enumerate
+elements backwards from the end of the list}.
+\IFRU{Но памяти на это тратится немного больше}{But the memory overhead is slightly larger}.
 
 \subsubsection{Windows API}
 
-Здесь, да и много где в ядре Windows, применяются две примитивные структуры:
+\IFRU{Здесь, да и много где в ядре Windows, применяются две примитивные структуры}
+{Here, and also in a lot of places of Windows kernel, two primitive data structures are used}:
 
 \begin{lstlisting}
 typedef struct _LIST_ENTRY {
@@ -86,8 +124,12 @@ typedef struct _SINGLE_LIST_ENTRY {
 } SINGLE_LIST_ENTRY, *PSINGLE_LIST_ENTRY;
 \end{lstlisting}
 
-Эти структуры нельзя назвать самостоятельными, они скорее предназначены для встраивания в другие структуры.
-Например, вам нужно объеденить в список структуру описывающую цвет:
+\IFRU{Эти структуры нельзя назвать самостоятельными,
+они скорее предназначены для встраивания в другие структуры}
+{These structures are not intended for independent use, but rather they are intended for embedding
+into another structures}.
+\IFRU{Например, нам нужно объеденить в список структуру описывающую цвет}
+{For example, we need to unite a color-describing structure into a list}:
 
 \begin{lstlisting}
 struct color
@@ -99,23 +141,31 @@ struct color
 };
 \end{lstlisting}
 
-Теперь в вашей структуре есть также и ссылка на предыдущий элемент и на следующий.
-Для работы со структурами использующие эти списки, в Windows есть набор ф-ций
+\IFRU{Теперь в вашей структуре есть также и ссылка на предыдущий элемент и на следующий}
+{Now we have a pointers to the both next and previous elements}.
+\IFRU{Для работы со структурами использующие эти списки, в Windows есть набор ф-ций}
+{There is a small API present in Windows API using these structures}
 \footnote{\url{http://msdn.microsoft.com/en-us/library/windows/hardware/ff563802(v=vs.85).aspx}}.
 
 \subsubsection{Linux}
 
-В ядре Linux работа с простыми двусвязными списками, описывается в файле /include/linux/list.h
+\IFRU{В ядре Linux работа с простыми двусвязными списками, описывается в файле}
+{Doubly-linked list routines in Linux kernel are declared in the file} /include/linux/list.h
 \footnote{\url{http://lxr.free-electrons.com/source/include/linux/list.h}}.
 
-Там это много где используется, в ядре 3.12 по крайней мере ~2900 упоминаний ``struct list\_head''.
+\IFRU{Там это много где используется, в ядре версии 3.12 по крайней мере ~2900 упоминаний}
+{It is heavily used there, in the kernel version 3.12 there are at least ~2900 references to} 
+``struct list\_head''.
 
 \subsubsection{Glib}
 
-Напрашивается мысль, а нельзя ли выделить отдельную структуру для элемента списка, и не встраивать лишних полей
-в свои структуры? Можно, например, так сделано в glist.h
+\IFRU{Напрашивается мысль, а нельзя ли выделить отдельную структуру для элемента списка, 
+и не встраивать лишних полей в свои структуры}
+{One might ask, is not it possible to declare a perticular structure for the list element,
+and not to embed it to own structures}?
+\IFRU{Можно, например, так сделано в}{Yes, for example, that is how it is done in} glist.h
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/glist.h} 
-\url{https://developer.gnome.org/glib/2.37/glib-Doubly-Linked-Lists.html}} в glib:
+\url{https://developer.gnome.org/glib/2.37/glib-Doubly-Linked-Lists.html}} \InENRU glib:
 
 \begin{lstlisting}
 struct _GList
@@ -126,10 +176,17 @@ struct _GList
 };
 \end{lstlisting}
 
-data может указывать на какой угодно объект, на любую существующую структуру, в которой вы ничего не хотите менять.
-Конечно, с эстетической точки зрения, это лучше. Но нельзя забывать, что тогда на каждый элемент вашего списка,
-будет приходится уже два выделенных блока памяти + 
-еще затраты на поддержания самих блоков памяти\ref{HeapOverhead}. \\
+\TT{data} \IFRU{может указывать на какой угодно объект, на любую существующую структуру,
+в которой вы ничего не хотите менять, это также называется}
+{may point to any object you like, to any existing structure in which you want not to change
+anything, this is also called} ``opaque pointer''.
+\IFRU{Конечно, с эстетической точки зрения, это лучше}{Of course, aesthetically it is better}.
+\IFRU{Но нельзя забывать, что тогда на каждый элемент вашего списка,
+будет приходится уже два выделенных блока памяти}{But one should remember that there will be
+two allocated memory block for each element of list} + 
+\IFRU{еще затраты на поддержания самих блоков памяти в куче}{memory overhead for supporting
+allocated blocks in heap}\ref{HeapOverhead}. \\
 \\
-Таким образом, подобное решение оправдано там, где экономия памяти менее важна.
+\IFRU{Таким образом, подобное решение оправдано там, где экономия памяти менее важна}
+{Thus, this approach is acceptable if memory footprint is not important}.
 
