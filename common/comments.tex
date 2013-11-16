@@ -1,13 +1,17 @@
-﻿\subsection{Комментарии}
+﻿\subsection{\IFRU{Комментарии}{Comments}}
 
-Их иногда удобно вставлять прямо в вызов ф-ции, чтобы где-то на виду держать пометку,
-что означает каждый аргумент:
+\IFRU{Их иногда удобно вставлять прямо в вызов ф-ции, чтобы где-то на виду держать пометку,
+что означает некий аргумент}
+{It is sometimes useful to insert them right into a function call, in order to have a visual note
+about meaning of an argument}:
 
 \begin{lstlisting}
 f (val1, /* a very special flag! */ false, /* another special flag here */ true);
 \end{lstlisting}
 
-Целый блок кода можно откомментировать при помощи \#if\footnote{директива препроцессора}:
+\IFRU{Целый блок кода можно откомментировать при помощи}
+{The whole code block can be commented with the help of} \#if
+\footnote{\IFRU{директива препроцессора}{preprocessor directive}}:
 
 \begin{lstlisting}
 	ta	= aemif_calc_rate(t->ta, clkrate, TA_MAX);
@@ -21,6 +25,8 @@ f (val1, /* a very special flag! */ false, /* another special flag here */ true)
 	wsetup	= aemif_calc_rate(t->wsetup, clkrate, WSETUP_MAX);
 \end{lstlisting}
 
-Это может быть удобнее чем традиционный способ потому что текстовый редактор или IDE в этом случае
-не ``сломает'' отступы при выравнивании.
+\IFRU{Это может быть удобнее чем традиционный способ потому что текстовый редактор или \ac{IDE} в этом случае
+не ``сломает'' отступы при выравнивании}
+{This might be more convenient then usual way because the text editor or \ac{IDE} in this case will not ``break''
+indentation while auto-indentation}.
 

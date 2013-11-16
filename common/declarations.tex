@@ -1,24 +1,31 @@
 ﻿\section{\IFRU{Объявления в Си/Си++}{C/C++ declarations}}
-\subsection{Объявления переменных внутри ф-ции}
+\subsection{\IFRU{Объявления локальных переменных}{Local variable declarations}}
 
-Раньше, в Си можно было объявлять переменные только в начале ф-ции. А в Си++ --- где угодно.
+\IFRU{Раньше, в Си можно было объявлять переменные только в начале ф-ции}
+{It was possible to declare variables only at the function beginning in C}.
+\IFRU{А в}{And anywhere in} \CPP\IFRU{ ~--- где угодно}{}.
 
-К тому же, нельзя было объявлять итератор в for() (а в Си++ также можно было):
+\IFRU{К тому же, нельзя было объявлять итератор в}{It was also not possible to declare
+iterator in} for() (\IFRU{а в}{it was possible in} \CPP\IFRU{ также можно было}{}):
 
 \begin{lstlisting}
 for(int i=0; i<10; i++)
 	...
 \end{lstlisting}
 
-Новый стандарт C99\ref{C99} позволяет делать это.
+\IFRU{Новый стандарт}{The new} C99\ref{C99} \IFRU{позволяет делать это}{ standard allows this}.
 
 \subsubsection{static}
 
-Обычно глобальные переменные (или ф-ции) объявляются как static, так их область видимости ограничивается 
-данным файлом. Но локальные переменные внутри ф-ции также можно объявлять как static, тогда эта переменная
-будет не локальной, а глобальной, но её область видимости будет ограничена только этой ф-цией.
+\IFRU{Если глобальные переменные (или ф-ции) объявляются как \IT{static}, так их область видимости ограничивается 
+данным файлом}{If the global variables (or functions) are declared as \IT{static}, its scope is limited
+by current file}.
+\IFRU{Но локальные переменные внутри ф-ции также можно объявлять как}{However, local variables
+inside a function may also be declared as} \IT{static}, \IFRU{тогда эта переменная
+будет не локальной, а глобальной, но её область видимости будет ограничена только этой ф-цией}
+{then this variable will be global instead of local, but its scope will be limited by a function}.
 
-Например:
+\IFRU{Например}{For example}:
 
 \begin{lstlisting}
 void fn(...)
@@ -31,20 +38,22 @@ void fn(...)
 };
 \end{lstlisting}
 
-К примеру, это помогло бы для реализации strtok(), ведь этой ф-ции что-то нужно хранить у себя между вызовами.
+\IFRU{К примеру, это помогло бы для реализации}
+{For example, it might be helpful for the} \TT{strtok()}\IFRU{, ведь этой ф-ции что-то нужно
+хранить у себя между вызовами}{ implementing, because this function should store something between calls}.
 
 \input{common/forward_declarations} % subsection
 
-\subsection{Определение строк}
+\subsection{\IFRU{Определение строк}{String declarations}}
 
-\subsubsection{Символы используемые в строках}
+\subsubsection{\IFRU{Последовательности символов используемые в строках}{Character sequences used in strings}}
 
 \begin{center}
 \begin{tabular}{ | l | l | l | }
 \hline
-\textbackslash{}0 & 0x00 & нулевой байт \\
+\textbackslash{}0 & 0x00 & \IFRU{нулевой байт}{zero byte} \\
 \hline
-\textbackslash{}t & 0x09 & табуляция \\
+\textbackslash{}t & 0x09 & \IFRU{табуляция}{tabulation} \\
 \hline
 \textbackslash{}n & 0x0A & line feed (LF) \\
 \hline
@@ -53,12 +62,15 @@ void fn(...)
 \end{tabular}
 \end{center}
 
-Разница между LF и CR в том, что в старых матричных принтерах,
-LF означал протягивание бумаги на одну строку вниз,
-а CR перевод каретки влево до конца.
-Так что в принтер нужно было передавать оба символа.
+\IFRU{Разница между LF и CR в том, что в старых матричных принтерах,
+LF означал протягивание бумаги на одну строку вниз, а CR перевод каретки влево до края бумаги}
+{The difference between LF and CR is that in old dot-matrix printers LF mean line feed by one line down,
+and CR carriage return to the left margin of paper}.
+\IFRU{Так что в принтер нужно было передавать оба символа}{So both characters must be transmitted to the
+printer}.
 
-Вывод CR без LF дает возможность перезаписывать текующую строку в консоли:
+\IFRU{Вывод CR без LF дает возможность перезаписывать текующую строку в консоли}{Outputting CR without LF
+allows to rewrite current string in the console}:
 
 \begin{lstlisting}
 for (;;)
@@ -70,11 +82,13 @@ for (;;)
 };
 \end{lstlisting}
 
-Это часто используется например в архиваторах для отображения информации, или, например, wget.
+\IFRU{Это часто используется например в архиваторах для отображения текущего статуса, или, например}
+{This is often used in the file archivers for displaying current status, or, for example}, wget.
 
-В Си и UNIX принят LF.
+\IFRU{В Си}{In C} \AndENRU UNIX \IFRU{принят LF как символ новой строки}
+{LF is traditionally accepted as newline symbol}.
 
-В DOS и затем в Windows ~--- CR+LF.
+\IFRU{В}{In the} DOS \IFRU{и затем в}{and then} Windows ~--- CR+LF.
 
 \subsubsection{Строка определенная в нескольких строках}
 \label{heredoc}

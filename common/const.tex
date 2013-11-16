@@ -1,29 +1,43 @@
 ﻿\subsection{const}
 
-Объявлять переменные, аргументы ф-ций и методы классов в Си++ как const очень полезно, потому что:
+\IFRU{Объявлять переменные, аргументы ф-ций и методы классов в \CPP как const очень полезно, потому что}
+{To declare variables, function arguments and \CPP class methods as const is advisable because}:
 
 \begin{itemize}
 \item
-Документация кода ~--- сразу видно что это элемент только для чтения.
+\IFRU{Документация кода}{Self-documentation} ~--- \IFRU{сразу видно что это элемент только для чтения}
+{it can be easy seen visually that the element is read-only}.
 
 \item
-Защита от ошибок: в случае с глобальной переменной-const, при попытке записать в нее, 
-сработает защита и процесс упадет.
-А если пытаться модифицировать const-аргумент ф-ции, компилятор выдаст ошибку.
+\IFRU{Защита от ошибок: в случае с глобальной переменной-const, при попытке записать в нее, 
+сработает защита и процесс упадет}
+{Protection from errors: in case of global const-variable, the process will crash while attempting to write to
+it due to memory protection}.
+\IFRU{А если пытаться модифицировать const-аргумент ф-ции, компилятор выдаст ошибку}
+{The compiler also reports an error if to try to modify a const-argument inside of a function}.
 
 \item
-Оптимизация: компилятор, зная что элемент всегда ``только для чтения'', может сделать работу с ним эффективнее.
+\IFRU{Оптимизация: компилятор, зная что элемент всегда ``только для чтения'', может сделать работу с ним эффективнее}
+{Optimization: the compiler considering the element is always read-only, may generate faster code for using it}.
 \end{itemize}
 
-Желательно все аргументы ф-ции, которые вы не собираетесь модифицировать, объявлять как const.
-Например, ф-ция strcmp() ничего не меняет во входных аргументах, так что их обычно оба объявляют как const.
-А, например, strcat() ничего не меняет во втором аргументе, но меняет в первом, поэтому обычно она объявляется
-с const во втором аргументе.
+\IFRU{Желательно все аргументы ф-ции, которые вы не собираетесь модифицировать, объявлять как}
+{It is highly advisable to declare all function arguments which you do not plan to modify as} const.
+\IFRU{Например, ф-ция}{For example, the} \TT{strcmp()} 
+\IFRU{ничего не меняет во входных аргументах, так что их обычно оба объявляют как}
+{function is changing nothing in the input arguments, so they are both usually declared as} const.
+\IFRU{А, например, strcat() ничего не меняет во втором аргументе, но меняет в первом, поэтому обычно она объявляется
+с \IT{const} во втором аргументе}
+{The strcat() changing nothing in the second argument, but changing something in the first,
+so it is usually declared with a \IT{const} in the second argument}.
 
 \subsubsection{\CPP}
 
-В \CPP, желательно все методы класса, которые не изменяют ничего в объекте, 
-также объявлять как const.
+\IFRU{В}{In the} \CPP, \IFRU{желательно все методы класса, которые не изменяют ничего в объекте, 
+также объявлять как}{a class methods which are not changing anything in the object
+is highly advisable to be marked as} \IT{const}.
 
-const-методы класса называют также аксессорами (accessors), 
-а не-const-методы ~--- манипуляторами (manipulators)\cite{Lakos}.
+const-\IFRU{методы класса называют также \IT{аксессорами} (accessors)}
+{methods of a class are also called as \IT{accessors}},
+\IFRU{а не-const-методы ~--- \IT{манипуляторами} (manipulators)}
+{while non-const methods as \IT{manipulators}}\cite{Lakos}.

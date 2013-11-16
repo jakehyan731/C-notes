@@ -1,18 +1,25 @@
-﻿\subsection{Массивы}
+﻿\subsection{\IFRU{Массивы}{Arrays}}
 
-В C99\ref{C99} можно передавать массив в аргументах ф-ции.
+\IFRU{В}{In} C99\ref{C99} 
+\IFRU{можно передавать массив в аргументах ф-ции}{it is possible to pass array in the function arguments}.
 
-Собственно, массив байт можно было передавать и раньше, кодируя байты в строке, включая ноль, примерно так
-(узнать, встречается ли байт \IT{c} в массиве байт)\ref{memchr}:
+\IFRU{Собственно, массив байт можно было передавать и в более старых стандартах Си,
+кодируя байты в строке, включая ноль, примерно так}
+{Strictly speaking, array of bytes can be passed in the older C standards, by encoding all bytes
+including zero in a string}
+(\IFRU{узнать, встречается ли байт}{let's determine if the byte} (\IT{c})
+\IFRU{в массиве байт}{is present in a byte array})\ref{memchr}:
 
 \begin{lstlisting}
 if (memchr ("\x12\x34\x56\x78\x00\xAB", c, 6))
 	...
 \end{lstlisting}
 
-Байты после ноля нормально кодируются.
+\IFRU{Байты после ноля нормально кодируются}{The bytes after zero is encoded finely}.
 
-Но в C99 теперь можно передавать массив значений других типов, например unsigned int:
+\IFRU{Но в C99 теперь можно передавать массив значений других типов, например}
+{However, it is possible in C99 to pass an array of other types, like}
+unsigned int:
 
 \begin{lstlisting}
 unsigned int find_max_value (unsigned int *array, size_t array_size);
@@ -20,13 +27,18 @@ unsigned int find_max_value (unsigned int *array, size_t array_size);
 unsigned int max_value=find_max_value ((unsigned[]){ 0x123, 0x456, 0x789, 0xF00 }, 4);
 \end{lstlisting}
 
-Поиск в массиве можно реализовать при помощи ф-ций bsearch() или lfind()\ref{bsearch_lfind}, 
-поиск и вставку при помощи lsearch()\footnote{работает также как и lfind(), но при отсутствии искомого элемента,
-добавляет его в массив}.
+\IFRU{Поиск в массиве можно реализовать при помощи ф-ций}
+{Search for the element in the array can be implemented with the help of} bsearch() \OrENRU lfind()\ref{bsearch_lfind}, 
+\IFRU{поиск и вставку при помощи}{search and insertion with the help of} lsearch()
+\footnote{\IFRU{работает также как и}{works like} lfind(), 
+\IFRU{но при отсутствии искомого элемента, добавляет его в массив}
+{but if the element is absent there, it also inserts it}}.
 
-\subsubsection{Инициализация}
+\subsubsection{\IFRU{Инициализация}{Initialization}}
 
-В GCC можно\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html}} инициализировать части массивов:
+\IFRU{В GCC можно}{It is possible in GCC}
+\footnote{\url{http://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html}} \IFRU{инициализировать части массивов}
+{to initialize array parts}:
 
 \begin{lstlisting}
 struct a
@@ -42,5 +54,5 @@ struct a tbl[8] =
 };
 \end{lstlisting}
 
-... но это нестандартное расширение.
+... \IFRU{но это нестандартное расширение}{but it is non-standard extension}.
 

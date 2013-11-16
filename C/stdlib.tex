@@ -168,32 +168,50 @@ and the stack pointer}.
 \IFRU{А всё что делает}{And all the} \TT{longjmp()} \IFRU{это восстанавливает состояние регистров}{does is
 restores their values}.
 
-Это часто используется для возврата из каких-то глубоких мест наружу, обычно, в случае ошибок.
-Собственно, как и исключения в \CPP.
+\IFRU{Это часто используется для возврата из каких-то глубоких мест наружу, обычно, в случае ошибок}
+{It is often used for returning from a deep places to outside, usually, in case of errors}.
+\IFRU{Собственно, как и исключения в}{Just like exceptions in} \CPP.
 
-Например, в Oracle RDBMS, когда происходит некая ошибка, и пользователь код ошибки, сообщение об ошибке, итд,
-в реальности, там срабатывает longjmp откуда-то из глубины. Для того же это используется и в bash.
+\IFRU{Например, в Oracle RDBMS, когда происходит некая ошибка, и пользователь видит код и сообщение об ошибке,
+в реальности, там срабатывает}
+{For example, in the Oracle RDBMS, when some error occured, user sees a code and error message,
+the} \TT{longjmp()} \IFRU{откуда-то из глубины}{is triggered somewhere from the deep in reality}.
+\IFRU{Для того же это используется и в}{For the same reason it is used in} Bash.
 
-Этот механизм даже немного гибче чем исключения в других \ac{PL} ~--- нет никаких проблем ``устанавливать точки 
-возврата'' в каких угодно местах программы и затем возвращаться туда по мере необходимости.
+\IFRU{Этот механизм даже немного гибче чем исключения в других}
+{It is even more flexible mechanism than exceptions in other} \ac{PL} ~--- 
+\IFRU{нет никаких проблем устанавливать точки возврата
+в каких угодно местах программы и затем возвращаться туда по мере необходимости}
+{it is not an issue to set return points in arbitrary points of program and return to them when one need}.
 
 \label{goto}
-Пофантазируя, можно даже сказать что \TT{longjmp()} это такой супермега-goto, обходящий блоки, ф-ции, 
-и восстанавливающий состояние стека.
+\IFRU{Пофантазируя, можно даже сказать что}
+{We can even imagine the} \TT{longjmp()} 
+\IFRU{это такой супер-мега-goto, обходящий блоки, ф-ции, и восстанавливающий состояние стека}
+{as a super-mega-goto which bypasses blocks, functions and restoring stack state}.
 
-Однако, нельзя забывать, что всё что восстанавливает \TT{longjmp()} это регистры.
-Выделенная память остается выделенной,
-никаких деструкторов, как в \CPP, вызвано не будет. Никакого \ac{RAII} здесь нет. 
-С другой стороны, так как часть стека просто аннулируется, 
-память выделенная при помощи alloca()\ref{alloca} будет также аннулирована.
+\IFRU{Однако, нельзя забывать, что всё что восстанавливает}
+{However, it should be mentioned, all the} \TT{longjmp()}
+\IFRU{это регистры процессора}{restores is a \ac{CPU} registers}.
+\IFRU{Выделенная память остается выделенной, никаких деструкторов, как в \CPP, вызвано не будет}
+{Allocated memory will remain so, no destructors as in \CPP will be called}.
+\IFRU{Никакого}{There are no such thing as} \ac{RAII}\IFRU{ здесь нет}{}.
+\IFRU{С другой стороны, так как часть стека просто аннулируется, память выделенная при помощи}
+{On the other hand, since the part of the stack is just annuled, the memory allocated with the help of}
+\TT{alloca()}\ref{alloca} \IFRU{будет также аннулирована}{will also be annuled}.
 
 \subsection{stdarg.h}
 
-Тут ф-ции для работы с переменным кол-вом аргументов. Как минимум ф-ции семейства printf() и scanf() такие.
+\IFRU{Тут ф-ции для обработки переменного количества аргументов}
+{There are functions intended for variable arguments handling}.
+\IFRU{Как минимум ф-ции семейства}{At least the functions of the} printf() \AndENRU scanf() 
+\IFRU{такие}{family are these}.
 
-\subsubsection{Засада \#1}
+\subsubsection{\IFRU{Засада}{Caveat} \#1}
 
-Переменную типа va\_list можно использовать только один раз, если нужно больше, их нужно копировать:
+\IFRU{Переменную типа}{The variable of the type} va\_list 
+\IFRU{можно использовать только один раз, если нужно больше, их нужно копировать}
+{may be used only once, if one need more, it should be copied}:
 
 \begin{lstlisting}
 va_list v1, v2;

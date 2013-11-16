@@ -1,21 +1,31 @@
-\subsection{Бинарные деревья в Си}
+\subsection{\IFRU{Бинарные деревья в Си}{Binary trees in C}}
 
-Бинарные деревья --- одна из важнейших структур данных в компьютерных науках.
-Чаще всего они используются для хранения пар ``ключ-значение''. Это то что в Си++ STL реализовано в std::map.
+\IFRU{Бинарные деревья}{Binary trees} ~--- \IFRU{одна из важнейших структур данных в компьютерных науках}
+{are the one of the most important structures in computer science}.
+\IFRU{Чаще всего они используются для хранения пар}{Most often these are used for}
+``\IFRU{ключ-значение}{key-values}''\IFRU{}{ pairs storage}.
+\IFRU{Это то что в \CPP \ac{STL} реализовано в std::map}
+{This is what implemented in std::map in \CPP \ac{STL}}.
 
-Упрощенно говоря, по сравнению со списками, выборка у деревьев происходит намного быстрее.
-С другой стороны, добавление элемента в дерево происходит чуть медленнее.
+\IFRU{Упрощенно говоря, по сравнению со списками, выборка у деревьев происходит намного быстрее}
+{Simply speaking, in comparison with lists, trees offers much faster selection}.
+\IFRU{С другой стороны, добавление элемента в дерево может происходить медленнее}
+{On the other hand, element insertion may be slower}.
 
-В стандартных библиотеках Си, нет работы с деревьями, но кое-что есть в POSIX 
+\IFRU{В стандартных библиотеках Си, нет работы с деревьями, но кое-что есть в}
+{There are no C standard functions working with a trees, but some things are present in} \ac{POSIX}
 (tsearch(), twalk(), tfind(), tdelete())
 \footnote{\url{http://pubs.opengroup.org/onlinepubs/009696799/functions/tsearch.html}}.
 
-Это семейство ф-ций активно используется в bash 4.2, BIND 9.9.1, GCC --- там можно посмотреть, как использовать
-это.
+\IFRU{Это семейство ф-ций активно используется в}
+{This family of functions are used actively in the} Bash 4.2, BIND 9.9.1, \ac{GCC} ~--- 
+\IFRU{там можно посмотреть, как это использовать}{it can be seen there how it can be used}.
 
-Множество (std::set в Си++ STL) можно реализовать так же просто при помощи бинарных деревьев, достаточно
-просто не хранить значение, а хранить только ключ.
-
-В Glib имеется также свои ф-ции для работы с деревьями, объявленные в gtree.h
+\IFRU{В}{The} Glib \IFRU{имеется также свои ф-ции для работы с деревьями, объявленные в}
+{also has the tree functions declared in the} gtree.h
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.h}}.
+
+\IFRU{Множество}{The set} (std::set \InENRU \CPP \ac{STL}) 
+\IFRU{можно реализовать так же просто при помощи бинарных деревьев, достаточно просто не хранить значение, а хранить только ключ}
+{can be implemented as binary trees as well, one may just not to store value and store only key}.
 
