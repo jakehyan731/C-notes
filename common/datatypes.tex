@@ -1,6 +1,6 @@
-﻿\subsection{\IFRU{Типы данных}{Datatypes}}
+﻿\subsubsection{\IFRU{Типы данных}{Datatypes}}
 
-\subsubsection{bool}
+\paragraph{bool}
 
 bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он есть и в Си, начиная с}
 {but also in the C starting at} C99\ref{C99} (stdbool.h).
@@ -8,7 +8,7 @@ bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он ес
 \IFRU{В Windows API принят тип BOOL, это синоним \IT{int}}
 {There are synonymous to the \IT{int} type in Windows API ~--- BOOL}.
 
-\subsubsection{\IFRU{Знаковые или беззнаковые}{Signed or unsigned}?}
+\paragraph{\IFRU{Знаковые или беззнаковые}{Signed or unsigned}?}
 
 \IFRU{Знаковые типы}{Signed types} (int, char) 
 \IFRU{используются куда чаще беззнаковых}{are used much more often than unsigned} (unsigned int, unsigned char).
@@ -55,7 +55,7 @@ void f(int size)
 \IFRU{На 32-битных архитектурах это обычно}{It is} \IT{unsigned int}\IFRU{}{ on 32-bit architectures},
 \IFRU{а на 64-битных это}{and} \IT{unsigned int64}\IFRU{}{ on 64-bit ones}.
 
-\subsubsection{char \OrENRU uint8\_t \IFRU{вместо}{instead of} int?}
+\paragraph{char \OrENRU uint8\_t \IFRU{вместо}{instead of} int?}
 
 \IFRU{Может показаться что если какая-то переменная всегда будет в пределах}
 {One may think that is a value will always be in} $0..100$\IFRU{, то незачем выделять под нее 32-битный}
@@ -126,7 +126,7 @@ the first field and the offset of the second field will be +4}.
 {Summarizing: if compactness and memory footprint is important, then}
 \IT{char}, \IT{uint16\_t}, \IFRU{итд}{etc, may be used}.
 
-\subsubsection{x86-64 \OrENRU AMD64}
+\paragraph{x86-64 \OrENRU AMD64}
 
 \IFRU{На новых 64-битных x86-процессорах, тип}{On the new 64-bit x86 CPUs, the} \IT{int/unsigned int} 
 \IFRU{оставили 32-битным, вероятно, в целях совместимости}{is still 32-bit, perhaps, for compatibility}.

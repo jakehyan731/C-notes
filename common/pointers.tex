@@ -14,16 +14,22 @@ of some element in memory}.
 {The reason pointers are so popular is that an address of object is much easier to pass into a function
 instead of passing the whole object ~--- because it is absurdly}.
 
-К тому же, вызываемая функция, например, обрабатывающая ваш массив данных,
-просто изменит что-то в нем, вместо того чтобы возвращать новый, измененный массив данных, что тоже абсурдно.
+\IFRU{К тому же, вызываемая функция, например, обрабатывающая ваш массив данных,
+просто изменит что-то в нем, вместо того чтобы возвращать новый, измененный массив данных, что тоже абсурдно}
+{Besides, calling function, for example, processing a data array, will just change something in it instead
+of returning new one, which is absurdical too}.
 
-Возьмем простой пример. Стандартная функция \IT{strtok()} делит строку на подстроки, используя заданный символ
-как разделитель. К примеру, мы можем подать на вход строку \TT{The quick brown fox jumps over the lazy dog} 
-и задать пробел в качестве разделителя.
+\IFRU{Возьмем простой пример}{Let's take a simple example}.
+\IFRU{Стандартная функция}{The standard C function} \IT{strtok()} 
+\IFRU{делит строку на подстроки, используя заданный символ как разделитель}{just divide string by substrings
+using specified character as delimiter}.
+\IFRU{К примеру, мы можем подать на вход строку}{For example, we may specify the string}
+\TT{The quick brown fox jumps over the lazy dog} 
+\IFRU{и задать пробел в качестве разделителя}{and set the space as a delimiter}.
 
 \lstinputlisting{common/strtok_ex1.c}
 
-Мы в итоге получим на выходе:
+\IFRU{Мы в итоге получим на выходе}{What we got on output}:
 
 \begin{lstlisting}
 The
@@ -37,80 +43,154 @@ lazy
 dog
 \end{lstlisting}
 
-Что тут в реальности происходит, это то что ф-ция \IT{strtok()} просто находит в заданной строке следующий пробел 
-(либо иной заданный разделитель),
-записывает туда $0$ (что по соглашениям текстовых строк в Си является концом строки) и возвращает указатель на это
-место.
+\IFRU{Что тут в реальности происходит, это то что ф-ция}
+{What is going on here is that the} \IT{strtok()} 
+\IFRU{просто находит в заданной строке следующий пробел}{just searching for the next space in the input string}
+(\IFRU{либо иной заданный разделитель}{or any other delimiter set}),
+\IFRU{записывает туда}{writes} $0$\IFRU{}{ to it} 
+(\IFRU{что по соглашениям текстовых строк в Си является концом строки}
+{this is string terminator by C conventions}) 
+\IFRU{и возвращает указатель на это место}{and returns a pointer to that place}.
 
-В качестве недостатка \IT{strtok()} можно отметить, что эта ф-ция ``портит'' входную строку, записывая нули
-на месте разделителей.
+\IFRU{В качестве недостатка}{As a shortcoming, it can be said that the} \IT{strtok()} 
+\IFRU{можно отметить, что эта ф-ция ``портит'' входную строку, записывая нули на месте разделителей}
+{function ``garbles'' input string, writing zeros at the delimiter's places}.
 
-Но вот что важно заметить: никакие строки или подстроки не копируются в памяти. Входная
-строка остается там же где и лежала. В \IT{strtok()} передается только указатель на нее, или, её адрес.
-Эта ф-ция затем, после
-того как записывает $0$, возвращает \IT{адрес} каждого следующего ``слова''.
-Адрес затем подается на вход в \IT{printf()}, где происходит его вывод на консоль.
+\IFRU{Но вот что важно заметить: никакие строки или подстроки не копируются в памяти}
+{What is worth to note: no strings or substrings copied in memory}.
+\IFRU{Входная строка остается там же где и лежала}{The input string is still on its own place}.
 
-Обратите также внимание на то что в исходнике присутствует и некорректное объявление \IT{str}. Оно тем некорректное
-что в Си строка имеет тип \IT{const char*}, то есть, распологается в константном сегменте данных, защищенным
-от записи.
-Если так сделать, то \IT{strtok()} не сможет модифицировать строку записывая туда нули и процесс ``упадет''.
+\IFRU{В \IT{strtok()} передается только указатель на нее, или, её адрес}
+{It is only pointer to the string (or its address) is passed to the \IT{strtok()} function}.
 
-Так что, в нашем примере, строка выделяется как массив \IT{char} а не массив \IT{const char}.
+\IFRU{Эта ф-ция затем, после того как записывает $0$, возвращает \IT{адрес} каждого следующего ``слова''}
+{The function then after it writes $0$, returns \IT{address} of each consecutive ``word''}.
 
-Обобщая, скажем что работа со строками в Си происходит только лишь используя адреса этих строк. К примеру,
-ф-ция сравнения строк \IT{strcmp()} на вход берет два адреса двух строк и по одному символу сравнивает их.
-Было бы очень абсурдно копировать куда-то эти две строки лишний раз, чтобы \IT{strcmp()} обработала их.
+\IFRU{Адрес ``слова'' затем подается на вход в}{The address of the ``word'' is then passed to the}
+\IT{printf()}, 
+\IFRU{где происходит его вывод на консоль}{where it dumped to the console}.
 
-Трудность понимания указателей в Си связана с тем, что указатель это ``часть'' объекта. Указатель на строку,
-это не сама строка. Сама строка еще должна где-то в памяти хранится, под нее нужно выделять место, итд.
+\IFRU{Обратите также внимание на то что в исходнике присутствует и некорректное объявление \IT{str}}
+{Please also take a note that an incorrect declaration of \IT{str} is present in the source code}.
 
-В \ac{PL} более высокого уровня, объект и указатель на него могут быть представлены как единое целое, что облегчает
-понимание.
-Впрочем, это не значит что в этих \ac{PL} строки и иные объекты неразумно копируются много раз при передаче 
-в другие функции,
-там точно так же используются указатели, но просто эта механика скрыта от программиста.
+\IFRU{Оно тем некорректное что в Си строка имеет тип}{It is incorrect in that sense that the C string
+has type} \IT{const char*}, \IFRU{то есть, распологается в константном сегменте данных, 
+защищенным от записи}{i.e., it is located in the constant data segment, write-protected}.
 
-\subsubsection{Синтаксический сахар для a[i]}
+\IFRU{Если так сделать, то}{If do so, then the} \IT{strtok()} 
+\IFRU{не сможет модифицировать входную строку записывая туда нули и процесс ``упадет''}
+{will not be able modify the input string by writing zeros there and the process will crash}.
 
-Ради упрощения, можно сказать что в Си нет массивов вообще, а есть только синтаксический сахар для выражений
-вроде \IT{a[i]}.
+\IFRU{Так что, в нашем примере, строка выделяется как массив}
+{So, in our example, the string is allocated as an array of} \IT{char}
+\IFRU{а не массив}{instead of array of} \IT{const char}.
 
-К примеру, возможно вы видели такой трюк:
+\IFRU{Обобщая, скажем что работа со строками в Си происходит только лишь используя адреса этих строк}
+{Generalizing, we may say all standard C strings functions works with them using only their addresses}.
+
+\IFRU{К примеру, ф-ция сравнения строк}{For example, the function of string comparison} \IT{strcmp()} 
+\IFRU{берет на вход два адреса двух строк и по одному символу сравнивает их}
+{takes addresses of two strings and compare them by one character}.
+\IFRU{Было бы очень абсурдно копировать куда-то эти две строки лишний раз, чтобы}
+{It would be absurdical to copy these strings to some other place so the} \IT{strcmp()} 
+\IFRU{обработала их}{may process them}.
+
+\IFRU{Трудность понимания указателей в Си связана с тем, что указатель это ``часть'' объекта}
+{The difficulty of C pointers understanding is in the fact that pointer is a ``part'' of an object}.
+\IFRU{Указатель на строку, это не сама строка}{The pointer to the string is not the string itselfs}.
+\IFRU{Сама строка еще должна где-то в памяти хранится, под нее нужно перед этим выделять место, итд}
+{The string should be placed somewhere in memory, a memory should be allocated for it before, etc}.
+
+\IFRU{В}{In higher level} \ac{PL} 
+\IFRU{более высокого уровня, 
+объект и указатель на него могут быть представлены как единое целое, что облегчает понимание}
+{an object and a pointer may be represented as a single whole, and that is makes understanding simpler}.
+
+\IFRU{Впрочем, это не значит что в этих \ac{PL} строки и 
+иные объекты неразумно копируются много раз при передаче в другие функции ~---
+там точно так же как и в Си используются указатели, но просто эта механика скрыта от программиста}
+{It is however not mean that a strings and other objects are copied misspendinly in these \ac{PL} ~---
+a pointers are used there internally just as in C, and this mechanisms are hidden from the programmer}.
+
+\subsubsection{\IFRU{Синтаксический сахар для}{Syntactic sugar for} array[index]}
+
+\IFRU{Ради упрощения, можно сказать что в Си нет массивов вообще,
+а есть только синтаксический сахар для выражений вроде}
+{For the sake of simplification, it could be said that C has not arrays at all,
+it has only syntactic sugar for expressions like} \IT{array[index]}.
+
+\IFRU{К примеру, возможно вы видели такой трюк}{For example, perhaps you saw this trick}:
 
 \begin{lstlisting}
 printf ("%c", 3["hello"]);
 \end{lstlisting}
 
-Это выдаст 'l'. 
-Это происходит, потому что любое выражение \IT{a[i]}, на самом деле преобразовывается в \IT{*(a+i)}
+\IFRU{Это выдаст}{It outputs} 'l'. 
+
+\IFRU{Это происходит, потому что любое выражение}{This happens because the expression} \IT{a[i]}, 
+\IFRU{на самом деле преобразовывается в}{is in fact translating into} \IT{*(a+i)}
 \cite[6.5.2.1]{C99TC3}.
-\IT{3["hello"]} преобразовывается в \IT{*(3+"hello")}, а \IT{"hello"} это просто указатель на массив символов, 
-типа \IT{const char*}.
-\IT{3+"hello"} это в итоге указатель на часть строки, то есть, \IT{"lo"}. А \IT{*("lo")} это cимвол 'l'. 
-Вот почему это работает.
+\IT{3["hello"]} \IFRU{преобразовывается в}{is translated into} \IT{*(3+"hello")},
+\IFRU{а}{and} \IT{"hello"} \IFRU{это просто указатель на массив символов, типа}{is just
+a pointer to array of characters like} \IT{const char*}.
 
-Но так врядли стоит писать, если вы конечно не готовите программу на конкурс 
+\IT{3+"hello"} \IFRU{это в итоге указатель на часть строки, то есть}{as a result is a pointer
+to the part of string}, \IT{"lo"}. \IFRU{А}{And} \IT{*("lo")} \IFRU{это cимвол}{is a} 'l'. 
+\IFRU{Вот почему это работает}{That is why it works}.
+
+\IFRU{Но так врядли стоит писать, если вы конечно не готовите программу на конкурс}
+{It is not advisable to write such things unless your intentions is to participate in}
 The International Obfuscated C Code Contest\footnote{\url{http://www.ioccc.org/}}.
-Так что я привел этот пример, чтобы наглядно показать, 
-что выражения вроде \IT{a[i]} это синтаксический сахар.
+\IFRU{Так что я привел этот пример, чтобы наглядно показать, 
+что выражения вроде}{So I demostrated the trick here in order to explain that the} \IT{a[i]}
+\IFRU{это синтаксический сахар}{is a syntactic sugar}.
 
-При некотором упорстве, в Си вообще можно обойтись без индексации массивов, хотя выглядеть это будет не очень
-эстетично.
+\IFRU{При некотором упорстве, в Си вообще можно обойтись без индексации массивов,
+хотя выглядеть это будет не очень эстетично}
+{With some persistence, it is possible not to use indexed arrays in C at all, but it will not be
+very aesthetical though}.
 
-Кстати, так легко понять как работают отрицательные индексы массивов. \IT{a[-3]} просто преобразуется в \IT{*(a-3)},
-так адресуется элемент лежащий перед самим массивом.
-И хотя это вполне возможно, так можно делать только если вы точно знаете, что вы делаете.
+\IFRU{Кстати, так легко понять как работают отрицательные индексы массивов}
+{By the way, now it is easy to understand how negative array indexes works}.
+\IT{a[-3]} \IFRU{просто преобразуется в}{is translating into} \IT{*(a-3)}, 
+\IFRU{так адресуется элемент лежащий перед самим массивом}{and that is how the element before
+array itself is addressed}.
+\IFRU{И хотя это вполне возможно, так можно делать только если вы точно знаете, что вы делаете}
+{Despite it is possible, one should use this only if one exactly knows what one does}.
 
-В Си массив это, в каком-то смысле, это просто место в памяти под массив плюс указатель, указывающий
-на него. 
+\IFRU{Еще один трюк связанный с негативными индексами: например, когда вы привыкли адресовать
+массивы начиная не с 0, а с 1 (как в FORTRAN), тогда можно сделать такое}
+{Another array negative indexes trick: for example, if you used to address arrays starting
+not from 0 but from 1 (like in FORTRAN), then you may do something like this}:
 
-Вот почему имя массива в Си можно считать за указатель:
+\begin{lstlisting}
+void f (int *a)
+{
+	a[1]=...; // first element
+	a[2]=...; // second element
+};
 
-Если вы объявите глобальную переменную \IT{int a[10]}, то \IT{a} будет иметь тип \IT{int*}.
-Позже, когда где-то в коде
-вы укажете \IT{x=a[5]}, выражение будет преобразовано в \IT{x=*(a+5)}. От начала массива (то есть, первого элемента
-массива), будет отсчитано 5 элементов, затем оттуда прочитается элемент для записи в \IT{x}.
+int main()
+{
+	int array[10];
+	f(&a[-1]); // passing a pointer to the one int element before array
+};
+\end{lstlisting}
+
+\IFRU{Хотя снова нельзя с уверенностью сказать что использование таких трюков оправдано}
+{But again it is hard to say if the trick is justified}.
+
+\IFRU{Так что в Си массив это, в каком-то смысле, это просто место в памяти под массив плюс указатель,
+указывающий на него}{So C array in some sense is just a memory block plus a pointer to it}.
+
+\IFRU{Вот почему имя массива в Си можно считать за указатель}{That is why array name in C may be treated
+as a pointer}:
+
+\IFRU{Если вы объявите глобальную переменную}{If to declare global variable} \IT{int a[10]},
+\IFRU{то}{then} \IT{a} будет иметь тип \IT{int*}.
+Позже, когда где-то в коде вы укажете \IT{x=a[5]}, выражение будет преобразовано в \IT{x=*(a+5)}.
+От начала массива (то есть, первого элемента массива), будет отсчитано 5 элементов,
+затем оттуда прочитается элемент для записи в \IT{x}.
 
 \label{PtrArith}
 \subsubsection{\IFRU{Арифметика указателей}{Pointer arithmetic}}

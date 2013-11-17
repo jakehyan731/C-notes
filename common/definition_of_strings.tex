@@ -1,0 +1,70 @@
+﻿\subsubsection{\IFRU{Определение строк}{String declarations}}
+
+\paragraph{\IFRU{Последовательности символов используемые в строках}{Character sequences used in strings}}
+
+\begin{center}
+\begin{tabular}{ | l | l | l | }
+\hline
+\textbackslash{}0 & 0x00 & \IFRU{нулевой байт}{zero byte} \\
+\hline
+\textbackslash{}t & 0x09 & \IFRU{табуляция}{tabulation} \\
+\hline
+\textbackslash{}n & 0x0A & line feed (LF) \\
+\hline
+\textbackslash{}r & 0x0D & carriage return (CR) \\
+\hline
+\end{tabular}
+\end{center}
+
+\IFRU{Разница между LF и CR в том, что в старых матричных принтерах,
+LF означал протягивание бумаги на одну строку вниз, а CR перевод каретки влево до края бумаги}
+{The difference between LF and CR is that in old dot-matrix printers LF mean line feed by one line down,
+and CR carriage return to the left margin of paper}.
+\IFRU{Так что в принтер нужно было передавать оба символа}{So both characters must be transmitted to the
+printer}.
+
+\IFRU{Вывод CR без LF дает возможность перезаписывать текующую строку в консоли}{Outputting CR without LF
+allows to rewrite current string in the console}:
+
+\begin{lstlisting}
+for (;;)
+{
+	// do something
+	// how much we processed?
+	percents=ammount_of_work/total_work*100;
+	printf ("%d%% complete\r", percents);
+};
+\end{lstlisting}
+
+\IFRU{Это часто используется например в архиваторах для отображения текущего статуса, или, например}
+{This is often used in the file archivers for displaying current status, or, for example}, wget.
+
+\IFRU{В Си}{In C} \AndENRU UNIX \IFRU{принят LF как символ новой строки}
+{LF is traditionally accepted as newline symbol}.
+
+\IFRU{В}{In the} DOS \IFRU{и затем в}{and then} Windows ~--- CR+LF.
+
+\paragraph{\IFRU{Строка определенная в нескольких строках}{The string defined as multi-string}}
+\label{heredoc}
+\IFRU{Малоизвестная возможность Си, длинные строки можно определять так}
+{Not widely known C feature, long strings can be declared as}:
+
+\begin{lstlisting}
+const char* long_line="line 1"
+	"line 2"
+	"line 3"
+	"line 4"
+	"line 5";
+
+...
+
+printf ("Some Utility v0.1\n"
+	"Usage: %s parameters\n"
+	"\n"
+	"Authors:...\n", argv[0]);
+\end{lstlisting}
+
+\IFRU{Это отдаленно напоминает}{It is somewhat resembling}
+``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} 
+\IFRU{в UNIX-шеллах}{in UNIX-shells} \AndENRU Perl.
+
