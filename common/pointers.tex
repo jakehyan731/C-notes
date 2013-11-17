@@ -70,7 +70,7 @@ dog
 \IT{printf()}, 
 \IFRU{где происходит его вывод на консоль}{where it dumped to the console}.
 
-\IFRU{Обратите также внимание на то что в исходнике присутствует и некорректное объявление \IT{str}}
+\IFRU{Обратите также внимание на то что в исходнике присутствует и некорректное определение \IT{str}}
 {Please also take a note that an incorrect declaration of \IT{str} is present in the source code}.
 
 \IFRU{Оно тем некорректное что в Си строка имеет тип}{It is incorrect in that sense that the C string
@@ -187,19 +187,22 @@ int main()
 as a pointer}:
 
 \IFRU{Если вы объявите глобальную переменную}{If to declare global variable} \IT{int a[10]},
-\IFRU{то}{then} \IT{a} будет иметь тип \IT{int*}.
-Позже, когда где-то в коде вы укажете \IT{x=a[5]}, выражение будет преобразовано в \IT{x=*(a+5)}.
-От начала массива (то есть, первого элемента массива), будет отсчитано 5 элементов,
-затем оттуда прочитается элемент для записи в \IT{x}.
+\IFRU{то}{then} \IT{(a)} \IFRU{будет иметь тип}{will have the type} \IT{int*}.
+\IFRU{Позже, когда где-то в коде вы укажете}{When further the following expression will be appeared:}
+\IT{x=a[5]}, \IFRU{выражение будет преобразовано в}{the expression will be translated into} \IT{x=*(a+5)}.
+\IFRU{От начала массива (то есть, первого элемента массива), будет отсчитано 5 элементов,
+затем оттуда прочитается элемент для записи в}{From the array start (i.e., from the first array element)
+5 elements will be counted, then the element will be read from that point for the storing it into} \IT{(x)}.
 
 \label{PtrArith}
 \subsubsection{\IFRU{Арифметика указателей}{Pointer arithmetic}}
 
-Простой пример:
+\IFRU{Простой пример}{Simple example}:
 
 \lstinputlisting{common/phonebook1.c}
 
-Мы объяляем глобальный массив из структур. Если скомпилировать это в GCC с ключом \IT{-S} либо в MSVC с ключом
+Мы объявляем глобальный массив из структур.
+Если скомпилировать это в GCC с ключом \IT{-S} либо в MSVC с ключом
 \IT{/Fa}, мы увидим листинг на ассемблере и то, как компилятор расположил эти строки. 
 
 Расположил он их как линейный массив указателей на строки, вот так:

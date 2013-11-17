@@ -78,9 +78,9 @@ printf("date2: %s\n", date2);
 \lstinputlisting{C/strings/git_hex.c}
 
 \IFRU{Строка возвращается фактически через глобальную переменную,
-объявление её как \TT{static} внутри ф-ции просто напросто
+определение её как \TT{static} внутри ф-ции просто напросто
 обеспечивает доступ к ней только из этой ф-ции}{In fact, the string is returned via global variable,
-\TT{static} definition makes it visible only from this function}.
+\TT{static} declaration makes it visible only from this function}.
 \IFRU{Но вот недостаток: после вызова}{Here is a shortcoming: after call to} \IT{sha1\_to\_hex()} 
 \IFRU{вы не можете
 вызвать её повторно для получения второй строки до тех пор, пока не используете как-то первую, ведь она

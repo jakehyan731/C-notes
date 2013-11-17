@@ -1,11 +1,11 @@
-﻿\subsection{\IFRU{Объявления в Си/Си++}{C/C++ declarations}}
-\subsubsection{\IFRU{Объявления локальных переменных}{Local variable declarations}}
+﻿\subsection{\IFRU{Определения в Си/Си++}{C/C++ declarations}}
+\subsubsection{\IFRU{Определения локальных переменных}{Local variable declarations}}
 
-\IFRU{Раньше, в Си можно было объявлять переменные только в начале ф-ции}
+\IFRU{Раньше, в Си можно было определять переменные только в начале ф-ции}
 {It was possible to declare variables only at the function beginning in C}.
 \IFRU{А в}{And anywhere in} \CPP\IFRU{ ~--- где угодно}{}.
 
-\IFRU{К тому же, нельзя было объявлять итератор в}{It was also not possible to declare
+\IFRU{К тому же, нельзя было определять итератор в}{It was also not possible to declare
 iterator in} for() (\IFRU{а в}{it was possible in} \CPP\IFRU{ также можно было}{}):
 
 \begin{lstlisting}
@@ -17,10 +17,10 @@ for(int i=0; i<10; i++)
 
 \paragraph{static}
 
-\IFRU{Если глобальные переменные (или ф-ции) объявляются как \IT{static}, так их область видимости ограничивается 
+\IFRU{Если глобальные переменные (или ф-ции) определяются как \IT{static}, так их область видимости ограничивается 
 данным файлом}{If the global variables (or functions) are declared as \IT{static}, its scope is limited
 by current file}.
-\IFRU{Но локальные переменные внутри ф-ции также можно объявлять как}{However, local variables
+\IFRU{Но локальные переменные внутри ф-ции также можно определять как}{However, local variables
 inside a function may also be declared as} \IT{static}, \IFRU{тогда эта переменная
 будет не локальной, а глобальной, но её область видимости будет ограничена только этой ф-цией}
 {then this variable will be global instead of local, but its scope will be limited by a function}.

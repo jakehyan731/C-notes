@@ -5,14 +5,23 @@
 
 \begin{itemize}
 \item
-\IT{Определение (declaration)} определяет имя/тип переменной либо имя и типы аргументов и возвращаемого значения ф-ции
-или метода.
-Обычно, определения перечисляются в заголовочных .h или .hpp-файлах, чтобы при компиляции отдельного
-.c или .cpp-файла, компилятор имел информацию об именах и типах внешних (обычно глобальных) переменных и ф-ций/методов.
+\IFRU{\IT{Определение (declaration)} определяет имя/тип переменной либо имя и типы аргументов а также 
+возвращаемого значения ф-ции или метода}
+{\IT{Declaration} declares name/type of variable or name and argument types and also returning value type of function
+or method}.
+\IFRU{Обычно, определения перечисляются в заголовочных .h или .hpp-файлах, чтобы при компиляции отдельного
+.c или .cpp-файла, компилятор имел информацию об именах и типах внешних (обычно глобальных) переменных и ф-ций/методов}
+{Declarations are usually enlisted in the header .h or .hpp-files, so the compiler while compiling individual
+.c or .cpp-file may have an access to the information about all names and types of external (usually global) variables
+and functions/methods}.
+
+\IFRU{Типы данных также \IT{определяются}}{Data types are also \IT{declared}}.
 
 \item
-\IT{Объявление (definition)} объявляет значение (обычно глобальной) переменной либо тело ф-ции/метода.
-Обычно это происходит в одном из .c или .cpp-файлах.
+\IFRU{\IT{Объявление (definition)} объявляет значение (обычно глобальной) переменной либо тело ф-ции/метода.
+Обычно это происходит в одном из .c или .cpp-файлах}
+{\IT{Definition} defines a value of (usually global) variable or a body of function/method.
+It is usually take place in the individual .c or .cpp-file}.
 \end{itemize}
 
 \input{common/declarations}

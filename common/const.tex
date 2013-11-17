@@ -1,6 +1,6 @@
 ﻿\subsubsection{const}
 
-\IFRU{Объявлять переменные, аргументы ф-ций и методы классов в \CPP как const очень полезно, потому что}
+\IFRU{Определять переменные, аргументы ф-ций и методы классов в \CPP как const очень полезно, потому что}
 {To declare variables, function arguments and \CPP class methods as const is advisable because}:
 
 \begin{itemize}
@@ -21,12 +21,12 @@ it due to memory protection}.
 {Optimization: the compiler considering the element is always read-only, may generate faster code for using it}.
 \end{itemize}
 
-\IFRU{Желательно все аргументы ф-ции, которые вы не собираетесь модифицировать, объявлять как}
+\IFRU{Желательно все аргументы ф-ции, которые вы не собираетесь модифицировать, определять как}
 {It is highly advisable to declare all function arguments which you do not plan to modify as} const.
 \IFRU{Например, ф-ция}{For example, the} \TT{strcmp()} 
-\IFRU{ничего не меняет во входных аргументах, так что их обычно оба объявляют как}
+\IFRU{ничего не меняет во входных аргументах, так что их обычно оба определяют как}
 {function is changing nothing in the input arguments, so they are both usually declared as} const.
-\IFRU{А, например, strcat() ничего не меняет во втором аргументе, но меняет в первом, поэтому обычно она объявляется
+\IFRU{А, например, strcat() ничего не меняет во втором аргументе, но меняет в первом, поэтому обычно она определяется
 с \IT{const} во втором аргументе}
 {The strcat() changing nothing in the second argument, but changing something in the first,
 so it is usually declared with a \IT{const} in the second argument}.
@@ -34,8 +34,8 @@ so it is usually declared with a \IT{const} in the second argument}.
 \paragraph{\CPP}
 
 \IFRU{В}{In the} \CPP, \IFRU{желательно все методы класса, которые не изменяют ничего в объекте, 
-также объявлять как}{a class methods which are not changing anything in the object
-is highly advisable to be marked as} \IT{const}.
+также определять как}{a class methods which are not changing anything in the object
+is highly advisable to be declared as} \IT{const}.
 
 const-\IFRU{методы класса называют также \IT{аксессорами} (accessors)}
 {methods of a class are also called as \IT{accessors}},

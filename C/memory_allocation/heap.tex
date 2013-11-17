@@ -276,7 +276,7 @@ try\_to\_free\_routine(), \IFRU{а затем вызвать}{and then to call} 
 
 \IFRU{Помимо всего прочего, если определен}
 {Aside from that, if} XMALLOC\_POISON\IFRU{, все байты в выделенном блоке заполняются}
-{ is defined, all bytes in the block allocated is filled with} 0xA5.
+{ macro is defined, all bytes in the block allocated is filled with} 0xA5.
 
 \IFRU{Это может помочь визуально, на глаз, увидеть когда вы, например, выделили память под структуру,
 а затем используете какое-то поле из нее до того как инициализировали}

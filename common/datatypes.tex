@@ -13,7 +13,7 @@ bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он ес
 \IFRU{Знаковые типы}{Signed types} (int, char) 
 \IFRU{используются куда чаще беззнаковых}{are used much more often than unsigned} (unsigned int, unsigned char).
 
-\IFRU{Но с точки зрения документации кода, если вы объявляете переменную, которая никогда не будет хранить отрицательное
+\IFRU{Но с точки зрения документации кода, если вы определяете переменную, которая никогда не будет хранить отрицательное
 значение, в т.ч., индексы массивов, наверное лучше применять беззнаковый тип}
 {However, in the sense of the code self-documenting, if you declare a variable which will not be assigned to
 a negative value, including array indices, perhaps, unsigned type is better}.
@@ -51,7 +51,7 @@ void f(int size)
 \IFRU{Таким образом, здесь нужно было бы применить}{So, the type} 
 \IT{unsigned}\IFRU{, либо даже тип}{should be used here, maybe even} \IT{size\_t}. 
 \IT{size\_t} \IFRU{определяет тип, достаточно большой, способный хранить размер любого,
-сколько угодно большого блока памяти}{defines a big enough type able to store a size of any, big enough memory block}.
+сколько угодно большого блока памяти}{declares a big enough type able to store a size of any, big enough memory block}.
 \IFRU{На 32-битных архитектурах это обычно}{It is} \IT{unsigned int}\IFRU{}{ on 32-bit architectures},
 \IFRU{а на 64-битных это}{and} \IT{unsigned int64}\IFRU{}{ on 64-bit ones}.
 
