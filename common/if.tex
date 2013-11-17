@@ -1,6 +1,7 @@
 ﻿\subsection{if}
 
-Вместо коротких if желательно использовать \TT{?:}, например:
+\IFRU{Вместо коротких}{Instead short} \IT{if} \IFRU{желательно использовать}{the shorter} 
+\TT{?:}\IFRU{, например}{ clause is advisable, for example}:
 
 \begin{lstlisting}
 char* get_name (struct data *s)
@@ -13,9 +14,9 @@ char* get_name (struct data *s)
 printf ("val=%s\n", val ? "true" : "false");
 \end{lstlisting}
 
-\subsubsection{\CPP: объявление переменных в if()}
+\subsubsection{\CPP: \IFRU{объявление переменных в}{variable declarations in} if()}
 
-Это доступно как минимум в C++03:
+\IFRU{Это доступно как минимум в стандарте}{It is avaiable at least in} C++03\IFRU{}{ standard}:
 
 \begin{lstlisting}
 if (int a=fn(...))
@@ -26,5 +27,5 @@ if (int a=fn(...))
 };
 \end{lstlisting}
 
-Точно также их можно объявлять и в switch().
+\IFRU{Точно также их можно объявлять и в}{They can be declared in the same way also in} switch().
 

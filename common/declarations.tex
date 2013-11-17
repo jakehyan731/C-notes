@@ -90,9 +90,10 @@ for (;;)
 
 \IFRU{В}{In the} DOS \IFRU{и затем в}{and then} Windows ~--- CR+LF.
 
-\subsubsection{Строка определенная в нескольких строках}
+\subsubsection{\IFRU{Строка определенная в нескольких строках}{The string defined as multi-string}}
 \label{heredoc}
-Малоизвестная возможность Си, длинные строки можно определять так:
+\IFRU{Малоизвестная возможность Си, длинные строки можно определять так}
+{Not widely known C feature, long strings can be declared as}:
 
 \begin{lstlisting}
 const char* long_line="line 1"
@@ -109,6 +110,7 @@ printf ("Some Utility v0.1\n"
 	"Authors:...\n", argv[0]);
 \end{lstlisting}
 
-Это отдаленно напоминает ``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} в 
-UNIX-шеллах и Perl.
+\IFRU{Это отдаленно напоминает}{It is somewhat resembling}
+``here document''\footnote{\url{https://en.wikipedia.org/wiki/Here_document}} 
+\IFRU{в UNIX-шеллах}{in UNIX-shells} \AndENRU Perl.
 

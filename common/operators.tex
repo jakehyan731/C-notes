@@ -2,53 +2,94 @@
 
 \subsubsection{==}
 
-Очень неприятные ошибки возникают если в условии \IT{if(a==3)} опечататься и написать \IT{if(a=3)}.
-Ведь выражение \IT{a=3} ``возвращает'' 3, а 3 это не 0, поэтому условие if() всегда будет 
-срабатывать.
+\IFRU{Очень неприятные ошибки возникают если в условии}
+{Somewhat unpleasant mistakes may appear if in} \IT{if(a==3)} 
+\IFRU{опечататься и написать}{condition become} \IT{if(a=3)}\IFRU{}{ in result of typo}.
+\IFRU{Ведь выражение}{Because the statement} \IT{a=3} ``\IFRU{возвращает}{returns}'' 3,
+\IFRU{а}{and} 3 \IFRU{это не}{is not a} 0, \IFRU{поэтому условие \IT{if()} всегда будет 
+срабатывать}{so the \IT{if()} condition will always trigger}.
 
-Раньше, для защиты от подобных ошибок, была мода писать наоборот: \IT{if(3==a)}, таким образом,
-если опечататься, выйдет \IT{if(3=a)}, компилятор тут же выдаст ошибку.
+\IFRU{Раньше, для защиты от подобных ошибок, была мода писать наоборот}
+{It was fashionable in past to protect from such mistakes by writing}: \IT{if(3==a)}, 
+\IFRU{таким образом}{and thus},
+\IFRU{если опечататься, выйдет}{we will get a} \IT{if(3=a)}\IFRU{, компилятор тут же выдаст ошибку}
+{ in case of typo and the compiler will report error instantly}.
 
-Тем не менее, в наше время, компиляторы обычно предупреждают если написать \IT{if(a==3)}, 
-так что, наверное, менять местами элементы выражения уже не обязательно.
+\IFRU{Тем не менее, в наше время, компиляторы обычно предупреждают если написать}
+{Nevertheless, in modern times, compilers are usually warns if to write} \IT{if(a=3)}, 
+\IFRU{так что, наверное, менять местами элементы выражения уже не обязательно}
+{so elements swapping in conditions is probably not necessary these days}.
 
-\subsubsection{Short-circuit evaluation и артефакт приоритетов операций}
+\subsubsection{Short-circuit evaluation 
+\IFRU{и артефакт приоритетов операций}{and operator precedence artefact}}
 
-Разберем что такое short-circuit\footnote{дословный перевод на русский: ``короткое замыкание''} evaluation.
+\IFRU{Разберем что такое}{Let's see what is} \IT{short-circuit}
+\IFRU{\footnote{дословный перевод на русский: ``короткое замыкание''}} \IT{evaluation}.
 
-Это когда в выражении \IT{if(a \&\& b \&\& c)}, часть \IT{b} будет вычисляться только если \IT{a} -- истинна,
-а \IT{c} будет вычисляться
-только если \IT{a} и \IT{b} -- истинны. И вычисляться они будут именно в таком порядке, как указано.
+\IFRU{Это когда в выражении}{It is when in the expression} \IT{if(a \&\& b \&\& c)},
+\IFRU{часть}{the part} \IT{(b)} \IFRU{будет вычисляться только если}{will be calculated only if} 
+\IT{(a)} ~--- \IFRU{истинна}{is true},
+\IFRU{а}{and} \IT{(c)}
+\IFRU{будет вычисляться только если}{will be calculated only if} \IT{(a)} \AndENRU \IT{(b)} 
+~--- \IFRU{оба истинны}{are both true}.
+\IFRU{И вычисляться они будут именно в таком порядке, как указано}{and they will be computed
+exactly in the same order as specified}.
 
-Иногда можно встретить подобное: \IT{if (p!=NULL \&\& p->field==123)} -- и это совершенно правильно.
-Поле \IT{field} в структуре,
-на которую указывает \IT{p}, будет вычисляться только если указатель \IT{p} не равен NULL.
+\IFRU{Иногда можно встретить подобное}{Sometimes we can see expression like}: 
+\IT{if (p!=NULL \&\& p->field==123)} ~--- \IFRU{и это совершенно правильно}{and this is completely
+correct}.
+\IFRU{Поле}{The field} \IT{field} \IFRU{в структуре, на которую указывает}{in the structure to which} 
+\IT{(p)}\IFRU{, будет вычисляться только если указатель}{ points will be computed only if the pointer}
+\IT{(p)} \IFRU{не равен}{not equals to} \IT{NULL}.
 
-То же касается и операции ``или'', если в выражении \IT{if (a || b || c)} подвыражение a будет ``истинно'',
-остальные вычисляться не будут. Это может быть удобно для вызова нескольких ф-ций: 
-\IT{if (get\_flagsA() || get\_flagsB() || get\_flagsC())} --- если первая или вторая ф-ция вернет true, 
-остальные даже не будут вызываться.
+\IFRU{То же касается и операции}{The same story about} ``\IFRU{или}{or}'', 
+\IFRU{если в выражении}{if in the expression} \IT{if (a || b || c)} \IFRU{подвыражение}{subexpression} 
+\IT{(a)} \IFRU{будет ``истинно''}{will be ``true''},
+\IFRU{остальные вычисляться не будут}{others will not be computed}.
 
-Эта особенность есть не только в Си/Си++
-\footnote{Здесь список \ac{PL} где присутствует short-circuit evaluation\url{https://en.wikipedia.org/wiki/Short-circuit_evaluation}. Кстати, хотя это и не про Си, но все же интересно: в bash если писать \IT{cmd1 \&\& cmd2 \&\& cmd3}, то каждая следующая команда будет исполняться только если предыдущая закончилась с успехом. Это также short-circuit.}.
+\IFRU{Это может быть удобно для вызова нескольких ф-ций}{It is useful when one need to call several
+functions}:
+\IT{if (get\_flagsA() || get\_flagsB() || get\_flagsC())} ~--- 
+\IFRU{если первая или вторая ф-ция вернет}{if first or second will return} \IT{true}, 
+\IFRU{остальные даже не будут вызываться}{others will not be called at all}.
 
-Когда-то давно\cite{dmr:1995}, в языках B и BCPL (предтечи Си) не было операторов \IT{\&\&} и \IT{||}, 
-но чтобы реализовать в них
-short-circuit evaluation, приоритет операций \IT{\&} и \IT{|} сделали больше, чем, например, у \IT{\^} или \IT{+}
+\IFRU{Эта особенность есть не только в Си/Си++}{This feature is not unique for C/C++}
+\footnote{\IFRU{Здесь список}{Here is a list of} \ac{PL} \IFRU{где присутствует}{where}
+\IT{short-circuit evaluation}\IFRU{}{ exist}\url{https://en.wikipedia.org/wiki/Short-circuit_evaluation}.
+\IFRU{Кстати, хотя это и не про Си, но все же интересно}{It is not about C, but interesting nevertheless}:
+\IFRU{в bash если писать}{if to write in bash} \IT{cmd1 \&\& cmd2 \&\& cmd3}, 
+\IFRU{то каждая следующая команда будет исполняться только если предыдущая закончилась с успехом}
+{then each next command will be executed only if the previous was executed with success}.
+\IFRU{Это также}{It is also} \IT{short-circuit}.}.
+
+\IFRU{Когда-то давно}{Some time ago}\cite{dmr:1995}, 
+\IFRU{в языках B и BCPL (предтечи Си) не было операторов}{there was no operators} 
+\IT{\&\&} \AndENRU \IT{||}\IFRU{}{ in B and BCPL (C precursors)}, 
+\IFRU{но чтобы реализовать в них}{but in order to implement}
+\IT{short-circuit evaluation}\IFRU{}{ in them}, 
+\IFRU{приоритет операций}{the priority of the operators} \IT{\&} \AndENRU \IT{|} 
+\IFRU{сделали больше, чем, например, у}{was made higher than in} \IT{\^} \OrENRU \IT{+}
 \footnote{\IFRU{Приоритет операций в Си++}{C++ Operator Precedence}: \url{http://en.cppreference.com/w/cpp/language/operator_precedence}}.
 
-Это позволяло писать что-то вроде \IT{if (a==1 \& b==c)} используя \IT{\&} вместо \IT{\&\&}. Вот откуда взялся
-этот артефакт в приоритетах.
-Так что, нередкая ошибка это забывать о высоком приоритете этих операций и писать, например,
-\IT{if (a\&1==0)}, в то время как это нужно брать в скобки: \IT{if ((a\&1)==0)}.
+\IFRU{Это позволяло писать что-то вроде}{That allowed to write something like} \IT{if (a==1 \& b==c)} 
+\IFRU{используя}{while using} \IT{\&} \IFRU{вместо}{instead of} \IT{\&\&}.
+\IFRU{Вот откуда взялся этот артефакт в приоритетах}{That is where that artefact came from}. \\
+\\
+\IFRU{Так что, нередкая ошибка это забывать о высоком приоритете этих операций и писать, например}
+{So one often mistake is to forget about higher priority of these operators and to write, for example},
+\IT{if (a\&1==0)}, \IFRU{в то время как это нужно брать в скобки}{which should be taken
+in brackets}: \IT{if ((a\&1)==0)}.
 
-\subsubsection{! и \~{}}
+\subsubsection{! \AndENRU \~{}}
 
-\~{} (тильда) это побитовое инвертирование всех бит в значении.
+\~{} (\IFRU{тильда}{tilde}) \IFRU{это побитовое инвертирование всех бит в значении}
+{is a bitwise inversion of all bits in a value}.
 
-! --- если значение не равно 0, тогда будет 0. Если значение было равно 0, тогда будет 1. Эта операция часто
-используется для инвертирования результатов действия ф-ций. Например, strcmp() в случае равенства строк возвращает 0.
-Поэтому можно писать:
+\IFRU{Эта операция часто используется для инвертирования результатов действия ф-ций}
+{The operation is often used for function results invertion}.
+\IFRU{Например}{For example}, strcmp() \IFRU{в случае равенства строк возвращает}{in case of strings
+equivalence, returns} 0.
+\IFRU{Поэтому можно писать}{So we can write}:
 
 \begin{lstlisting}
 if (!strcmp(str1, str2))
@@ -57,24 +98,26 @@ if (!strcmp(str1, str2))
 };
 \end{lstlisting}
 
-... вместо \TT{if (strcmp (...)==0)}. \\
+... \IFRU{вместо}{instead of} \TT{if (strcmp (...)==0)}. \\
 \\
-Также, два подряд восклицательных знака применяется для трасформирования любого значения в тип bool
-по правилу: 0 --- false (0); не ноль --- true (1).
-Например:
+\IFRU{Также, два подряд восклицательных знака применяется для трасформирования любого значения в тип bool
+по правилу}{Also, two consecutive exclamation points can be used for
+transforming any value into \IT{bool} type}: 0 ~--- false (0); \IFRU{не ноль}{not zero} ~--- true (1).
+
+\IFRU{Например}{For example}:
 
 \begin{lstlisting}
 bool some_object_present=!!struct->object;
 \end{lstlisting}
 
-Или:
+\IFRU{Или}{Or}:
 
 \begin{lstlisting}
 #define FLAG 0x00001000
 bool FLAG_present=!!(value & FLAG);
 \end{lstlisting}
 
-А также:
+\IFRU{А также}{And also}:
 
 \begin{lstlisting}
 bool bit_7_set=!!(value & (1<<7));

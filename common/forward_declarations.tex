@@ -1,14 +1,22 @@
 ﻿\label{forwarddeclaration}
 \subsection{forward declaration}
 
-Как известно, в заголовочных файлах (headers) обычно содержатся декларации ф-ций, то есть, 
-имя ф-ции, аргументы и типы, тип возвращаемого значения, но нет тела ф-ций. Так делается для того,
-чтобы компилятор мог знать, с чем имеет дело, не углубляясь в тонкости реализации ф-ций.
+\IFRU{Как известно, в заголовочных файлах (headers) обычно содержатся декларации ф-ций, то есть, 
+имя ф-ции, аргументы и типы, тип возвращаемого значения, но нет тела ф-ций}
+{As it is well-known, in the header files (headers) function declarations are usually present,
+i.e., function names, arguments and types, returning type, but no function bodies}.
+\IFRU{Так делается для того, чтобы компилятор мог знать, с чем имеет дело,
+не углубляясь в тонкости реализации ф-ций}{This is done for the compiler so it will have information,
+what it is working with, without delving into the intricacies of function implementations}.
 
-То же самое можно делать и для типов. Для того чтобы не включать при помощи \#include файл с описаниями
-какого либо класса в другой заголовочный файл, можно обойтись указанием, что он вообще существует.
+\IFRU{То же самое можно делать и для типов}{The same can be done for types}.
+\IFRU{Для того чтобы не включать при помощи \#include файл с описаниями
+какого либо класса в другой заголовочный файл, можно обойтись указанием, что он вообще существует}
+{In order not to include with the help of \#include the file with a class definitions into
+the other header file, one can just declare the type presence}.
 
-Например, вы работаете с комплексными числами и у вас где-то есть такая структура:
+\IFRU{Например, вы работаете с комплексными числами и у вас где-то есть такая структура}
+{For example, you work with complex numbers and you have a such structure somewhere}:
 
 \begin{lstlisting}
 struct complex
@@ -18,12 +26,17 @@ struct complex
 };
 \end{lstlisting}
 
-И она определена в файле my\_complex.h.
+\IFRU{И, например, она определена в файле}{And let's say it is defined in the file} my\_complex.h.
 
-Безусловно, вам нужно включить этот файл, если вы собиретесь работать с переменными типа complex, 
-с отдельными полями структуры.
-Но если вы описываете свои ф-ции для работы с этой структурой в отдельном заголовочном файле, то включать там
-my\_complex.h не обязательно, компилятору достаточно просто знать что complex это структура:
+\IFRU{Безусловно, вам нужно включить этот файл, если вы собиретесь работать с переменными типа 
+\IT{complex}, с отдельными полями структуры}
+{Of course, one should include the file if one have intention to work with variables of \IT{complex} type
+and specific structure fields}.
+\IFRU{Но если вы описываете свои ф-ции для работы с этой структурой в отдельном заголовочном файле,
+то включать там}
+{But if you declare your functions using the structure in other header file, you may not include}
+my\_complex.h \IFRU{не обязательно, компилятору достаточно просто знать что \IT{complex} это структура}
+{there, compiler just needs to know that the \IT{complex} is a structre}:
 
 \begin{lstlisting}
 struct complex;
@@ -32,5 +45,8 @@ void sum(struct complex *x, struct complex *y, struct complex *out);
 void pow(struct complex *x, struct complex *y, struct complex *out);
 \end{lstlisting}
 
-Это позволяет увеличить скорость компиляции, а также бороться с циркулярными зависимостями, когда
-в двух модулях используются типы и ф-ции друг друга.
+\IFRU{Это позволяет увеличить скорость компиляции, а также бороться с циркулярными зависимостями, когда
+в двух модулях используются типы и ф-ции друг друга}
+{This may speed up the compilation process and also solve circular dependencies, when two modules
+uses functions and type of each other}.
+

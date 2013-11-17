@@ -1,9 +1,12 @@
 ﻿\subsection{goto}
 
-Использование оператора \IT{goto}\footnote{statement} считается плохим тоном и вредным вообще\cite{Dijkstra:1968:LEG:362929.362947}\cite{Dijkstra:1979:GSC:1241515.1241518}, 
-тем не менее, использование его в разумных дозах\cite{Knuth:1974:SPG:356635.356640} может облегчить жизнь.
+\IFRU{Использование}{Usage of} \IT{goto}\footnote{statement} 
+\IFRU{считается плохим тоном и вредным вообще}{is considered as bad taste and harmful}
+\cite{Dijkstra:1968:LEG:362929.362947}\cite{Dijkstra:1979:GSC:1241515.1241518}, 
+\IFRU{тем не менее, использование его в разумных дозах}{nevertheless, its usage in reasonable
+doses}\cite{Knuth:1974:SPG:356635.356640} \IFRU{может облегчить жизнь}{may be very helpful}.
 
-Частый пример, это выход из функции.
+\IFRU{Частый пример, это выход из функции}{One frequent example is return from a function}:
 
 \begin{lstlisting}
 void f(...)
@@ -30,7 +33,7 @@ cleanup_and_exit:
 };
 \end{lstlisting}
 
-Более сложный пример:
+\IFRU{Более сложный пример}{More complex example}:
 
 \begin{lstlisting}
 void f(...)
@@ -64,8 +67,11 @@ cleanup_and_exit:
 };
 \end{lstlisting}
 
-Если в данных примерах отказаться от \IT{goto}, то придется вызывать \IT{free()} и \IT{fclose()}
-перед каждым выходом из функции (\IT{return}), что здорово замусорит весь код.
+\IFRU{Если в данных примерах отказаться от}{If to remove all} \IT{goto}\IFRU{, то придется вызывать}
+{in these examples, one will need to call} \IT{free()} \AndENRU \IT{fclose()}
+\IFRU{перед каждым выходом из функции}{before each return from the function} 
+(\IT{return})\IFRU{, что здорово замусорит весь код}{which adds a lot of mess}.
 
-Использование \IT{goto} в таких случаях одобряется, например, в \cite{LinuxKernelCodingStyle}.
+\IFRU{Использование}{Usage of} \IT{goto} 
+\IFRU{в таких случаях одобряется, например, в}{is, for example, approved in} \cite{LinuxKernelCodingStyle}.
 
