@@ -148,7 +148,7 @@ struct
 ... \IFRU{и обращаться к полям union просто как к}{and to access them as} \TT{variable.i}, \TT{variable.d}, 
 \IFRU{итд}{etc}.
 
-\subsection{\IFRU{Тэггированные указатели}{tagged pointers}}
+\subsubsection{\IFRU{Тэггированные указатели}{tagged pointers}}
 
 \IFRU{Вернемся к примеру объявления переменной, которая может быть как числом, так и числом с плавающей запятой,
 так и текстовой строкой}{Let's back to the example of variable declaration, which can be a number,
@@ -180,6 +180,9 @@ from the structure}.
 {This approach is very popular in LISP-interpreters and compilers because LISP atoms is a similar
 variable defining structures, a there are may be a lot of them in memory, so it can reduce memory footprint
 by using lowest bits of pointers}.
+
+\IFRU{Точно так же, любая другая информация может хранится в этих битах указателя}
+{Likewise, any other information maybe stored in the tagger pointer bits}.
 
 \IFRU{В качестве негативной стороны, нужно всегда помнить о том что указатель теперь не совсем указатель,
 а содержит еще информацию}{As a negative side, one should always keep in mind that this is not an usual

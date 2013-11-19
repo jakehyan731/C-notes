@@ -37,13 +37,19 @@ int main()
 \end{lstlisting}
 
 \IFRU{Откуда взялось число $14$}{Where the $14$ number is came from}?
-Это то что вернула ф-ция printf() вызванная из f1().
-Возвращаемые результаты ф-ций \glslink{integral type}{интегральных типов}
-остаются в регистре EAX/RAX.
-В ф-ции main() берется значение из регистра EAX/RAX и передается дальше во второй printf()
-\footnote{Больше о том, как возвращаются результаты ф-ций через регистры, можно почитать в \cite{REBook}}.
+\IFRU{Это то что вернула ф-ция}{This is what returns the} printf() \IFRU{вызванная из}{called from} f1().
+\IFRU{Возвращаемые результаты ф-ций}{Returned functions results of} 
+\glslink{integral type}{\IFRU{интегральных типов}{integral types}}
+\IFRU{остаются в регистре EAX/RAX}{are leaved in the EAX/RAX registers}.
+\IFRU{В ф-ции main() берется значение из регистра EAX/RAX и передается дальше во второй}
+{The value from the EAX/RAX register is taken in the main() function and then passed into the second} printf()
+\footnote{
+\IFRU{Больше о том, как возвращаются результаты ф-ций через регистры, можно почитать в}
+{About how results are returned via registers, you may read more here}
+\cite{REBook}}.
 
-Если компилировать с опцией -Wall, GCC скажет:
+\IFRU{Если компилировать с опцией}{If to compile with the} \TT{-Wall}\IFRU{}{ option}, \ac{GCC} 
+\IFRU{скажет}{will tell}:
 
 \begin{lstlisting}
 1.c: In function 'f1':
@@ -56,14 +62,17 @@ int main()
  ^
 \end{lstlisting}
 
-... хотя всё равно скомпилирует.
+... \IFRU{хотя всё равно скомпилирует}{but will compile anyway}.
 
-MSVC 2010 тоже генерирует код, работающий точно также, хотя и выводит предупреждение:
+MSVC 2010 \IFRU{генерирует код, работающий точно также, хотя и выводит предупреждение}
+{generates the code working just the same, with warning, though}:
 
 \begin{lstlisting}
 ...\1.c(7) : warning C4716: 'f1' : must return a value
 \end{lstlisting}
 
-Как видно, ошибка почти критическая, вызванная, можно сказать, опечаткой, но предупреждения компилятора
-либо не видно вовсе, либо можно и не заметить.
+\IFRU{Как видно, ошибка почти критическая, вызванная, можно сказать, опечаткой, но предупреждения компилятора
+либо не видно вовсе, либо можно и не заметить}
+{As you may see, the error is almost critical, caused by, it can be said, type, but there were no
+compiler warning, or it was inconspicuous}.
 
