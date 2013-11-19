@@ -1,8 +1,10 @@
 ﻿\label{typedef}
 \subsubsection{typedef}
 
-typedef вводит \IT{синоним} для типа. Часто это используется для структур, чтобы каждый раз не писать \IT{struct}
-перед её именем, например:
+\TT{typedef} \IFRU{вводит}{introduces} \IT{\IFRU{синоним}{synonym}} \IFRU{для типа данных}{for a data type}.
+\IFRU{Часто это используется для структур, чтобы каждый раз не писать}
+{It is often used for structures, for the reason not to write} \IT{struct}
+\IFRU{перед её именем, например}{each time before its name, for example}:
 
 \begin{lstlisting}
 typedef struct _node
@@ -13,10 +15,13 @@ typedef struct _node
 } node;
 \end{lstlisting}
 
-Такого очень много в ``заголовочных'' файлах в Windows SDK (Windows API).
+\IFRU{Такого очень много в ``заголовочных'' файлах в}
+{A lot of such examples may be found in header files in the} Windows SDK (Windows API).
 
-Тем не менее, \IT{typedef} также можно использовать не только для структур, но и для обычных, 
-интегральных\footnote{приводимых к числу}, типов, например:
+\IFRU{Тем не менее}{Nevertheless}, \IT{typedef} 
+\IFRU{также можно использовать не только для структур, но и для обычных, 
+интегральных}{can be also used not only for structures, but also for usual integral}
+\footnote{\IFRU{приводимых к числу}{which may be converted to a number}}, \IFRU{типов, например}{types like}:
 
 \begin{lstlisting}
 typedef int age;
@@ -29,21 +34,31 @@ typedef uint32_t address;
 void write_memory (address a, size_t size, byte *buf);
 \end{lstlisting}
 
-Как видно, \IT{typedef} здесь может помочь в документировании исходного кода, так он легче читается.
+\IFRU{Как видно}{As we can see}, \IT{typedef} 
+\IFRU{здесь может помочь в документировании исходного кода, так он легче читается}{here may help with
+code documentation, it is now easier to read}.
 
-Например, тип \IT{time\_t} (время в формате UNIX time, то что возвращает стандартная функция localtime(), 
-например), это на самом деле
-обычное 32-битное число, но этот тип определен в time.h обычно так:
+\IFRU{Например, тип}{For example, the} \IT{time\_t} 
+(\IFRU{время в формате}{The time in the} UNIX time
+\IFRU{, то что возвращает стандартная функция}{ format, for example, what the}
+localtime()
+\IFRU{, например}{returns}), \IFRU{это на самом деле
+обычное 32-битное число, но этот тип определен в}{it is in fact 32-bit number, but the type is defined in the}
+\IT{time.h} \IFRU{обычно так}{file usually as}:
 
 \begin{lstlisting}
 typedef long __time32_t;
 \end{lstlisting}
 
-Здесь вполне можно было бы использовать директиву препроцессора \TT{\#define} (многие так и делают),
-но это хуже с точки зрения обработки ошибок во время компиляции.
+\IFRU{Здесь вполне можно было бы использовать директиву препроцессора}
+{A preprocessor directive} \TT{\#define} \IFRU{(многие так и делают),
+но это хуже с точки зрения обработки ошибок во время компиляции}{may be used here (many do so),
+but it is worse in the sense of errors handling during compilation}.
 
-\paragraph{Критика typedef}
+\paragraph{\IFRU{Критика }{}typedef\IFRU{}{ criticism}}
 
-Тем не менее, такие известные и опытные программисты как Линус Торвальдс, против использования typedef:
+\IFRU{Тем не менее, такой известный и опытный программист как Линус Торвальдс,
+против использования typedef}{Nevertheless, such well-known and experiences programmer as Linus
+Torvalds is against typedef usage}:
 \cite{Torvalds:2002}.
 

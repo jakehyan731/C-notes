@@ -1,7 +1,9 @@
 ﻿\subsection{struct}
 
-В C99\ref{C99} можно инициализировать отдельные поля структур. Пропущенные будут заполнены нулями. Такого очень
-много в ядре Linux. 
+\IFRU{В}{In} C99\ref{C99} \IFRU{можно инициализировать отдельные поля структур}{it is possible
+to initialize specific structure fields}.
+\IFRU{Пропущенные будут заполнены нулями}{Fields not set will be filled by zeroes}.
+\IFRU{Такого очень много в ядре Linux}{A lot of such examples can be found in Linux kernel}.
 
 \begin{lstlisting}
 struct color
@@ -14,7 +16,8 @@ struct color
 struct color blue={ .B=255 };
 \end{lstlisting}
 
-И даже более того, можно создавать структуру прямо в аргументах ф-ции, например:
+\IFRU{И даже более того, можно создавать структуру прямо в аргументах ф-ции, например}
+{And even more than that, it is possible to create a structure right in the function arguments, for example}:
 
 \begin{lstlisting}
 struct color
@@ -36,19 +39,28 @@ int main()
 };
 \end{lstlisting}
 
-Помимо всего прочего, о структурах также много есть в разделе ``\COOPname''\ref{COOP}.
+\IFRU{Помимо всего прочего, о структурах также много есть в разделе}
+{Read more about structures in the section} ``\COOPname''(\ref{COOP}).
 
-\subsubsection{Расположение полей в структурах}
+\subsubsection{\IFRU{Расположение полей в структурах}{Structure fields placement}}
 
-В современных x86-микропроцессорах (как Intel, так и AMD) имеется кеш-память разных уровней. 
-Самая быстрая кеш-память (первого уровня),
-разделена на 64-байтные элементы (кеш-линии) и любое обращение к памяти заполняет сразу всю линию\cite{AgnerFog}.
+\IFRU{В современных x86-микропроцессорах (как Intel, так и AMD) имеется кеш-память разных уровней}
+{In modern x86 CPUs (both Intel and AMD) a multi-level cache-memory present}.
+\IFRU{Самая быстрая кеш-память (L1),
+разделена на 64-байтные элементы (кеш-линии) 
+и любое обращение к памяти заполняет сразу всю линию}
+{The fastest cache-memory (L1) is divided by 64-byte elements (cache-lines) and any
+memory access resulting in filling a whole line}\cite{AgnerFog}.
 
-Можно сказать, что любое обращение к памяти (по выровненным адресам) подтягивает в кеш сразу 64 байта.
+\IFRU{Можно сказать, что любое обращение к памяти (по выровненным адресам) подтягивает в кеш сразу 64 байта}
+{It can be said that any memory access (on aligned boundary) fetches 64 bytes into cache at once}.
 
-Поэтому, если некая структура данных имеет размер более 64-х байт, очень важно разделить её на две части:
-наиболее востребованные поля и менее востребованные. 
-Самые востребованные поля желательно разместить в пределах первых 64-х байт.
+\IFRU{Поэтому, если некая структура данных имеет размер более 64-х байт, очень важно разделить её на две части:
+наиболее востребованные поля и менее востребованные}
+{So if a data structure is larger than 64 bytes, it is very important to divide it by 2 parts:
+the most demanded fields and the less ones}.
+\IFRU{Самые востребованные поля желательно разместить в пределах первых 64-х байт}
+{It is desirable to place the most demanded fields in the first 64 bytes}.
 
-Это же касается и классов в Си++.
+\IFRU{Это же касается и классов в \CPP}{\CPP classes are also concerned}.
 

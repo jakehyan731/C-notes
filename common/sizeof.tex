@@ -1,30 +1,41 @@
 ﻿\subsection{sizeof}
 
-Обычно, sizeof() применяют к интегральным\footnote{типы отражающие числа} типам либо к структурам, 
-тем не менее, его можно применять и к массивам, к примеру:
-
-% snprintf, wchar_t...
+\IFRU{Обычно}{Usually}, sizeof() \IFRU{применяют к интегральным}
+{is applied to integral}\footnote{\IFRU{типы отражающие числа}{types representing numbers}}
+\IFRU{типам либо к структурам}{or to structures},
+\IFRU{тем не менее, его можно применять и к массивам, к примеру}
+{but nevertheless it is possible to apply it to arrays as well}:
 
 \begin{lstlisting}
 	char buf[1024];
 	snprintf(buf, sizeof(buf), "...");
 \end{lstlisting}
 
-В противном случае, если указывать длину массива ($1024$) в двух местах (в определении buf и как второй 
-аргумент snprintf()), то и изменять это значение придется каждый раз в обоих местах, а об этом легко забыть.
+\IFRU{В противном случае, если указывать длину массива}{Otherwise, if to specify array length} ($1024$) 
+\IFRU{в двух местах}{in both places} 
+(\IFRU{в определении \TT{buf} и как второй аргумент \TT{snprintf()}}
+{in \TT{buf} declaration and as a second argument of \TT{snprintf()}}),
+\IFRU{то и изменять это значение придется каждый раз в обоих местах, а об этом легко забыть}
+{then the value is have to be changed at the both places each time, and it is easy to forget about this}.
 
-Если нужны wide-строки, то sizeof можно применять из \IT{wchar\_t} (который, на самом деле, 16-битный тип short):
+\IFRU{Если нужны wide-строки, то}{If one need wide-strings, then} sizeof() 
+\IFRU{можно применять к}{can be applied to} \IT{wchar\_t} 
+(\IFRU{который, на самом деле, 16-битный тип данных \IT{short}}
+{which is in turn, 16-bit data type \IT{short}}):
 
 \begin{lstlisting}
 	wchar_t buf[1024];
 	swprintf(buf, sizeof(buf)/sizeof(wchar_t), "...");
 \end{lstlisting}
 
-sizeof() возвращает длину в байтах, так что здесь он будет равен $1024*2$, т.е., $2048$. Но мы можем
-разделить это значение на длину одного элемента массива (\IT{wchar\_t}) в байтах ($2$), 
-чтобы получить количество элементов в массиве ($1024$).
+sizeof() \IFRU{возвращает длину в байтах, так что здесь он будет равен}{returns the size in bytes, so it will
+be here} $1024*2$, \IFRU{т.е.}{i.e.}, $2048$. 
+\IFRU{Но мы можем разделить это значение на длину одного элемента массива}
+{But we can divide this value by length of one array element} (\IT{wchar\_t})
+\IFRU{в байтах ($2$)}{is $2$ in bytes},
+\IFRU{чтобы получить количество элементов в массиве}{in order to get elements number in array} ($1024$).
 
-sizeof() можно применять и к массивам структур:
+sizeof() \IFRU{можно применять и к массивам структур}{can be applied to array of structures}:
 
 \begin{lstlisting}
 struct phonebook_entry
@@ -49,7 +60,9 @@ void dump (struct phonebook_entry* input)
 };
 \end{lstlisting}
 
-sizeof(phonebook) -- это размер всего массива структур в байтах. sizeof(struct phonebook\_entry) -- 
-это размер одной структуры в байтах.
-Делением мы узнаем количество структур в массиве.
+sizeof(phonebook) ~--- \IFRU{это размер всего массива структур в байтах}{is a size of the whole array
+of structures in bytes}.
+\TT{sizeof(struct phonebook\_entry)} ~--- \IFRU{это размер одной структуры в байтах}{is a size of one structure
+in bytes}.
+\IFRU{Делением мы узнаем количество структур в массиве}{By division we get number of structures in an array}.
 

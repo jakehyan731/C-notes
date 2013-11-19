@@ -1,7 +1,8 @@
 ﻿\subsection{union}
 
-union часто используется, когда в каком-то месте структуры можно хранить разные типы на выбор.
-К примеру:
+\TT{union} \IFRU{часто используется, когда в каком-то месте структуры нужно хранить разные типы на выбор}
+{is often used when in some place of the structure one need to store various data types by choice}.
+\IFRU{К примеру}{For example}:
 
 \begin{lstlisting}
 union
@@ -12,13 +13,20 @@ union
 } u;
 \end{lstlisting}
 
-Такой union позволяет хранить одну из этих трех переменных на выбор. Занимать он будет места столько же,
-сколько максимальный элемент (double) --- 8 байт.
+\IFRU{Такой}{Such} \TT{union} \IFRU{позволяет хранить одну из этих трех переменных на выбор}{allows to
+store one of these variables by choice}.
+\IFRU{Занимать он будет места столько же,
+сколько максимальный элемент (double) ~--- 8 байт}{It will require the same ammount of space as a largest
+element (double) ~--- 8 bytes}.
 
-union часто используют для обращения к какому-то типу данных как к другому.
+\TT{union} \IFRU{часто используют для обращения к какому-то типу данных как к другому}
+{is often used as a way to access some data type as another data type}.
 
-Например, как известно, каждый XMM-регистр в SSE может представлять собой 16 байт, 8 16-битных слов,
-4 32-битных слова, 2 64-битных слова, 4 float-значения и 2 double-значения. Так можно описать его:
+\IFRU{Например, как известно, каждый XMM-регистр в SSE может представлять собой 16 байт, 8 16-битных слов,
+4 32-битных слова, 2 64-битных слова, 4 float-значения и 2 double-значения}{For example, as we know,
+each XMM-register in SSE may be represented as 16 bytes, 8 16-bit words, 3 32-bit words, 2 64-bit words,
+4 float variables and 2 double variables}.
+\IFRU{Так можно описать его}{This is how it can be declared}:
 
 \begin{lstlisting}
 union
@@ -40,8 +48,9 @@ reg.u.d[1]=89.12345;
 
 \end{lstlisting}
 
-Это также очень удобно использовать вместе со структурой, где поля имеют битовую гранулярность.
-Это флаги x86-процессора:
+\IFRU{Это также очень удобно использовать вместе со структурой, где поля имеют битовую гранулярность}
+{It is also handy to use it with a structure where fields has bit granularity}.
+\IFRU{Как флаги x86-процессора}{As x86-CPU flags}:
 
 \begin{lstlisting}
 typedef struct _s_EFLAGS
@@ -76,15 +85,23 @@ typedef union _u_EFLAGS
 } u_EFLAGS;
 \end{lstlisting}
 
-Можно таким образом загрузить флаги как 32-битное значение в поле flags, а затем из поля s обращаться
-к отдельным битам. Либо наоборот, модифицировать биты, затем прочитать поле flags. Такого очень много
-в исходниках ядра Linux.
+\IFRU{Можно таким образом загрузить флаги как 32-битное значение в поле \IT{flags},
+а затем из поля \IT{(s)} обращаться к отдельным битам}
+{Thus it possible to load flags as a 32-bit value into \IT{flags} field and then, from the \IT{(s)} field
+to access specific bits}.
+\IFRU{Либо наоборот, модифицировать биты, затем прочитать поле}{Or conversely, to modify bits
+and then to read the} \IT{flags}\IFRU{}{ field}.
+\IFRU{Такого очень много в исходниках ядра Linux}{A lot of such examples you may find in the Linux kernel}.
 
 \subsubsection{tagged union}
 
-Это union плюс флаг (tag), определяющий тип union. К примеру, если нам нужна какая-то переменная,
-которая может быть как числом, так и числом с плавающей точкой, так и текстовой строкой (как переменные
-в динамически-типизированных \ac{PL}), то мы можем объявить такую структуру:
+\IFRU{Это}{It is} \TT{union} \IFRU{плюс флаг}{plus flag} (tag), \IFRU{определяющий тип}{defines type of} \TT{union}.
+\IFRU{К примеру, если нам нужна какая-то переменная, которая может быть как числом,
+так и числом с плавающей точкой, так и текстовой строкой}
+{For example, if we need a variable which can be a number, a float point number, a text string} 
+(\IFRU{как переменные в динамически-типизированных}{as in dynamically typed} \ac{PL}
+\footnote{\IFRU{in Visual Basic it also called}{в Visual Basic это называется также} ``variant type''}),
+\IFRU{то мы можем объявить такую структуру}{then we may declare such structure}:
 
 \begin{lstlisting}
 
@@ -107,10 +124,13 @@ struct
 } variable;
 \end{lstlisting}
 
-Суммарная длина такой структуры будет $8+4=12$ байт. В любом случае, это компактнее, чем выделять
-поля для переменной каждого возможного типа.
+\IFRU{Суммарная длина такой структуры будет}{The whole size of the structure is} $8+4=12$ 
+\IFRU{байт}{byte}. \IFRU{В любом случае, это компактнее, чем выделять
+поля для переменной каждого возможного типа}{It is much more compact than to allocate fields for the variable
+of each type}.
 
-Начиная с C11\cite{C11}, \TT{u} можно не указывать, это называется ``анонимный union'':
+\IFRU{Начиная с}{Beginning with} C11\cite{C11}, \TT{(u)} 
+\IFRU{можно не указывать, это называется}{may not be specified, it is called} ``\IFRU{анонимный}{anonymous} union'':
 
 \begin{lstlisting}
 struct
@@ -125,5 +145,45 @@ struct
 } variable;
 \end{lstlisting}
 
-... и обращаться к полям union просто как к \TT{variable.i}, \TT{variable.d}, итд.
+... \IFRU{и обращаться к полям union просто как к}{and to access them as} \TT{variable.i}, \TT{variable.d}, 
+\IFRU{итд}{etc}.
+
+\subsection{\IFRU{Тэггированные указатели}{tagged pointers}}
+
+\IFRU{Вернемся к примеру объявления переменной, которая может быть как числом, так и числом с плавающей запятой,
+так и текстовой строкой}{Let's back to the example of variable declaration, which can be a number,
+a floating point number, and a text string}.
+\IFRU{Самый большой тип}{Largest type} ~--- double (8 \IFRU{байт}{bytes}), 
+\IFRU{следовательно, имея много таких блоков в памяти рядом, указатель на каждый
+блок будет всегда выровнен по 8-байтной границе}{this means, by storing a lot of such blocks in memory
+back to back, a pointer to each block will always be aligned on 8-byte border}.
+\IFRU{И даже более того, в malloc() glibc всегда выделяет блоки
+по 8-байтной границе}{Even more than that, glibc malloc() always allocates memory blocks by
+8-byte border}. 
+\IFRU{Следовательно, указатель на подобный блок всегда будет иметь нули в трех младших битах}
+{Hence, the pointer to such block will always have zero in 3 lowest bits}.
+\IFRU{А раз так, то эти младшие биты можно использовать для чего-то}
+{And if so, these lowest bits may be used for something}.
+\IFRU{Одна из возможностей, это хранить там тип}{One chance is to store there the type of} \IT{union}.
+\IFRU{У нас всего три различных типа переменных, для хранения числа в диапазоне 0..2 нужно только 2 бита}
+{We have only 3 variable types, so we need only 2 bits for storing a number in 0..2 range}.
+
+\IFRU{Это называется тэггированный указатель (tagged pointer)}{This is what is called \IT{tagger pointer}}.
+\IFRU{Так можно сэкономить на памяти и убрать из структуры \IT{enum} 
+указывающий на тип}
+{That is the way to make memory footprint smaller and to get rid of data type defining \IT{enum}
+from the structure}.
+
+\IFRU{Это очень популярно в LISP-интерпретаторах и компиляторах, потому что атомы в LISP-е это как раз вот такие
+структуры, описывающие каждую переменную, их может быть очень много, и использование младших бит указателя
+здорово экономит память}
+{This approach is very popular in LISP-interpreters and compilers because LISP atoms is a similar
+variable defining structures, a there are may be a lot of them in memory, so it can reduce memory footprint
+by using lowest bits of pointers}.
+
+\IFRU{В качестве негативной стороны, нужно всегда помнить о том что указатель теперь не совсем указатель,
+а содержит еще информацию}{As a negative side, one should always keep in mind that this is not an usual
+pointer, but has more information}.
+\IFRU{Отладчики не смогут работать с такими указателями корректно}{Debuggers will not be able to
+work with such pointers correctly}.
 
