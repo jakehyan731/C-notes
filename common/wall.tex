@@ -7,7 +7,8 @@
 in order to determine quickly small errors}.
 \IFRU{Можно даже в GCC включить}{In GCC it is even possible to turn on} \TT{-Werror} \OrENRU \TT{/WX} 
 \InENRU MSVC ~--- 
-\IFRU{тогда предупреждения будут трактоваться как ошибки}{then warning will be treated as errors}.
+\IFRU{тогда все предупреждения будут трактоваться как ошибки}
+{then all warning will be treated as errors}.
 
 \IFRU{Вот простой пример}{Here is a simple example}:
 
@@ -65,7 +66,7 @@ int main()
 ... \IFRU{хотя всё равно скомпилирует}{but will compile anyway}.
 
 MSVC 2010 \IFRU{генерирует код, работающий точно также, хотя и выводит предупреждение}
-{generates the code working just the same, with warning, though}:
+{generates the code running likewise, with warning, though}:
 
 \begin{lstlisting}
 ...\1.c(7) : warning C4716: 'f1' : must return a value

@@ -237,7 +237,7 @@ one should consider it}.
 malloc() неудобно, так что довольно популярный метод это писать свои функции-переходники с названием 
 xmalloc(), xrealloc(), вызывающие malloc()/realloc(), но проверяющие их результат и падающие в случае
 ошибки}
-{It is not handy to check the returned pointer after each malloc() call, so there are a popular method
+{It is not handy to check the returned pointer after each malloc() call, so there are a popular technique
 to write own thunk functions named xmalloc(), xrealloc() calling malloc()/realloc(), which checks
 returning result and exiting in case of error}.
 
@@ -319,7 +319,7 @@ GCC \IFRU{считает возвращаемое значение неизве�
 {Another mistake may cost your nerves is to allocate the same block of memory at one place 
 more than one time (previous calls are ``hiding'' from the sight)}.
 
-\subsubsection{\IFRU{Еще методы борьбы}{Other bug hunting methods}}
+\subsubsection{\IFRU{Еще методы борьбы}{Other bug hunting techniques}}
 
 \IFRU{Однако, может оказаться так, что ошибки в программе у вас есть, а перекомпилировать её по каким-то причинам
 вы не можете}

@@ -110,7 +110,7 @@ has type} \IT{const char*}, \IFRU{то есть, распологается в �
 иные объекты неразумно копируются много раз при передаче в другие функции ~---
 там точно так же как и в Си используются указатели, но просто эта механика скрыта от программиста}
 {It is however not mean that a strings and other objects are copied misspendinly in these \ac{PL} ~---
-a pointers are used there internally just as in C, and this mechanisms are hidden from the programmer}.
+a pointers are used there internally likewise as in C, but this mechanisms are hidden from the programmer}.
 
 \subsubsection{\IFRU{Синтаксический сахар для}{Syntactic sugar for} array[index]}
 
@@ -245,11 +245,11 @@ a} \IT{-S} \IFRU{либо в MSVC с ключом}{key or in MSVC with a}
 \IFRU{Ф-ции}{The functions} \IT{dump1()} \AndENRU \IT{dump2()}
 \IFRU{эквивалентны}{are equivalent to each other}.
 
-\IFRU{Но в первой итератор}{But in the first function iterator} \IT{(i)} 
+\IFRU{Но в первой счетчик}{But in the first function counter} \IT{(i)} 
 \IFRU{начинается с 0 и к нему прибавляется 1 на каждой итерации}{is beginning at 0 and 1 is added
 to it at each iteration}.
 
-\IFRU{Во второй ф-ции итератор}{In the second function iterator} \IT{(i)} 
+\IFRU{Во второй ф-ции \glslink{iterator}{итератор}}{In the second function \gls{iterator}} \IT{(i)} 
 \IFRU{указывает на начало массива и затем, к нему прибавляется длина структуры}
 {points to the beginning of the array and then size of structure is added to it}
 (\IFRU{а не 1 байт, как можно поначалу ошибочно подумать}{instead of 1 byte,

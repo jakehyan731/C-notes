@@ -27,7 +27,7 @@ in the array of pointers to a strings}:
 массив строк фиксированной длины, тогда можно было бы воспользоваться стандартным stricmp()}
 {If it would be an array of fixed-size strings, then usual stricmp() could be used here instead}.
 
-\IFRU{Кстати, точно также ф-ция сравнения задается и для}{By the way, the same comparison function
+\IFRU{Кстати, точно также ф-ция сравнения задается и для}{By the way, likewise comparison function
 is used for} qsort().
 
 lfind() \IFRU{возвращает указатель на место в массиве где ф-ция}{returns a pointer to a place in an array
@@ -94,8 +94,8 @@ it with the string in the first field of structure}.
 использовать bsearch(), если вам нравится такая идея}
 {Probably, unsorted array can be sorted by qsort() before bsearch() usage, if you like the idea}. \\
 \\
-\IFRU{Точно так же можно искать что угодно, где угодно}{In the same way, it is possible to search anything
-anywhere}. \IFRU{Пример из}{The example from} BIND 9.9.1
+\IFRU{Точно так же можно искать что угодно, где угодно}
+{Likewise, it is possible to search anything anywhere}. \IFRU{Пример из}{The example from} BIND 9.9.1
 \footnote{\url{https://www.isc.org/downloads/bind/}}:
 
 \begin{lstlisting}[caption=backtrace.c]
