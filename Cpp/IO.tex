@@ -1,9 +1,14 @@
-\section{Ввод/вывод}
+\section{\IFRU{Ввод/вывод}{Input/output}}
+\label{CPPIO}
 
-Часто есть необходимость выводить в ostream целые структуры, а каждый раз выводить их по одному полю это
-неудобно. Иногда это решается добавлением метода ToString() в класс. 
-Другое решение это сделать ``свободную'' ф-цию (free function)
-\footnote{Ф-ции не являющиеся методом какого-либо класса} для вывода вроде:
+\IFRU{Часто есть необходимость выводить в}{It is often necessary to output whole data structures into}
+\IT{ostream} \IFRU{целые структуры, а каждый раз выводить их по одному полю это неудобно}{while it is not
+handy to do output by each field}.
+\IFRU{Иногда это решается добавлением метода}{Sometimes it can be solved by adding the} \TT{ToString()} 
+\IFRU{в класс}{method to a class}.
+\IFRU{Другое решение это сделать}{Other solution is to make a}
+\glslink{free function}{\IFRU{свободную ф-цию}{free function}}
+\IFRU{для вывода вроде}{for outputing like}:
 
 \begin{lstlisting}
 ostream& operator<< (ostream &out, const Object &in)
@@ -14,7 +19,7 @@ ostream& operator<< (ostream &out, const Object &in)
 };
 \end{lstlisting}
 
-После этого можно отправлять экземпляры класса прямо в ostream:
+\IFRU{Теперь можно отправлять объекты прямо в}{Now it is possible to send objects right into} \IT{ostream}:
 
 \begin{lstlisting}
 Object o1, o2;
@@ -22,7 +27,10 @@ Object o1, o2;
 cout << "o1=" << o1 << " o2=" << o2 << endl;
 \end{lstlisting}
 
-А для того чтобы ф-ция вывода могла обращаться к любым полям класса, её можно сделать friend.
-Впрочем, имеется также такая точка зрения, что подобные ф-ции не следует делать friend
-для сохранения энкапсуляции
+\IFRU{А для того чтобы ф-ция вывода могла обращаться к любым полям класса, её можно сделать}
+{For the function's ability to access any class fields, it can be marked as} \IT{friend}.
+\IFRU{Впрочем, имеется также такая точка зрения, что подобные ф-ции не следует делать}
+{However, there is a point of view about not making them as} \IT{friend}
+\IFRU{для сохранения энкапсуляции}{for encapsulation reasons}
 \cite[Item 23 Prefer non-member non-friend functions to member functions]{EffectiveCPP}.
+

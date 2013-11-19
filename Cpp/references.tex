@@ -1,6 +1,9 @@
 ﻿\subsection{references}
 
-Это то же что и указатели, но обезопасенные (safe), потому что работая с ними, труднее сделать ошибку
+\IFRU{Это то же что и указатели (\ref{pointers}), но ``обезопасенные'' (safe), 
+потому что работая с ними, труднее сделать ошибку}
+{It is the same thing as pointers (\ref{pointers}), but ``safe'', 
+because it is harder to make a mistake while working with them}
 \cite[8.3.2]{CPP11}.
 
 \IFRU{Например, reference всегда должен указывать объект того же типа и не может быть NULL}
@@ -10,9 +13,11 @@
 {Even more, reference cannot be changed, it's not possible to point to to another object (reseat)}
 \cite[8.5]{ParashiftCPPFAQ}.
 
-В \cite[1.7.1]{REBook} можно увидеть, что на уровне x86-кода, это одно и то же.
+\IFRU{В}{In} \cite[1.7.1]{REBook} \IFRU{продемонстрировано, что на уровне x86-кода, это одно и то же}
+{it was demonstrated that on x86-level of code it is the same thing}.
 
-Как и указатели, reference-ы также можно возвращать из ф-ций, например:
+\IFRU{Как и указатели, \IT{reference} также можно возвращать из ф-ций, например}
+{Just like pointers, \IT{references} can be returned by functions, for example}:
 
 \begin{lstlisting}
 #include <iostream>
@@ -32,7 +37,7 @@ void main()
 };
 \end{lstlisting}
 
-Это выведет предсказуемое:
+\IFRU{Это выведет предсказуемое}{This will print predictable}:
 
 \begin{lstlisting}
 1001
@@ -41,6 +46,9 @@ void main()
 1004
 \end{lstlisting}
 
-Если посмотреть что там сгенерировалось на ассемблере, то можно увидеть что \TT{use\_count()} просто возвращает
-указатель на \TT{uc}, а в \TT{main()} происходит инкремент значения по этому указателю.
+\IFRU{Если посмотреть что сгенерировалось на языке ассемблера, то можно увидеть что}
+{If to see what was generated in assembly language, it can be seen that} \TT{use\_count()} 
+\IFRU{просто возвращает указатель на}{just returns a pointer to} \TT{uc}, 
+\IFRU{а в}{and in the} \TT{main()} \IFRU{происходит инкремент значения по этому указателю}
+{an increment of a value on this pointer is occuring}.
 

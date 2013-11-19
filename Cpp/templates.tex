@@ -1,22 +1,31 @@
-\section{Темплейты}
+\section{\IFRU{Темплейты}{Templates}}
 
-Темплейты нужны обычно для того чтобы сделать класс универсальным для нескольких типов данных.
-К примеру, \TT{std::string} в реальности это \TT{std::basic\_string<char>}, \\ 
-а \TT{std::wstring} это \TT{std::basic\_string<wchar\_t>}. \\
+\IFRU{Темплейты нужны обычно для того чтобы сделать класс универсальным для нескольких типов данных}
+{Templates are usually necessary in order to make a class universal for several data types}.
+\IFRU{К примеру}{For example}, \TT{std::string} \IFRU{в реальности это}{is in fact} \TT{std::basic\_string<char>}, \\ 
+\IFRU{а}{and} \TT{std::wstring} \IFRU{это}{is} \TT{std::basic\_string<wchar\_t>}. \\
 \\
-Нередко подобное делают и для типов float/double/complex и даже int. 
-Некий математический алгоритм может быть описан один раз,
-но скомпилирован сразу в нескольких версиях, для работы со всеми этими типами данных. \\
+\IFRU{Нередко подобное делают и для типов}{It is often done for data types like} \IT{float/double/complex} 
+\IFRU{и даже}{and even} \IT{int}.
+\IFRU{Некий математический алгоритм может быть описан один раз,
+но скомпилирован сразу в нескольких версиях, для работы со всеми этими типами данных}
+{Some mathematical algorithm can be defined only once, but be compiled in several versions for all
+these data types}. \\
 \\
-Таким образом, можно описывать алгоритмы только один раз, но работать они будут для разных типов. \\
+\IFRU{Таким образом, можно описывать алгоритмы только один раз, но работать они будут для разных типов}
+{Thus it is possible to define algorithms only once, but they will work for several data types}. \\
 \\
-Простейшие примеры это ф-ции max, min, swap, работающие для любых типов, которые можно сравнивать
-и присваивать. Потом, вы можете написать свою реализацию BigInt
-\footnote{так обычно называют библиотеки для работы с числами произвольной точности}, 
-и если там присутствует 
-оператор сравнения двух объектов (\TT{operator<}),
-то написанные раннее max/min будут работать и для нового класса.\\
+\IFRU{Простейшие примеры это ф-ции}{Simplest examples are the} \IT{max, min, swap}
+\IFRU{, работающие для любых типов, переменные которых можно сравнивать и присваивать}
+{ functions working for any type, variables of which can be compared and assigned}.
+\IFRU{Потом, вы можете написать свою реализацию}{Then you may want to write your own} \gls{BigInt}\IFRU{}{ implementation},
+\IFRU{и если там присутствует 
+оператор сравнения двух объектов}{and if there is a comparison operator} (\TT{operator<})\IFRU{}{ is present},
+\IFRU{то написанные раннее}{then written earlier} \IT{max/min} \IFRU{будут работать и для нового класса}
+{will work for the new class as well}.\\
 \\
-Вот почему списки и прочие контейнеры в \ac{STL} это именно темплейты: они как бы 
-``встраивают'' в ваш класс возможность объеденять в списки, итд.
+\IFRU{Вот почему списки и прочие контейнеры в}{That is why lists and other containers in the} \ac{STL} 
+\IFRU{это именно темплейты}{are exactly templates}: \IFRU{они как бы}{it can be said, they}
+``\IFRU{встраивают}{embedds}'' \IFRU{в ваш класс возможность объеденять в списки, итд}{the possibility of be united
+into list or collection to your class}.
 

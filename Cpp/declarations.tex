@@ -2,13 +2,18 @@
 
 \subsection{C++11: auto}
 
-Пользуясь \ac{STL}, иногда надоедает каждый раз определять тип \glslink{iterator}{итератора} вроде:
+\IFRU{Пользуясь}{When using} \ac{STL}, 
+\IFRU{иногда надоедает каждый раз определять тип}{sometimes it is very boring to declare the type of} 
+\glslink{iterator}{\IFRU{итератора}{iterator}} \IFRU{вроде}{like}:
 
 \begin{lstlisting}
 for (std::list<int>::iterator it=list.begin(); it!=list.end(); it++)
 \end{lstlisting}
 
-Тип it вполне можно получить из list.begin(), поэтому, в начиная со стандарта C++11, можно использовать auto:
+\IFRU{Тип}{The} \IT{it} \IFRU{вполне можно получить из}{can be deduced from} \TT{list.begin()}, 
+\IFRU{поэтому, в начиная со стандарта}{so that is why starting from the} 
+C++11
+\IFRU{можно использовать}{standard, } \IT{auto}\IFRU{}{ can be used instead}:
 
 \begin{lstlisting}
 for (auto it=list.begin(); it!=list.end(); it++)

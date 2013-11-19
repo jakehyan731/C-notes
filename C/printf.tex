@@ -12,7 +12,7 @@ a structure describing complex number, or a color encoded as 3 int numbers as a 
 \IFRU{Эту проблему в Си++ решают определением ф-ции}
 {In C++ this problem is usually solved by definition} \TT{operator<<} \InENRU \TT{ostream} 
 \IFRU{для своего типа}{for the own type}, \IFRU{либо введением метода с названием}
-{or by a method definition named} \TT{ToString()}. \\
+{or by a method definition named} \TT{ToString()} (\ref{CPPIO}). \\
 \\
 \IFRU{В}{In} printk() (printf-\IFRU{подобная ф-ция в ядре Linux}{like function in Linux kernel})
 \IFRU{имеются дополнительные модификаторы}{there are additional modifiers exist}
@@ -27,7 +27,7 @@ a structure describing complex number, or a color encoded as 3 int numbers as a 
 модификаторы нужные для вывода чисел с произвольной точностью}{function having non-standard modifiers for
 arbitrary precision numbers outputting}. \\
 \\
-\\IFRU{В \ac{OS}}{In} Plan9\IFRU{, и в исходниках компилятора Go, можно найти ф-цию}
+\IFRU{В \ac{OS}}{In the} Plan9\IFRU{, и в исходниках компилятора Go, можно найти ф-цию}
 { \ac{OS}, and in Go compiler source code, we may find}
 fmtinstall()\IFRU{, для объявления нового модификатора printf-строки, например}
 { function for a new printf-string modifier definition, for example}:

@@ -1,14 +1,22 @@
-﻿\section{Возврат кодов ошибок}
+﻿\section{\IFRU{Возврат кодов ошибок}{Error codes returning}}
 
-Самый простой способ сообщить вызываемой ф-ции о своем успехе, это вернуть булеву переменную, 
-\IT{false} ~--- в случае ошибки, и \IT{true} в случае успеха. Такого очень много в Windows API.
-А если нужно передать больше информации, то оставить код ошибки в \ac{TIB}, откуда затем получить 
-это значение вызвав GetLastError(). Либо, в UNIX-средах, оставлять код ошибки в глобальной переменной \IT{errno}.
+\IFRU{Самый простой способ сообщить вызываемой ф-ции о своем успехе, это вернуть булево значение}
+{The simplest way to indicate to caller about success is to return boolean value},
+\IT{false} ~--- \IFRU{в случае ошибки}{in case of error},
+\AndENRU \IT{true} \IFRU{в случае успеха}{in case of success}.
+\IFRU{Такого очень много в}{A lot of such functions are present in the} Windows API.
+\IFRU{А если нужно передать больше информации, то оставить код ошибки в \ac{TIB}, откуда затем получить 
+это значение вызвав}{And if one need to return more information, the error code may be left in \ac{TIB},
+from where it is possible to get it using} GetLastError(). 
+\IFRU{Либо, в}{Or, in the} UNIX-\IFRU{средах, оставлять код ошибки в глобальной переменной}{enviroments,
+to leave the error code in the global variable} \IT{errno}.
 
-\subsection{Отрицательные коды ошибок}
+\subsection{\IFRU{Отрицательные коды ошибок}{Negative error codes}}
 
-Еще один интересный способ передать больше информации в возвращаемом значении. Например, в документации IBM DB2 9.1,
-мы можем увидеть такое:
+\IFRU{Еще один интересный способ передать больше информации в возвращаемом значении}
+{Another interesting approach to pass more information in returning value}.
+\IFRU{Например, в документации}{For example, in the manuals of the} IBM DB2 9.1, \IFRU{мы можем увидеть такое}
+{we may spot this}:
 
 \begin{framed}
 \begin{quotation}
@@ -23,7 +31,7 @@ SQLCODE = 100, "no data" was found. For example, a FETCH statement returned no d
 \footnote{\href{http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=\%2Fcom.ibm.db2z9.doc.codes\%2Fsrc\%2Ftpc\%2Fdb2z\_sqlcodes.htm}{SQL codes}}
 \footnote{\href{http://publib.boulder.ibm.com/infocenter/dzichelp/v2r2/index.jsp?topic=\%2Fcom.ibm.db2z9.doc.codes\%2Fsrc\%2Ftpc\%2Fdb2z\_n.htm}{SQL error codes}}
 
-В исходниках Linux можно увидеть и такое
+\IFRU{В исходниках Linux можно увидеть и такое}{In the Linux kernel source code we may find this}
 \footnote{\url{http://lxr.free-electrons.com/source/arch/powerpc/kernel/crash_dump.c}}:
 
 \begin{lstlisting}[caption=arch/arm/kernel/crash\_dump.c]
@@ -66,6 +74,10 @@ ssize_t copy_oldmem_page(unsigned long pfn, char *buf,
 }
 \end{lstlisting}
 
-Обратите внимание ~--- ф-ция может вернуть как количество байт, так и ошибку. Тип ssize\_t это ``знаковый'' size\_t,
-то есть, способный принимать отрицательные значения. ENOMEM и EFAULT это стандартные коды ошибок из errno.h.
+\IFRU{Обратите внимание}{Take a look} ~--- 
+\IFRU{ф-ция может вернуть как количество байт, так и код ошибки}{a function many return both number of bytes and
+the error code}. 
+\IFRU{Тип}{The} ssize\_t \IFRU{это}{type is} ``\IFRU{знаковый}{signed}'' size\_t,
+\IFRU{то есть, способный принимать отрицательные значения}{i.e., able to store negative values}.
+ENOMEM \AndENRU EFAULT \IFRU{это стандартные коды ошибок из}{are standard error codes from the} errno.h.
 

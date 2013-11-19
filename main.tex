@@ -137,7 +137,12 @@ To view a copy of this license, visit} \url{http://creativecommons.org/licenses/
 
 %\bibliographystyle{alpha}
 \bibliographystyle{plain} % FIXME
-\bibliography{books,articles,usenet,misc}
+\IFRU{
+	\bibliography{RE_book_RU,books,articles,usenet,misc}
+}
+{
+	\bibliography{RE_book_EN,books,articles,usenet,misc}
+}
 
 \clearpage
 \addcontentsline{toc}{chapter}{\IFRU{Глоссарий}{Glossary}}

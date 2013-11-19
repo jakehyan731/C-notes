@@ -1,17 +1,21 @@
-﻿\chapter{Прочее}
+﻿\chapter{\IFRU{Прочее}{Other}}
 
-Что хранится в объектных и бинарных (.exe, .dll) файлах?
+\IFRU{Что хранится в объектных и бинарных}{What is stored in the binary} (.o, .obj, .exe, .dll, .so) \IFRU{файлах}{files}?
 
-Обычно только данные (глобальные переменные) и тела ф-ций (включая методы классов).
+\IFRU{Обычно только данные (глобальные переменные) и тела ф-ций (включая методы классов)}
+{Usually it is only data (global variables) and function bodies (including class methods)}.
 
-Информации о типах (классы, структуры, typedef(\ref{typedef})-ы) там нет. 
-Это может помочь в понимании того как всё устроено.
+\IFRU{Информации о типах (классы, структуры, typedef(\ref{typedef})-ы) там нет}
+{There are no type information (classes, structures, typedefs(\ref{typedef})) there}.
+\IFRU{Это может помочь в понимании того как всё устроено}{This may helps in understanding how it works internally}.
 
-В этом заключается одна из больших проблем декомпиляции --- отсутствие информации о типах.
+\IFRU{В этом заключается одна из больших проблем декомпиляции ~--- отсутствие информации о типах}
+{That is one of the serious decompilation problems ~--- type information absence}.
 
 % FIXME: add about name mangling
 
-О том как всё компилируется в машинный код, подробнее можно почитать здесь:\cite{REBook}.
+\IFRU{О том как всё компилируется в машинный код, подробнее можно почитать здесь}
+{Read more about how everything is compiled into machine code}:\cite{REBook}.
 
 \input{other/errors}
 

@@ -1,16 +1,25 @@
-﻿\section{Глобальные переменные}
+﻿\section{\IFRU{Глобальные переменные}{Global variables}}
 
-Мода на ООП и всякие такие штуки утвердила что глобальные переменные это плохо, тем не менее, в каких-то разумных
-случаях, это можно использовать, например, для возврата большего количества информации из ф-ций. 
+\IFRU{Мода на }{}\ac{OOP}\IFRU{ и всякие такие штуки утвердила что глобальные переменные это плохо, тем не менее,
+в каких-то разумных случаях, это можно использовать, например,
+для возврата большего количества информации из ф-ций}
+{ hype and other such things tells us that global variables is a bad thing, nevertheless,
+sometimes it is worth to use it,
+for example, for returning large amount of information from functions}.
 
-Так, некоторые стандартные ф-ции Си возвращают код ошибки через глобальную переменную errno, которая, в наше
-время, фактически не глобальная, а находится внутри \ac{TLS}.
+\IFRU{Так, некоторые стандартные ф-ции Си возвращают код ошибки через глобальную переменную}
+{Thus, several C standard library functions are returned error code via global variable} \IT{errno}, 
+\IFRU{которая, в наше
+время, фактически не глобальная, а находится внутри}{which is not a global anymore in our time,
+but is stored in the} \ac{TLS}.
 
-В Windows API код ошибки можно узнать вызвав GetLastError(), 
-которая, на самом деле, выдает значение из \ac{TIB}.
+\IFRU{В}{In} Windows API \IFRU{код ошибки можно узнать вызвав}{the error code can be determined by calling the}
+GetLastError(), 
+\IFRU{которая, на самом деле, выдает значение из}{which just takes a value from the} \ac{TIB}.
 
-В кодегенераторе компилятора OpenWatcom, всё находится в глобальных переменных,
-а самая главная ф-ция выглядит так:
+\IFRU{В кодегенераторе компилятора}{In the} OpenWatcom\IFRU{, всё находится в глобальных переменных,
+а самая главная ф-ция выглядит так}{ compiler everything is stored in the global variables, so the very
+main function looks like}:
 
 \begin{lstlisting}[caption=bld\textbackslash{}cg\textbackslash{}c\textbackslash{}generate.c]
 extern  void    Generate( bool routine_done )

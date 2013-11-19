@@ -1,13 +1,19 @@
-﻿\section{Битовые поля}
+﻿\section{\IFRU{Битовые поля}{Bit fields}}
 
-Это очень популярная штука в Си, да и не только.
+\IFRU{Это очень популярная штука в Си, да и в программировании вообще}{A very popular thing in C, and also
+in programming generally}.
 
-Для задания булевых значений ``true'' или ``false'', можно передавать 1 или 0 в байте или в 32-битном регистре,
-или в типе int, но это очень не экономно в плане расхода памяти. Намного удобнее передавать такие значения в отдельных
-битах.
+\IFRU{Для задания булевых значений}{For defining boolean values} ``true'' \OrENRU ``false'',
+\IFRU{можно передавать $1$ или $0$ в байте или в 32-битном регистре}{it is possible to pass $1$ or $0$ in byte or
+32-bit register},
+\IFRU{или в типе \IT{int}}{or in \IT{int} type}, \IFRU{но это очень не экономно в плане расхода памяти}
+{but it is not very compact}.
+\IFRU{Намного удобнее передавать такие значения в отдельных битах}{Much more handy is to pass such values
+in specific bits}.
 
-К примеру, стандартная ф-ция findfirst() возвращает структуру о найденном файле, где аттрибуты файла передаются
-такими флагами:
+\IFRU{К примеру, стандартная ф-ция}{For example, the standard C function} findfirst() 
+\IFRU{возвращает структуру о найденном файле, где аттрибуты файла передаются
+такими флагами}{returns a structure about file it found where file attributes are encoded as}:
 
 \begin{lstlisting}
 #define _A_NORMAL 0x00
@@ -18,13 +24,17 @@
 #define _A_ARCH 0x20
 \end{lstlisting}
 
-Конечно, передавать каждый аттрибут отдельной переменной bool было бы очень неэкономично.
+\IFRU{Конечно, передавать каждый аттрибут отдельной переменной типа}{Of course, it would not be very
+compact to pass each attribute by a} \IT{bool} \IFRU{было бы очень неэкономично}{variable}.
 
-И напротив, для указания флагов в ф-цию можно исползовать битовые поля. 
-Например, CreateFile
-\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/aa363858(v=vs.85).aspx}} из Windows API.
+\IFRU{И напротив, для указания флагов в ф-цию можно исползовать битовые поля}
+{Contrariwise, it is possible to use bit fields for passing flags into the function}.
+\IFRU{Например}{For example}, CreateFile
+\footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/aa363858(v=vs.85).aspx}} 
+\IFRU{из}{from} Windows API.
 
-Для задания флагов, чтобы не запутаться и не опечататься в значениях каждого бита, можно писать так:
+\IFRU{Для задания флагов, чтобы не запутаться и не опечататься в значениях каждого бита, можно писать так}
+{For flags specifying, in order not to make a typo and mess, they can be defined as}:
 
 \begin{lstlisting}
 #define FLAG1 (1<<0)
@@ -34,9 +44,11 @@
 #define FLAG5 (1<<4)
 \end{lstlisting}
 
-(Компилятор все равно всё это легко соптимизирует).
+(\IFRU{Компилятор все равно всё это легко соптимизирует}{The compiler will optimize it anyway}).
 
-А чтобы было удобнее выставлять, удалять и проверять отдельный бит/флаг, можно использовать подобные макросы:
+\IFRU{А чтобы было удобнее проверять/выставлять/удалять отдельный бит/флаг,
+можно использовать подобные макросы}{These handy macros may be also used for specific bit/flag 
+checking/setting/resetting}:
 
 \begin{lstlisting}
 #define IS_SET(flag, bit)       (((flag) & (bit)) ? true : false)
@@ -44,8 +56,12 @@
 #define REMOVE_BIT(var, bit)    ((var) &= ~(bit))
 \end{lstlisting}
 
-С другой стороны, необходимо помнить, что операции выделения отдельного бита из значения типа int 
-обычно даются процессору ``дороже'', чем работа с типом bool в 32-битном регистре. 
-Так что, если скорость для вас намного критичнее чем
-экономия памяти, можно попробовать использовать тип bool.
+\IFRU{С другой стороны, необходимо помнить, что операции выделения отдельного бита из значения типа}
+{On the other hand, one need to keep in mind that operation of isolation of each bit in the value of type} \IT{int}
+\IFRU{обычно даются \ac{CPU} ``дороже'', чем работа с типом \IT{bool} в 32-битном регистре}
+{is usually costly for the \ac{CPU} then \IT{bool} type processing in 32-bit register }.
+\IFRU{Так что, если скорость для вас намного критичнее чем
+экономия памяти, можно попробовать использовать тип}
+{So if the speed is more crucial for you then memory footprint, you may try to use}
+\IT{bool}.
 
