@@ -65,7 +65,7 @@ calloc() \IFRU{отличается от}{is different from the} malloc()
 {in that sense that all allocated space will be cleared and consequently, there will be NULL
 in the \TT{next} field}
 \footnote{\IFRU{Об ``инициализации'' структур, читайте также здесь}
-{More about structures ``initialization'', read here}: \ref{COOPInit}.}.
+{More about structures ``initialization'', read here}: (\ref{COOPInit}).}.
 
 \IFRU{Поиск нужного элемента это просто проход по всему списку и сравнение каждого элемента с искомым,
 до тех пор, пока не найдется то что нужно}
@@ -185,7 +185,7 @@ anything, this is also called} ``opaque pointer''.
 будет приходится уже два выделенных блока памяти}{But one should remember that there will be
 two allocated memory block for each element of list} + 
 \IFRU{еще затраты на поддержания самих блоков памяти в куче}{memory overhead for supporting
-allocated blocks in heap}\ref{HeapOverhead}. \\
+allocated blocks in heap}(\ref{HeapOverhead}). \\
 \\
 \IFRU{Таким образом, подобное решение оправдано там, где экономия памяти менее важна}
 {Thus, this approach is acceptable if memory footprint is not important}.

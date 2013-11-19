@@ -23,10 +23,10 @@ special way, one would write a special function for it in C as well}.
 {But if it simple structure, it is possible to initialize it with} calloc()
 \footnote{\IFRU{Это тоже самое что и malloc() + заполнение выделенной памяти нулями}
 {It is the same as the malloc() + allocated memory filling with zeroes}}
-\OrENRU bzero()\ref{bzero}.
+\OrENRU bzero()(\ref{bzero}).
 
 \IFRU{Все int-переменные становятся нулями}{All int-variables are set to zeroes}.
-\IFRU{Нулевое значение}{Zero value} bool \InENRU C99\ref{C99} \AndENRU \CPP \IFRU{это}{is} false,
+\IFRU{Нулевое значение}{Zero value} bool \InENRU C99(\ref{C99}) \AndENRU \CPP \IFRU{это}{is} false,
 \IFRU{так же как и}{same as} BOOL \InENRU Windows API.
 \IFRU{Все указатели становятся}{All pointers are set to} NULL.
 \IFRU{И даже вещественный ноль представляемый в формате}{And even floating point $0.0$ in} 
@@ -50,7 +50,7 @@ NULL can mean ``object absence''}.
 \subsection{\IFRU{Копирование структур}{Structures copying}}
 
 \IFRU{Если структура простая, то её можно копировать обычным побайтовым копированием}
-{If the structure is simple, it is possible to copy it with a call to} memcpy()\ref{memcpy}.
+{If the structure is simple, it is possible to copy it with a call to} memcpy()(\ref{memcpy}).
 \IFRU{Если в такой манере скопировать структуру, в которой есть указатели на другие структуры,
 то это будет называться}
 {If to copy structures having pointers to another structures in this manner, it will be called}
@@ -98,7 +98,7 @@ gtree.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.h}}
 \IFRU{нет описания самой структуры}{there are no declaration of the structure}
 (\IFRU{она есть только в}{it is present only in the} gtree.c
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.c}}), 
-\IFRU{а есть только}{there are only} forward declaration\ref{forwarddeclaration}.
+\IFRU{а есть только}{there are only} forward declaration(\ref{forwarddeclaration}).
 \IFRU{Так разработчики glib могут понадеятся что пользователи GTree 
 постараются не пользоваться отдельными полями в структуре напрямую}
 {Thus glib developers may have a hope that GTree users will not try to use specific fields in
@@ -107,7 +107,7 @@ the structure directly}.
 \IFRU{Но у такого метода есть и обратная сторона}{The technique does have its flip side}: 
 \IFRU{могут быть крохотные однострочные ф-ции вроде 
 ``вернуть длину строки''}{there are may be tiny one-line functions like ``return string length''}
-\InENRU strbuf\ref{strbuf}, \IFRU{например}{for example}:
+\InENRU strbuf(\ref{strbuf}), \IFRU{например}{for example}:
 
 \begin{lstlisting}
 typedef struct _strbuf
