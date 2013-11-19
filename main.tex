@@ -35,12 +35,16 @@
 \usepackage[footnote,printonlyused,withpage]{acronym}
 \usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 \usepackage[]{hyperref} % \href. must be last
+\usepackage{glossaries}
 %\usepackage{tikz}
 
 \definecolor{lstbgcolor}{rgb}{0.94,0.94,0.94}
 \makeindex
 
 \include{macros}
+\include{glossary}
+
+\makeglossaries
 
 \newcommand{\TITLE}{\IFRU{Заметки о языке программирования Си/Си++}
 {C/C++ programming language notes}}
@@ -135,6 +139,9 @@ To view a copy of this license, visit} \url{http://creativecommons.org/licenses/
 \bibliographystyle{plain} % FIXME
 \bibliography{books,articles,usenet,misc}
 
+\clearpage
+\addcontentsline{toc}{chapter}{\IFRU{Глоссарий}{Glossary}}
+\printglossaries
 \clearpage
 \printindex
 
