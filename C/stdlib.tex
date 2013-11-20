@@ -223,3 +223,11 @@ va_end(v2);
 va_end(v1);
 \end{lstlisting}
 
+\subsection{srand() \AndENRU rand()}
+
+\ac{PRNG} \IFRU{из стандартной библиотеки очень низкокачественный,
+к тому же генерирует только числа в пределах 0..32767}
+{from the standard library has a very poor quality, besides, it is able to generate numbers only in 0..32767
+limits}.
+\IFRU{Его лучше не использовать}{Avoid it}.
+

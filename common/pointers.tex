@@ -130,7 +130,7 @@ printf ("%c", 3["hello"]);
 
 \IFRU{Это происходит, потому что любое выражение}{This happens because the expression} \IT{a[i]}, 
 \IFRU{на самом деле преобразовывается в}{is in fact translating into} \IT{*(a+i)}
-\cite[6.5.2.1]{C99TC3}.
+\cite[6.5.2/1]{C99TC3}.
 \IT{3["hello"]} \IFRU{преобразовывается в}{is translated into} \IT{*(3+"hello")},
 \IFRU{а}{and} \IT{"hello"} \IFRU{это просто указатель на массив символов, типа}{is just
 a pointer to array of characters like} \IT{const char*}.

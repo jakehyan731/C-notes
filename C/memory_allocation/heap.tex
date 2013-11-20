@@ -314,7 +314,14 @@ to spot visually if someone attempting to use some data from the block after it 
 GCC \IFRU{считает возвращаемое значение неизвестной ф-ции}{treat returning value of} malloc() 
 \IFRU{за}{as} int \IFRU{и постоянно ругается на приведение типов}{and warns about types}.
 
-\IFRU{Еще одна ошибка, которая может попортить нервов, это выделить один и тот же блок памяти в одном месте 
+С другой стороны, в \CPP, результат malloc() все же нужно приводить к нужному вам типу:
+
+\begin{lstlisting}
+int *a=(int*) malloc(...);
+\end{lstlisting}
+
+\IFRU{Еще одна ошибка, которая может попортить нервов,
+это выделить один и тот же блок памяти в одном месте 
 больше одного раза (предыдущие вызовы ``теряются'' из вида)}
 {Another mistake may cost your nerves is to allocate the same block of memory at one place 
 more than one time (previous calls are ``hiding'' from the sight)}.

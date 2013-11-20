@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper,oneside]{book}
 
 \usepackage{cmap}
+\usepackage{fancyhdr}
 
 \ifdefined\RUSSIAN
 \usepackage[english,russian]{babel}
@@ -38,6 +39,22 @@
 \usepackage{glossaries}
 %\usepackage{tikz}
 
+% fancyhdr
+\makeatletter
+    \let\stdchapter\chapter
+    \renewcommand*\chapter{%
+    \@ifstar{\starchapter}{\@dblarg\nostarchapter}}
+    \newcommand*\starchapter[1]{%
+        \stdchapter*{#1}
+        \thispagestyle{fancy}
+        \markboth{\MakeUppercase{#1}}{}
+    }
+    \def\nostarchapter[#1]#2{%
+        \stdchapter[{#1}]{#2}
+        \thispagestyle{fancy}
+    }
+\makeatother
+
 \definecolor{lstbgcolor}{rgb}{0.94,0.94,0.94}
 \makeindex
 
@@ -73,6 +90,7 @@
 \input{common_phrases}
 
 \begin{document}
+\pagestyle{fancy}
 
 \VerbatimFootnotes
 

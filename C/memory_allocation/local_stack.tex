@@ -2,8 +2,8 @@
 
 \IFRU{Когда вы определяете что-то вроде}{If you declare something like} \TT{char a[1024]}, 
 \IFRU{выделения памяти как такового не происходит, происходит
-просто перемещение указателя стека на 1024 байта назад}
-{there are no memory allocation happens, it is just stack pointer moving back for 1024 bytes}
+просто перемещение указателя стека на $1024$ байта назад}
+{there are no memory allocation happens, it is just stack pointer moving back for $1024$ bytes}
 \cite[1.2.3]{REBook}. \IFRU{Это очень быстрая операция}{This is very fast operation}.
 
 \IFRU{Освобождать эту память никак не надо, в конце работы ф-ции, это происходит автоматически, с возвратом указателя стека}
@@ -13,3 +13,9 @@
 этого блока нельзя изменить, освободить и выделить заново его также нельзя}
 {As the flip side, one need to know exactly how much space to allocate, and also, the block cannot be shrinked or expanded,
 freed and reallocated again}.
+
+%NOTTRANSLATED
+Выделение локальных переменных происходит простым сдвигом указателя стека назад\cite[1.2.1][REBook].
+При этом с выделенной областью памати ничего не происходит, там остается то что находилось в это время
+в этом месте в стеке, скорее всего, что-то от работы предыдущих ф-ций.
+

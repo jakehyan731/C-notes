@@ -93,6 +93,21 @@ to access specific bits}.
 and then to read the} \IT{flags}\IFRU{}{ field}.
 \IFRU{Такого очень много в исходниках ядра Linux}{A lot of such examples you may find in the Linux kernel}.
 
+%NOTTRANSLATED
+Еще один пример использования union для определения порядка байтов (endianness
+\begin{lstlisting}
+int is_big_endian(void)
+{
+    union {
+        uint32_t i;
+        char c[4];
+    } bint = {0x01020304};
+
+    return bint.c[0] == 1; 
+}
+\end{lstlisting}\footnote{пример взят отсюда: 
+\url{http://stackoverflow.com/questions/1001307/detecting-endianness-programmatically-in-a-c-program}}
+
 \subsubsection{tagged union}
 
 \IFRU{Это}{It is} \TT{union} \IFRU{плюс флаг}{plus flag} (tag), \IFRU{определяющий тип}{defines type of} \TT{union}.

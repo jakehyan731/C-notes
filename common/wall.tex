@@ -30,6 +30,12 @@ int main()
 \IFRU{Автор ``забыл'' дописать \IT{return} в ф-ции f1()}
 {The author ``forgot'' to add \IT{return} in f1() function}.
 \IFRU{Тем не менее}{Nevertheless}, GCC 4.8.1 \IFRU{компилирует этот пример молча}{compiles this silently}.
+
+\IFRU{Это связано с тем что в стандарте Си}{It is because in the both C standard} 
+(\cite[6.9.1/12]{C99TC3}) \IFRU{и в}{and in}
+\CPP (\cite[6.6.3/2]{CPP11}) \IFRU{допустимо если ф-ция не возвращает значение}{is okay if a function
+does not return a value when it should}.
+
 \IFRU{При запуске мы увидим это}{After running we will see this}:
 
 \begin{lstlisting}

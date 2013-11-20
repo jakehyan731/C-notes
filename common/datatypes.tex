@@ -11,7 +11,11 @@ bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он ес
 \paragraph{\IFRU{Знаковые или беззнаковые}{Signed or unsigned}?}
 
 \IFRU{Знаковые типы}{Signed types} (int, char) 
-\IFRU{используются куда чаще беззнаковых}{are used much more often than unsigned} (unsigned int, unsigned char).
+\IFRU{используются куда чаще беззнаковых}{are used much more often than unsigned} (unsigned int, unsigned char)
+\footnote{\IFRU{Стандартном не закреплен тип}{The data type of} \IT{char}\IFRU{}{ is not fixed in the standard}, \IFRU{но в}{but in} \ac{GCC} \AndENRU \ac{MSVC} \IFRU{по умолчанию это именно знаковый тип}
+{it is exactly signed type by default}.
+\IFRU{При желании в}{In can be changed in the} GCC \IFRU{можно изменить это задав ключ}{by adding key}
+\TT{-funsigned-char} \IFRU{а в}{and in} MSVC \IFRU{ключ}{key} \TT{/J}.}.
 
 \IFRU{Но с точки зрения документации кода, если вы определяете переменную, которая никогда не будет хранить отрицательное
 значение, в т.ч., индексы массивов, наверное лучше применять беззнаковый тип}

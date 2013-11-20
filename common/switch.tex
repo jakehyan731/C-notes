@@ -39,3 +39,24 @@ switch(...)
 \IFRU{Так что если в планах имеется использовать только компилятор \ac{GCC}, то можно делать так}
 {So if you plan to use only \ac{GCC} compiler, it is possible to do so}.
 
+%NOTTRANSLATED
+\subsubsection{Объявление переменных внутри switch}
+
+Этого делать нельзя, но зато можно открывать новый блок и объявлять их уже там (в \CPP или начиная с C99):
+
+\begin{lstlisting}
+switch(...)
+{
+	case 0:
+		{
+			int x=1,y=2;
+			fn1(x, y);
+		};
+		break;
+	case 1:
+	case 2:
+
+	...
+};
+\end{lstlisting}
+
