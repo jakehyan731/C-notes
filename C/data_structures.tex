@@ -1,3 +1,33 @@
-﻿\subsection{\IFRU{Ваши собственные структуры данных в Си}{Your own data structures in C}}
+﻿\section{\IFRU{Ваши собственные структуры данных в Си}{Your own data structures in C}}
+
 \input{C/lists}
 \input{C/trees}
+
+\subsection{\IFRU{Еще кое что}{One more thing}}
+
+\IFRU{Структуры данных описывающие какие-либо коллекции, могут также содержать и указатели на ф-ции для работы
+с элементами, например, ф-ции сравнения, копирования, итд}
+{Data structures related to collections may also contain pointers to the functions working with elements,
+like comparison functions, copying, etc}.
+
+\IFRU{К примеру}{For example} \InENRU GTree \InENRU glib:
+
+\begin{lstlisting}[caption=gtree.c]
+struct _GTree
+{
+  GTreeNode        *root;
+  GCompareDataFunc  key_compare;
+  GDestroyNotify    key_destroy_func;
+  GDestroyNotify    value_destroy_func;
+  gpointer          key_compare_data;
+  guint             nnodes;
+  gint              ref_count;
+};
+\end{lstlisting}
+
+\IFRU{Задав ф-цию сравнения ключей, значений, а также ф-цию освобождения памяти}
+{By setting the functions for key/value comparison and also deallocator function} (\InENRU \TT{g\_tree\_new\_full()}),
+\IFRU{ф-ции работы с деревьями в glib смогут 
+самостоятельно сравнивать два дерева, либо освобождать все структуры связанные с деревом}
+{tree functions in glib will be able to compare two trees or to free a tree on its own}.
+

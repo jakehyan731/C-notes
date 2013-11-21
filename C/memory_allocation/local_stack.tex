@@ -14,8 +14,11 @@
 {As the flip side, one need to know exactly how much space to allocate, and also, the block cannot be shrinked or expanded,
 freed and reallocated again}.
 
-%NOTTRANSLATED
-Выделение локальных переменных происходит простым сдвигом указателя стека назад\cite[1.2.1][REBook].
-При этом с выделенной областью памати ничего не происходит, там остается то что находилось в это время
-в этом месте в стеке, скорее всего, что-то от работы предыдущих ф-ций.
+\IFRU{Выделение локальных переменных происходит простым сдвигом указателя стека назад}
+{Local variables allocated in the local stack by simple shifting stack pointer back}\cite[1.2.1][REBook].
+\IFRU{При этом с выделенной областью памати ничего больше не происходит, в новых выделенных переменных
+будет содержаться то, что находилось в это время
+в этом месте в стеке, скорее всего, что-то от работы предыдущих ф-ций}
+{During that, nothing else is happen, new variables will contain the values which were at the place in stack, most likely,
+what was leaved there from previous functions execution}.
 

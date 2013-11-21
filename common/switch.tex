@@ -39,10 +39,11 @@ switch(...)
 \IFRU{Так что если в планах имеется использовать только компилятор \ac{GCC}, то можно делать так}
 {So if you plan to use only \ac{GCC} compiler, it is possible to do so}.
 
-%NOTTRANSLATED
-\subsubsection{Объявление переменных внутри switch}
+\subsubsection{\IFRU{Объявление переменных внутри}{Variable declarations inside} switch()}
 
-Этого делать нельзя, но зато можно открывать новый блок и объявлять их уже там (в \CPP или начиная с C99):
+\IFRU{Этого делать нельзя, но зато можно открывать новый блок и объявлять их уже там (в \CPP или начиная с C99)}
+{It is not possible, but it is possible to open a new block and to declare them there (in \CPP or starting from
+C99)}:
 
 \begin{lstlisting}
 switch(...)
@@ -59,4 +60,6 @@ switch(...)
 	...
 };
 \end{lstlisting}
+
+%TODO: fall through with examples.
 
