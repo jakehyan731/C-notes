@@ -1,0 +1,33 @@
+﻿\section{\IFRU{Треды}{Threads}}
+
+%\index{C++11}
+\IFRU{В}{In the} C++11 \IFRU{ввели модификатор}{standard, a new} \IT{thread\_local} 
+\IFRU{показывающий что каждый тред будет иметь свою версию этой переменной}
+{modifier was added, showing that each thread will have its own version of the variable},
+\IFRU{и её можно инициализировать, и она расположена в}{it can be initialized, and it is located in the} \ac{TLS}
+\footnote{
+%\index{C11}
+\IFRU{В C11 также есть поддержка тредов, хотя и опциональная}
+{C11 also has thread support, optional though}}:
+
+\begin{lstlisting}[caption=C++11]
+#include <iostream>
+#include <thread>
+
+thread_local int tmp=3;
+
+int main()
+{
+	std::cout << tmp << std::endl;
+};
+\end{lstlisting}
+\footnote{\IFRU{Компилируется в}{Compiled in} GCC 4.8.1, \IFRU{но не в}{but not in} MSVC 2012}
+
+\IFRU{В исполняемом файле значение}{In the resulting executable file, the} \IT{tmp} 
+\IFRU{будет именно в}{variable will be stored in the} \ac{TLS}.
+
+\IFRU{Это удобно например для хранения глобальных переменных вроде}
+{It is useful for storing global variables like} \IT{errno}, 
+\IFRU{которая не может быть одна для всех тредов}
+{which cannot be one single variable for all threads}.
+

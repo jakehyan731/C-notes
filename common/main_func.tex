@@ -1,0 +1,44 @@
+﻿\section{\IFRU{Ф-ция main()}{main() function}}
+
+\IFRU{Стандартное определение}{Standard declaration}:
+
+\begin{lstlisting}
+int main(int argc, char* argv[], char* envp[])
+\end{lstlisting}
+
+\IT{argc} \IFRU{будет}{will be} 1 \IFRU{при отсутствии аргументов}{if no arguments present}, 
+2 ~--- \IFRU{при одном аргументе}{if one argument}, 3 ~--- \IFRU{если два}{if two}, \IFRU{итд}{etc}.
+
+\begin{itemize}
+\item argv[0] ~--- \IFRU{имя текущей запущенной программы}{current running program name}.
+\item argv[1] ~--- \IFRU{первый аргумент}{first argument}.
+\item argv[2] ~--- \IFRU{второй аргумент}{second argument}.
+\item \IFRU{итд}{etc}.
+\end{itemize}
+
+\IFRU{элементы в }{}\IT{argv} \IFRU{можно перечислять в цикле}{can be enumerated in loop}.
+\IFRU{К примеру, программа может принимать список файлов в командной строке}
+{For example, the program may take a file list in command line} (\IFRU{как это делает утилита}{like} UNIX \IT{cat} 
+\IFRU{итд}{utility does, etc}).
+\IFRU{Опции с дефисом в начале могут добавляться для отличия их от имен файлов}
+{Dashed options may be supplied in order to distinguish them from file names}.
+
+\IFRU{В аргументах \IT{main()}, \IT{envp[]} может быть пропущено, но и \IT{argc/argv[]}, и это корректно}
+{Both \IT{envp[]} and \IT{argc/argv[]} can be omitted in the main() function argument list, and it is correct}.
+\IFRU{Почему это корректно, можно прочитать в}{Read more here on why it is correct:} \cite[1.2.1]{REBook}.
+
+\IFRU{Выражение return может быть пропущено начиная с}{Return clause can be omitted in functions as of}
+C99 (\ref{no_return}) (\IFRU{тогда ф-ция}{then the} \IT{main()} 
+\IFRU{будет возвращать 0}{function will return 0}
+\footnote{\IFRU{это исключение из правил существует только для}{this rule exception is present only for}
+\IT{main()}}).
+
+\IFRU{Возвращаемое значение ф-ции}{Return value of} \IT{main()}
+\IFRU{в итоге передается в ф-цию}{function is eventually passed to the} \IT{exit()} 
+\IFRU{либо в}{function or} \IT{ExitProcess()} \InENRU win32.
+\IFRU{Обычно это возвращаемый код ошибки, который можно проверять в шеллах, итд}
+{It is usually a return error code which may be checked in command shells, etc}.
+0 \IFRU{обычно означает успех, хотя, разумеется, автор сам может определять (и переопределять) свои возвращаемые 
+коды}
+{is usually means success, but of course, it is up to author to define (or redefine) its own return codes}.
+

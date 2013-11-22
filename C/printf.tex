@@ -1,6 +1,12 @@
 ﻿\label{printf}
 \subsection{printf()}
 
+\IFRU{Ограничить длину выводимой строки}{Limit output string by size}:
+
+\begin{lstlisting}
+printf ("%.*s", size, buf);
+\end{lstlisting}
+
 \subsubsection{\IFRU{Свои собственные модификаторы в printf()}{Your own printf() format-string modifiers}}
 
 \IFRU{Часто можно испытать раздражение, когда было бы логично передать в printf(),
