@@ -39,6 +39,22 @@ int main()
 };
 \end{lstlisting}
 
+\IFRU{Точно также стурктуру можно и возвращать из ф-ции}
+{The structure is also can be returned from the function in the same way}:
+
+\begin{lstlisting}
+struct pair
+{
+	int a;
+	int b;
+};
+
+struct pair f1(int a, int b)
+{
+	return (struct pair) {.a=a, .b=b};
+};
+\end{lstlisting}
+
 \IFRU{Помимо всего прочего, о структурах также много есть в разделе}
 {Read more about structures in the section} ``\COOPname''(\ref{COOP}).
 
