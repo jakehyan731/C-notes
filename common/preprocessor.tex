@@ -35,6 +35,23 @@
 \IFRU{Прочие макросы разных \ac{OS}}{Other \ac{OS}-related macros}:
 \url{http://sourceforge.net/p/predef/wiki/OperatingSystems/}
 
+\subsection{\IFRU{Еще стандартные макросы препроцессора}{More standard preprocessor macros}}
+
+\TT{\_\_FILE\_\_}, \TT{\_\_LINE\_\_}, \TT{\_\_FUNCTION\_\_} ~--- 
+\IFRU{соответственно, имя текущего файла, номер текущей строки и имя текущей ф-ции}
+{current file name, current line number, current function name respectively}.
+
+\IFRU{Для того чтобы получить значения}
+{In order to get values of} \TT{\_\_FILE\_\_} \AndENRU \TT{\_\_FUNCTION\_\_} \InENRU UTF-16, 
+\IFRU{можно воспользоваться следующим хаком}{the following hack may be used}:
+
+\begin{lstlisting}
+#define CONCAT(x, y) x##y
+#define WIDEN(x) CONCAT(L,x)
+
+wprintf (L"%s\n", WIDEN(__FUNCTION__));
+\end{lstlisting}
+
 \subsection{``\IFRU{Пустой}{Empty}'' \IFRU{макрос}{macro}}
 
 \IFRU{Всем известны макросы не объявляющие никаких значений, например \IT{\_DEBUG}}

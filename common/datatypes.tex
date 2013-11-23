@@ -25,7 +25,7 @@ a negative value, including array indices, perhaps, unsigned type is better}.
 {For example, \IT{unsigned} type is often used in LLVM}.
 
 \IFRU{Если вы работаете с байтами, например, с байтами в памяти, то наверное лучше применять именно}
-{If you work with bytes, for example, with bytes in memory, then perhaps}
+{If you work with bytes, e.g. with bytes in memory, then perhaps}
 \IT{unsigned char}
 \IFRU{}{ is better}.
 
@@ -86,7 +86,7 @@ the variables declared with the type \IT{char}, requires as much space as}
 {Specific bytes processing may be more ``expensive'' and slower then processing 32-bit or 64-bit values
 because \ac{CPU} registers are usually has the same width as CPU bits}.
 \IFRU{И даже более того}{Even more than that}, \ac{RISC}-\IFRU{процессоры}{units}
-(\IFRU{например ARM}{ARM for example})
+(\IFRU{например ARM}{e.g. ARM})
 \IFRU{вообще могут быть неспособны работать с отдельными байтами внутренне,
 потому что имеют только 32-битные регистры}
 {may not be able to work with specific bytes internally at all because they have only 32-bit registers}.

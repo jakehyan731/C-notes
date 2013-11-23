@@ -1,11 +1,11 @@
 ﻿\section{\IFRU{Глобальные переменные}{Global variables}}
 
 \IFRU{Мода на }{}\ac{OOP}\IFRU{ и всякие такие штуки утвердила что глобальные переменные это плохо, тем не менее,
-в каких-то разумных случаях, это можно использовать, например,
+в каких-то разумных случаях, это можно использовать (не забывая о мультитредовости), например,
 для возврата большего количества информации из ф-ций}
 { hype and other such things tells us that global variables is a bad thing, nevertheless,
-sometimes it is worth to use it,
-for example, for returning large amount of information from functions}.
+sometimes it is worth to use it (keeping in mind thread-awareness),
+e.g. for returning large amount of information from functions}.
 
 \IFRU{Так, некоторые стандартные ф-ции Си возвращают код ошибки через глобальную переменную}
 {Thus, several C standard library functions are returned error code via global variable} \IT{errno}, 

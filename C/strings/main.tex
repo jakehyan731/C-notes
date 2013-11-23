@@ -27,7 +27,7 @@ to buffer overflow}\cite[1.14.2]{REBook}.
 {construction of strings and then to pass (or write) them to some place}.
 
 \IFRU{Для 1) можно использовать потоки (streams) ~--- не конструируя строку, выдавать её по порциям, например}
-{For 1) it is possible to use streams ~--- without string construction just to output it by portions, for example}:
+{For 1) it is possible to use streams ~--- without string construction just to output it by portions, e.g.}:
 
 \begin{lstlisting}
 printf ("Date: ");
@@ -172,66 +172,7 @@ characters in the strings}.
 
 \input{C/strings/return}
 \input{C/strings/std_func}
-
-\subsection{Unicode}
-
-Unicode \IFRU{в наше время это важно}{is important these days}. 
-\IFRU{Наиболее популярные способы его применения это}{Most popular approaches are}:
-
-\begin{itemize}
-\item UTF-8
-\IFRU{Популярно в UNIX-системах}{Popular in Unices}.
-\IFRU{Сильное приемущество: можно продолжать пользоваться многими стандартными (и не только) 
-ф-циями для обработки строк}
-{Significant advantage: it is still possible to use many (but not limited to) 
-standard functions for strings processing}.
-
-\item UTF-16
-\IFRU{Используется в}{Used in} Windows API.
-\end{itemize}
-
-\subsubsection{UTF-16}
-
-\IFRU{Под каждый символ отводят 16-битный тип}{For each character a 16-bit type is assigned:}
-\IT{wchar\_t}.
-
-\IFRU{Для объявления строк с таким типом, используется макрос \IT{L}}
-{For such typed string definition, \IT{L} macro is used:}:
-
-\begin{lstlisting}
-L"hello world"
-\end{lstlisting}
-
-\IFRU{Для работы с wchar\_t вместо char, имеется целый класс функций-двойников с символом w в названии,
-например}
-{There are a special class of ``twin'' functions with the ``w'' in name, intended for work with 
-wchar\_t instead of char}:
-fwprintf(), wcscmp(), wcslen(), iswalpha().
-
-\paragraph{Windows}
-
-\IFRU{В Windows, если некто хочет писать программу сразу в двух версиях, с использованием Unicode и без,
-для этого есть тип \TT{tchar}, в зависимости от объявленной переменной препроцессора \TT{UNICODE},
-он будет либо \TT{char} либо \TT{wchar\_t}}
-{There are \TT{tchar} type in the Windows API which helps us to write a program in two builds: with Unicode
-and without, depending on \TT{UNICODE} preprocessor variable definition, it will be \TT{char} or \TT{wchar\_t}}
-\footnote{\IFRU{Одновременные сборки с Unicode и без были популярна во времена популярности
-как}{Simultenous builds with Unicode and without were popular in the time of popularity of both} 
-Windows NT/2000/XP \IFRU{так и}{and} Windows 95/98/ME\IFRU{}{ lines}.
-\IFRU{Вторая линейка плохо поддерживала Unicode}
-{Unicode support in the second was not very good}}.
-\IFRU{Для этого же имеется макрос}{ }\TT{\_T(...)}\IFRU{}{ macro is also intended for this}:
-
-\begin{lstlisting}
-_T("hello world")
-\end{lstlisting}
-
-\IFRU{В зависимости от выставленной переменной препроцессора \TT{UNICODE}, она будет определена как}
-{Depending on \TT{UNICODE} preprocessor macro definition, it will be} \TT{char} \OrENRU \TT{wchar\_t}.
-
-\IFRU{В заголовочном файле \TT{tchar.h} есть масса ф-ций, меняющих свое поведение в зависимости от этой переменной}
-{In the \TT{tchar.h} header file, there are a lot of functions, 
-changing its behaviour depending on this variable}.
+\input{C/strings/unicode}
 
 \subsection{\IFRU{Списки строк}{Lists of strings}}
 

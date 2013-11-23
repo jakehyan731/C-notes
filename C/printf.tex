@@ -7,6 +7,27 @@
 printf ("%.*s", size, buf);
 \end{lstlisting}
 
+\subsubsection{\IFRU{Засада}{Caveat} \#1}
+
+\IFRU{Этот код}{This code}:
+
+\begin{lstlisting}
+char c=0x80;
+printf ("%02X", c);
+\end{lstlisting}
+
+... \IFRU{выдает}{dumps} \TT{FFFFFF80} \IFRU{потому что}{because} \IT{char} 
+\IFRU{по умолчанию знаковый}{is signed by default} (\IFRU{как в}{as in} \ac{GCC} \IFRU{так и в}{and in} \ac{MSVC}).
+\IFRU{При передаче в}{While passing it as argument to} \IT{printf()} 
+\IFRU{как аргумента, он знаково расширяется до}{it sign-extended to} \IT{int} \IFRU{и мы видим то что видим}
+{and we see what we see}.
+\IFRU{Правильно так}{This is correct}:
+
+\begin{lstlisting}
+char c=0x80;
+printf ("%02X", (unsigned char)c);
+\end{lstlisting}
+
 \subsubsection{\IFRU{Свои собственные модификаторы в printf()}{Your own printf() format-string modifiers}}
 
 \IFRU{Часто можно испытать раздражение, когда было бы логично передать в printf(),
@@ -36,7 +57,7 @@ a structure describing complex number, or a color encoded as 3 int numbers as a 
 \IFRU{В \ac{OS}}{In the} Plan9\IFRU{, и в исходниках компилятора Go, можно найти ф-цию}
 { \ac{OS}, and in Go compiler source code, we may find}
 fmtinstall()\IFRU{, для объявления нового модификатора printf-строки, например}
-{ function for a new printf-string modifier definition, for example}:
+{ function for a new printf-string modifier definition, e.g.}:
 
 \begin{lstlisting}[caption=go\textbackslash{}src\textbackslash{}cmd\textbackslash{}5c\textbackslash{}list.c]
 void

@@ -10,7 +10,7 @@ in order to determine quickly small errors}.
 \IFRU{тогда все предупреждения будут трактоваться как ошибки}
 {then all warning will be treated as errors}.
 
-\IFRU{Вот простой пример}{Here is a simple example}:
+\subsection{\IFRU{Пример}{Example} \#1}
 
 \label{no_return}
 \begin{lstlisting}
@@ -83,4 +83,67 @@ MSVC 2010 \IFRU{генерирует код, работающий точно т�
 либо не видно вовсе, либо можно и не заметить}
 {As you may see, the error is almost critical, caused by, it can be said, type, but there were no
 compiler warning, or it was inconspicuous}.
+
+\subsection{\IFRU{Пример}{Example} \#2}
+
+\IFRU{В Си-стандарте}{In the} C99 \IFRU{появился тип}{standard, new type} \IT{bool}
+\IFRU{, и согласно этому стандарту, он должен быть достаточным, чтобы
+хранить там по крайней мере один бит}{ and according to standard, it should be big enough to store at least
+one bit}.
+\IFRU{В GCC bool это байт}{It is byte in GCC}.\\
+\\
+\IFRU{Если GCC не находит объявления некоей используемой ф-ции,
+он по умолчанию считает его возвращаемый тип за \IT{int}, о чем
+предупреждает}{If GCC cannot find declaration of some function we going to use, it considers its returning
+type as \IT{int} by default and warns about it}.\\
+\\
+\IFRU{Далее, представим что имеем два файла}{Now let's consider we have two files}:
+
+\begin{lstlisting}[caption=file1.c]
+bool f1()
+{
+	...
+
+	return cond ? true : false;
+};
+\end{lstlisting}
+
+\begin{lstlisting}[caption=file2.c]
+...
+
+if (f1())
+	do_something();
+
+...
+\end{lstlisting}
+
+\IFRU{При компиляции file2.c, у GCC нет информации о f1() и он считает что возвращается \IT{int}}
+{GCC has not information about f1() while compiling file2, so it considers its return type as \IT{int}}.
+\IFRU{При компиляции file1.c GCC знает что нужно вернуть bool, но достаточно просто байт}
+{GCC knows it should return \IT{bool} while compiling file1.c, but byte is enough}.
+\IFRU{Переменные}{Variables of} \glslink{integral type}{\IFRU{интегральных типов}{integral types}}
+\IFRU{возвращаются через регистр EAX или RAX x86-процессоров}
+{are returned via EAX or RAX registers of x86-processors}
+\footnote{\IFRU{о том как возвращаются переменные интегральных типов из ф-ций, можно прочитать 
+еще здесь\cite[1.6]{REBook}}
+{read more here \cite[1.6]{REBook} on how integral type variables are returned from functions}}, 
+\IFRU{так что GCC генерирует код, который
+выставляет только младший байт этого регистра (AL) в 1 или 0, а остальную часть регистра он может вообще
+не трогать, и там может оставаться случайный мусор от исполнения другого кода}
+{so GCC generates a code which can set only low byte of the register (AL) to 1 or 0 and do not touch the rest
+regsiter part, so there might be random noise leaved from an other code execution}.
+\IFRU{Так что сгенерированный код в f1() может возвращать false записывая 0 в младший байт регистра EAX/RAX,
+тогда как в остальных битах будет мусор}
+{So, the generated code of f1() may return false by writing 0 into the lowest byte of register EAX/RAX,
+while other bits will contain noise}.
+\IFRU{С точки зрения file2.c, где принимается что f1() возвращает \IT{int}, возвращаемое число может выглядеть так}
+{From the point of view of file2.c where returning type of f1() is considered to be \IT{int}, the returning
+value may looks like}:
+\TT{0x??????00}, \IFRU{где}{where} \IT{?} ~--- \IFRU{случайные биты}{random bits}.
+\IFRU{Поэтому, даже если f1() возвращает false, условие if() может срабатывать почти всегда}
+{So even if when f1() returning false, if() condition may be triggered almost always}.\\
+\\
+\IFRU{Автору этих строк удалось найти такую ошибку только заглянув в ассемблерные листинги этих ф-ций,
+и пришлось потратить несколько часов}{This notes author once spent several hours for bug-hunting of such error,
+and he had to dive into assembly listings}.
 

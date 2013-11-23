@@ -34,10 +34,15 @@ means for consequtive argument types} \IT{int}. \\
 \IFRU{Вот зачем в заголовочных файлах нужна директива}{That is why header files may contain} \TT{extern "C"}:
 
 \begin{lstlisting}
-extern "C" 
-{
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
    void foo(int a, int b);
+
+#ifdef  __cplusplus
 }
+#endif
 \end{lstlisting}
 
 \IFRU{Это означает что}{This mean that} \TT{foo()} \IFRU{написана на Си}{is written in C},
@@ -51,5 +56,8 @@ and will have the following name in object files:} \TT{\_foo}.
 \\
 \IFRU{Таким образом, эта директива необходима для подключения Си-библиотек к \CPP-проектам}
 {Therefore, this directive is needed for linking C libraries to \CPP-projects}.
+
+\IFRU{А}{And} \IT{ifdef} \IFRU{делает эту директиву видимой только в}{makes this directive
+visible only in} \CPP.
 
 \IFRU{Еще о}{More about} \IT{name mangling}: \cite[1.17]{REBook}.
