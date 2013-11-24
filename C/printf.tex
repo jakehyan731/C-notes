@@ -7,6 +7,20 @@
 printf ("%.*s", size, buf);
 \end{lstlisting}
 
+\IFRU{Иногда бывает необходимость делать отступы в N пробелов или символов табуляции перед каждым
+выводимым сообщением}
+{Sometimes one need to print identation of N spaces or tabulation symbols before
+each printing message}:
+
+\begin{lstlisting}
+const char* ALOT_OF_SPACES="                                                     ";
+const char* ALOT_OF_TABS="\t\t\t\t\t\t\t\t\t\t\t";
+
+printf ("%.*smessage\n", current_nested_level, ALOT_OF_SPACES);
+...
+printf ("%.*smessage\n", current_nested_level, ALOT_OF_TABS);
+\end{lstlisting}
+
 \subsubsection{\IFRU{Засада}{Caveat} \#1}
 
 \IFRU{Этот код}{This code}:
