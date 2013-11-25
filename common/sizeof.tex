@@ -1,5 +1,6 @@
 ﻿\subsection{sizeof}
 
+\index{sizeof()}
 \IFRU{Обычно}{Usually}, sizeof() \IFRU{применяют к \glslink{integral type}{интегральным типам}}
 {is applied to \glslink{integral type}{integral types}}
 \IFRU{либо к структурам}{or to structures},
@@ -11,6 +12,7 @@
 	snprintf(buf, sizeof(buf), "...");
 \end{lstlisting}
 
+\index{snprintf()}
 \IFRU{В противном случае, если указывать длину массива}{Otherwise, if to specify array length} ($1024$) 
 \IFRU{в двух местах}{in both places} 
 (\IFRU{в определении \TT{buf} и как второй аргумент \TT{snprintf()}}
@@ -18,6 +20,7 @@
 \IFRU{то и изменять это значение придется каждый раз в обоих местах, а об этом легко забыть}
 {then the value is have to be changed at the both places each time, and it is easy to forget about this}.
 
+\index{wchar\_t}
 \IFRU{Если нужны wide-строки, то}{If one need wide-strings, then} sizeof() 
 \IFRU{можно применять к}{can be applied to} \IT{wchar\_t} 
 (\IFRU{который, на самом деле, 16-битный тип данных \IT{short}}

@@ -13,10 +13,12 @@ e.g. for returning large amount of information from functions}.
 время, фактически не глобальная, а находится внутри}{which is not a global anymore in our time,
 but is stored in the} \ac{TLS}.
 
+\index{Windows API!GetLastError()}
 \IFRU{В}{In} Windows API \IFRU{код ошибки можно узнать вызвав}{the error code can be determined by calling the}
 GetLastError(), 
 \IFRU{которая, на самом деле, выдает значение из}{which just takes a value from the} \ac{TIB}.
 
+\index{OpenWatcom}
 \IFRU{В кодегенераторе компилятора}{In the} OpenWatcom\IFRU{, всё находится в глобальных переменных,
 а самая главная ф-ция выглядит так}{ compiler everything is stored in the global variables, so the very
 main function looks like}:

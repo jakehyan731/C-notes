@@ -1,6 +1,7 @@
 ﻿\label{printf}
 \subsection{printf()}
 
+\index{printf()}
 \IFRU{Ограничить длину выводимой строки}{Limit output string by size}:
 
 \begin{lstlisting}
@@ -25,6 +26,7 @@ printf ("%.*smessage\n", current_nested_level, ALOT_OF_TABS);
 
 \IFRU{Этот код}{This code}:
 
+\index{char}
 \begin{lstlisting}
 char c=0x80;
 printf ("%02X", c);
@@ -50,11 +52,14 @@ printf ("%02X", (unsigned char)c);
 {It is often irritating when it is logical to pass to printf(), let's say, 
 a structure describing complex number, or a color encoded as 3 int numbers as a single entity}.
 
+\index{C++!operator<<}
+\index{ToString()}
 \IFRU{Эту проблему в Си++ решают определением ф-ции}
 {In C++ this problem is usually solved by definition} \TT{operator<<} \InENRU \TT{ostream} 
 \IFRU{для своего типа}{for the own type}, \IFRU{либо введением метода с названием}
 {or by a method definition named} \TT{ToString()} (\ref{CPPIO}). \\
 \\
+\index{Linux!printk()}
 \IFRU{В}{In} printk() (printf-\IFRU{подобная ф-ция в ядре Linux}{like function in Linux kernel})
 \IFRU{имеются дополнительные модификаторы}{there are additional modifiers exist}
 \footnote{\url{http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/printk-formats.txt}}, 
@@ -68,6 +73,8 @@ a structure describing complex number, or a color encoded as 3 int numbers as a 
 модификаторы нужные для вывода \gls{BigInt}-чисел}{function having non-standard modifiers for
 \gls{BigInt}-numbers outputting}. \\
 \\
+\index{Plan9}
+\index{Go}
 \IFRU{В \ac{OS}}{In the} Plan9\IFRU{, и в исходниках компилятора Go, можно найти ф-цию}
 { \ac{OS}, and in Go compiler source code, we may find}
 fmtinstall()\IFRU{, для объявления нового модификатора printf-строки, например}
@@ -143,7 +150,7 @@ in the format string will be met}.
 \IFRU{Кстати, эта ф-ция и сама использует другие объявленные модификаторы, такие как}
 {By the way, that function also uses other defined modifiers like} \%A, \%D, \IFRU{итд}{etc}. \\
 \\
-\IFRU{В}{The} Glibc\footnote{\IFRU{Стандартной библиотеке в Linux}{The Linux standard library}} 
+\IFRU{В}{The} \gls{glibc}
 \IFRU{есть нестандартное расширение}{has non-standard extension}
 \footnote{\url{http://www.gnu.org/software/libc/manual/html_node/Customizing-Printf.html}}, 
 \IFRU{позволяющее объявлять свои модификаторы, но это}{allowing to define our own

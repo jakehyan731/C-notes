@@ -110,6 +110,7 @@ elements backwards from the end of the list}.
 
 \subsubsection{Windows API}
 
+\index{Windows API}
 \IFRU{Здесь, да и много где в ядре Windows, применяются две примитивные структуры}
 {Here, and also in a lot of places of Windows kernel, two primitive data structures are used}:
 
@@ -149,6 +150,7 @@ struct color
 
 \subsubsection{Linux}
 
+\index{Linux}
 \IFRU{В ядре Linux работа с простыми двусвязными списками, описывается в файле}
 {Doubly-linked list routines in Linux kernel are declared in the file} /include/linux/list.h
 \footnote{\url{http://lxr.free-electrons.com/source/include/linux/list.h}}.
@@ -159,13 +161,14 @@ struct color
 
 \subsubsection{Glib}
 
+\index{Glib!GList}
 \IFRU{Напрашивается мысль, а нельзя ли выделить отдельную структуру для элемента списка, 
 и не встраивать лишних полей в свои структуры}
 {One might ask, is not it possible to declare a perticular structure for the list element,
 and not to embed it to own structures}?
 \IFRU{Можно, например, так сделано в}{Yes, for example, that is how it is done in} glist.h
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/glist.h} 
-\url{https://developer.gnome.org/glib/2.37/glib-Doubly-Linked-Lists.html}} \InENRU glib:
+\url{https://developer.gnome.org/glib/2.37/glib-Doubly-Linked-Lists.html}} \InENRU Glib:
 
 \begin{lstlisting}
 struct _GList

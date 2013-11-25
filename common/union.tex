@@ -22,6 +22,7 @@ element (double) ~--- 8 bytes}.
 \TT{union} \IFRU{часто используют для обращения к какому-то типу данных как к другому}
 {is often used as a way to access some data type as another data type}.
 
+\index{SSE}
 \IFRU{Например, как известно, каждый XMM-регистр в SSE может представлять собой 16 байт, 8 16-битных слов,
 4 32-битных слова, 2 64-битных слова, 4 float-значения и 2 double-значения}{For example, as we know,
 each XMM-register in SSE may be represented as 16 bytes, 8 16-bit words, 3 32-bit words, 2 64-bit words,
@@ -91,6 +92,7 @@ typedef union _u_EFLAGS
 to access specific bits}.
 \IFRU{Либо наоборот, модифицировать биты, затем прочитать поле}{Or conversely, to modify bits
 and then to read the} \IT{flags}\IFRU{}{ field}.
+\index{Linux}
 \IFRU{Такого очень много в исходниках ядра Linux}{A lot of such examples you may find in the Linux kernel}.
 
 \IFRU{Еще один пример использования \IT{union} для определения порядка байтов (endianness)}
@@ -173,8 +175,8 @@ a floating point number, and a text string}.
 \IFRU{следовательно, имея много таких блоков в памяти рядом, указатель на каждый
 блок будет всегда выровнен по 8-байтной границе}{this means, by storing a lot of such blocks in memory
 back to back, a pointer to each block will always be aligned on 8-byte border}.
-\IFRU{И даже более того, в malloc() glibc всегда выделяет блоки
-по 8-байтной границе}{Even more than that, glibc malloc() always allocates memory blocks by
+\IFRU{И даже более того, в malloc() \gls{glibc} всегда выделяет блоки
+по 8-байтной границе}{Even more than that, \gls{glibc} malloc() always allocates memory blocks by
 8-byte border}. 
 \IFRU{Следовательно, указатель на подобный блок всегда будет иметь нули в трех младших битах}
 {Hence, the pointer to such block will always have zero in 3 lowest bits}.
@@ -190,6 +192,7 @@ back to back, a pointer to each block will always be aligned on 8-byte border}.
 {That is the way to make memory footprint smaller and to get rid of data type defining \IT{enum}
 from the structure}.
 
+\index{LISP}
 \IFRU{Это очень популярно в LISP-интерпретаторах и компиляторах, потому что атомы в LISP-е это как раз вот такие
 структуры, описывающие каждую переменную, их может быть очень много, и использование младших бит указателя
 здорово экономит память}

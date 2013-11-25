@@ -1,5 +1,6 @@
 ﻿\section{\IFRU{Препроцессор}{Preprocessor}}
 
+\index{\Preprocessor}
 \IFRU{Препроцессор обрабатывает директивы начинающиеся с}
 {The preprocessor handles directives started with} \# ~--- \#define, \#include, \#if, \IFRU{итд}{etc}.
 
@@ -41,6 +42,7 @@
 \IFRU{соответственно, имя текущего файла, номер текущей строки и имя текущей ф-ции}
 {current file name, current line number, current function name respectively}.
 
+\index{UTF-16}
 \IFRU{Для того чтобы получить значения}
 {In order to get values of} \TT{\_\_FILE\_\_} \AndENRU \TT{\_\_FUNCTION\_\_} \InENRU UTF-16, 
 \IFRU{можно воспользоваться следующим хаком}{the following hack may be used}:
@@ -61,6 +63,9 @@ or absence}.
 \IFRU{Вот еще пример полезного ``пустого'' макроса}
 {Here is another example of useful ``empty'' macro}:
 
+\index{\Preprocessor!IN}
+\index{\Preprocessor!OUT}
+\index{\Preprocessor!OPTIONAL}
 \IFRU{В заголовочных файлах}{In the} Windows API \IFRU{мы можем увидеть такое}{header files we
 can find this}:
 
@@ -101,7 +106,7 @@ IN, OUT \AndENRU OPTIONAL ~--- \IFRU{это}{are} ``\IFRU{пустые}{empty}''
 {They carry no information for compiler at all, they are intended for documenting purposes,
 to mark function arguments}.
 
-\subsection{\IFRU{Частые ошибки}{Frequent caveats}}
+\subsection{\IFRU{Частые ошибки}{Frequent mistakes}}
 
 \subsubsection{\#1}
 

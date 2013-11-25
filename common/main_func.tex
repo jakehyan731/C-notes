@@ -18,8 +18,9 @@ int main(int argc, char* argv[], char* envp[])
 
 \IFRU{элементы в }{}\IT{argv} \IFRU{можно перечислять в цикле}{can be enumerated in loop}.
 \IFRU{К примеру, программа может принимать список файлов в командной строке}
-{For example, the program may take a file list in command line} (\IFRU{как это делает утилита}{like} UNIX \IT{cat} 
-\IFRU{итд}{utility does, etc}).
+{For example, the program may take a file list in command line}
+\index{UNIX!cat}
+(\IFRU{как это делает утилита}{like} UNIX \IT{cat} \IFRU{итд}{utility does, etc}).
 \IFRU{Опции с дефисом в начале могут добавляться для отличия их от имен файлов}
 {Dashed options may be supplied in order to distinguish them from file names}.
 
@@ -27,12 +28,15 @@ int main(int argc, char* argv[], char* envp[])
 {Both \IT{envp[]} and \IT{argc/argv[]} can be omitted in the main() function argument list, and it is correct}.
 \IFRU{Почему это корректно, можно прочитать в}{Read more here on why it is correct:} \cite[1.2.1]{REBook}.
 
+\index{C99}
 \IFRU{Выражение return может быть пропущено начиная с}{Return clause can be omitted in functions as of}
 C99 (\ref{no_return}) (\IFRU{тогда ф-ция}{then the} \IT{main()} 
 \IFRU{будет возвращать 0}{function will return 0}
 \footnote{\IFRU{это исключение из правил существует только для}{this rule exception is present only for}
 \IT{main()}}).
 
+\index{exit()}
+\index{Windows API!ExitProcess()}
 \InENRU \ac{CRT} \IFRU{возвращаемое значение ф-ции}{the return value of} \IT{main()}
 \IFRU{в итоге передается в ф-цию}{function is eventually passed to the} \IT{exit()} 
 \IFRU{либо в}{function or} \IT{ExitProcess()} \InENRU win32.

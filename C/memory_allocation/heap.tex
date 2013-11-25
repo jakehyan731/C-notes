@@ -11,6 +11,12 @@ where it can divide it within its sole discretion}.
 the heap is annuled automatically and \ac{OS} will not need to free
 all allocated blocks one by one}.
 
+\index{malloc()}
+\index{calloc()}
+\index{realloc()}
+\index{free()}
+\index{C++!new}
+\index{C++!delete}
 \IFRU{Для работы с кучей есть стандартные библиотечные ф-ции}
 {There are standard C functions to work with the heap:}
 malloc(), calloc(), realloc(), free(), 
@@ -50,6 +56,7 @@ must be different}.
 без которой легко наделать ошибок}
 {Heap using require a programmer's discipline, it is easy to make a lot
 of mistakes without one}.
+\index{RAII}
 \IFRU{Возможно поэтому, считается что \ac{PL} с \ac{RAII} как Си++
 либо \ac{PL} со сборщиками мусора (Python, Ruby) легче}
 {Probably because of this, it is widely considered that \ac{PL} with 
@@ -97,6 +104,7 @@ the block is being allocated, and you can see, where and under what conditions i
 \IFRU{Писать в коде комментарии для каждого выделяемого блока памяти нудно, но очень полезно}
 {It is boring to write a comment for each block allocated, but very useful}.
 \IFRU{Потом легко увидеть, под что была выделена память}{Then it is easy to see, what was memory allocated for}.
+\index{Oracle RDBMS}
 \IFRU{Я впервые увидел эту идею в}{I first saw this idea in the} Oracle RDBMS.
 \IFRU{Помимо всего прочего, там еще и ведется
 статистика, под какие блоки было выделено больше памяти, её можно легко увидеть}
@@ -199,13 +207,14 @@ will not work properly}.
 HEAP[Application.exe]: HEAP: Free Heap block 211a10 modified at 211af8 after it was freed
 \end{lstlisting}
 
+\index{\IFRU{Переполнение кучи}{Heap overflow}}
 \IFRU{Подобные ошибки эксплуатируются авторами эксплоитов}
 {Such errors are exploited by exploit authors}: 
 \IFRU{если знать что вы можете изменить структуры данных
 менеджера памяти нужным вам образом, вы можете добиться какого-то нужного вам поведения программы}
 {if to know you can alter heap manager structures in a way you need, you may achieve some 
 specific program behaviour you need}
-(\IFRU{это называется}{this is called} heap overflow
+(\IFRU{это называется переполнение кучи (heap overflow)}{this is called heap overflow}
 \footnote{\url{https://en.wikipedia.org/wiki/Heap_overflow}}).
 
 \IFRU{Довольно распространенный метод борьбы с подобными ошибками: это просто дописывать ``guard''-ы с обоих сторон
@@ -233,6 +242,8 @@ or NULL in case of memory shortage}.
 если вы используете много памяти, думать об этом все же надо}
 {Of course, in our time of cheap memory, this is rare problem, nevertheless, if one use it a lot,
 one should consider it}.
+\index{xmalloc()}
+\index{xrealloc()}
 \IFRU{Проверять возвращаемый указатель после каждого вызова
 malloc() неудобно, так что довольно популярный метод это писать свои функции-переходники с названием 
 xmalloc(), xrealloc(), вызывающие malloc()/realloc(), но проверяющие их результат и падающие в случае
@@ -241,6 +252,7 @@ xmalloc(), xrealloc(), вызывающие malloc()/realloc(), но прове�
 to write own thunk functions named xmalloc(), xrealloc() calling malloc()/realloc(), which checks
 returning result and exiting in case of error}.
 
+\index{git}
 \IFRU{Интересно упомянуть, как ведет себя}{It is interesting to note how} xmalloc() \IFRU{в}{behaves in} git:
 
 \begin{lstlisting}
@@ -297,6 +309,7 @@ to spot visually if someone attempting to use some data from the block after it 
 
 \IFRU{Некоторые константы от}{Some constants from} Microsoft:
 
+\index{Magic numbers}
 \begin{lstlisting}
 * 0xABABABAB : Used by Microsoft's HeapAlloc() to mark "no man's land" guard bytes after allocated heap memory
 * 0xABADCAFE : A startup to this value to initialize all free memory to catch errant pointers
@@ -310,9 +323,10 @@ to spot visually if someone attempting to use some data from the block after it 
 
 \subsubsection{\IFRU{Еще частые ошибки}{Other common mistakes}}
 
+\index{stdlib.h}
 \IFRU{Если не включить заголовочный файл}{If not to include header file} stdlib.h, 
 GCC \IFRU{считает возвращаемое значение неизвестной ф-ции}{treat returning value of} malloc() 
-\IFRU{за}{as} int \IFRU{и постоянно ругается на приведение типов}{and warns about types}.
+\IFRU{за}{as} \IT{int} \IFRU{и постоянно ругается на приведение типов}{and warns about types}.
 
 \IFRU{С другой стороны}{On the other hand}, \InENRU \CPP, 
 \IFRU{результат malloc() все же нужно приводить к нужному вам типу}{malloc() result should be casted
@@ -330,6 +344,7 @@ more than one time (previous calls are ``hiding'' from the sight)}.
 
 \subsubsection{\IFRU{Еще методы борьбы}{Other bug hunting techniques}}
 
+\index{Valgrind}
 \IFRU{Однако, может оказаться так, что ошибки в программе у вас есть, а перекомпилировать её по каким-то причинам
 вы не можете}
 {However, you may be in the situation, when there are bugs in program, but you are not able to recompile it

@@ -1,5 +1,6 @@
 ﻿\subsection{assert}
 
+\index{assert()}
 \IFRU{Как известно, этот макрос часто используется для валидации}
 {This macro is commonly used for validating}
 \footnote{\IFRU{используется также такой термин как ``инвариант'' и ``sanitization'' в англ.яз.}{
@@ -11,7 +12,8 @@
 
 \IFRU{Вот то о чем нужно помнить: стандартный макрос assert() доступен только в отладочных (debug) сборках}
 {Here is what one should remember: standard assert() macro is available only in debug builds}.
-\IFRU{В release, где объявлена переменная NDEBUG, все выражения как бы исчезают}{In release, where NDEBUG
+\index{\Preprocessor!NDEBUG}
+\IFRU{В release, где объявлена переменная NDEBUG, все выражения как бы исчезают}{In a release build, where NDEBUG
 is defined, all statements are ``disappearing''}.
 \IFRU{Поэтому писать, например,}{That is why it is not correct to write}
 \IT{assert(f=malloc(...))}\IFRU{ неверно}{}.
@@ -24,6 +26,7 @@ is defined, all statements are ``disappearing''}.
 \IFRU{Например, в исходниках}{For example, in the} LLVM\footnote{\url{http://llvm.org/}}
 \IFRU{можно встретить такое}{source code we may find this}:
 
+\index{LLVM}
 \begin{lstlisting}
 assert(Index < Length && "Invalid index!");
 ...

@@ -32,6 +32,7 @@ int main()
 {The author ``forgot'' to add \IT{return} in f1() function}.
 \IFRU{Тем не менее}{Nevertheless}, GCC 4.8.1 \IFRU{компилирует этот пример молча}{compiles this silently}.
 
+\index{C99}
 \IFRU{Это связано с тем что в стандарте Си}{It is because in the both C standard} 
 (\cite[6.9.1/12]{C99TC3}) \IFRU{и в}{and in}
 \CPP (\cite[6.6.3/2]{CPP11}) \IFRU{допустимо если ф-ция не возвращает значение}{is okay if a function
@@ -44,6 +45,7 @@ does not return a value when it should}.
 (in main) 14
 \end{lstlisting}
 
+\index{printf()}
 \IFRU{Откуда взялось число $14$}{Where the $14$ number is came from}?
 \IFRU{Это то что вернула ф-ция}{This is what returns the} printf() \IFRU{вызванная из}{called from} f1().
 \IFRU{Возвращаемые результаты ф-ций}{Returned functions results of} 
@@ -86,6 +88,7 @@ compiler warning, or it was inconspicuous}.
 
 \subsection{\IFRU{Пример}{Example} \#2}
 
+\index{C99!bool}
 \IFRU{В Си-стандарте}{In the} C99 \IFRU{появился тип}{standard, new type} \IT{bool}
 \IFRU{, и согласно этому стандарту, он должен быть достаточным, чтобы
 хранить там по крайней мере один бит}{ and according to standard, it should be big enough to store at least
@@ -143,7 +146,7 @@ value may looks like}:
 \IFRU{Поэтому, даже если f1() возвращает false, условие if() может срабатывать почти всегда}
 {So even if when f1() returning false, if() condition may be triggered almost always}.\\
 \\
-\IFRU{Автору этих строк удалось найти такую ошибку только заглянув в ассемблерные листинги этих ф-ций,
+\IFRU{Автору этих строк удалось найти такую ошибку только заглянув в отладчик и ассемблерные листинги этих ф-ций,
 и пришлось потратить несколько часов}{This notes author once spent several hours for bug-hunting of such error,
-and he had to dive into assembly listings}.
+and he had to dive into the debugger and assembly listings}.
 

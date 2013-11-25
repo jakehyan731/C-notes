@@ -1,4 +1,5 @@
 ﻿\subsubsection{scanf(), fscanf(), sscanf()}
+\index{scanf()}
 
 \IFRU{Извечный спор, что лучше, текстовые файлы или бинарные}
 {A well-known holy-war, is text files are better than binary files or otherwise}.
@@ -100,6 +101,7 @@ int main(int argc, char *argv[])
 };
 \end{lstlisting}
 
+\index{\IFRU{Регулярные выражения}{Regular expressions}}
 \TT{\%16[\^{}=]} ~--- \IFRU{это отдаленно напоминает регулярные выражения}
 {is somewhat looks like regular expression}.
 \IFRU{Означает, читать 16 любых символов, кроме
@@ -117,8 +119,8 @@ to 16 and 60 characters}.
 ведь там длина парамера (первое поле) длиннее}{That is why error predictabily occuring on the fifth string, because
 it has larger length of parameter (first field)}.
 
-\IFRU{Так можно парсить несложные форматы, даже}{Thus it is possible to parse simple file formats, even} CSV
-\footnote{Comma-separated values: \url{https://en.wikipedia.org/wiki/Comma-separated_values}}.
+\IFRU{Так можно парсить несложные форматы, даже}{Thus it is possible to parse simple file formats, even}
+\ac{CSV}.
 
 \IFRU{Однако, нельзя забывать о том что scanf()-функции не способны прочитать пустую строку там где задается 
 модификатор \%s}

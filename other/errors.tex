@@ -4,10 +4,12 @@
 {The simplest way to indicate to caller about success is to return boolean value},
 \IT{false} ~--- \IFRU{в случае ошибки}{in case of error},
 \AndENRU \IT{true} \IFRU{в случае успеха}{in case of success}.
+\index{Windows API}
 \IFRU{Такого очень много в}{A lot of such functions are present in the} Windows API.
 \IFRU{А если нужно передать больше информации, то оставить код ошибки в \ac{TIB}, откуда затем получить 
 это значение вызвав}{And if one need to return more information, the error code may be left in \ac{TIB},
 from where it is possible to get it using} GetLastError(). 
+\index{errno}
 \IFRU{Либо, в}{Or, in the} UNIX-\IFRU{средах, оставлять код ошибки в глобальной переменной}{enviroments,
 to leave the error code in the global variable} \IT{errno}.
 
@@ -15,6 +17,7 @@ to leave the error code in the global variable} \IT{errno}.
 
 \IFRU{Еще один интересный способ передать больше информации в возвращаемом значении}
 {Another interesting approach to pass more information in returning value}.
+\index{IBM DB2}
 \IFRU{Например, в документации}{For example, in the manuals of the} IBM DB2 9.1, \IFRU{мы можем увидеть такое}
 {we may spot this}:
 

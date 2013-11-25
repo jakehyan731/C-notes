@@ -10,7 +10,8 @@
 {Data structures related to collections may also contain pointers to the functions working with elements,
 like comparison functions, copying, etc}.
 
-\IFRU{К примеру}{For example} \InENRU GTree \InENRU glib:
+\index{Glib!GTree}
+\IFRU{К примеру}{For example} \InENRU GTree \InENRU Glib:
 
 \begin{lstlisting}[caption=gtree.c]
 struct _GTree
@@ -27,7 +28,7 @@ struct _GTree
 
 \IFRU{Задав ф-цию сравнения ключей, значений, а также ф-цию освобождения памяти}
 {By setting the functions for key/value comparison and also deallocator function} (\InENRU \TT{g\_tree\_new\_full()}),
-\IFRU{ф-ции работы с деревьями в glib смогут 
+\IFRU{ф-ции работы с деревьями в Glib смогут 
 самостоятельно сравнивать два дерева, либо освобождать все структуры связанные с деревом}
-{tree functions in glib will be able to compare two trees or to free a tree on its own}.
+{tree functions in Glib will be able to compare two trees or to free a tree on its own}.
 

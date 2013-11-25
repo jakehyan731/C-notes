@@ -1,4 +1,5 @@
 ﻿\label{alloca}
+\index{alloca()}
 \subsection{alloca()}
 
 \IFRU{Ф-ция alloca() выделяет блок памяти в локальном стеке точно также,
@@ -18,6 +19,9 @@ void f(size_t s, ...)
 	char a[s];
 };
 \end{lstlisting}
+
+\index{Variable length array}
+\IFRU{Это называется}{This is called} variable length array.
 
 \IFRU{Впрочем, внутри, это работает так же как и}
 {Internally it works just as} alloca()\IFRU{}{ however}.

@@ -2,46 +2,9 @@
 
 \input{C/assert}
 
-\subsection{\IFRU{Разница между}{The difference between} stdout \AndENRU stderr}
-
-\IT{stdout} \IFRU{это то что выводится на консоль при помощи вызова}{is what is dumped
-to the console with the help of function} \IT{printf()} \OrENRU \IT{cout} \InENRU \CPP.
-\IT{stdout} \IFRU{это буферизированный вывод, так что, пользователь,
-обычно того не зная, видит вывод порциями}{is buffered output, so a user, usually not aware of this,
-sees output by portions}.
-\IFRU{Бывает так что программа выдает что-то используя}
-{Sometimes, the program output something using} \IT{printf()} \OrENRU \IT{cout} \IFRU{и тут же падает}
-{and then crashes}.
-\IFRU{Если это попадает в буфер, но буфер не успевает ``сброситься'' (flush) в консоль,
-то пользователь ничего не увидит}{If something goes to the buffer, but buffer did not have time to ``flush''
-into the console, a user will not see anything}.
-\IFRU{Это бывает неудобно}{This is unconvenient sometimes}.
-\IFRU{Таким образом, для вывода более важной информации, в том числе отладочной, удобнее использовать}
-{Thus, for dumping more important information, including debugging, it is more convenient to use} \IT{stderr}
-\OrENRU \IT{cerr}.
-
-\IT{stderr} \IFRU{это не буферизированный вывод, и всё что попадает в этот поток при помощи}
-{is not bufferized output, so, anything comes in this stream with the help of} 
-\TT{fprintf(stderr,...)} \OrENRU \IT{cerr},
-\IFRU{появляется в консоли тут же}{appearing in the console instantly}.
-
-\IFRU{Не следует также забывать, что из-за отсутствия буфера, вывод в}{It is also worth noting
-that because of buffer absence, output to the} \IT{stderr} \IFRU{медленнее}{is slower}.
-
-\IFRU{Чтобы направлять}{In order to redirect} \IT{stderr}
-\IFRU{в другой файл при запуске процесса, в командной строке (Windows/UNIX) можно указывать}
-{to the other file while process running, this can be specified in the command line (Windows/UNIX)}:
-
-\begin{lstlisting}
-process 2> debug.txt
-\end{lstlisting}
-
-... \IFRU{это направит вывод}{this will redirect} \IT{stderr} 
-\IFRU{в заданный файл (потому что номер потока для вывода ошибок~--- 2)}
-{into the file specified (because number of the error output stream is 2)}.
-
 \subsection{UNIX time}
 
+\index{UNIX}
 \IFRU{В UNIX-среде очень популярно представление даты и времени в формате UNIX time}
 {In UNIX-environment UNIX time representation is very popular}.
 \IFRU{Это просто 32-битное число, отсчитывающее
@@ -71,6 +34,7 @@ that will be a year when a 32-bit number will overflow, i.e., $2^{32}$ seconds w
 \label{memcpy}
 \subsection{memcpy()}
 
+\index{memcpy()}
 \IFRU{Поначалу трудно запомнить порядок аргументов в ф-циях}{It is hard to memorize arguments order
 in the functions} memcpy(), strcpy()\IFRU{}{ at first}.
 \IFRU{Чтобы было легче, можно представлять знак ``='' (``равно'') между аргументами}
@@ -79,6 +43,8 @@ in the functions} memcpy(), strcpy()\IFRU{}{ at first}.
 \label{bzero}
 \subsection{bzero() \AndENRU memset()}
 
+\index{bzero()}
+\index{memset()}
 \TT{bzero()} \IFRU{это ф-ция просто обнуляющая блок памяти}{is a function which just fills memory block to
 zeroes}.
 \IFRU{Для этого обычно используют}{The} \TT{memset()}\IFRU{}{ is often used in the place}.
@@ -94,6 +60,7 @@ will be silent because the filling byte is specified by \IT{int} type}.
 \IFRU{С другой стороны, её нет в стандарте Си, но она есть в}{On the other hand,
 it is absent in C standard, however, it is present in} \ac{POSIX}.
 
+\index{Windows API!ZeroMemory()}
 \IFRU{А в}{In the} Windows API \IFRU{для этих же целей применяется}{there are present} ZeroMemory()
 \footnote{\url{http://msdn.microsoft.com/en-us/library/windows/desktop/aa366920(v=vs.85).aspx}}
 \IFRU{}{ for the same purpose}.
@@ -102,6 +69,7 @@ it is absent in C standard, however, it is present in} \ac{POSIX}.
 
 \subsection{atexit()}
 
+\index{atexit()}
 \IFRU{При помощи}{With the help of} \TT{atexit()} 
 \IFRU{можно добавить ф-цию, автоматически вызываемую перед выходом из вашей программы}
 {it is possible to add a function automatically called before each exit from your program}.
@@ -156,6 +124,8 @@ int main()
 
 \subsection{setjmp(), longjmp()}
 
+\index{setjmp()}
+\index{longjmp()}
 \IFRU{В каком-то смысле, это реализация исключений в Си}{In some sense, it is C exceptions implementation}.
 
 \TT{jmp\_buf} \IFRU{это просто структура содержащая в себе набор регистров,
@@ -172,6 +142,7 @@ restores their values}.
 {It is often used for returning from a deep places to outside, usually, in case of errors}.
 \IFRU{Собственно, как и исключения в}{Just like exceptions in} \CPP.
 
+\index{Oracle RDBMS}
 \IFRU{Например, в Oracle RDBMS, когда происходит некая ошибка, и пользователь видит код и сообщение об ошибке,
 в реальности, там срабатывает}
 {For example, in the Oracle RDBMS, when some error occured, user sees a code and error message,
@@ -185,6 +156,7 @@ the} \TT{longjmp()} \IFRU{откуда-то из глубины}{is triggered so
 {it is not an issue to set return points in arbitrary points of program and return to them when one need}.
 
 \label{goto}
+\index{goto}
 \IFRU{Пофантазируя, можно даже сказать что}
 {We can even imagine the} \TT{longjmp()} 
 \IFRU{это такой супер-мега-goto, обходящий блоки, ф-ции, и восстанавливающий состояние стека}
@@ -196,12 +168,14 @@ the} \TT{longjmp()} \IFRU{откуда-то из глубины}{is triggered so
 \IFRU{Выделенная память остается выделенной, никаких деструкторов, как в \CPP, вызвано не будет}
 {Allocated memory will remain so, no destructors as in \CPP will be called}.
 \IFRU{Никакого}{There are no such thing as} \ac{RAII}\IFRU{ здесь нет}{}.
+\index{alloca()}
 \IFRU{С другой стороны, так как часть стека просто аннулируется, память выделенная при помощи}
 {On the other hand, since the part of the stack is just annuled, the memory allocated with the help of}
 \TT{alloca()}(\ref{alloca}) \IFRU{будет также аннулирована}{will also be annuled}.
 
 \subsection{stdarg.h}
 
+\index{stdarg.h}
 \IFRU{Тут ф-ции для обработки переменного количества аргументов}
 {There are functions intended for variable arguments handling}.
 \IFRU{Как минимум ф-ции семейства}{At least the functions of the} printf() \AndENRU scanf() 
@@ -209,6 +183,7 @@ the} \TT{longjmp()} \IFRU{откуда-то из глубины}{is triggered so
 
 \subsubsection{\IFRU{Засада}{Caveat} \#1}
 
+\index{va\_list}
 \IFRU{Переменную типа}{The variable of the type} va\_list 
 \IFRU{можно использовать только один раз, если нужно больше, их нужно копировать}
 {may be used only once, if one need more, it should be copied}:
@@ -225,6 +200,8 @@ va_end(v1);
 
 \subsection{srand() \AndENRU rand()}
 
+\index{srand()}
+\index{rand()}
 \ac{PRNG} \IFRU{из стандартной библиотеки очень низкокачественный,
 к тому же генерирует только числа в пределах 0..32767}
 {from the standard library has a very poor quality, besides, it is able to generate numbers only in 0..32767

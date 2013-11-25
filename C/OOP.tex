@@ -15,10 +15,12 @@ to program in OOP style in ``pure'' C}.
 \subsection{\IFRU{Инициализация структур}{Structures initialization}}
 \label{COOPInit}
 
-\IFRU{В Си++ у классов имеются конструкторы}{C++ has class constructors}.
+\IFRU{В \CPP у классов имеются конструкторы}{\CPP has class constructors}.
 \IFRU{Если вам нужно каким-то особенным образом инициализировать
 структуру, вам и в Си придется делать подобную ф-цию}{If one need to initialize structure in some
 special way, one would write a special function for it in C as well}.
+\index{calloc()}
+\index{bzero()}
 \IFRU{Но если структура простая, то её можно инициализировать при помощи}
 {But if it simple structure, it is possible to initialize it with} calloc()
 \footnote{\IFRU{Это тоже самое что и malloc() + заполнение выделенной памяти нулями}
@@ -26,9 +28,13 @@ special way, one would write a special function for it in C as well}.
 \OrENRU bzero()(\ref{bzero}).
 
 \IFRU{Все int-переменные становятся нулями}{All int-variables are set to zeroes}.
+\index{C99!bool}
+\index{C++!bool}
+\index{Windows API!BOOL}
 \IFRU{Нулевое значение}{Zero value} bool \InENRU C99(\ref{C99}) \AndENRU \CPP \IFRU{это}{is} false,
 \IFRU{так же как и}{same as} BOOL \InENRU Windows API.
 \IFRU{Все указатели становятся}{All pointers are set to} NULL.
+\index{IEEE 754}
 \IFRU{И даже вещественный ноль представляемый в формате}{And even floating point $0.0$ in} 
 IEEE 754 \IFRU{это также все ноли во всех битах}{format is zero bits in all positions}.
 
@@ -41,6 +47,7 @@ NULL can mean ``object absence''}.
 \IFRU{Если в структуре есть ссылки на другие структуры, то их нужно освобождать}
 {If structure has pointers to another structures, they are also must be freed}.
 \IFRU{В простом случае, обычным вызовом}{In simple case, it is just a call to} free().
+\index{free()}
 \IFRU{Кстати, вот почему free() может принимать на вход NULL,
 это чтобы можно было просто писать}
 {By the way, that is why NULL is valid argument for free(), it allows to write} 
@@ -49,8 +56,11 @@ NULL can mean ``object absence''}.
 
 \subsection{\IFRU{Копирование структур}{Structures copying}}
 
+\index{memcpy()}
 \IFRU{Если структура простая, то её можно копировать обычным побайтовым копированием}
 {If the structure is simple, it is possible to copy it with a call to} memcpy()(\ref{memcpy}).
+\index{Shallow copy}
+\index{Deep copy}
 \IFRU{Если в такой манере скопировать структуру, в которой есть указатели на другие структуры,
 то это будет называться}
 {If to copy structures having pointers to another structures in this manner, it will be called}
@@ -63,6 +73,7 @@ NULL can mean ``object absence''}.
 обычный массив символов фиксированной длины}
 {That is why it may be more convenient to store a string in the structure as 
 an fixed-size array of characters}.
+\index{Windows API}
 \IFRU{Такого, например, очень много в}{For example, a lot of such cases in the} Windows API.
 \IFRU{Такую структуру легко скопировать, её хранение требует меньших накладных расходов
 \footnote{overhead} в куче}{Such structure is easier to copy, it requires smaller
@@ -91,7 +102,8 @@ field, this is a compile-stage protection}\cite[1.7.3]{REBook}.
 
 \IFRU{Впрочем, можно попытаться ``защитить'' структуру ``от посторонних глаз''}
 {However, it is possible to ``protect'' a structure from ``prying eyes''}.
-\IFRU{Например, в glib, имеется библиотека для работы с деревьями}{For example, glib has a library
+\index{Glib!GTree}
+\IFRU{Например, в Glib, имеется библиотека для работы с деревьями}{For example, Glib has a library
 intended for work with trees}.
 \IFRU{В заголовочном файле}{In the header file}
 gtree.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.h}} 
@@ -99,9 +111,9 @@ gtree.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.h}}
 (\IFRU{она есть только в}{it is present only in the} gtree.c
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.c}}), 
 \IFRU{а есть только}{there are only} forward declaration(\ref{forwarddeclaration}).
-\IFRU{Так разработчики glib могут понадеятся что пользователи GTree 
+\IFRU{Так разработчики Glib могут понадеятся что пользователи GTree 
 постараются не пользоваться отдельными полями в структуре напрямую}
-{Thus glib developers may have a hope that GTree users will not try to use specific fields in
+{Thus Glib developers may have a hope that GTree users will not try to use specific fields in
 the structure directly}.
 
 \IFRU{Но у такого метода есть и обратная сторона}{The technique does have its flip side}: 

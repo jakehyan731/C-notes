@@ -2,14 +2,18 @@
 
 \paragraph{bool}
 
+\index{C++!bool}
+\index{C99!bool}
 bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он есть и в Си, начиная с}
 {but also in the C starting at} C99(\ref{C99}) (stdbool.h).
 
+\index{Windows API!BOOL}
 \IFRU{В Windows API принят тип BOOL, это синоним \IT{int}}
 {There are synonymous to the \IT{int} type in Windows API ~--- BOOL}.
 
 \paragraph{\IFRU{Знаковые или беззнаковые}{Signed or unsigned}?}
 
+\index{char}
 \IFRU{Знаковые типы}{Signed types} (int, char) 
 \IFRU{используются куда чаще беззнаковых}{are used much more often than unsigned} (unsigned int, unsigned char)
 \footnote{\IFRU{Стандартном не закреплен тип}{The data type of} \IT{char}\IFRU{}{ is not fixed in the standard}, \IFRU{но в}{but in} \ac{GCC} \AndENRU \ac{MSVC} \IFRU{по умолчанию это именно знаковый тип}
@@ -21,6 +25,7 @@ bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он ес
 значение, в т.ч., индексы массивов, наверное лучше применять беззнаковый тип}
 {However, in the sense of the code self-documenting, if you declare a variable which will not be assigned to
 a negative value, including array indices, perhaps, unsigned type is better}.
+\index{LLVM}
 \IFRU{Например, в LLVM очень часто используется \IT{unsigned}}
 {For example, \IT{unsigned} type is often used in LLVM}.
 
@@ -29,6 +34,7 @@ a negative value, including array indices, perhaps, unsigned type is better}.
 \IT{unsigned char}
 \IFRU{}{ is better}.
 
+\index{Integer overflow}
 \IFRU{К тому же, это может немного защититься от ошибок связанных с}
 {Aside from that, this may help protecting from the errors related to} integer overflow\cite{Phrack3C0A}.
 
@@ -46,6 +52,7 @@ void f(int size)
 };
 \end{lstlisting}
 
+\index{malloc()}
 \IFRU{Если}{If} \IT{size} \IFRU{будет, например}{will be, for example}, $-1$, 
 \IFRU{то}{then} malloc() \IFRU{вызовется с аргументом}{will be called with an argument}
 \TT{0xffffffff} (\IFRU{это}{it is} $4294967295$).
@@ -61,6 +68,8 @@ void f(int size)
 
 \paragraph{char \OrENRU uint8\_t \IFRU{вместо}{instead of} int?}
 
+\index{char}
+\index{int}
 \IFRU{Может показаться что если какая-то переменная всегда будет в пределах}
 {One may think that is a value will always be in} $0..100$\IFRU{, то незачем выделять под нее 32-битный}
 { limits, then it is not necessary to allocate the whole 32-bit}
@@ -85,6 +94,8 @@ the variables declared with the type \IT{char}, requires as much space as}
 регистры \ac{CPU} обычно имеют ту же ширину что и разрядность процессора}
 {Specific bytes processing may be more ``expensive'' and slower then processing 32-bit or 64-bit values
 because \ac{CPU} registers are usually has the same width as CPU bits}.
+\index{RISC}
+\index{ARM}
 \IFRU{И даже более того}{Even more than that}, \ac{RISC}-\IFRU{процессоры}{units}
 (\IFRU{например ARM}{e.g. ARM})
 \IFRU{вообще могут быть неспособны работать с отдельными байтами внутренне,
@@ -132,6 +143,7 @@ the first field and the offset of the second field will be +4}.
 
 \paragraph{x86-64 \OrENRU AMD64}
 
+\index{x86-64}
 \IFRU{На новых 64-битных x86-процессорах, тип}{On the new 64-bit x86 CPUs, the} \IT{int/unsigned int} 
 \IFRU{оставили 32-битным, вероятно, в целях совместимости}{is still 32-bit, perhaps, for compatibility}.
 \IFRU{Так что если вы хотите использовать 64-битные значения, можно использовать}

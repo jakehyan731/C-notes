@@ -1,6 +1,8 @@
 ﻿\subsection{bsearch(), lfind()}
 \label{bsearch_lfind}
 
+\index{bsearch()}
+\index{lfind()}
 \IFRU{Удобные ф-ции для поиска чего-либо где-либо}{Handy functions for searching for something somewhere}.
 
 \IFRU{Разница между ними только в том что}{The difference between them is that} lfind() 
@@ -19,6 +21,7 @@ in the array of pointers to a strings}:
 
 \lstinputlisting{C/lfind.c}
 
+\index{stricmp()}
 \IFRU{Свой собственный}{We need our own} stricmp() \IFRU{нужен потому что}{because} lfind() 
 \IFRU{будет передавать в него указатель на искомую строку}{will pass a pointer to the string we looking for},
 \IFRU{а также на место в массиве где записан указатель на строку, но не сама строка}
@@ -27,6 +30,7 @@ in the array of pointers to a strings}:
 массив строк фиксированной длины, тогда можно было бы воспользоваться стандартным stricmp()}
 {If it would be an array of fixed-size strings, then usual stricmp() could be used here instead}.
 
+\index{qsort()}
 \IFRU{Кстати, точно также ф-ция сравнения задается и для}{By the way, likewise comparison function
 is used for} qsort().
 
@@ -40,6 +44,7 @@ where the} \TT{my\_stricmp()} \IFRU{сработала выдав}{function was 
 
 \IFRU{Реализуя ф-цию сравнивания, можно искать строку в каком угодно массиве}
 {By implementing comparison function, we can search a string in any array}.
+\index{OpenWatcom}
 \IFRU{Пример из}{Example from} OpenWatcom:
 
 \begin{lstlisting}[caption=\textbackslash{}bld\textbackslash{}pbide\textbackslash{}defgen\textbackslash{}scan.c]
@@ -95,7 +100,9 @@ it with the string in the first field of structure}.
 {Probably, unsorted array can be sorted by qsort() before bsearch() usage, if you like the idea}. \\
 \\
 \IFRU{Точно так же можно искать что угодно, где угодно}
-{Likewise, it is possible to search anything anywhere}. \IFRU{Пример из}{The example from} BIND 9.9.1
+{Likewise, it is possible to search anything anywhere}.
+\index{BIND}
+\IFRU{Пример из}{The example from} BIND 9.9.1
 \footnote{\url{https://www.isc.org/downloads/bind/}}:
 
 \begin{lstlisting}[caption=backtrace.c]

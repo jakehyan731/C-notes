@@ -11,6 +11,7 @@ in programming generally}.
 \IFRU{Намного удобнее передавать такие значения в отдельных битах}{Much more handy is to pass such values
 in specific bits}.
 
+\index{findfirst()}
 \IFRU{К примеру, стандартная ф-ция}{For example, the standard C function} findfirst() 
 \IFRU{возвращает структуру о найденном файле, где аттрибуты файла передаются
 такими флагами}{returns a structure about file it found where file attributes are encoded as}:
@@ -27,6 +28,7 @@ in specific bits}.
 \IFRU{Конечно, передавать каждый аттрибут отдельной переменной типа}{Of course, it would not be very
 compact to pass each attribute by a} \IT{bool} \IFRU{было бы очень неэкономично}{variable}.
 
+\index{Windows API!CreateFile()}
 \IFRU{И напротив, для указания флагов в ф-цию можно исползовать битовые поля}
 {Contrariwise, it is possible to use bit fields for passing flags into the function}.
 \IFRU{Например}{For example}, CreateFile()
@@ -56,6 +58,7 @@ checking/setting/resetting}:
 #define REMOVE_BIT(var, bit)    ((var) &= ~(bit))
 \end{lstlisting}
 
+\index{bool}
 \IFRU{С другой стороны, необходимо помнить, что операции выделения отдельного бита из значения типа}
 {On the other hand, one need to keep in mind that operation of isolation of each bit in the value of type} \IT{int}
 \IFRU{обычно даются \ac{CPU} ``дороже'', чем работа с типом \IT{bool} в 32-битном регистре}

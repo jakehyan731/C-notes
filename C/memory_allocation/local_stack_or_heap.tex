@@ -1,7 +1,7 @@
 ﻿\subsection{\IFRU{Локальный стек или куча}{Local stack or heap}?}
 
-\IFRU{Конечно, в локальном стеке выделение памяти происходит быстрее}{Of course, allocation in the
-local stack is much faster}.
+\IFRU{Конечно, в локальном стеке выделение памяти происходит намного быстрее}
+{Of course, allocation in the local stack is much faster}.
 
 \IFRU{Например: в}{For example: in} tracer
 \footnote{\url{\IFRU{http://yurichev.com/tracer-ru.html}{http://yurichev.com/tracer-en.html}}}
@@ -25,7 +25,7 @@ fill it and return a pointer to it, or NULL in case of disassembling error}.
 {However, disassembler and x86 CPU emulator works in loop, a huge number of iterations per second and efficiency
 is crucial}.
 \IFRU{Так что, основной цикл у меня выглядит примерно так}
-{So main loop I wrote in that way}:
+{So the main loop I wrote in that way}:
 
 \begin{lstlisting}
 while(true)

@@ -1,5 +1,6 @@
 ﻿\subsection{\IFRU{Массивы}{Arrays}}
 
+\index{C99}
 \IFRU{В}{In} C99(\ref{C99})
 \IFRU{можно передавать массив в аргументах ф-ции}{it is possible to pass array in the function arguments}.
 
@@ -10,6 +11,7 @@ including zero in a string}
 (\IFRU{узнать, встречается ли байт}{let's determine if the byte} (\IT{c})
 \IFRU{в массиве байт}{is present in a byte array})(\ref{memchr}):
 
+\index{memchr()}
 \begin{lstlisting}
 if (memchr ("\x12\x34\x56\x78\x00\xAB", c, 6))
 	...
@@ -27,6 +29,8 @@ unsigned int find_max_value (unsigned int *array, size_t array_size);
 unsigned int max_value=find_max_value ((unsigned[]){ 0x123, 0x456, 0x789, 0xF00 }, 4);
 \end{lstlisting}
 
+\index{bsearch()}
+\index{lfind()}
 \IFRU{Поиск в массиве можно реализовать при помощи ф-ций}
 {Search for the element in the array can be implemented with the help of} bsearch() \OrENRU lfind()(\ref{bsearch_lfind}),
 \IFRU{поиск и вставку при помощи}{search and insertion with the help of} lsearch()

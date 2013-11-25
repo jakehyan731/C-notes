@@ -4,6 +4,7 @@
 {are the one of the most important structures in computer science}.
 \IFRU{Чаще всего они используются для хранения пар}{Most often these are used for}
 ``\IFRU{ключ-значение}{key-values}''\IFRU{}{ pairs storage}.
+\index{C++!STL!map}
 \IFRU{Это то что в \CPP \ac{STL} реализовано в std::map}
 {This is what implemented in std::map in \CPP \ac{STL}}.
 
@@ -12,6 +13,10 @@
 \IFRU{С другой стороны, добавление элемента в дерево может происходить медленнее}
 {On the other hand, element insertion may be slower}.
 
+\index{POSIX!tsearch()}
+\index{POSIX!twalk()}
+\index{POSIX!tfind()}
+\index{POSIX!tdelete()}
 \IFRU{В стандартных библиотеках Си, нет работы с деревьями, но кое-что есть в}
 {There are no C standard functions working with a trees, but some things are present in} \ac{POSIX}
 (tsearch(), twalk(), tfind(), tdelete())
@@ -21,10 +26,12 @@
 {This family of functions are used actively in the} Bash 4.2, BIND 9.9.1, \ac{GCC} ~--- 
 \IFRU{там можно посмотреть, как это использовать}{it can be seen there how it can be used}.
 
+\index{Glib!GTree}
 \IFRU{В}{The} Glib \IFRU{имеется также свои ф-ции для работы с деревьями, определенные в}
 {also has the tree functions declared in the} gtree.h
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.h}}.
 
+\index{C++!STL!set}
 \IFRU{Множество}{The set} (std::set \InENRU \CPP \ac{STL}) 
 \IFRU{можно реализовать так же просто при помощи бинарных деревьев, достаточно просто не хранить значение, а хранить только ключ}
 {can be implemented as binary trees as well, one may just not to store value and store only key}.

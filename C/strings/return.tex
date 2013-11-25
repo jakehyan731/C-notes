@@ -47,6 +47,7 @@ return the pointer to the buffer we allocated}.
 
 \subsection{2: \IFRU{Через глобальный массив символов}{Via global array of characters}}
 
+\index{asctime()}
 \IFRU{Так делает стандартная ф-ция}{That is how} \TT{asctime()}\IFRU{}{ it does}.
 \IFRU{Следует помнить, что нужно использовать возвращенную строку
 перед каждым следующим вызовом}{Keep in mind that string should be used before each subsequent call
@@ -72,7 +73,7 @@ printf("date2: %s\n", date2);
 и вывод \TT{printf()} будет одинаковым}
 {because \TT{date1} and \TT{date2} pointers will point to one place and \TT{printf()} output will be the same}. \\
 \\
-\IFRU{В git в hex.c}{In hex.c of git}\footnote{\url{https://github.com/git/git/blob/master/hex.c}} 
+\IFRU{В git в \IT{hex.c}}{In \IT{hex.c} of git}\footnote{\url{https://github.com/git/git/blob/master/hex.c}} 
 \IFRU{можно найти такое}{we may find this}:
 
 \lstinputlisting{C/strings/git_hex.c}

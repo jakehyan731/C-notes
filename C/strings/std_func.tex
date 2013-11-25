@@ -1,5 +1,6 @@
 ﻿\subsection{\IFRU{Стандартные ф-ции в Си для работы со строками}{Standard string C functions}}
 
+\index{getcwd()}
 \IFRU{Некоторые ф-ции, например, getcwd() не только заполняют буфер, но и возвращают указатель на него}
 {Some functions like getcwd() not only filling the buffer, but also returns a pointer to it}.
 \IFRU{Это для того чтобы можно было писать что-то вроде}
@@ -20,25 +21,33 @@ do_something (buf);
 
 \subsubsection{strstr() \AndENRU memmem()}
 
+\index{strstr()}
 strstr() \IFRU{применяется для поиска строки в другой строке, либо чтобы узнать, есть ли там такая строка вообще}
 {is intended for searching for a substring in another string, or to get to know,
 are there substring present in it anyway}.
 
+\index{memmem()}
 memmem() \IFRU{можно применять с этими же целями, но для поиска по буферу, в котором могут быть нули,
 либо по части строки}{can be used with the same intentions, but for searching in the buffer which may
 contain zeroes, ot in the part of a string}.
 
-\label{memchr}
 \subsubsection{strchr() \AndENRU memchr()}
 
+\index{strchr()}
 strchr() \IFRU{применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще}
 {is used for searching for character in a string or to get to know if there such character present}.
 
+\label{memchr}
+\index{memchr()}
 memchr() \IFRU{можно применять с этими же целями, но для поиска по части строки}{can be used with the same
 intentions, but for searching in the part of a string}.
 
 \subsubsection{atoi(), atof(), strtod(), strtof()}
 
+\index{atoi()}
+\index{atof()}
+\index{strtod()}
+\index{strtof()}
 \IFRU{Ф-ции }{}atoi()/atof() \IFRU{не могут сигнализировать об ошибке}{cannot signal an error},
 \IFRU{а}{but} strtod()/strtof()
 \IFRU{, делая то же самое}{ while doing the same thing} ~--- \IFRU{могут}{can signal}.
@@ -47,6 +56,7 @@ intentions, but for searching in the part of a string}.
 
 \subsubsection{strspn(), strcspn()}
 
+\index{strspn()}
 \TT{strspn()} \IFRU{часто применяется для того чтобы удостовериться, что некая строка полностью состоит из
 нужных символов}{is often used to get to be sure that a string has only characters from the list we defined}:
     
@@ -65,6 +75,7 @@ const char *whitespaces = " \n\r\t";
 *buf += strspn(*buf, whitespaces); // skip whitespaces at start
 \end{lstlisting}
 
+\index{strcspn()}
 \TT{strcspn()} \IFRU{это обратная ф-ция}{is inverse function},
 \IFRU{её можно использовать для пропуска всех символов в начале строки, не попадающих
 под множество символов}{it can be used for skipping all symbols at the string beginning,
@@ -78,6 +89,8 @@ s += strspn(s, whitespaces); // then skip whitespaces
 
 \subsubsection{strtok() \AndENRU strpbrk()}
 
+\index{strtok()}
+\index{strpbrk()}
 \IFRU{Обе ф-ции служат для разбиения строки на подстроки, отделенные друг от друга разделительными символами}
 {Both functions are used for delimiting string into substrings, divided by special characters}
 \footnote{delimiter}.

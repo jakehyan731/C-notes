@@ -56,6 +56,7 @@ functions}:
 \IFRU{Эта особенность есть не только в Си/Си++}{This feature is not unique for C/C++}
 \footnote{\IFRU{Здесь список}{Here is a list of} \ac{PL} \IFRU{где присутствует}{where}
 \IT{short-circuit evaluation}\IFRU{}{ exist}\url{https://en.wikipedia.org/wiki/Short-circuit_evaluation}.
+\index{UNIX!bash}
 \IFRU{Кстати, хотя это и не про Си, но все же интересно}{It is not about C, but interesting nevertheless}:
 \IFRU{в bash если писать}{if to write in bash} \IT{cmd1 \&\& cmd2 \&\& cmd3}, 
 \IFRU{то каждая следующая команда будет исполняться только если предыдущая закончилась с успехом}
@@ -87,6 +88,7 @@ in brackets}: \IT{if ((a\&1)==0)}.
 
 \IFRU{Эта операция часто используется для инвертирования результатов действия ф-ций}
 {The operation is often used for function results invertion}.
+\index{strcmp()}
 \IFRU{Например}{For example}, strcmp() \IFRU{в случае равенства строк возвращает}{in case of strings
 equivalence, returns} 0.
 \IFRU{Поэтому можно писать}{So we can write}:
@@ -100,6 +102,7 @@ if (!strcmp(str1, str2))
 
 ... \IFRU{вместо}{instead of} \TT{if (strcmp (...)==0)}. \\
 \\
+\index{bool}
 \IFRU{Также, два подряд восклицательных знака применяется для трасформирования любого значения в тип bool
 по правилу}{Also, two consecutive exclamation points can be used for
 transforming any value into \IT{bool} type}: 0 ~--- false (0); \IFRU{не ноль}{not zero} ~--- true (1).

@@ -4,12 +4,15 @@
 \ac{PL} более
 высокого уровня}{There are no features in C to handle strings like those present in higher level PLs}.
 
+\index{strcat()}
+\index{sprintf()}
 \IFRU{Часто жалуются на неудобную
 конкатенацию строк (то есть, склеивание) в Си при помощи функции strcat().
 Также, многих раздражает sprintf(), под который нельзя толком зараннее предсказать, 
 сколько нужно выделять памяти}{People often complain about awkward string concatenation (i.e., glueling together).
 Also irritating sprintf(), for which is hard to predict how much space will need}.
 
+\index{strcpy()}
 \IFRU{Копирование строк при помощи
 strcpy() также неудобно ~--- нужно думать, сколько же выделить байт под буфер}
 {Strings copying with strcpy() is not easy as well ~--- one need to think how many bytes must be allocated
@@ -37,7 +40,9 @@ dump_a(stdout, a);
 printf ("\n");
 \end{lstlisting}
 
-\IFRU{Подобное заменяется в Си++ выводом в \IT{ostream}}{This is what \IT{ostream} in C++ is intended for}:
+\index{C++!ostream}
+\IFRU{Подобное заменяется в \CPP выводом в \IT{ostream}}
+{This is what \IT{ostream} in C++ is intended for}:
 
 \begin{lstlisting}
 cout << "Date: " << Date_ToString(date) << " a=" << a_ToString(a) << "\n";
@@ -59,12 +64,14 @@ of such messages, there may be string concatenation overhead}. \\
 \\
 \IFRU{Но все же строки иногда конструировать надо}{Anyway, sometimes strings must be constructed}.
 
+\index{Glib}
 \IFRU{Есть какие-то библиотеки для этого}{There are some libraries for this}.
 \IFRU{К примеру, в}{For example, in} Glib\footnote{\url{https://developer.gnome.org/glib/}} 
 \IFRU{есть}{there are}
 gstring.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.h}}/
 gstring.c\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.c}}. 
 
+\index{git}
 \label{strbuf}
 \IFRU{А в исходниках git можно найти}
 {In the git source code we may find} strbuf.h\footnote{\url{https://github.com/git/git/blob/master/strbuf.h}}/
@@ -80,6 +87,7 @@ in it, current buffer length and current string in buffer length}.
 {With the help of various functions, it is possible to add to buffer other string or characters,
 which, in turn, will grow or shrink}.
 
+\index{sprintf()}
 \IFRU{В}{In} \IT{strbuf.c} \IFRU{из}{from} git 
 \IFRU{есть в том числе и ф-ция}{there are also function} \IT{strbuf\_addf()}, 
 \IFRU{работающая как}{working just like} \IT{sprintf()}, 
@@ -96,6 +104,7 @@ buffer overflows are virtually impossibly if not to work with the structures by 
 
 \begin{itemize}
 \item
+\index{Glib!GString}
 \IFRU{Инициализация структуры}{Structure} strbuf \IFRU{или}{or} GString\IFRU{}{ initialization}.
 
 \item
@@ -115,6 +124,7 @@ buffer overflows are virtually impossibly if not to work with the structures by 
 \IFRU{Освобождаем структуру}{Structure deinitialization}.
 \end{itemize}
 
+\index{Java}
 \IFRU{Кстати, конструирование строк чем-то напоминает}{By the way, string construction is resembling somehow}
 Buffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html}}, 
 ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} \AndENRU
@@ -122,6 +132,7 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 
 \subsection{\IFRU{Хранение длины строки}{String length storage}}
 
+\index{Pascal}
 \IFRU{Всегда хранить длину строки ~--- это было принято в реализациях \ac{PL} Pascal}
 {Storing always string length ~--- it was done in Pascal \ac{PL} implementations}.
 \IFRU{Не смотря на исходы святых войн\footnote{holy wars} между приверженцами Си и Pascal}
@@ -133,6 +144,7 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 каждой модификации}
 {just because conveniences outweigh the need of length value recalculation after each modification}.
 
+\index{strlen()}
 \IFRU{Например}{For example}, \IT{strlen()}
 \footnote{\IFRU{подсчет длины строки}{string length calculation}} 
 \IFRU{больше не нужен вообще, длина строки известна всегда}{is not needed at all, string length is always known}.
@@ -145,6 +157,7 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 at the beginning and if they are not equals to each other, return \IT{false} without starting to compare
 characters in the strings}.
 
+\index{Oracle RDBMS}
 \IFRU{В всетевых библиотеках}{In the network libraries of} Oracle RDBMS, 
 \IFRU{в функции работы со строками, зачастую передается строка и, 
 отдельным аргументом, её длина}
