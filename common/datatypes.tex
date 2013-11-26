@@ -1,5 +1,45 @@
 ﻿\subsubsection{\IFRU{Типы данных}{Datatypes}}
 
+\paragraph{long double}
+
+\index{float}
+\index{double}
+\index{long double}
+\index{IEEE 754}
+\IT{float} \IFRU{это}{is} 32-\IFRU{битное число в формате}{bit number in} IEEE 754\IFRU{}{ format},
+\IT{double} \IFRU{это 64-битное, но FPU-сопроцессор в x86 оперирует 80-битными числами}
+{is 64-bit variable but x86 FPU-coprocessor is in fact operating 80-bit numbers}.
+\IFRU{Для них имеется тип}{There is another type for those:} \IT{long double}, 
+\IFRU{он поддерживается в}{it is supported in the} \ac{GCC} \IFRU{но не в}{but not in} \ac{MSVC}.
+
+\paragraph{int}
+
+\IFRU{В}{The} \IT{int} 
+\IFRU{обычно столько же бит сколько и разрядность регистров общего назначения процессора}
+{usually occupies the same number of bits as general purpse CPU registers}.
+\index{int}
+\index{x86-84}
+\IFRU{Однако, в}{However, in the} x86-64, 
+\IFRU{для лучшей обратной совместимости, ширина}{for better backward compatibility, } \IT{int} 
+\IFRU{так и осталась 32 бита}{width is still 32 bits}.
+
+\paragraph{short, long \AndENRU long long}
+
+\index{short}
+\index{long}
+\index{long long}
+\IFRU{По крайней мере в}{At least in the} \ac{MSVC} \AndENRU \ac{GCC} \IT{short} 16-\IFRU{битный}{bit},
+\IT{long} ~--- 32-\IFRU{битный}{bit},
+\IFRU{а}{and} \IT{long long} ~--- 64-\IFRU{битный}{bit}. \\
+\\
+\index{stdint.h}
+\index{C99}
+\IFRU{Во избежании путанницы, в}{In order to avoid confusion} \IT{stdint.h} \IFRU{(по крайней мере в C99) имеются типы}{(at least in C99) has new
+types:} \IT{int8\_t}, \IT{uint8\_t},
+\IT{int16\_t}, \IT{uint16\_t},
+\IT{int32\_t}, \IT{uint32\_t},
+\IT{int64\_t}, \IT{uint64\_t}.
+
 \paragraph{bool}
 
 \index{C++!bool}
@@ -7,9 +47,11 @@
 bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он есть и в Си, начиная с}
 {but also in the C starting at} C99(\ref{C99}) (stdbool.h).
 
+\IFRU{И в}{Both in the} MSVC \IFRU{и в}{and} GCC, bool \IFRU{занимает}{occupies} 1 \IFRU{байт}{byte}.
+
 \index{Windows API!BOOL}
 \IFRU{В Windows API принят тип BOOL, это синоним \IT{int}}
-{There are synonymous to the \IT{int} type in Windows API ~--- BOOL}.
+{There is a synonymous to the \IT{int} type in Windows API ~--- BOOL}.
 
 \paragraph{\IFRU{Знаковые или беззнаковые}{Signed or unsigned}?}
 
