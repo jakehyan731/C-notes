@@ -1,0 +1,50 @@
+\chapter{\IFRU{Инструменты от GNU}{GNU tools}}
+
+\label{gcov}
+\section{gcov}
+
+\index{GNU!gcov}
+(\IT{Coverage}) \IFRU{Позволяет показать исполненные строки кода и количество}{Allows to show
+code lines executed and count}:
+
+\IFRU{Попробуем простой пример}{Let's try simple example}:
+
+\lstinputlisting{gcov_test.c}
+
+\IFRU{Компилируем так}{Compile it as} 
+(\TT{-g} \IFRU{означает добавление отладочной информации к выходному исполняемому файлу}{means adding debug
+information to the resulting executable file},
+\TT{-O0} ~--- \IFRU{отсутствие оптимизации кода}{absence of code optimization}
+\footnote{\IFRU{Это важно потому что генерируемые инструкции для процессора
+должны быть сгруппированны и соответствовать строкам на Си/\CPP}
+{It is very important because generated CPU instructions should be grouped and match C/\CPP code lines}.
+\index{GNU!gdb}
+\IFRU{Оптимизация может сильно исказить эту связь и}{Optimization may distort this relation
+and} gcov (\IFRU{и еще и}{and also} gdb) 
+\IFRU{не сможет корректно показывать строки исходника}{will not be able to show source code lines correctly}.},
+\IFRU{остальное}{the rest} ~--- \IFRU{параметры для gcov}{gcov parameters}):
+
+\begin{lstlisting}
+gcc -std=c99 -g -O0 -fprofile-arcs -ftest-coverage gcov_test.c -o gcov_test
+\end{lstlisting}
+
+GCC \IFRU{вставляет в код ф-ции собирающие статистику}
+{inserts a statistics collection functions into the code}.
+\IFRU{Конечно, это замедляет работу самой программы}{Of course, it slows down execution time}.
+\IFRU{После исполнения, появляются файлы}{After the program execution, these files are generated:}
+gmon.out, gcov\_test.gcda, gcov\_test.gcno.
+
+\IFRU{Запускаем}{Let's run} gcov:
+
+\begin{lstlisting}
+gcov gcov_test
+\end{lstlisting}
+
+\IFRU{Получим в результате текстовый файл}{We will got the text file} gcov\_test.c.gcov:
+
+\lstinputlisting[caption=gcov\_test.c.gcov]{gcov_test.c.gcov}
+
+\IFRU{Строки маркированные}{Strings marked as} \TT{\#\#\#\#\#} \IFRU{не исполнялись}{was not executed}.
+\IFRU{Это может быть очень полезным для составления тестов}{This can be particularly useful for tests writing}.
+
+% TODO: gprof example

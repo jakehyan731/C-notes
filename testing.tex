@@ -1,0 +1,32 @@
+\chapter{\IFRU{Тестирование}{Testing}}
+
+\IFRU{Тестирование это крайне важно}{Testing is crucial}.
+\IFRU{Самый простой тест это некая программа, вызывающая ваши ф-ции и сверяющая результаты с корректными}
+{Simplest possible test is a program calling your functions and comparing their results with correct ones}:
+
+\begin{lstlisting}
+void should_be_true(bool a)
+{
+	if (a==false)
+		die ("one of tests failed\n");
+};
+int main()
+{
+	should_be_true(f1(...)==correct_value1);
+	should_be_true(f2(...)==correct_value2);
+	should_be_true(f3(...)==correct_value3);
+};
+\end{lstlisting}
+
+\IFRU{Тесты должны работать автоматически (без внешнего вмешательства) 
+и запускаться как можно чаще, очень хорошо если
+после каждого изменения кода}{Tests should be work automatically (without human intervention) and be running
+as frequently as possible, ideally after each code change}.
+
+\IFRU{Для составления тестов очень полезен}{For tests writing,} gcov (\ref{gcov}) 
+\IFRU{либо иной инструмент для вывода покрытия (coverage)}{ or any other coverage tool is very useful}.
+\IFRU{Хороший тест должен проверять работоспособность всех ф-ций, а также всех частей ф-ций}
+{Good test should test correctness of all functions, but also of all function parts}.
+
+\IFRU{Другие статьи и советы о тестировании}{Other testing articles and advices}: \cite{NJN}.
+
