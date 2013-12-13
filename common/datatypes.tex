@@ -16,7 +16,7 @@
 
 \IFRU{В}{The} \IT{int} 
 \IFRU{обычно столько же бит сколько и разрядность регистров общего назначения процессора}
-{usually occupies the same number of bits as general purpse CPU registers}.
+{usually occupies the same number of bits as general purpose CPU registers}.
 \index{int}
 \index{x86-84}
 \IFRU{Однако, в}{However, in the} x86-64, 
@@ -34,7 +34,7 @@
 \\
 \index{stdint.h}
 \index{C99}
-\IFRU{Во избежании путанницы, в}{In order to avoid confusion} \IT{stdint.h} \IFRU{(по крайней мере в C99) имеются типы}{(at least in C99) has new
+\IFRU{Во избежании путанницы, в}{In order to avoid confusion,} \IT{stdint.h} \IFRU{(по крайней мере в C99) имеются типы}{(at least in C99) has new
 types:} \IT{int8\_t}, \IT{uint8\_t},
 \IT{int16\_t}, \IT{uint16\_t},
 \IT{int32\_t}, \IT{uint32\_t},
@@ -68,8 +68,8 @@ bool \IFRU{есть в}{is present in the} \CPP, \IFRU{но также он ес
 {However, in the sense of the code self-documenting, if you declare a variable which will not be assigned to
 a negative value, including array indices, perhaps, unsigned type is better}.
 \index{LLVM}
-\IFRU{Например, в LLVM очень часто используется \IT{unsigned}}
-{For example, \IT{unsigned} type is often used in LLVM}.
+\IFRU{Например, в LLVM очень часто используется \IT{unsigned} там где обычно можно было бы использовать \IT{int}}
+{For example, \IT{unsigned} type is often used in LLVM at the places where \IT{int} might be used}.
 
 \IFRU{Если вы работаете с байтами, например, с байтами в памяти, то наверное лучше применять именно}
 {If you work with bytes, e.g. with bytes in memory, then perhaps}
