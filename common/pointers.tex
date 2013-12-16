@@ -115,6 +115,13 @@ has type} \IT{const char*}, \IFRU{то есть, распологается в �
 {It is however not mean that a strings and other objects are copied misspendinly in these \ac{PL} ~---
 a pointers are used there internally likewise as in C, but this mechanisms are hidden from the programmer}.
 
+\index{call by value}
+\index{call by reference}
+\IFRU{Передача значения в ф-цию также называется}
+{Passing a value to a function is also called} ``call by value'' \OrENRU ``pass by value'' 
+\IFRU{в то время как передача указателя на объект называется}
+{while passing a pointer to an object is called} ``call by reference'' \OrENRU ``pass by reference''.
+
 \subsubsection{\IFRU{Синтаксический сахар для}{Syntactic sugar for} array[index]}
 
 \IFRU{Ради упрощения, можно сказать что в Си нет массивов вообще,
