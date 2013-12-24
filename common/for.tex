@@ -49,12 +49,20 @@ points to the list element}:
 3: 1
 \end{lstlisting}
 
-\IFRU{Но к сожалению, определять счетчики или \glslink{iterator}{итераторы} вместе с типами в теле самого for() вот так нельзя}
-{However, it is not possible to declare \glslink{iterator}{iterators} with its types in for() clause}:
+\IFRU{Но к сожалению, определять счетчики или \glslink{iterator}{итераторы} вместе с разными типами в теле самого for() вот так нельзя}
+{However, it is not possible to declare \glslink{iterator}{iterators} with its different types in for() clause}:
 
 \begin{lstlisting}
 	for (int i=0, std::list<int>::iterator it=l.begin(); it!=l.end(); i++, it++)
 \end{lstlisting}
+
+\IFRU{Тем не менее, переменные одного типа определять можно}
+{Nevertheless, variables of the same type can be defined}:
+
+\begin{lstlisting}
+	for (int i=0, j=10; i<20; i++, j++)
+\end{lstlisting}
+
 
 \subsubsection{continue}
 
