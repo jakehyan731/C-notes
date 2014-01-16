@@ -46,7 +46,7 @@ for (struct some_object *i=list; i!=NULL; i=i->next)
 {One need first to find the last element}:
 
 \begin{lstlisting}
-for (struct some_object *i=list; i!=NULL; i=i->next);
+for (struct some_object *i=list; i->next!=NULL; i=i->next);
 struct some_object *last_element=i;
 \end{lstlisting}
 
@@ -108,6 +108,14 @@ in case of element deletion}.
 elements backwards from the end of the list}.
 \IFRU{Но памяти на это тратится немного больше}{But the memory overhead is slightly larger}.
 
+\IFRU{Нередко, двусвязный список также является кольцевым, т.е., первый и последний элементы
+указывают друг на друга}{Often, doubly-linked list is also circular, i.e., the first and the
+last elements are pointing to each other}.
+\IFRU{Например, так сделано в std::list в C++ STL}{For example, that is how it is done
+in std::list in C++ STL} \cite[2.4.2]{REBook}.
+\IFRU{Это значительно ускоряет поиск последнего элемента (не нужно перебирать все элементы)}
+{This simplifying searching of the last element (one do not need to enumerate all elements)}.
+
 \subsubsection{Windows API}
 
 \index{Windows API}
@@ -129,7 +137,7 @@ typedef struct _SINGLE_LIST_ENTRY {
 они скорее предназначены для встраивания в другие структуры}
 {These structures are not intended for independent use, but rather they are intended for embedding
 into another structures}.
-\IFRU{Например, нам нужно объеденить в список структуру описывающую цвет}
+\IFRU{Например, нам нужно объединить в список структуру описывающую цвет}
 {For example, we need to unite a color-describing structure into a list}:
 
 \begin{lstlisting}

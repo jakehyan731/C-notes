@@ -30,13 +30,13 @@ is crucial}.
 \begin{lstlisting}
 while(true)
 {
-	struct disassembled_instruction;
+	struct disassembled_instruction DA;
 
-	bool DA_success=disassemble(&disassembled_instruction...);
+	bool DA_success=disassemble(&DA...);
 	if (DA_success==false)
 		break;
 
-	bool emulate_success=try_to_emulate(&disassembled_instruction);
+	bool emulate_success=try_to_emulate(&dDA);
 	if (emulate_success==false)
 		break;
 
@@ -111,7 +111,7 @@ the previous calls}.
 
 \IFRU{Возможно, это уже слишком, но вы поняли идею}{Maybe it is overkill, but you got the idea}.
 
-\IFRU{Таким образом, если вы выделяете память под небольшие структуры зараннее известного размера, или если скорость
+\IFRU{Таким образом, если вы выделяете память под небольшие структуры заранее известного размера, или если скорость
 очень важна, то лучше подумать насчет выделения в локальном стеке}
 {Thus, if you allocate small structures of known size and if speed is crucial, you may consider allocating
 them in the local stack}.
