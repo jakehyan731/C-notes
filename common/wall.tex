@@ -148,5 +148,27 @@ value may looks like}:
 \\
 \IFRU{Автору этих строк удалось найти такую ошибку только заглянув в отладчик и ассемблерные листинги этих ф-ций,
 и пришлось потратить несколько часов}{This notes author once spent several hours for bug-hunting of such error,
-and he had to dive into the debugger and assembly listings}.
+and he had to dive into the debugger and assembly listings}. \\
+\\
+\IFRU{Вариация этой ошибки}{A variant of this bug}:
+
+\begin{lstlisting}[caption=file1.c]
+uint64_t f1()
+{
+	return some_large_number;
+};
+\end{lstlisting}
+
+\begin{lstlisting}[caption=file2.c]
+...
+
+uint64_t tmp=f1();
+
+...
+\end{lstlisting}
+
+\IFRU{Если компилятор будет считать тип значения возвращаемого f1() за int, то 64-битное значение будет ``обрезаться''
+до 32-битного (потому что int в 64-битной среде, вероятно для лучшей совместимости, оставили 32-битным)}
+{If the compiler will treat return value type of f1() as int, the 64-bit value will be ``clipped'' to 32-bit
+(because, supposedly for better compatibility, int is still a 32-bit type in 64-bit environment)}.
 
