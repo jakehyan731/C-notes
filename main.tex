@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,oneside]{book}
+\documentclass[a4paper,oneside]{book}
 
 \usepackage{cmap}
 \usepackage{fancyhdr}
@@ -6,15 +6,15 @@
 \ifdefined\RUSSIAN
 \usepackage[english,russian]{babel}
 \usepackage[T2A]{fontenc}
-\usepackage{paratype}
+%\usepackage{paratype}
 \renewcommand*\familydefault{\sfdefault}
 % http://www.emerson.emory.edu/services/latex/latex_169.html
-\newcommand{\lstlistingsize}{\scriptsize}
+%\newcommand{\lstlistingsize}{\scriptsize}
 \else
-\usepackage[russian,english]{babel}
-\usepackage[T2A]{fontenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
 \usepackage[default]{sourcesanspro}
-\newcommand{\lstlistingsize}{\footnotesize}
+%\newcommand{\lstlistingsize}{\footnotesize}
 \fi
 
 \usepackage[utf8]{inputenc}
@@ -80,7 +80,8 @@
 
 \lstset{
     backgroundcolor=\color{lstbgcolor},
-    basicstyle=\ttfamily\lstlistingsize, 
+%   basicstyle=\ttfamily\lstlistingsize, 
+    basicstyle=\ttfamily,
     breaklines=true,
     frame=single,
     inputencoding=cp1251,
