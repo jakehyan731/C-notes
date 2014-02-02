@@ -42,6 +42,10 @@ IEEE 754 \IFRU{это также все ноли во всех битах}{forma
 то NULL может означать ``отсутствие объекта''}{If structure has pointers to another structures,
 NULL can mean ``object absence''}.
 
+\IFRU{Помимо всего прочего, неинициализированные глобальные переменные также обнуляются}
+{Among other things, not initialized global variables are also zeroed}
+\cite[6.7.8.10]{C99TC3}.
+
 \subsection{\IFRU{Деинициализация структур}{Structures deinitialization}}
 
 \IFRU{Если в структуре есть ссылки на другие структуры, то их нужно освобождать}
