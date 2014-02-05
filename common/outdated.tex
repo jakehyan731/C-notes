@@ -1,0 +1,24 @@
+﻿\section{\IFRU{Устаревшие особенности}{Outdated features}}
+
+\subsection{register}
+
+\IFRU{Этим ключевым словом обозначались раньше переменные, которые компилятор должен был разместить в регистрах \ac{CPU} 
+(если это возможно), для более быстрого доступа к ним.}{This keyword was used in past to mark a variables which compiler
+should (if possible) to allocate in \ac{CPU} registers for the faster access to them.}
+
+\begin{lstlisting}
+void f()
+{
+	int a, b;
+	register int x, y;
+	...
+}
+\end{lstlisting}
+
+\IFRU{В наше время компиляторы уже достаточно развиты для того чтобы самостоятельно решать это, так что в использовании
+этого ключевого слова нет никакой необходимости.}{Modern compilers are advanced enough to make such decisions on their own,
+so this keyword is outdated.}
+\IFRU{Впрочем, во время чтения старых исходных кодов, это помогает быстро увидеть наиболее используемые переменные в
+ф-ции.}
+{However, it might be useful while reading ancient source code for quickly spotting busiest variables.}
+
