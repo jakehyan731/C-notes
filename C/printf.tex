@@ -22,6 +22,14 @@ printf ("%.*smessage\n", current_nested_level, ALOT_OF_SPACES);
 printf ("%.*smessage\n", current_nested_level, ALOT_OF_TABS);
 \end{lstlisting}
 
+\subsubsection{size\_t, ssize\_t}
+
+\IFRU{Вывод типа size\_t в MSVC: \TT{"\%Iu"}, ssize\_t: \TT{"\%Id"}.}
+{size\_t in MSVC: \TT{"\%Iu"}, ssize\_t: \TT{"\%Id"}.}
+
+\IFRU{В GCC, соответственно: \TT{"\%zu"}, \TT{"\%zd"}.}
+{size\_t in GCC: \TT{"\%zu"}, and \TT{"\%zd"} for ssize\_t.}
+
 \subsubsection{\IFRU{Засада}{Caveat} \#1}
 
 \IFRU{Этот код}{This code}:
