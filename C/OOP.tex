@@ -46,6 +46,12 @@ NULL can mean ``object absence''}.
 {Among other things, not initialized global variables are also zeroed}
 \cite[6.7.8.10]{C99TC3}.
 
+\IFRU{Инициализация это важный момент}{Initialization is important thing}.
+\IFRU{Очень трудно искать ошибки связанные с работой с неинициализированными переменными,
+а в случае со структурами, компилятор не предупредит, если вы используете переменную оттуда без
+инициализации}{It is very hard to catch a bug related to not initialized variables accesses.
+Compiler will not warn if to use a structure field without initialization}.
+
 \subsection{\IFRU{Деинициализация структур}{Structures deinitialization}}
 
 \IFRU{Если в структуре есть ссылки на другие структуры, то их нужно освобождать}
