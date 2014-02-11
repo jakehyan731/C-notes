@@ -1,8 +1,21 @@
-\section{\IFRU{Строки в Си}{String in C}}
+\section{\IFRU{Строки в Си}{Strings in C}}
+
+\IFRU{Причина, почему формат строки в Си именно такой (оканчивающийся нулем) вероятно историческая}
+{The reason why C string format is as it is (zero-terminating) is apparently hisorical}.
+\IFRU{В}{In} \cite{Ritchie79} \IFRU{мы можем прочитать}{we can read}:
+
+\begin{framed}
+\begin{quotation}
+A minor difference was that the unit of I/O was the word, not the byte, because the PDP-7 was a word-addressed
+machine. In practice this meant merely that all programs dealing with character streams ignored null
+characters, because null was used to pad a file to an even number of characters.
+\end{quotation}
+\end{framed}
 
 \IFRU{В Си нет встроенных возможностей для удобной работы со строками, такими, какие имеются в 
 \ac{PL} более
-высокого уровня}{There are no features in C to handle strings like those present in higher level PLs}.
+высокого уровня как конкатенация}{There are no features in C to handle strings like those present 
+in higher level PLs like concatenation}.
 
 \index{strcat()}
 \index{sprintf()}
