@@ -1,4 +1,4 @@
-\documentclass[a4paper,oneside]{book}
+\documentclass[a4paper,oneside]{book} % oneside: do not put blank page after each chapter
 
 \usepackage{cmap}
 \usepackage{fancyhdr}
@@ -38,6 +38,11 @@
 \usepackage[]{hyperref} % \href. must be last
 \usepackage{glossaries}
 %\usepackage{tikz}
+
+\ifdefined\RUSSIAN
+\renewcommand\lstlistingname{Листинг}
+\renewcommand\lstlistlistingname{Листинг}
+\fi
 
 % fancyhdr
 \makeatletter
