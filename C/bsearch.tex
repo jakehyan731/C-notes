@@ -8,7 +8,7 @@
 \IFRU{Разница между ними только в том что}{The difference between them is that} lfind() 
 \IFRU{просто ищет заданное}{just search for data}, \IFRU{а}{buf} bsearch() \IFRU{требует отсортированный массив
 данных, но зато может искать быстрее}{requires sorted data array, but may search faster}
-\footnote{\IFRU{методом половинного деления, итд}{by bisection method, etc}}
+\footnote{\IFRU{методом половинного деления, и т.д.}{by bisection method, etc}}
 \footnote{\IFRU{разница еще также в том что bsearch() есть в стандарте}{the difference also is that
 bsearch() is present in}\cite{C99TC3}, 
 \IFRU{а lfind() нет, он есть только в \ac{POSIX} и в \ac{MSVC}}
@@ -144,6 +144,6 @@ symtbl_compare(const void *addr, const void *entryarg) {
 		result = ISC_R_NOTFOUND;
 \end{lstlisting}
 
-\IFRU{Таким образом, можно обойтись без того чтобы писать каждый раз цикл for() для перебирания элементов, итд}
+\IFRU{Таким образом, можно обойтись без того чтобы писать каждый раз цикл for() для перебирания элементов, и т.д.}
 {Thus, it is possible to get rid of for() loop for enumerating elements each time, etc}.
 
