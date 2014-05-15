@@ -152,7 +152,7 @@ because \ac{CPU} registers are usually has the same width as CPU bits}.
 \IFRU{Это вопрос поиск баланса между скоростью и компактностью}
 {This is a question of seeking balance between speed and compactness}.
 \IFRU{С одной стороны, можно отвести}{On the one hand, one may use} \IT{char} 
-\IFRU{под небольшие переменные, под флаги, под enum, итд, но не следует
+\IFRU{под небольшие переменные, под флаги, под enum, и т.д., но не следует
 забывать, что доступ к этим переменным будет чуть медленнее}{for a small variables, flags, bitfields, enums, etc,
 but one should not forget that access to these variables will be slower}.
 \IFRU{С другой стороны, под все переменные можно отводить}{On the other hand, if to assign}
@@ -181,7 +181,7 @@ the first field and the offset of the second field will be +4}.
 
 \IFRU{Резюмируя: если компактность и экономия памяти для вас важнее скорости, тогда нужно использовать}
 {Summarizing: if compactness and memory footprint is important, then}
-\IT{char}, \IT{uint16\_t}, \IFRU{итд}{etc, may be used}.
+\IT{char}, \IT{uint16\_t}, \IFRU{и т.д.}{etc, may be used}.
 
 \paragraph{x86-64 \OrENRU AMD64}
 
