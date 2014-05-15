@@ -46,7 +46,7 @@ while(true)
 \IFRU{Затрат на выделение памяти под структуры, описывающие дизассемблированную инструкцию, нет вовсе}
 {There are no costs for allocating disassembler structures at all}.
 \IFRU{А иначе, нужно было бы на каждой итерации цикла вызывать malloc()/free(), каждая из которых, каждый раз,
-работала бы со структурами кучи, итд}
+работала бы со структурами кучи, и т.д.}
 {Otherwise, we need to call malloc()/free() at teach loop iteration, each of which will also work with heap
 data structures, etc}.
 

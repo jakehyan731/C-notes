@@ -7,20 +7,20 @@ int main(int argc, char* argv[], char* envp[])
 \end{lstlisting}
 
 \IT{argc} \IFRU{будет}{will be} 1 \IFRU{при отсутствии аргументов}{if no arguments present}, 
-2 ~--- \IFRU{при одном аргументе}{if one argument}, 3 ~--- \IFRU{если два}{if two}, \IFRU{итд}{etc}.
+2 ~--- \IFRU{при одном аргументе}{if one argument}, 3 ~--- \IFRU{если два}{if two}, \IFRU{и т.д.}{etc}.
 
 \begin{itemize}
 \item argv[0] ~--- \IFRU{имя текущей запущенной программы}{current running program name}.
 \item argv[1] ~--- \IFRU{первый аргумент}{first argument}.
 \item argv[2] ~--- \IFRU{второй аргумент}{second argument}.
-\item \IFRU{итд}{etc}.
+\item \IFRU{и т.д.}{etc}.
 \end{itemize}
 
 \IFRU{элементы в }{}\IT{argv} \IFRU{можно перечислять в цикле}{can be enumerated in loop}.
 \IFRU{К примеру, программа может принимать список файлов в командной строке}
 {For example, the program may take a file list in command line}
 \index{UNIX!cat}
-(\IFRU{как это делает утилита}{like} UNIX \IT{cat} \IFRU{итд}{utility does, etc}).
+(\IFRU{как это делает утилита}{like} UNIX \IT{cat} \IFRU{и т.д.}{utility does, etc}).
 \IFRU{Опции с дефисом в начале могут добавляться для отличия их от имен файлов}
 {Dashed options may be supplied in order to distinguish them from file names}.
 
@@ -40,7 +40,7 @@ C99 (\ref{no_return}) (\IFRU{тогда ф-ция}{then the} \IT{main()}
 \InENRU \ac{CRT} \IFRU{возвращаемое значение ф-ции}{the return value of} \IT{main()}
 \IFRU{в итоге передается в ф-цию}{function is eventually passed to the} \IT{exit()} 
 \IFRU{либо в}{function or} \IT{ExitProcess()} \InENRU win32.
-\IFRU{Обычно это возвращаемый код ошибки, который можно проверять в шеллах, итд}
+\IFRU{Обычно это возвращаемый код ошибки, который можно проверять в шеллах, и т.д.}
 {It is usually a return error code which may be checked in command shells, etc}.
 0 \IFRU{обычно означает успех, хотя, разумеется, автор сам может определять (и переопределять) свои возвращаемые 
 коды}
