@@ -1,0 +1,41 @@
+﻿\section{\IFRU{Разница между}{The difference between} stdout/cout \AndENRU stderr/cerr}
+
+\index{stdout}
+\index{stderr}
+\index{C++!cout}
+\index{C++!cerr}
+\IT{stdout} \IFRU{это то что выводится на консоль при помощи вызова}{is what is dumped
+to the console with the help of function} \IT{printf()} \OrENRU \IT{cout} \InENRU \CPP.
+\IT{stdout} \IFRU{это буферизированный вывод, так что, пользователь,
+обычно того не зная, видит вывод порциями}{is buffered output, so a user, usually not aware of this,
+sees output by portions}.
+\IFRU{Бывает так что программа выдает что-то используя}
+{Sometimes, the program output something using} \IT{printf()} \OrENRU \IT{cout} \IFRU{и тут же падает}
+{and then crashes}.
+\IFRU{Если это попадает в буфер, но буфер не успевает ``сброситься'' (flush) в консоль,
+то пользователь ничего не увидит}{If something goes to the buffer, but buffer did not have time to ``flush''
+into the console, a user will not see anything}.
+\IFRU{Это бывает неудобно}{This is sometimes unconvenient}.
+\IFRU{Таким образом, для вывода более важной информации, в том числе отладочной, удобнее использовать}
+{Thus, for dumping more important information, including debugging, it is more convenient to use} \IT{stderr}
+\OrENRU \IT{cerr}.
+
+\IT{stderr} \IFRU{это не буферизированный вывод, и всё что попадает в этот поток при помощи}
+{is not bufferized output, so, anything comes in this stream with the help of} 
+\TT{fprintf(stderr,...)} \OrENRU \IT{cerr},
+\IFRU{появляется в консоли тут же}{appearing in the console instantly}.
+
+\IFRU{Не следует также забывать, что из-за отсутствия буфера, вывод в}{It is also worth noting
+that because of buffer absence, output to the} \IT{stderr} \IFRU{медленнее}{is slower}.
+
+\IFRU{Чтобы направлять}{In order to redirect} \IT{stderr}
+\IFRU{в другой файл при запуске процесса, в командной строке (Windows/UNIX) можно указывать}
+{to the other file while process running, this can be specified in the command line (Windows/UNIX)}:
+
+\begin{lstlisting}
+process 2> debug.txt
+\end{lstlisting}
+
+... \IFRU{это направит вывод}{this will redirect} \IT{stderr} 
+\IFRU{в заданный файл (потому что номер потока для вывода ошибок~--- 2)}
+{into the file specified (because number of the error output stream is 2)}.

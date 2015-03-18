@@ -13,3 +13,6 @@ C-notes*.ilg
 C-notes*.ind
 C-notes*.fdb_latexmk
 C-notes*.xml
+*.gl?
+TODO.txt
+*.bat
