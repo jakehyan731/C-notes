@@ -50,7 +50,7 @@ does not return a value when it should}.
 \IFRU{Это то что вернула ф-ция}{This is what returns the} printf() \IFRU{вызванная из}{called from} f1().
 \IFRU{Возвращаемые результаты ф-ций}{Returned functions results of} 
 \glslink{integral type}{\IFRU{интегральных типов}{integral types}}
-\IFRU{остаются в регистре EAX/RAX}{are leaved in the EAX/RAX registers}.
+\IFRU{остаются в регистре EAX/RAX}{are left in the EAX/RAX registers}.
 \IFRU{В ф-ции main() берется значение из регистра EAX/RAX и передается дальше во второй}
 {The value from the EAX/RAX register is taken in the main() function and then passed into the second} printf()
 \footnote{
@@ -134,17 +134,17 @@ if (f1())
 выставляет только младший байт этого регистра (AL) в 1 или 0, а остальную часть регистра он может вообще
 не трогать, и там может оставаться случайный мусор от исполнения другого кода}
 {so GCC generates a code which can set only low byte of the register (AL) to 1 or 0 and do not touch the rest
-regsiter part, so there might be random noise leaved from an other code execution}.
+register part, so there might be random noise left from an other code execution}.
 \IFRU{Так что сгенерированный код в f1() может возвращать false записывая 0 в младший байт регистра EAX/RAX,
 тогда как в остальных битах будет мусор}
 {So, the generated code of f1() may return false by writing 0 into the lowest byte of register EAX/RAX,
 while other bits will contain noise}.
 \IFRU{С точки зрения file2.c, где принимается что f1() возвращает \IT{int}, возвращаемое число может выглядеть так}
 {From the point of view of file2.c where returning type of f1() is considered to be \IT{int}, the returning
-value may looks like}:
+value may look like}:
 \TT{0x??????00}, \IFRU{где}{where} \IT{?} ~--- \IFRU{случайные биты}{random bits}.
 \IFRU{Поэтому, даже если f1() возвращает false, условие if() может срабатывать почти всегда}
-{So even if when f1() returning false, if() condition may be triggered almost always}.\\
+{So even if when f1() is returning false, if() condition may be triggered almost always}.\\
 \\
 \IFRU{Автору этих строк удалось найти такую ошибку только заглянув в отладчик и ассемблерные листинги этих ф-ций,
 и пришлось потратить несколько часов}{This notes author once spent several hours for bug-hunting of such error,

@@ -54,7 +54,7 @@ must be different}.
 
 \IFRU{Использование кучи требует некоторой программистской дисциплины,
 без которой легко наделать ошибок}
-{Heap using require a programmer's discipline, it is easy to make a lot
+{Heap using requires a programmer's discipline, it is easy to make a lot
 of mistakes without one}.
 \index{RAII}
 \IFRU{Возможно поэтому, считается что \ac{PL} с \ac{RAII} как Си++
@@ -130,15 +130,15 @@ large pool   SWRF Metric Eidbuf             368640          2
 \end{lstlisting}
 
 \IFRU{Подобная штука также присутствует и в ядре Windows, там это называется}
-{The same thing present in the Windows kernel, it is called there} \IT{tagging}.
+{The same thing present in the Windows kernel, it is called} \IT{tagging}.
 
 \IFRU{При выделении памяти
 в ядре или драйвере, нужно указывать также 32-битный тег (обычно, четырехбуквенное сокращение, означающее
 подсистему Windows)}
-{When one allocates memory in the kernel or dirver, a 32-bit tag may be set (usually, it is a four-letter
+{When one allocates memory in the kernel or driver, a 32-bit tag may be set (usually, it is a four-letter
 abbreviation, indicating Windows subsystem)}.
 \IFRU{Затем в отладчике можно увидеть статистику, под что выделено больше всего памяти}
-{Then it is possible to see a statistics in a debugger, how much memory is allocated what for}:
+{Then it is possible to see statistics in a debugger, how much memory is allocated what for}:
 
 \begin{lstlisting}
 kd> !poolused 4
@@ -185,7 +185,7 @@ simple \IT{empty} thunk-function for} malloc().
 {One of the common mistakes: heap corruption}}
 
 \IFRU{Нетрудно выделить память под 4 байта, но по ошибке дописать туда пятый}
-{It is easy to allocate a memory for 4 bytes, but write there fifth by accident}.
+{It is easy to allocate a memory for 4 bytes, but write there a fifth by accident}.
 \IFRU{Скорее всего, сразу это никак не проявится, но фактически это очень опасная мина замедленного действия,
 опасная, потому что ведет к трудновыявляемым ошибкам}
 {Most likely, it will not come out instantly, but in fact, it is a very dangerous time bomb, dangerous because
@@ -198,7 +198,7 @@ but there may begin a heap manager structure, keeping the information about some
 even that block}.
 \IFRU{Если какую-то из таких структур сознателно разрушить,
 перезаписать, то тогда следующие вызовы malloc() или free() не смогут корректно работать}
-{If some of these structures to corrupt or rewrite intentionally, consequent malloc() or free() calls
+{If some of these structures get corrupted or rewriten intentionally, consequent malloc() or free() calls
 will not work properly}.
 \IFRU{Иногда это проявляется в выводе ошибок вроде}{Sometimes it is manifested in errors like} 
 (\IFRU{в}{in} Windows):
@@ -212,7 +212,7 @@ HEAP[Application.exe]: HEAP: Free Heap block 211a10 modified at 211af8 after it 
 {Such errors are exploited by exploit authors}: 
 \IFRU{если знать что вы можете изменить структуры данных
 менеджера памяти нужным вам образом, вы можете добиться какого-то нужного вам поведения программы}
-{if to know you can alter heap manager structures in a way you need, you may achieve some 
+{if you know you can alter heap manager structures in a way you need, you may achieve some 
 specific program behaviour you need}
 (\IFRU{это называется переполнение кучи (heap overflow)}{this is called heap overflow}
 \footnote{\url{https://en.wikipedia.org/wiki/Heap_overflow}}).
@@ -226,7 +226,7 @@ at the both sides of the block}.
 проверяется целостность guard-ов (это могут быть просто какие-то фиксированные значения вроде 0x12345678),
 и если кто-то или что-то затерло один из них, можно тут же сообщить об этом}
 {At each free() call, integrity of both guards are checked (these may be a fixed values like 0x12345678),
-and if something or someone writed to it, that fact can be reported instantly}.
+and if something or someone wrote to it, that fact can be reported instantly}.
 
 %\subsubsection{Приемущества своего собственного менеджера памяти или надстройки над стандартным}
 %... может выдать размер выделенного блока, хотя нафик оно надо...
