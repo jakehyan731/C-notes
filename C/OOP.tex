@@ -3,13 +3,13 @@
 
 \IFRU{Как известно, в Си нет поддержки ООП, она есть в Си++, тем не менее, в ``чистом'' Си вполне
 можно программировать в стиле ООП}
-{Of course, there are no OOP support in C, it is present in C++, nevertheless, it is possible
+{Of course, there is no OOP support in C, it is present in C++, nevertheless, it is possible
 to program in OOP style in ``pure'' C}.
 
 \IFRU{ООП, коротко говоря, это явное разделение на объекты и методы}
 {OOP, in short, is a separation to object and methods}.
 \IFRU{В Си структуры легко могут представляться объектами, а обычные ф-ции}
-{In C, structures are easily can be represented as objects, and usual functions} ~--- 
+{In C, structures can easily be represented as objects, and usual functions} ~--- 
 \IFRU{методами}{as methods}.
 
 \subsection{\IFRU{Инициализация структур}{Structures initialization}}
@@ -17,7 +17,7 @@ to program in OOP style in ``pure'' C}.
 
 \IFRU{В \CPP у классов имеются конструкторы}{\CPP has class constructors}.
 \IFRU{Если вам нужно каким-то особенным образом инициализировать
-структуру, вам и в Си придется делать подобную ф-цию}{If one need to initialize structure in some
+структуру, вам и в Си придется делать подобную ф-цию}{If one needs to initialize structure in some
 special way, one would write a special function for it in C as well}.
 \index{calloc()}
 \index{bzero()}
@@ -39,23 +39,23 @@ special way, one would write a special function for it in C as well}.
 IEEE 754 \IFRU{это также все ноли во всех битах}{format is zero bits in all positions}.
 
 \IFRU{Если в структуре присутствуют указатели на другие структуры,
-то NULL может означать ``отсутствие объекта''}{If structure has pointers to another structures,
+то NULL может означать ``отсутствие объекта''}{If a structure has pointers to other structures,
 NULL can mean ``object absence''}.
 
 \IFRU{Помимо всего прочего, неинициализированные глобальные переменные также обнуляются}
 {Among other things, not initialized global variables are also zeroed}
 \cite[6.7.8.10]{C99TC3}.
 
-\IFRU{Инициализация это важный момент}{Initialization is important thing}.
+\IFRU{Инициализация это важный момент}{Initialization is an important thing}.
 \IFRU{Очень трудно искать ошибки связанные с работой с неинициализированными переменными,
 а в случае со структурами, компилятор не предупредит, если вы используете переменную оттуда без
-инициализации}{It is very hard to catch a bug related to not initialized variables accesses.
-Compiler will not warn if to use a structure field without initialization}.
+инициализации}{It is very hard to catch a bug related to non initialized variables accesses.
+The compiler will not warn you if you use a structure field without initialization}.
 
 \subsection{\IFRU{Деинициализация структур}{Structures deinitialization}}
 
 \IFRU{Если в структуре есть ссылки на другие структуры, то их нужно освобождать}
-{If structure has pointers to another structures, they are also must be freed}.
+{If a structure has pointers to other structures, they are also must be freed}.
 \IFRU{В простом случае, обычным вызовом}{In simple case, it is just a call to} free().
 \index{free()}
 \IFRU{Кстати, вот почему free() может принимать на вход NULL,
@@ -68,25 +68,25 @@ Compiler will not warn if to use a structure field without initialization}.
 
 \index{memcpy()}
 \IFRU{Если структура простая, то её можно копировать обычным побайтовым копированием}
-{If the structure is simple, it is possible to copy it with a call to} memcpy()(\ref{memcpy}).
+{If a structure is simple, it is possible to copy it with a call to} memcpy()(\ref{memcpy}).
 \index{Shallow copy}
 \index{Deep copy}
 \IFRU{Если в такой манере скопировать структуру, в которой есть указатели на другие структуры,
 то это будет называться}
-{If to copy structures having pointers to another structures in this manner, it will be called}
+{If you are copying structures having pointers to other structures in this manner, it's called}
 ``shallow copy''\footnote{\url{https://en.wikipedia.org/wiki/Object_copy}}. 
 \IFRU{И напротив}{And in opposite}, \IT{deep copy} ~--- \IFRU{это копирование структуры
 плюс всех связанных с ней структур (это дольше)}
-{is copying a structure with all connected to it structures (is slower)}.
+{is copying a structure with all structures connected to it (slower operation)}.
 
 \IFRU{Вот почему может быть удобнее хранить строку в структуре как
 обычный массив символов фиксированной длины}
-{That is why it may be more convenient to store a string in the structure as 
-an fixed-size array of characters}.
+{That is why it may be more convenient to store a string in a structure as 
+a fixed-size array of characters}.
 \index{Windows API}
 \IFRU{Такого, например, очень много в}{For example, a lot of such cases in the} Windows API.
 \IFRU{Такую структуру легко скопировать, её хранение требует меньших накладных расходов
-\footnote{overhead} в куче}{Such structure is easier to copy, it requires smaller
+\footnote{overhead} в куче}{Such a structure is easier to copy, it requires smaller
 memory overhead in the heap}.
 \IFRU{Но с другой стороны, придется согласиться с ограничением на длину строки}
 {On the other hand, we should accept string length fixedness}.
@@ -94,7 +94,7 @@ memory overhead in the heap}.
 \IFRU{Помимо всего прочего, структуру можно копировать просто так}
 {Aside from that, a structure can be copied just as}: \TT{s1=s2} ~--- 
 \IFRU{в итоге генерируется код, копирющий все поля по порядку}{the code generated will copy
-each structure filed}.
+each structure field}.
 \IFRU{И это наверное легче читается чем вызов}{Perhaps it is easier to read than a call to} memcpy() 
 \IFRU{на этом же месте}{at the same place}.
 
@@ -104,20 +104,20 @@ each structure filed}.
 \IFRU{Например, вы не можете
 написать программу модифицирующую защищенное поле в классе, 
 это защита на стадии компиляции}
-{For example, you cannot write a program which modify a protected class
+{For example, you cannot write a program which modifies a protected class
 field, this is a compile-stage protection}\cite[1.7.3]{REBook}.
 
 \IFRU{В Си этого нет, поэтому тут нужно больше дисциплины}
-{There are no such thing in C, it requires more discipline}.
+{There is no such thing in C, it requires more discipline}.
 
 \IFRU{Впрочем, можно попытаться ``защитить'' структуру ``от посторонних глаз''}
 {However, it is possible to ``protect'' a structure from ``prying eyes''}.
 \index{Glib!GTree}
 \IFRU{Например, в Glib, имеется библиотека для работы с деревьями}{For example, Glib has a library
-intended for work with trees}.
+intended for working with trees}.
 \IFRU{В заголовочном файле}{In the header file}
 gtree.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.h}} 
-\IFRU{нет описания самой структуры}{there are no declaration of the structure}
+\IFRU{нет описания самой структуры}{there is no declaration of the structure}
 (\IFRU{она есть только в}{it is present only in the} gtree.c
 \footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gtree.c}}), 
 \IFRU{а есть только}{there are only} forward declaration(\ref{forwarddeclaration}).
@@ -128,7 +128,7 @@ the structure directly}.
 
 \IFRU{Но у такого метода есть и обратная сторона}{The technique does have its flip side}: 
 \IFRU{могут быть крохотные однострочные ф-ции вроде 
-``вернуть длину строки''}{there are may be tiny one-line functions like ``return string length''}
+``вернуть длину строки''}{there may be tiny one-line functions like ``return string length''}
 \InENRU strbuf(\ref{strbuf}), \IFRU{например}{e.g.}:
 
 \begin{lstlisting}
@@ -147,16 +147,16 @@ unsigned strbuf_get_len(strbuf *s)
 
 \IFRU{Если компилятору на стадии компиляции доступно и описание структуры и тело ф-ции,
 то в каком-то месте,
-вместо вызова}{If the compiler on compiling stage have access to structure declaration and the 
+вместо вызова}{If the compiler during the compiling stage has access to a structure declaration and the 
 function body, instead of call to} strbuf\_get\_len() 
 \IFRU{он может сделать эту ф-цию как inline-овую, вставить её тело прямо на том
 же место и сэкономить на вызове другой ф-ции}{it may make this function as inline, i.e., insert
 its body right at the place and save some resources on call to another function}.
 \IFRU{Но если эта информация компилятору недоступна, то он
-оставит вызов}{But if this information is not available to compiler, it will leave call to}
+оставит вызов}{But if this information is not available to the compiler, it will leave call to}
 strbuf\_get\_len() \IFRU{как есть}{as is}.
 
-\IFRU{То же самое касается поля \TT{buf} в структуре \TT{strbuf}}{The same thing is about \TT{buf}
+\IFRU{То же самое касается поля \TT{buf} в структуре \TT{strbuf}}{The same thing is applies to the \TT{buf}
 field in the \TT{strbuf} structure}.
 \IFRU{Компилятор может генерировать куда более эффективный
 код, если этот сгенерированный машинный код сможет обращаться к полям структур на прямую,

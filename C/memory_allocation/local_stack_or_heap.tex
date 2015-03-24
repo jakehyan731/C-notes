@@ -5,14 +5,14 @@
 
 \IFRU{Например: в}{For example: in} tracer
 \footnote{\url{\IFRU{http://yurichev.com/tracer-ru.html}{http://yurichev.com/tracer-en.html}}}
-\IFRU{у меня есть дизассемблер}{i have disassembler}\footnote{\url{https://github.com/dennis714/x86_disasm}} 
+\IFRU{у меня есть дизассемблер}{i have a disassembler}\footnote{\url{https://github.com/dennis714/x86_disasm}} 
 \IFRU{и эмулятор x86-процессора}{and also x86 CPU emulator}
 \footnote{\url{https://github.com/dennis714/bolt/blob/master/X86_emu.c}}.
 \IFRU{Когда я писал дизассемблер на Си (я делал это после того как длительное время писал на \ac{PL} 
 более высокого уровня ~--- Python), 
 я думал, что было бы неплохо, чтобы он сам выделял память под структуру, заполнял её
 и возвращал указатель на нее, а в случае ошибки дизассемблирования, возвращал бы NULL}
-{When I was writing disassembled in C (I did it after a long period of programming in higher level 
+{When I was writing the disassembler in C (I did it after a long period of programming in higher level 
 \ac{PL} ~---
 Python), I thought, it is a good idea for disassembler to allocate the memory for the structure it returns,
 fill it and return a pointer to it, or NULL in case of disassembling error}.
@@ -47,7 +47,7 @@ while(true)
 {There are no costs for allocating disassembler structures at all}.
 \IFRU{А иначе, нужно было бы на каждой итерации цикла вызывать malloc()/free(), каждая из которых, каждый раз,
 работала бы со структурами кучи, и т.д.}
-{Otherwise, we need to call malloc()/free() at teach loop iteration, each of which will also work with heap
+{Otherwise, we need to call malloc()/free() at each loop iteration, each of which will also work with heap
 data structures, etc}.
 
 \IFRU{Как известно, у x86-инструкций может быть вплоть до трех операндов, так что, в моей структуре, помимо
@@ -90,7 +90,7 @@ struct disassembled_instruction
 {However, there are no extra manipulations with memory}.
 
 \IFRU{Ну а если уж так сильно хочется сэкономить на третьем операнде,
-то можно не хранить третий операнд вовсе}{But if one like to save a space by not storing third operator,
+то можно не хранить третий операнд вовсе}{But if one likes to save space by not storing the third operator,
 it may be not stored at all}: \IFRU{нетрудно
 вычислить размер структуры без одного операнда}{it is easy to calculate structure size
 without one operatnd}: \TT{sizeof(disassembled\_instruction) - sizeof(struct operand)} 
@@ -99,14 +99,14 @@ stored}.
 \IFRU{Ведь никто не запрещает нам использовать (и хранить) не всю структуру а только её часть}
 {Because no one prohibits to use (and store) not the whole structure, but only its part}.
 \IFRU{А ф-ции работы с этой структурой могут не трогать в памяти третий операнд вовсе и,
-таким образом, ошибок не будет}{Besides, the functions which works with the structure, may not touch
+таким образом, ошибок не будет}{Besides, the functions which work with the structure, may not touch
 third operand at all, and that will work correctly}.
 
 \IFRU{И даже более того: я специально сделал свой дизассемблер именно так,
 чтобы он мог принимать на вход не инициализированную
 структуру, и мог работать даже если там осталась информация от предыдущих вызовов}
 {Even more than that: I made my disassembler intentionally in that way that it can take
-not initialized structure and may work even if there are still some information left from
+not initialized structure and may work even if there is still some information left from
 the previous calls}.
 
 \IFRU{Возможно, это уже слишком, но вы поняли идею}{Maybe it is overkill, but you got the idea}.

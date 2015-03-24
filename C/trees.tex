@@ -1,7 +1,7 @@
 \subsection{\IFRU{Бинарные деревья в Си}{Binary trees in C}}
 
 \IFRU{Бинарные деревья}{Binary trees} ~--- \IFRU{одна из важнейших структур данных в компьютерных науках}
-{are the one of the most important structures in computer science}.
+{are one of the most important structures in computer science}.
 \IFRU{Чаще всего они используются для хранения пар}{Most often these are used for}
 ``\IFRU{ключ-значение}{key-values}''\IFRU{}{ pairs storage}.
 \index{C++!STL!map}
@@ -9,7 +9,7 @@
 {This is what implemented in std::map in \CPP \ac{STL}}.
 
 \IFRU{Упрощенно говоря, по сравнению со списками, выборка у деревьев происходит намного быстрее}
-{Simply speaking, in comparison with lists, trees offers much faster selection}.
+{Simply speaking, in comparison with lists, trees offer much faster selection}.
 \IFRU{С другой стороны, добавление элемента в дерево может происходить медленнее}
 {On the other hand, element insertion may be slower}.
 
@@ -18,7 +18,7 @@
 \index{POSIX!tfind()}
 \index{POSIX!tdelete()}
 \IFRU{В стандартных библиотеках Си, нет работы с деревьями, но кое-что есть в}
-{There are no C standard functions working with a trees, but some things are present in} \ac{POSIX}
+{There are no C standard functions for working with trees, but some functions are present in} \ac{POSIX}
 (tsearch(), twalk(), tfind(), tdelete())
 \footnote{\url{http://pubs.opengroup.org/onlinepubs/009696799/functions/tsearch.html}}.
 
@@ -34,5 +34,5 @@
 \index{C++!STL!set}
 \IFRU{Множество}{The set} (std::set \InENRU \CPP \ac{STL}) 
 \IFRU{можно реализовать так же просто при помощи бинарных деревьев, достаточно просто не хранить значение, а хранить только ключ}
-{can be implemented as binary trees as well, one may just not to store value and store only key}.
+{can be implemented as binary trees as well, one may just choose not to store the value and store the key only}.
 

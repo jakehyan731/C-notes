@@ -2,14 +2,14 @@
 \section{\IFRU{Кодирование имен}{Name mangling}}
 
 \IFRU{В Си к именам прибавляется спереди символ подчеркивания, и ваша ф-ция с именем}
-{In the C a underscore symbol is to be prepended before each function name, so} \TT{function} 
-\IFRU{может иметь имя в объектом файле}{may in fact have the following name in object file:} \TT{\_function}. \\
+{In C an underscore symbol is to be prepended before each function name, so} \TT{function} 
+\IFRU{может иметь имя в объектом файле}{may in fact have the following name in the object file:} \TT{\_function}. \\
 \\
 \IFRU{В}{The} \CPP 
 \IFRU{возможна перегрузка операторов, следовательно, несколько ф-ций могут иметь одно и то же
 имя, но разные типы}{has operator overloading, so, several functions may share one name but different
 types}.
-\IFRU{С другой стороны, загрузчик}{On the other hand,} \ac{OS} 
+\IFRU{С другой стороны, загрузчик \ac{OS}}{On the other hand, \ac{OS} loader and linker} 
 \IFRU{и линкер могут работать только с обычными именами ф-ций
 (или символов) и ничего про \CPP не знают}{are not aware of \CPP and works with plain function names (or symbols)}.
 \IFRU{Следовательно, имеется потребность кодировать имя функции,
@@ -18,19 +18,19 @@ there is a need to encode function name, argument types, return value type, and 
 one line}. \\
 \\
 \IFRU{К примеру, конструктор класса}{For example, that is how the} \IT{box} 
-\IFRU{объявленный следующим образом}{class constructor defined as}: \\
+\IFRU{объявленный следующим образом}{class constructor is defined as}: \\
 
 \begin{lstlisting}
 box::box(int color, int width, int height, int depth)
 \end{lstlisting}
 
-... \IFRU{в соглашениях}{In the} \ac{MSVC} 
+... \IFRU{в соглашениях}{In the} \ac{MSVC}, 
 \IFRU{будет иметь следующее внутреннее имя}{conventions will have the following name}: 
 \TT{??0box@@QAE@HHHH@Z} ~--- \IFRU{например, четыре символа \IT{H} 
-означают четыре подряд идущих аргумента типа}{for example, four consequtive \IT{H} characters
-means for consequtive argument types} \IT{int}. \\
+означают четыре подряд идущих аргумента типа \IT{int}}{for example, four consequtive \IT{H} characters
+stand for the four consequtive argument of \IT{int} type}. \\
 \\
-\IFRU{Это называется}{This is what called} \IT{name mangling}.\\
+\IFRU{Это называется}{This is what is called} \IT{name mangling}.\\
 \\
 \IFRU{Вот зачем в заголовочных файлах нужна директива}{That is why header files may contain} \TT{extern "C"}:
 
@@ -46,12 +46,12 @@ extern "C" {
 #endif
 \end{lstlisting}
 
-\IFRU{Это означает что}{This mean that} \TT{foo()} \IFRU{написана на Си}{is written in C},
+\IFRU{Это означает что}{This means that} \TT{foo()} \IFRU{написана на Си}{is written in C},
 \IFRU{скомпилирована как ф-ция Си и будет иметь имя в объектных файлах}{compiled as C function
-and will have the following name in object files:} \TT{\_foo}.
+and will have the following name in the object files:} \TT{\_foo}.
 
 \IFRU{Если этот заголовочный файл подключить к проекту на \CPP, то компилятор будет знать, что имя ф-ции}
-{If to include that header in the \CPP project, the compiler will treat its internal name as} \TT{\_foo}.
+{If you are to include that header in the \CPP project, the compiler will treat its internal name as} \TT{\_foo}.
 \IFRU{Без этого объявления, компилятор будет искать в объектных файлах ф-цию с внутренним именем}
 {Without this directive, the compiler will look for the function named} \TT{?foo@@YAXHH@Z}. \\
 \\

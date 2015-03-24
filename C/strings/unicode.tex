@@ -32,7 +32,7 @@ L"hello world"
 
 \IFRU{Для работы с wchar\_t вместо char, имеется целый класс функций-двойников с символом w в названии,
 например}
-{There are a special class of ``twin'' functions with the ``w'' in name, intended for work with 
+{There is a special class of ``twin'' functions with the ``w'' in name, intended for work with 
 wchar\_t instead of char}:
 \index{fwprintf()}
 \index{wcscmp()}
@@ -46,7 +46,7 @@ fwprintf(), wcscmp(), wcslen(), iswalpha().
 \IFRU{В Windows, если некто хочет писать программу сразу в двух версиях, с использованием Unicode и без,
 для этого есть тип \TT{tchar}, в зависимости от объявленной переменной препроцессора \TT{UNICODE},
 он будет либо \TT{char} либо \TT{wchar\_t}}
-{There are \TT{tchar} type in the Windows API which helps us to write a program in two builds: with Unicode
+{There is \TT{tchar} type in the Windows API which helps us to write a program in two builds: with Unicode
 and without, depending on \TT{UNICODE} preprocessor variable definition, it will be \TT{char} or \TT{wchar\_t}}
 \footnote{\IFRU{Одновременные сборки с Unicode и без были популярна во времена популярности
 как}{Simultenous builds with Unicode and without were popular in the time of popularity of both} 

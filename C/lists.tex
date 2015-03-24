@@ -62,7 +62,7 @@ last_element->next=new_object;
 calloc() \IFRU{отличается от}{is different from the} malloc() 
 \IFRU{тем что обнуляет всё выделенное место, а значит в поле \TT{next} нового
 элемента сразу будет NULL}
-{in that sense that all allocated space will be cleared and consequently, there will be NULL
+{in the sense that all allocated space will be cleared and consequently, there will be NULL
 in the \TT{next} field}
 \footnote{\IFRU{Об ``инициализации'' структур, читайте также здесь}
 {More about structures ``initialization'', read here}: (\ref{COOPInit}).}.
@@ -75,7 +75,7 @@ with the sought-for element until it is found}.
 \IFRU{Удаление элемента}{Element deletion}: \IFRU{найти предыдущий элемент и следующий, 
 у предыдущего в \TT{next} установить указатель на следующий элемент, 
 затем освободить блок памяти выделенный для текущего элемента}
-{find previous the element and the next, set the \TT{next} pointer in the previous element to the next one,
+{find the previous element and the next, set the \TT{next} pointer in the previous element to the next one,
 then free memory block allocated for the current element}.
 
 \IFRU{Самый первый элемент списка называется}{The very first list element is also called} ``list head''.
@@ -114,13 +114,13 @@ last elements are pointing to each other}.
 \IFRU{Например, так сделано в std::list в C++ STL}{For example, that is how it is done
 in std::list in C++ STL} \cite[2.4.2]{REBook}.
 \IFRU{Это значительно ускоряет поиск последнего элемента (не нужно перебирать все элементы)}
-{This simplifying searching of the last element (one do not need to enumerate all elements)}.
+{This simplifies searching of the last element (one does not need to enumerate all elements)}.
 
 \subsubsection{Windows API}
 
 \index{Windows API}
 \IFRU{Здесь, да и много где в ядре Windows, применяются две примитивные структуры}
-{Here, and also in a lot of places of Windows kernel, two primitive data structures are used}:
+{Here, and also in a lot of places in the Windows kernel, two primitive data structures are used}:
 
 \begin{lstlisting}
 typedef struct _LIST_ENTRY {

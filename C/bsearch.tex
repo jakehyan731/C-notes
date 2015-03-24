@@ -6,7 +6,7 @@
 \IFRU{Удобные ф-ции для поиска чего-либо где-либо}{Handy functions for searching for something somewhere}.
 
 \IFRU{Разница между ними только в том что}{The difference between them is that} lfind() 
-\IFRU{просто ищет заданное}{just search for data}, \IFRU{а}{buf} bsearch() \IFRU{требует отсортированный массив
+\IFRU{просто ищет заданное}{just searches for data}, \IFRU{а}{buf} bsearch() \IFRU{требует отсортированный массив
 данных, но зато может искать быстрее}{requires sorted data array, but may search faster}
 \footnote{\IFRU{методом половинного деления, и т.д.}{by bisection method, etc}}
 \footnote{\IFRU{разница еще также в том что bsearch() есть в стандарте}{the difference also is that
@@ -17,7 +17,7 @@ bsearch() is present in}\cite{C99TC3},
 {but these functions are very straightforward to implement them on your own}}.
 
 \IFRU{К примеру, поиск строки в массиве указателей на строки}{For example, search for a string
-in the array of pointers to a strings}:
+in an array of pointers to a strings}:
 
 \lstinputlisting{C/lfind.c}
 
@@ -71,7 +71,7 @@ static int CheckReservedWords( char *tokbuf ) {
 \end{lstlisting}
 
 \IFRU{Здесь имеется отсортированный по первому полю массив структур}
-{Here we have array of structures sorted by the first field} \IT{ReservedWords},
+{Here we have an array of structures sorted by the first field} \IT{ReservedWords},
 \IFRU{выглядящий так}{like}:
 
 \begin{lstlisting}[caption=\textbackslash{}bld\textbackslash{}pbide\textbackslash{}defgen\textbackslash{}scan.c]
@@ -93,11 +93,11 @@ static KeyWord  ReservedWords[] = {
 bsearch() \IFRU{ищет строку сравнивая её со строкой в первом поле структуры}{searching for the string comparing
 it with the string in the first field of structure}.
 \IFRU{Здесь можно применить именно bsearch(), потому что массив уже отсортированный}
-{bsearch() can be used here because array is already sorted}.
+{bsearch() can be used here because the array is already sorted}.
 \IFRU{Иначе пришлось бы использовать lfind()}{Otherwise, lfind() should be used}.
 \IFRU{Вероятно, несортированный массив можно вначале отсортировать при помощи qsort(), а затем уже
 использовать bsearch(), если вам нравится такая идея}
-{Probably, unsorted array can be sorted by qsort() before bsearch() usage, if you like the idea}. \\
+{Probably, an unsorted array can be sorted by qsort() before bsearch() usage, if you like the idea}. \\
 \\
 \IFRU{Точно так же можно искать что угодно, где угодно}
 {Likewise, it is possible to search anything anywhere}.

@@ -1,7 +1,7 @@
 \section{\IFRU{Строки в Си}{Strings in C}}
 
 \IFRU{Причина, почему формат строки в Си именно такой (оканчивающийся нулем) вероятно историческая}
-{The reason why C string format is as it is (zero-terminating) is apparently hisorical}.
+{The reason why C string format is as it is (zero-terminating) is apparently historical}.
 \IFRU{В}{In} \cite{Ritchie79} \IFRU{мы можем прочитать}{we can read}:
 
 \begin{framed}
@@ -28,7 +28,7 @@ Also irritating sprintf(), for which is hard to predict how much space will need
 \index{strcpy()}
 \IFRU{Копирование строк при помощи
 strcpy() также неудобно ~--- нужно думать, сколько же выделить байт под буфер}
-{Strings copying with strcpy() is not easy as well ~--- one need to think how many bytes must be allocated
+{String copying with strcpy() is not easy as well ~--- one needs to think ahead how many bytes must be allocated
 for buffer}.
 \IFRU{Помимо всего прочего, неудобная
 работа со строками в Си, это источник огромного количества уязвимостей в ПО, связанных с переполнениями буфера}
@@ -80,7 +80,7 @@ of such messages, there may be string concatenation overhead}. \\
 \index{Glib}
 \IFRU{Есть какие-то библиотеки для этого}{There are some libraries for this}.
 \IFRU{К примеру, в}{For example, in} Glib\footnote{\url{https://developer.gnome.org/glib/}} 
-\IFRU{есть}{there are}
+\IFRU{есть}{there exist}
 gstring.h\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.h}}/
 gstring.c\footnote{\url{https://github.com/GNOME/glib/blob/master/glib/gstring.c}}. 
 
@@ -102,7 +102,7 @@ which, in turn, will grow or shrink}.
 
 \index{sprintf()}
 \IFRU{В}{In} \IT{strbuf.c} \IFRU{из}{from} git 
-\IFRU{есть в том числе и ф-ция}{there are also function} \IT{strbuf\_addf()}, 
+\IFRU{есть в том числе и ф-ция}{there is also a function} \IT{strbuf\_addf()}, 
 \IFRU{работающая как}{working just like} \IT{sprintf()}, 
 \IFRU{но добавляющая строку-результат в буфер}{but adding resulting string into the buffer}.
 
@@ -113,7 +113,7 @@ which, in turn, will grow or shrink}.
 buffer overflows are virtually impossibly if not to work with the structures by himself}.
 
 \IFRU{Типичная последовательность работы с такими библиотеками, выглядит так}
-{The typical sequence of using such libraries is looks like}:
+{The typical sequence of using such libraries looks like}:
 
 \begin{itemize}
 \item
@@ -138,7 +138,7 @@ buffer overflows are virtually impossibly if not to work with the structures by 
 \end{itemize}
 
 \index{Java}
-\IFRU{Кстати, конструирование строк чем-то напоминает}{By the way, string construction is resembling somehow}
+\IFRU{Кстати, конструирование строк чем-то напоминает}{By the way, string construction resembles somehow}
 Buffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/Buffer.html}}, 
 ByteBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/ByteBuffer.html}} \AndENRU
 CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharBuffer.html}} \InENRU Java.
@@ -147,7 +147,7 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 
 \index{Pascal}
 \IFRU{Всегда хранить длину строки ~--- это было принято в реализациях \ac{PL} Pascal}
-{Storing always string length ~--- it was done in Pascal \ac{PL} implementations}.
+{String length is always stored ~--- it was done in Pascal \ac{PL} implementations}.
 \IFRU{Не смотря на исходы святых войн\footnote{holy wars} между приверженцами Си и Pascal}
 {Aside from holy wars outcomes between both PL devotees}, 
 \IFRU{все же, почти все библиотеки
@@ -167,7 +167,7 @@ CharBuffer\footnote{\url{http://docs.oracle.com/javase/7/docs/api/java/nio/CharB
 \IT{false},
 не начиная сравнивание символов в строках}
 {The function of strings comparing may just compare string lengths 
-at the beginning and if they are not equals to each other, return \IT{false} without starting to compare
+at the beginning and if they are not equal to each other, return \IT{false} without starting to compare
 characters in the strings}.
 
 \index{Oracle RDBMS}

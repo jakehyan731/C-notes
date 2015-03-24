@@ -236,11 +236,11 @@ and if something or someone wrote to it, that fact can be reported instantly}.
 
 \IFRU{При успешном выполнении, malloc() возвращает указатель на только что выделенный блок,
 который можно использовать, либо NULL если памяти не хватает}
-{If malloc() finishes successfully, it returns the pointer to the newly allocated block can be used,
+{If malloc() finishes successfully, it returns a pointer to the newly allocated block that can be used,
 or NULL in case of memory shortage}.
 \IFRU{Конечно, в наше время дешевой памяти эта проблема становится редкой, тем не менее,
 если вы используете много памяти, думать об этом все же надо}
-{Of course, in our time of cheap memory, this is rare problem, nevertheless, if one use it a lot,
+{Of course, in our time of cheap memory, this is rare problem, nevertheless, if one uses it a lot,
 one should consider it}.
 \index{xmalloc()}
 \index{xrealloc()}
@@ -324,8 +324,9 @@ to spot visually if someone attempting to use some data from the block after it 
 \subsubsection{\IFRU{Еще частые ошибки}{Other common mistakes}}
 
 \index{stdlib.h}
-\IFRU{Если не включить заголовочный файл}{If not to include header file} stdlib.h, 
-GCC \IFRU{считает возвращаемое значение неизвестной ф-ции}{treat returning value of} malloc() 
+\IFRU{Если не включить заголовочный файл}
+{If you do not include header file} stdlib.h, 
+GCC \IFRU{считает возвращаемое значение неизвестной ф-ции}{treat the returning value of} malloc() 
 \IFRU{за}{as} \IT{int} \IFRU{и постоянно ругается на приведение типов}{and warns about types}.
 
 \IFRU{С другой стороны}{On the other hand}, \InENRU \CPP, 

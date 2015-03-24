@@ -44,8 +44,8 @@ printf ("%02X", c);
 
 ... \IFRU{выдает}{dumps} \TT{FFFFFF80} \IFRU{потому что}{because} \IT{char} 
 \IFRU{по умолчанию знаковый}{is signed by default} (\IFRU{как в}{as in} \ac{GCC} \IFRU{так и в}{and in} \ac{MSVC}).
-\IFRU{При передаче в}{While passing it as argument to} \IT{printf()} 
-\IFRU{как аргумента, он знаково расширяется до}{it sign-extended to} \IT{int} \IFRU{и мы видим то что видим}
+\IFRU{При передаче в}{While passing it as an argument to} \IT{printf()} 
+\IFRU{как аргумента, он знаково расширяется до}{it's sign-extended to} \IT{int} \IFRU{и мы видим то что видим}
 {and we see what we see}.
 \IFRU{Правильно так}{This is correct}:
 
@@ -71,7 +71,7 @@ a structure describing complex number, or a color encoded as 3 int numbers as a 
 \\
 \index{Linux!printk()}
 \IFRU{В}{In} printk() (printf-\IFRU{подобная ф-ция в ядре Linux}{like function in Linux kernel})
-\IFRU{имеются дополнительные модификаторы}{there are additional modifiers exist}
+\IFRU{имеются дополнительные модификаторы}{there exists additional modifiers}
 \footnote{\url{http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/Documentation/printk-formats.txt}}, 
 \IFRU{такие как}{like}
 \TT{\%pM} (Mac-\IFRU{адрес}{address}),
@@ -191,7 +191,7 @@ outputting and also for byte outputting in a binary form}:
 \ac{GCC} \IFRU{умеет следить за соответствиями модификаторов в}{is able to track accordance between
 modifiers in the} printf-\IFRU{строке и аргументами в вызове}{string and arguments in} printf(),
 \IFRU{но здесь ему встречаются незнакомые модификаторы, о чем он предупреждает}
-{however, unfamiliar to it modifiers are present here, so it warns us about them}.
+{however, unfamiliar to it's modifiers which are present here, so it warns us about them}.
 
 \IFRU{Тем не менее, наша программа работает}{Nevertheless, our program works}:
 

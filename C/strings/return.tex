@@ -12,7 +12,7 @@
 2: \IFRU{Возврат строки через глобальный массив символов}
 {String returning via global array of characters}. 
 \IFRU{Недостаток: массив один и каждый вызов ф-ции перезаписывает его содержимое}
-{Shortcoming: there are only one array and each subsequent function call overwrites its contents}.
+{Shortcoming: there is only one array and each subsequent function call overwrites its contents}.
 
 \item
 3: \IFRU{Возврат строки через буфер, заданный в аргументах ф-ции}
@@ -48,9 +48,9 @@ return the pointer to the buffer we allocated}.
 \subsection{2: \IFRU{Через глобальный массив символов}{Via global array of characters}}
 
 \index{asctime()}
-\IFRU{Так делает стандартная ф-ция}{That is how} \TT{asctime()}\IFRU{}{ it does}.
+\IFRU{Так делает стандартная ф-ция}{That is how} \TT{asctime()}\IFRU{}{ does it}.
 \IFRU{Следует помнить, что нужно использовать возвращенную строку
-перед каждым следующим вызовом}{Keep in mind that string should be used before each subsequent call
+перед каждым следующим вызовом}{Keep in mind that the string should be used before each subsequent call
 to} \TT{asctime()}.
 
 \IFRU{Например, это правильно}{For example, this is correct}:
@@ -88,11 +88,11 @@ printf("date2: %s\n", date2);
 затрется}{you cannot call it again for the second string result before you use the first somehow,
 because it will be overwritten}.
 \IFRU{Для того чтобы решить эту проблему здесь, по видимому, сделали сразу 4 буфера и каждый раз строка
-возвращается в следующем}{Apparently, in order to solve the problem, here are 4 buffers, and the string
+возвращается в следующем}{Apparently, in order to solve the problem, there are 4 buffers, and the string
 is returned each time in the next one}.
 \IFRU{Но имейте ввиду ~--- так можно делать если только вы уверены в том что вы делаете,
 это код на уровне ``грязного хака''}{It is also worth to notice ~--- it is possible to do such things if you
-are sure in what you do, the code is on the ``dirty hack'' level}.
+are sure of what you do, the code is on the ``dirty hack'' level}.
 \IFRU{Если вы вызовете эту ф-цию 5 раз и вам нужно будет использовать как-то строку полученную при первом вызове, 
 это может привести к трудновыявляемой ошибке}{If you will call this function 5 times and will need to 
 use the first string somehow, this may lead to hard-to-find bug}.

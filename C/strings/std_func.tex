@@ -2,7 +2,7 @@
 
 \index{getcwd()}
 \IFRU{Некоторые ф-ции, например, getcwd() не только заполняют буфер, но и возвращают указатель на него}
-{Some functions like getcwd() not only filling the buffer, but also returns a pointer to it}.
+{Some functions like getcwd() not only fill the buffer, but also returns a pointer to it}.
 \IFRU{Это для того чтобы можно было писать что-то вроде}
 {It is made for the situations, where it is more compact to write something like}:
 
@@ -35,7 +35,7 @@ contain zeroes, ot in the part of a string}.
 
 \index{strchr()}
 strchr() \IFRU{применяется для поиска символа в строке, либо чтобы узнать, есть ли там такой символ вообще}
-{is used for searching for character in a string or to get to know if there such character present}.
+{is used for searching for character in a string or to get to know if there are such characters present}.
 
 \label{memchr}
 \index{memchr()}
@@ -68,7 +68,7 @@ if (strspn(IPv4, "1234567890.") == strlen(IPv4)) ... OK
 if (strspn(IPv6, "0123456789AaBbCcDdEeFf:.") == strlen(IPv6)) ... OK
 \end{lstlisting}
 
-\IFRU{Либо для того чтобы пропустить начало строки}{Or to skip a begin of a string}:
+\IFRU{Либо для того чтобы пропустить начало строки}{Or to skip the beginning of a string}:
 
 \begin{lstlisting}
 const char *whitespaces = " \n\r\t";
@@ -94,7 +94,7 @@ s += strspn(s, whitespaces); // then skip whitespaces
 \IFRU{Обе ф-ции служат для разбиения строки на подстроки, отделенные друг от друга разделительными символами}
 {Both functions are used for delimiting string into substrings, divided by special characters}
 \footnote{delimiter}.
-\IFRU{Только}{However} strtok() \IFRU{модифицирует исходную строку}{modifies source stirng}
+\IFRU{Только}{However} strtok() \IFRU{модифицирует исходную строку}{modifies source string}
 (\IFRU{и таким образом, получаемые подстроки сразу можно использовать как отдельные Си-строки}
 {and thus resulting substrings can be used as separated C-strings}), 
 \IFRU{а}{but} strpbrk() \IFRU{нет, он только возвращает указатель на следующую подстроку}
