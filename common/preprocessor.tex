@@ -129,6 +129,10 @@ to mark function arguments}.
 #define square(x)      ((x)*(x))
 \end{lstlisting}
 
+\IFRU{Это все еще ошибка, потому что выражение}{It is still a mistake because the expression} \IT{square(x++)}
+\IFRU{в итоге ``развернется'' в}{will ``unfold'' into} $((x++)*(x++))$
+\IFRU{где}{where} \IT{x} \IFRU{был увеличен вдвое, и это не то, что вы, вероятно, хотели}{was increased twice, and that is not what you probably wanted}.
+
 \IFRU{Пример из файла}{Example from the} minmax.h \IFRU{из}{file from} MinGW:
 
 \begin{lstlisting}
